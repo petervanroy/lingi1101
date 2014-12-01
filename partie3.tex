@@ -1,0 +1,305 @@
+% \documentclass[10pt,a4paper]{article}
+% \usepackage[utf8]{inputenc}
+% \usepackage{amsmath}
+% \usepackage{amsfonts}
+% \usepackage{amssymb}
+% \usepackage{array}
+% \begin{document}
+%% 	\section{Rappel}
+% 		\subsubsection{Conséquence logique}
+% 			$p$ est conséquence logique de $q$ si et seulement si $p \Rightarrow q$ est une tautologie. En d'autres termes, si
+% 			\begin{center}
+% 			\begin{tabular}{ll}
+% 			$p \models q$ & $q$ est valide dans tous les modèles de $p$ \\
+% 			&\\
+% 			alors & \\
+% 			$\models (p \Rightarrow q)$ & $p \Rightarrow q$ est une tautologie.\\
+% 			&\\
+% 			On peut donc écrire & \\
+% 			$p \Rrightarrow q$ & $p$ est conséquence logique de $q$.\\
+% 			\end{tabular}
+% 			\end{center}
+% 			Cependant, la conséquence logique ($\Rrightarrow$) n'est pas une proposition logique (cf. syntaxe d'une proposition).
+% 		
+% 		\subsubsection{Équivalence logique}
+% 			Par le raisonnement ci-dessus, on peut dire que $p$ est logiquement équivalent à $q$ si et seulement si
+% 			\begin{center}
+% 			\begin{tabular}{ll}
+% 			$p \models q$ & $q$ est valide dans tous les modèles de $p$ \\
+% 			$q \models p$ & $p$ est valide dans tous les modèles de $q$ \\
+% 			&\\
+% 			et donc & \\
+% 			$\models (p \Rightarrow q)$ & $p \Rightarrow q$ est une tautologie et\\
+% 			$\models (p \Rightarrow q)$ & $p \Rightarrow q$ est une tautologie.\\
+% 			&\\
+% 			On peut donc écrire & \\
+% 			%impossible de trouver l'équivalence logique en symbole
+% 			$p \Lleftarrow \Rrightarrow q$ & $p$ est conséquence logique de $q$.\\ 
+% 			\end{tabular}
+% 			\end{center}
+% 			L'équivalence logique n'est pas non plus une proposition logique.\\
+% 			
+% 			Il ne faut pas non plus oublier la différence entre phrase propositionnelle ($p$, $q$, $s$,...) et propositions primaires ($P$, $Q$, $S$,...) (cf. syntaxe d'une proposition) :
+% 			\begin{center}
+% 			\begin{tabular}{ll}
+% 				$p \Rightarrow q$ & n'est pas une proposition\\
+% 				
+% 				mais &\\
+% 				$P \land Q \Rightarrow R \land \lnot S$ & en est bien une.\\
+% 			\end{tabular}
+% 			\end{center}
+% 	
+	\section{Les preuves}
+		Une preuve est une manière de partir d’une formule et de dire si celle-ci est vraie ou fausse.\\
+		il y a 3 approches possibles :
+		\begin{itemize}
+			\item Table de vérité
+			\item Preuve transformationnelle
+			\item Preuve déductive (la plus générale)		
+		\end{itemize}
+		\subsection{Preuve avec table de vérité}
+			\newcolumntype{x}{>{\itshape\bfseries}c}
+		Prouvons que $\lnot (P \land Q) \Leftrightarrow (\lnot P \lor \lnot Q)$ est vrai :
+			\begin{center}
+			\begin{tabular}{cc|ccxcx}
+			$P$ & $Q$ & $\lnot P$ & $\lnot Q$ & $(\lnot P \lor \lnot Q)$ & $P \land Q$ & $\lnot (P \land Q)$\\
+			\hline
+			F&F&T&T&T&F&T\\
+			T&F&F&T&T&F&T\\
+			F&T&T&F&T&F&T\\
+			T&T&F&F&F&T&F\\
+			\end{tabular}
+			\end{center}
+			On voit bien ici, que la table de $\lnot (P \land Q)$ est équivalente à celle de $\lnot (P \land Q)$. La preuve a donc vérifié la véracité de la proposition. \\
+			Il y a néanmoins un problème avec cette preuve car s'il y a $N$ propositions premières, on a $2^N$ lignes dans la table.
+		\subsection{Preuve transformationnelle}
+			On va utiliser des "Lois", c'est-à-dire des équivalences.
+			\begin{center}
+			\begin{tabular}{|ll|}
+			\hline
+			$p \Lleftarrow \Rrightarrow p \lor p$ & Idempotence\\
+			$p \lor q \Lleftarrow \Rrightarrow q \lor p$ & Commutativité\\
+			$(p \lor q) \lor r \Lleftarrow \Rrightarrow p \lor (q \lor r)$ & Associativité\\
+			$ \lnot \lnot p \Lleftarrow \Rrightarrow p$ & Double Négation\\
+			$p \Rightarrow q \Lleftarrow \Rrightarrow \lnot p \lor q$ & Implication\\
+			$\lnot p \land q \Lleftarrow \Rrightarrow \lnot p \lor \lnot q$ & $1^{ere}$ loi de De Morgan\\
+			$p \Leftrightarrow q \Lleftarrow \Rrightarrow (p \Rightarrow q) \land (q \Rightarrow p)$ & Équivalence\\
+			\hline
+			\end{tabular}
+			\end{center}
+			On y ajoute 2 règles supplémentaires pour cette technique : 
+			\subsubsection*{Transitivité de l'équivalence}
+			\indent Si $p \Lleftarrow \Rrightarrow q$ et $q \Lleftarrow \Rrightarrow r$, alors $p \Lleftarrow \Rrightarrow r$.
+			\subsubsection*{Substitution}
+			Il est autorisé de remplacer une formule par une formule équivalente à l’intérieur d’une autre formule. Autrement dit : \\
+			\indent Soit p,q,r des formules propositionnelles.\\
+			\indent Si $p \Leftrightarrow q$ et $r(p)$, alors $r(p) \Lleftarrow \Rrightarrow r(q)$.\\
+			On peut remplacer $p$ par $q$ car elles sont équivalentes. Il faut faire attention à ces règles, car elles sont en méta-langage. Elles expliquent seulement ce qui est autorisé  faire.
+			
+			\subsubsection*{Exemple}
+			On veut prouver : $p \land (q \land r) \Lleftarrow \Rrightarrow (p \land q) \land r$
+			\begin{center}
+			\begin{tabular}{ll}
+			
+			$p \land (q \land r)$ & $\Lleftarrow \Rrightarrow p \land \lnot \lnot (q \land r)$\\
+			& $\Lleftarrow \Rrightarrow p \land \lnot (\lnot q \lor \lnot r)$\\
+			& $\Lleftarrow \Rrightarrow \lnot \lnot (p \land \lnot (\lnot q \lor \lnot r))$\\
+			& $\Lleftarrow \Rrightarrow \lnot (\lnot p \lor \lnot \lnot (\lnot q \lor \lnot r))$\\
+			& $\Lleftarrow \Rrightarrow \lnot (\lnot p \lor (\lnot q \lor \lnot r))$\\
+			& $\Lleftarrow \Rrightarrow \lnot ((\lnot p \lor \lnot q) \lor \lnot r)$\\
+			&$\vdots$\\
+			& effectuer les mêmes lois dans le sens contraire \\
+			&$\vdots$\\
+			& $\Lleftarrow \Rrightarrow (p \land q) \land r$\\
+			\end{tabular}
+			\end{center}
+			Le problème dans cette méthode de preuve c'est qu'il faut de l'idée, de la créativité et donc ce n'est pas forcément mieux que les tables de vérités, surtout si c'est compliqué de trouver l'astuce.
+		
+		\subsection{Preuve déductive}
+		A partir des lois logiques (lois d'équivalence) et des règles d'inférence, On va construire des preuves.\\
+		\textit{Une preuve est un objet formel défini avec précision.\\}
+		
+		Lois de logique : 	
+			\begin{center}
+			\begin{tabular}{ll}
+			$p \Lleftarrow \Rrightarrow p \lor p$ & Idempotence de $\lor$\\
+			$p \lor q \Lleftarrow \Rrightarrow q \lor p$ & Commutativité de $\lor$\\
+			$(p \lor q) \lor r \Lleftarrow \Rrightarrow p \lor (q \lor r)$ & Associativité de $\lor$\\
+			$ \lnot \lnot p \Lleftarrow \Rrightarrow p$ & Double Négation\\
+			$p \Rightarrow q \Lleftarrow \Rrightarrow \lnot p \lor q$ & Implication\\
+			$\lnot p \land q \Lleftarrow \Rrightarrow \lnot p \lor \lnot q$ & $1^{ere}$ loi de De Morgan\\
+			$\lnot p \lor q \Lleftarrow \Rrightarrow \lnot p \land \lnot q$ & $2^{eme}$ loi de De Morgan\\
+			$(p \land q) \lor r \Lleftarrow \Rrightarrow (p \lor r) \land (q \lor r)$ & Distributivité de $\lor$\\
+			\end{tabular}
+			\end{center}
+			Mais également l'idempotence, la commutativité, l'associativité et la distributivité de $\land$.\\
+			
+		Règle d'inférence : \\
+		
+		A la différence de la preuve transformationnelle, les règles d'inférences ont une direction : Elles commencent par les prémisses et se terminent par la conclusion.
+		\begin{center}
+		\begin{tabular}{llp{3cm}l}
+		
+   			Conjonction : &
+   			\begin{tabular}{cl}
+      		p & prémisse\\
+      		q & prémisse\\
+      		\line(1,0){25}&\\
+      		$p\land q$ & Conclusion
+   			\end{tabular} 
+   			&
+   			
+   			Simplification : &
+   			\begin{tabular}{c}
+      		$p \land q$ \\
+      		\hline
+      		$p$\\
+   			\end{tabular} \\
+   			&\\
+   			
+   			Addition : &
+   			\begin{tabular}{c}
+      		$p $ \\
+      		\hline
+      		$p \lor q$\\
+   			\end{tabular}
+   			&
+   			
+   			Contradiction : &
+   			\begin{tabular}{c}
+      		$p$ \\
+      		$\lnot p$\\
+      		\hline
+      		$q$\\
+   			\end{tabular}\\
+   			&\\
+   			
+   			Double Négation : &
+   			\begin{tabular}{c}
+      		$\lnot \lnot p $ \\
+      		\hline
+      		$p$\\
+   			\end{tabular}
+   			&
+   			
+   			\raggedright Transitivité de l'équivalence : &
+   			\begin{tabular}{c}
+      		$p \Leftrightarrow q$ \\
+      		$q \Leftrightarrow r$ \\
+      		\hline
+      		$p \Leftrightarrow r$\\
+   			\end{tabular}\\
+   			&\\
+   			
+   			Modus Ponens : &
+   			\begin{tabular}{c}
+      		$p \Rightarrow q$ \\
+      		$p$ \\
+      		\hline
+      		$q$\\
+   			\end{tabular}
+   			&
+   			
+   			Modus Tollens : &
+   			\begin{tabular}{c}
+      		$p \Rightarrow q$ \\
+      		$\lnot p$ \\
+      		\hline
+      		$\lnot q$\\
+   			\end{tabular}\\
+   			&\\
+   			
+   			Loi d'équivalence : &
+   			\begin{tabular}{c}
+      		$p \Leftrightarrow q$ \\
+      		\hline
+      		$q \Leftrightarrow p$\\
+   			\end{tabular}\\		
+		\end{tabular}
+		\end{center}
+		
+		On y ajoute 2 régles spéciales : 
+		\begin{itemize}
+		\item Le théorème de déduction,
+		\item La preuve par contradiction.
+		\end{itemize}
+		
+		\subsubsection*{Théorème de déduction}
+			Pour prouver $s\Rightarrow t$, On suppose $s$ vrai. On déduit $t$ et donc on sait que l'hypothèse $s\Rightarrow t$ est vraie et on l'évacue.\\
+			
+			On note ce théorème $s \vdash t$ (t peut être prouvé à partir de s, ce qui signifie qu'on peut construire une preuve (objet mathématique) qui est vraie si on applique bien les règles ci-dessus).\\
+			
+			\textbf{Remarque :} $p\models t \neq p\vdash t$
+			\begin{itemize}
+			\item $p\models t$ est une notion de vérité, et donc de sémantique,
+			\item $ p\vdash t$ est une notion syntaxique, on peut prouver qu'une preuve est vraie.
+			\end{itemize}
+			
+			Notion de prouvabilité : on peut créer une preuve, et donc on peut créer une séquence de prémisses et de conclusions.
+			\begin{center}
+			\begin{tabular}{c}
+      		$p,...,r,s \vdash t$ \\
+      		\hline
+      		$p,...,r \vdash s\Rightarrow t$\\
+   			\end{tabular}\\
+			\end{center}
+			Ceci permet notamment de formaliser des théorèmes.
+			
+		\subsubsection*{Preuve par contradiction}
+		C'est une preuve indirecte :\\
+		Implicitement, on suppose que $p$ jusqu'à $q$ n'a pas de problème, c'est-à-dire qu'on ne peut pas prouver une contradiction pour ces formules propositionnelles.
+		\begin{center}
+			\begin{tabular}{c}
+      		$p,...,q,r \vdash s$ \\
+      		$p,...,q,r \vdash \lnot s$\\
+      		\hline
+      		$p,...,q \vdash \lnot r$\\
+   			\end{tabular}\\
+			\end{center}
+			
+			Ceci signifie qu'il y a une erreur dans les prémisses, et on suppose ici que c'est la formule propositionnelle $r$ qui est fautive. On justifie qu'il n'y a aucune contradiction dans $p,...,q$ car on part du principe qu'il existe un modèle de $p,...q$.\\
+			
+			Tout ceci est une formalisation de choses qu'on connaît déjà, mais ça nous donne une notion précise du raisonnement à avoir.
+			
+\subsection{Exemple de preuve propositionnelle}
+
+\noindent Voici les propositions premières : \\
+A : tu manges bien \\
+B : ton système digestif est en bonne santé \\
+C : tu pratiques une activité physique régulière \\
+D : tu es en bonne forme physique \\
+E : tu vis longtemps \\
+
+\noindent On peut maintenant faire une théorie et on espère qu'elle aura un modèle. \\
+A$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
+\\
+\noindent On aimerait prouver que $\lnot$A $\land$ $\lnot$C est vrai.\\
+
+\noindent Preuve : \\
+\\
+\begin{tabular}{|l|l|}
+\hline
+1. A$\Rightarrow$B & prémisse \\
+2. C$\Rightarrow$D & prémisse \\
+3. B$\lor$D $\Rightarrow$E & prémisse \\
+4. $\lnot$E & prémisse \\ 
+\indent 5. A & hypothèse \\
+\indent 6. B & modus ponens (1) \\
+\indent 7. B$\lor$D & addition (6) \\
+\indent 8. E & modus ponens (7) \\
+9. $\lnot$A & preuve indirecte \\
+\indent 10. C & hypothèse \\
+\indent 11. D & modus ponens (2) \\
+\indent 12. D$\lor$B & addition (11) \\
+\indent 13. B$\lor$D & commutativité (12)\\
+\indent 14. E & modus ponens (9) \\
+15. $\lnot$C & preuve indirecte \\
+16. $\lnot$A $\land$ $\lnot$C & conjonction (9,15) \\
+\hline
+\end{tabular}\\
+
+Grâce à la déduction on a donc pu prouver que tu ne manges pas bien et que tu ne pratiques pas d'activité physique régulière. 
+On aimerait maintenant pouvoir automatiser les preuves quand elles existent. Mais il faut savoir s'il peut tout résoudre ou pas. 
+On va donc construire un algorithme nous permettant de résoudre automatiquement les preuves en logique propositionnelle.
+
+% \end{document}

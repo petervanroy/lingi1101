@@ -1,0 +1,139 @@
+\section{Partie 9}
+
+On va terminer le point traité au cours précédent par un exemple un peu plus conséquent d'une preuve manuelle en logique des prédicats avant d'introduire l'algorithme permettant d'effectuer des preuves de manière automatisée.
+\subsection*{Exemple de preuve manuelle}
+Il est important de pouvoir faire des preuves manuellement, car cela permet de bien comprendre toutes les étapes de raisonnement d'une preuve, même si par la suite on utilise un algorithme plutôt que de faire les preuves à la main. 
+
+L'exemple suivant est inspiré de l'Empire romain: 
+\subsubsection*{Prémisses}
+\begin{itemize}
+    \item Les maîtres et esclaves sont tous des hommes adultes
+    \item toutes les personnes ne sont pas des hommes adultes
+\end{itemize}
+\textit{Note: on voit dans les prémisses qu'il y a des quantificateurs: tous, toutes. 
+}
+\subsubsection*{A prouver} 
+\begin{itemize}
+    \item il existe des personnes qui ne sont pas des maîtres
+\end{itemize}
+\subsubsection*{Preuve}
+\begin{enumerate}
+    \item $\forall{}x\ (maitre(x)\lor{}esclave(x)\implies{}adulte(x)\land{}homme(x))$ \hfill prémisse
+    \item $\lnot{}\forall{}x\ (adulte(x)\land{}homme(x))$ \hfill prémisse
+    \item $\exists{}x\ \lnot{}(adulte(x)\land{}homme(x))$ \hfill théorème négation\\
+    \textit{S' il n'est pas vrai que toutes les personnes sont des hommes adultes alors il existe une personne qui n'est pas un homme adulte}
+    \item $\lnot{}(adulte(x)\land{}homme(x))$ \hfill $\exists{}$ elim\\
+\textit{    On élimine le quantificateur existentiel:  on peut le faire, car on introduit une variable x qu'on choisit comme étant une personne rendant vraie la proposition.}
+    \item $(maitre(x)\lor{}esclave(x)\implies{}adulte(x)\land{}homme(x))$ \hfill $\forall{}$ elim\\
+    \textit{On peut retirer le $\forall$  en réduisant le champ de x aux x rendant vraie la proposition.}
+    \item $\lnot{}(maitre(x)\lor{}esclave(x))$ \hfill modus tollens
+    \item $\lnot{}maitre(x)\land{}\lnot{}esclave(x)$ \hfill de Morgan
+    \item $\lnot{}maitre(x)$ \hfill simplification
+    \item $\exists{}y\ \lnot{}maitre(y)$ \hfill $\exists{}$ intro\\
+    \textit{Comme dans l'interprétation, x est une personne qui rend valable cette proposition, on peut dire qu'il existe une personne rendant valable cette proposition et réintroduire le quantificateur $\exists$}
+\end{enumerate}
+C'était un exemple très simple ne faisant que quelques pas, mais la logique est assez expressive pour permettre des preuves plus complexes(par exemple, formaliser les mathématiques), le nombre de pas serait alors beaucoup plus important. 
+
+\hfill {\begin{minipage}{0.90\textwidth}
+\begin{small}
+{\large Instant Histoire:}\\
+A la fin du 19ème siècle, début du 20ème: 
+\begin{itemize}
+\item création de la logique de 1er ordre (Gottlob Frege)
+\item Deux personnes ont essayé de formaliser toutes les mathématiques. Principa Mathématica (Alfred Whitehead, Bertrand Russell)
+\end{itemize}
+Lors que l'arrivée des ordinateurs, fin du 20ème siècle(années 50-60 et fin du siècle) on a essayé de formaliser la logique via des algorithmes:
+\begin{itemize}
+\item Création de l'Algorithme de Preuves (1965):
+\begin{itemize}
+\item Alan Robinson crée La Règle de Résolution (qui va être expliquée aujourd'hui)
+\item Création de prouveurs (assistants de preuve) par exemple Coq et Isabelle en 1972
+\item Création de la logique de programmation qui aide à l'élaboration de la programmation par contraintes: Prolog (1972) 
+\end{itemize}
+\item Création de la sémantique Web: OWL (Web Ontology Langage)
+\end{itemize}
+\end{small}
+\end{minipage}
+\section{Algorithme de preuve pour la logique des prédicats}
+\begin{itemize}
+    \item Cet algorithme s'inspire de l'algorithme de réfutation de la logique des propositions [résolution forme clausale]
+    \item Pour la logique des prédicats, c'est un peu plus complique, mais ça marche!
+\end{itemize}
+On peut le faire marcher malgré la complexité des variables et des quantificateurs ce qui est assez étonnant, car c'est une logique très expressive. 
+Arriver à trouver un algorithme permettant de traiter la logique des prédicats était une sorte de Graal au 20ème siècle. 
+\subsection{3 transformations:} 
+On va commencer par faire les transformations de normalisation. Il y a 3 transformations à effectuer: 
+\begin{enumerate}
+    \item formule $\to$ forme prénexe: $$(\ldots{}\forall{}\ldots{}\exists{}\ldots{}\forall{} )\implies \forall{}\exists{}\forall{}(\ldots{})$$
+    Tous les quantificateurs sont mis en tête de la formule. Les quantificateurs étant très compliqués à gérer, on transforme la formule pour les extraire de celle-ci. \\Les modèles sont conservés durant cette transformation.
+    \item forme prénexe $\to$ forme Skolem (élimination des $\exists{}$): $$ \forall{}\exists{}\forall{}(\ldots{})  \implies \forall{}\forall{}\forall{}(\ldots{}) $$
+    Les quantificateurs existentiels sont très embêtants, car ils sont restrictifs. Ils disent qu'il existe des éléments, mais ne précisent pas lesquels, on va donc les éliminer. \\    Cette transformation préserve l'existence des modèles, mais pas les modèles eux-mêmes. Ils doivent être modifiés pour conserver la même signification. 
+    \item forme Skolem $\to$ forme normale conjonctive: $$\forall\ldots\forall \land_i(\lor_j L_{ij})$$ $$(meme\ algorithme\ que\ pour\ la\ logique\ des\ propositions)$$
+    Cette transformation est la même que celle effectuée dans la logique des propositions. \\
+     Les modèles sont préservés lors de cette transformation. 
+\end{enumerate}
+
+\subsection{Résolution}
+En logique des propositions: $$\frac{L\lor C_1, \neg L \lor C_2}{C_1\lor C_2}$$
+Cela fonctionne en logique des propositions, car il n'y a pas de variables, mais ici, on peut avoir $L_1 \lor C_1$ \hspace{10pt} $\neg L_2 \lor C_2$  avec $L_1$ et $L_2$ qui ont des variables différentes. Par exemple P(x,a) et P(y,z).\\
+Pour pouvoir faire la résolution, il va falloir en quelque sorte les rendre identiques. \\
+On va donc dire: ce ne sont peut-être pas toujours les mêmes, mais, pour certaines valeurs, ils sont identiques. Si x=y et a=z alors on peut faire la résolution. 
+\subsubsection*{Unification}
+\begin{minipage}{0.25\textwidth}
+		L1:  P(x,a)\\
+		L2:  P(y,z)
+\end{minipage}
+\begin{minipage}{0.75\textwidth}
+		Pour que $L_1$ et $L_2$ soient identiques, on va restreindre les variables et faire une substitution.
+\end{minipage}
+
+$$(a: constante,\ x,yz:variables)$$
+$$\sigma=\{(x,y),(z,a)\}$$
+$$P(x,a) \to P(y,a)$$
+$$P(y,z) \to P(y,a)$$
+
+Cette résolution marche pour toutes les valeurs qui sont limitées par la substitution. Le résultat ne sera donc pas général.
+Cette opération s'appelle l'unification et utilise la substitution $\sigma$ (sigma). 
+On peut maintenant faire la résolution en appliquant  le même algorithme de réfutation que pour la logique des prédicats: 
+
+$$\frac{L_1C_1, \neg L_2 \lor C_2}{(C_1 \lor C_2)\sigma}$$
+
+\subsection{Propriétés de cet algorithme}
+\begin{itemize}
+\item Cet algorithme est moins fort que pour la logique des propositions, car la logique des prédicats est beaucoup plus expressive.
+\item  adéquat: Si $B\vdash T$ $\to$ $B \models T$\\
+\textit{si l'on trouve une preuve de T avec les axiomes B alors T sera vrai dans tous les modèles de B}
+\item complet: Si $B \models T$ $\to$ $B\vdash T$\\
+\textit{Si quelque chose est vrai dans tous les modèles alors on va trouver une preuve}
+\item L'algorithme possède les propriétés d'un algorithme semi-décidable:
+\begin{itemize}
+\item Si $B \vdash T$ $\to$ l'algorithme trouve une preuve. 
+\item Si $B  \nvDash T$ $\to$ il peut tourner en rond indéfiniment.
+\end{itemize}
+\textit{Si ce qu'on tente de prouver est vrai dans tous les modèles, l'algorithme va finir par trouver une preuve, mais si ce n'est pas vrai, l'algorithme va tourner en rond et ne jamais se terminer. Le problème est donc que quand l'algorithme prend trop de temps à trouver une preuve, on doit l'arrêter et l'on n'est jamais certain du résultat. On ne peut jamais être sûr que l'algorithme n'aurait pas trouvé une preuve si on l'avait laissé tourner plus longtemps. Il est donc semi-décidable, car ses résultats ne sont totalement fiables que dans le cas ou une preuve est trouvée. }
+\end{itemize}
+\subsection{Transformation de la formule de base vers la forme prénexe}
+
+Etapes de la transformation en formule logiquement équivalente:
+\begin{enumerate}
+    \item Éliminer $\Leftrightarrow$ et $\implies{}$
+    \item Renommer les variables. 
+    \begin{itemize}
+    \item Chaque quantificateur ne porte que sur une variable, il faudra en créer de nouvelles si besoin en prenant soin de conserver l'équivalence de la formule . 
+    \item Attention: ne jamais garder le même nom de variable pour une variable libre et une variable liée. 
+    \item Supprimer les quantificateurs si possible. \\
+    \end{itemize}
+    \item Migrer les négations ($\neg$) vers l'intérieur, vers les prédicats. On peut faire cela, car $\neg\exists$ peut être transformé en $\forall\neg$ et vice versa.  
+    \item On peut mettre tous les quantificateurs de la logique des prédicats à l'avant de la formule. 
+\end{enumerate}
+\subsubsection*{Exemple d'une transformation en forme prénexe}
+\begin{enumerate}
+\item $\forall x  [p(x) \land \neg (\exists y) \forall x ( \neg q(x,y)) = > \forall z \exists v \bullet p(a,x,y,v))]$\\ \textit{Expression de base}
+\item $\forall x [p(x) \land \neg(\exists y) (\forall x) ($\colorbox{lightgray}{$\neg$} $\neg q(x,y) $\colorbox{lightgray}{$\lor$} $\forall z \exists v \bullet r(a,x,y,v)]$\\\textit{Suppression des $\implies{}$} 
+\item $\forall x [p(x) \land \neg(\exists y) (\forall $\colorbox{lightgray}{$u$}$)(\neg\neg q($\colorbox{lightgray}{$u$}$,y) \lor $\colorbox{lightgray}{$\cancel{\forall z}$}$\exists v \bullet r(a,$\colorbox{lightgray}{$u$}$,y,v)]$\\\textit{Renommage des variables et suppression des quantificateurs inutiles}
+\item $\forall x [p(x) \land$ \colorbox{lightgray}{$\forall y \neg$} $ (\forall u)($ \colorbox{lightgray}{$\cancel{\neg \neg}$} $q(u,y) \lor \exists v \bullet r(a,u,y,v)] $\\$\neg\exists y\ devient\  \forall \ y\ \neg \ et\ simplification\ des\ \neg$
+\item $\forall x [p(x) \land \forall y $ \colorbox{lightgray}{$\exists u \neg$}$(q(u,y) \lor \exists v \bullet r(a,u,y,v)] $\\$\neg\forall u\ devient\  \exists \ u\ \neg$
+\item $\forall x [p(x) \land \forall y \exists u $\colorbox{lightgray}{$(\neg q(u,y) \land \neg (\exists v) \bullet r(a,u,y,v))]$}\\ \textit{Distribution des $\neg$}\textit{(de Morgan)}
+\item $\forall x [p(x) \land \forall y \exists u (\neg q(u,y) \land $\colorbox{lightgray}{$(\forall v) \bullet \neg$}$ r(a,u,y,v))]$\\$\neg\exists y\ devient\  \forall \ y\ \neg$
+\item $\forall x$\colorbox{lightgray}{$ \forall y \exists u \forall v  \bullet$}$ [p(x) \land (\neg q(u,y) \land  \neg r(a,u,y,v))]$\\\textit{Extraction des quantificateurs.}
+\end{enumerate}

@@ -1,0 +1,87 @@
+\documentclass[a4paper,11pt,final]{article}
+% Pour une impression recto verso, utilisez plutôt ce documentclass :
+%\documentclass[a4paper,11pt,twoside,final]{article}
+
+\usepackage[english,francais]{babel}
+\usepackage[normalem]{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{setspace}
+\usepackage{hyperref}
+% \usepackage[french]{varioref}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{systeme}
+\usepackage{amssymb}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{cancel}
+\usepackage{framed}
+\usepackage{array}
+
+\usepackage{enumitem}
+
+
+\selectlanguage{french}
+
+\DeclareUnicodeCharacter{22A8}{\tautologie}
+\DeclareUnicodeCharacter{22AD}{\contradiction}
+
+\newcommand{\reporttitle}{LINGI1101\\
+\vspace{\baselineskip}
+Logique et Structures Discrètes}     % Titre
+\newcommand{\reportauthor}{Peter \textsc{Van Roy}} % Auteur
+\newcommand{\reportsubject}{ } % Sujet
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\setlength{\parskip}{1ex} % Espace entre les paragraphes
+
+\newcommand{\true}{\mathrm{true}}
+\newcommand{\false}{\mathrm{false}}
+\newcommand{\val}{\mathrm{val}}
+\newcommand{\VAL}{\mathrm{VAL}}
+
+\hypersetup{
+    pdftitle={\reporttitle},%
+    pdfauthor={\reportauthor},%
+    pdfsubject={\reportsubject},%
+    pdfkeywords={rapport} {vos} {mots} {clés}
+}
+
+\begin{document}
+  \include{title}
+  \cleardoublepage % Dans le cas du recto verso, ajoute une page blanche si besoin
+  \tableofcontents % Table des matières
+  \sloppy          % Justification moins stricte : des mots ne dépasseront pas des paragraphes
+  \cleardoublepage
+  \include{remerciements}
+  \cleardoublepage
+  % \include{intro}
+  % \cleardoublepage
+  \include{partie1}
+  \newpage
+  \include{partie2}
+  \newpage
+  \include{partie3}
+  \newpage
+  \include{partie4}
+  \newpage
+  \include{partie5}
+  \newpage
+  \include{partie6}
+  \newpage
+  \include{partie7}
+  \newpage
+  \include{partie8}
+  \newpage
+  \include{partie9}
+  \newpage
+  \include{partie10}
+  \newpage
+  \include{partie11}
+  \newpage
+  % \include{concl}
+  % \newpage
+  \include{references}
+\end{document}
+

@@ -1,0 +1,97 @@
+
+\section{Elimination de $\forall$}
+\begin{flushleft}
+
+$\forall$x$\bullet$P(x) $\rightarrow$ P(a) $\>$ a est une constante\\
+$\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\rightarrow$ P(y) $\>$ y est une variable $\>$ ($P_{I}$($y_{I}$) est vrai $\>$ $y_{I}$ $\in$ $P_{I}$)$\linebreak$ 
+$\forall$ = pour tout $x_{I}$ $\in$ $P_{I}$ : $P_{I}$($x_{I}$) est vrai$\linebreak$
+
+\underline{R\`egle :}$\linebreak$\\
+\begin{center}
+{\LARGE $\frac{\forall x : p}{p[x/t]}$}
+\begin{flushright}$\>$ Substitution : t remplace x\end{flushright}
+\end{center}
+\textcolor{red}{\underline{/!\textbackslash} Il faut faire du renommage dans certains cas !}
+
+\underline{Exemple :}\\
+\begin{enumerate}
+\item $\forall$x $\bullet$ $\forall$y $\bullet$ P(x,y) $\>$ Pr\'emisse
+\item $\forall$y $\bullet$ P(x,y) $\>$ $\>$ $\>$ $\>$ $\>$ Elimination de $\forall$
+\item P(x,x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Elimination de $\forall$ $\rightarrow$ Pas de renommage car pas de capture
+\item $\forall$x $\bullet$ P(x,x) $\>$ $\>$ $\>$ $\>$ $\>$ Introduction de $\forall$
+\end{enumerate}
+
+\section{Elimination de $\exists$}
+$\exists$x $\bullet$ P(x) $\rightarrow$ P(x) $\>$ x = nouvelle constante qui apparait nulle part ailleurs ($val_{I}(a) = x_{I}$)\\
+Il existe un $x_{I}$ $\in$ $D_{I}$ avec $P_{I}$($x_{I}$) est vrai\\
+$\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\nrightarrow$ P(y) $\>$ y = variable qui existe d\'ej\`a dans la preuve \\
+$\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\rightarrow$ P(z) $\>$ z = nouvelle variable dans la preuve $\>$ $val_{I}(z) = x_{I}$\\
+\underline{Exemple 1 :}\\
+\begin{enumerate}
+\item $\exists$x $\bullet$ chef(x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>\>$Pr\'emisse
+\item $\exists$x $\bullet$ voleur(x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$  $\>$Pr\'emisse
+\item chef(y) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$Elimination de $\exists$
+\item \sout{voleur(y)} $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Elimination de $\exists$ $\>$ \textcolor{red}{y n'est pas une nouvelle variable dans la preuve}
+\item chef(y) $\wedge$ voleur(y) $\>$ $\>$ $\>$ $\>$ $\>$ Conjonction
+\item $\exists$y $\bullet$ chef(y) $\wedge$ voleur(y) $\>$ Introduction de $\exists$
+\end{enumerate}
+
+\underline{Exemple 2 :}\\
+\begin{enumerate}
+\item $\exists$x $\bullet$ chef(x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$Pr\'emisse
+\item $\exists$x $\bullet$ voleur (x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$Pr\'emisse
+\item chef(y) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Elimination de $\exists$
+\item voleur (z) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Elimination de $\exists$
+\item chef(y) $\wedge$ voleur(z) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Conjonction
+\item $\exists$y $\exists$z chef(y) $\wedge$ voleur(z) $\>$ Introduction de $\exists$
+\end{enumerate}
+
+\section{Introduction de $\exists$}
+\underline{R\`egle :}\\
+\begin{center}
+{\LARGE $\frac{p[t]}{\exists x \bullet p[x]}$}
+\end{center}
+\begin{flushright}
+Il y a une substitution p[x/t]
+\end{flushright}
+
+\underline{Exemple :}\\
+\begin{center}
+ P(y,y)\\
+$\exists$x $\bullet$ P(x,x)\\[2\baselineskip]
+\sout{P(y,x)}\\
+\sout{$\exists$x $\bullet$ P(x,x)}
+\begin{flushright}
+\textcolor{red}{Ceci n'est pas correct !}
+\end{flushright}
+\end{center}
+$\Rightarrow$ Il doit être possible de retrouver la formule original en remplaçant.\\
+
+\section{Introduction de $\forall$}
+\underline{R\`egle :}\\
+\begin{center}
+{\LARGE $\frac{p}{\forall x \bullet p}$}
+\end{center}
+\begin{itemize}
+\item Si p n'a pas d'occurence libre de x alors c'est OK
+\item Si p contient une occurence libre de x : on doit s'assurer que la preuve jusqu'à cet endroit marchera pour toutes valeurs affectées à x\\
+$\> \> \> \hookrightarrow$ Aucune formule dans la preuve juqu'à cet endroit ne doit mettre une contrainte sur x !
+\end{itemize}
+\underline{Deux conditions :}\\
+\begin{itemize}
+\item x n'est pas libre dans une formule dans la preuve jusqu'à cet endroit obtenu par élimination de $\exists$
+\item x n'est pas libre dans une prémisse (x est déjà connu au début donc il possède déjà une valeur)
+\end{itemize}
+
+\underline{Exemple :}\\
+\begin{enumerate}
+\item $\forall$x $\exists$y parent(y,x) $\>$ Prémisse
+\item $\exists$y parent(y,x) $\>$ $\>$ $\>$ $\>$Elimination de $\forall$
+\item parent(y,x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Elimination de $\exists$ \textcolor{blue}{$\rightarrow$ N'est valable que pour ce y et ce x, pas pour tous}
+\item \sout{$\forall$x parent(y,x)} $\>$ $\>$ $\>$ $\>$Introduction de $\forall$ \textcolor{red}{$\rightarrow$ On ne peut pas faire ça car il y a une contrainte sur x. Là on dit que ce y est parent de tous !}
+\end{enumerate}
+
+
+
+
+\end{flushleft}

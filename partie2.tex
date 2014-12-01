@@ -1,0 +1,411 @@
+
+\section{La logique propositionnelle}
+
+\begin{quote}
+« \textit{\foreignlanguage{english}{They don't even need to know what they're
+talking about.}} » --- Richard Feynman à propos des mathématiciens.
+\end{quote}
+
+La logique propositionnelle est la plus simple des formes de logique. Elle
+permet de formaliser des expressions telles que les suivantes :
+
+\begin{enumerate}
+\item « S’il fait beau, alors je vais dehors. »
+\item « Cet homme est grand et fort. »
+\item « Il fait jour mais pas nuit. »
+\end{enumerate}
+
+Plus précisément, nous partons d’un ensemble de propositions
+premières. Par exemple :
+
+\begin{enumerate}
+\item il fait beau ;
+\item je vais dehors ;
+\item cet homme est grand ;
+\item cet homme est beau ;
+\item il fait jour ;
+\item il fait nuit.
+\end{enumerate}
+
+Le contenu exact de ces propositions n’a en fait aucune importance. C’est
+pourquoi elles seront remplacées par des lettres majuscules :
+
+\begin{enumerate}
+\item A = « il fait beau » ;
+\item B = « je vais dehors » ;
+\item C = « cet homme est grand » ;
+\item D = « cet homme est beau » ;
+\item E = « il fait jour » ;
+\item F = « il fait nuit ».
+\end{enumerate}
+
+Une proposition logique est alors :
+
+\begin{itemize}
+\item soit une des propositions premières ;
+\item soit une combinaison de propositions logiques connectées par des
+  connecteurs logiques.
+\end{itemize}
+
+Ainsi, les exemples de propositions précédentes peuvent être réécrites
+comme ceci (la signification précise des différents symboles sera décrite
+plus loin) :
+
+\begin{enumerate}
+\item $A \Rightarrow B$ ;
+\item $C \land D$ ;
+\item $E \land \lnot F$.
+\end{enumerate}
+
+% TODO: Plus d’exemples des différents connecteurs pour tout illustrer ? % On ne trouve pas nécessaire dans la mesure ou les trois exemple sont représentatifs - Cyril et Jon
+
+L’avantage de cette notation par rapport aux phrases en français est qu’elle
+nous permet d’effectuer des raisonnements formels sur les propositions
+logiques. En particulier, nous pouvons précisément définir :
+
+\begin{enumerate}
+\item une \textbf{grammaire} qui définit ce qui est une proposition logique et ce qui
+  ne l’est pas ;
+\item une \textbf{sémantique} qui donne un sens à chaque proposition logique ;
+\item une \textbf{théorie de preuve} permettant, en sachant qu’une proposition est
+  vraie, de trouver d’autres propositions vraies (par exemple à partir de $A
+  \Rightarrow B$ on peut trouver $\lnot B \Rightarrow \lnot A$).
+\end{enumerate}
+\subsection{La grammaire}
+
+La logique propositionnelle est un \textbf{langage} formel. Il peut être défini
+à l’aide d’une grammaire sur un \textbf{alphabet}. L’alphabet est l’ensemble des
+symboles qui composent une proposition logique, c’est-à-dire :
+
+\begin{itemize}
+\item les lettres majuscules représentant les différentes propositions
+  premières : $A$, $B$, $C$, etc. ;
+\item $\true$ et $\false$ qui représentent des propositions qui sont
+  respectivement toujours vraies et toujours fausses ;
+\item les différents connecteurs logiques :
+	\begin{itemize}
+	\item Conjonction : $\land$
+	\item Disjonction : $\lor$
+	\item Négation :  $\lnot$
+	\item Implication :  $\Rightarrow$
+	\item Equivalence :  $\Leftrightarrow$
+	\end{itemize}
+\item les caractères de ponctuation « $($ » et « $)$ ».
+\end{itemize}
+
+Cependant, toutes les séquences composées de ces caractères ne sont pas des
+phrases propositionnelles. La grammaire suivante permet de donner les règles que
+les phrases propositionnelles doivent respecter~:
+
+\begin{tabular}{rl}
+  $\textrm{<identificateur>}$ & = $A$ | $B$ | $C$ | $D$ | \dots \\
+  $\textrm{<proposition>}$
+  & = $\true$ \\
+  & | $\false$ \\
+  & | $\textrm{<identificateur>}$ \\
+  & | $(\textrm{<proposition>})$ \\
+  & | $\lnot \textrm{<proposition>}$ \\
+  & | $\textrm{<proposition>} \land \textrm{<proposition>}$ \\
+  & | $\textrm{<proposition>} \lor \textrm{<proposition>}$ \\
+  & | $\textrm{<proposition>} \Rightarrow \textrm{<proposition>}$ \\
+  & | $\textrm{<proposition>} \Leftrightarrow \textrm{<proposition>}$
+\end{tabular}
+\vspace{2 mm}
+
+Remarquez que seules les séquences de symboles qui respectent cette
+grammaire sont des phrases propositionnelles. Ainsi, $p \Leftrightarrow q$
+n’est pas une phrase propositionnelle parce que les propositions
+premières sont des lettres majuscules ; de même les phrases en français —
+ou en klingon, ou encore dans d’autres formalismes mathématiques – comme «
+  s’il fait beau alors je vais dehors » ne respectent pas la grammaire
+précédente et ne sont donc pas des phrases propositionnelles.
+
+Notez aussi que le discours à propos des phrases propositionnelles n’est
+pas une phrase propositionnelle. La grammaire précédente, la description de
+l’alphabet, et cette explication parlent de propositions logiques sans en
+être, et font donc partie de ce qui est appelé le \textbf{métalangage}.
+
+\subsection{Les tables de vérité}
+
+La grammaire permet de définir précisément l’ensemble des phrases
+propositionnelles, mais pas de leur donner un sens, c’est à dire de définir
+quand une proposition est vraie ou fausse.
+
+Pour cela, il faut décider lesquelles des propositions premières sont vraies
+et lesquelles sont fausses. Rappelez-vous que la signification des
+propositions premières n’a aucune importance, ce choix est donc complètement
+arbitraire (le choix qui décrit au mieux le monde réel n’est qu’un des choix
+possibles parmi tous les autres). On sait également que les propositions
+$\true$ et $\false$ sont, respectivement, toujours vraies et toujours
+fausses.
+
+Les autres propositions sont construites à partir de propositions plus
+simples. Leur véracité est fonction de celle des propositions qui les
+composent. Prenons par exemple $p \land q$, où $p$ et $q$ sont d’autres
+propositions. La véracité de $p \land q$ est une fonction de celle de $p$ et
+de $q$ : $p \land q$ est vrai si et seulement si $p$ et $q$ sont vrais aussi
+($\land$ est un « et » logique). Cette relation peut être exprimée à l’aide
+de la table de vérité suivante :
+
+\vspace{2 mm}
+\begin{tabular}{ll|l}
+  $p$ & $q$ & $p \land q$ \\
+  \hline
+
+  $\true$ & $\true$ & $\true$ \\
+  $\true$ & $\false$ & $\false$ \\
+  $\false$ & $\true$ & $\false$ \\
+  $\false$ & $\false$ & $\false$
+\end{tabular}
+
+\vspace{2 mm}
+Voici la table de vérité des autres connecteurs logiques :
+\vspace{2 mm}
+
+\begin{tabular}{ll|l}
+  $p$ & $q$ & $p \lor q$ \\
+  \hline
+
+  $\true$ & $\true$ & $\true$ \\
+  $\true$ & $\false$ & $\true$ \\
+  $\false$ & $\true$ & $\true$ \\
+  $\false$ & $\false$ & $\false$
+\end{tabular}
+\vspace{2 mm}
+
+\begin{tabular}{ll|l}
+  $p$ & $q$ & $p \Leftrightarrow q$ \\
+  \hline
+
+  $\true$ & $\true$ & $\true$ \\
+  $\true$ & $\false$ & $\false$ \\
+  $\false$ & $\true$ & $\false$ \\
+  $\false$ & $\false$ & $\true$
+\end{tabular}
+\vspace{2 mm}
+
+\begin{tabular}{l|l}
+  $p$ & $\lnot p$ \\
+  \hline
+
+  $\true$ & $\false$ \\
+  $\false$ & $\true$
+\end{tabular}
+\vspace{2 mm}
+
+\begin{tabular}{ll|l}
+  $p$ & $q$ & $p \Rightarrow q$ \\
+  \hline
+
+  $\true$ & $\true$ & $\true$ \\
+  $\true$ & $\false$ & $\false$ \\
+  $\false$ & $\true$ & $\true$ \\
+  $\false$ & $\false$ & $\true$
+\end{tabular}
+\vspace{2 mm}
+
+Remarquez que le dernier tableau est correct. Il n’est parfois pas intuitif
+que la proposition $A \Rightarrow B$ (qui pourrait s’exprimer en français
+par « si $A$, alors $B$ ») soit toujours vraie quand $A$ est faux, mais c’est
+pourtant le cas : la proposition dit que quand $A$ est vrai, $B$ doit
+l’être aussi, mais elle ne donne aucune information sur le cas où $A$ est
+faux.
+
+Les parenthèses, quant à elles, servent à distinguer des propositions telles
+que $A \land (B \lor C)$ et $(A \land B) \lor C$, qui s’écriraient de la
+même manière sans parenthèses alors qu’elles n’ont pas la même table de
+vérité :
+
+\begin{tabular}{lll|ll}
+  $A$ & $B$ & $C$ & $A \land (B \lor C)$ & $(A \land B) \lor C$ \\
+  \hline
+
+  $\true$  & $\true$  & $\true$  & $\true$  & $\true$  \\
+  $\true$  & $\true$  & $\false$ & $\true$  & $\true$  \\
+  $\true$  & $\false$ & $\true$  & $\true$  & $\true$  \\
+  $\true$  & $\false$ & $\false$ & $\false$ & $\false$ \\
+  $\false$ & $\true$  & $\true$  & $\false$ & $\true$  \\
+  $\false$ & $\true$  & $\false$ & $\false$ & $\false$ \\
+  $\false$ & $\false$ & $\true$  & $\false$ & $\true$  \\
+  $\false$ & $\false$ & $\false$ & $\false$ & $\false$
+\end{tabular}
+
+\subsection{Les interprétations}
+
+Une autre façon plus puissante de définir si une proposition est vraie ou fausse est d’utiliser
+une \textbf{interprétation}. Si $E_P$ est l’ensemble des propositions premières,
+alors une interprétation $I$ définit la fonction $\val_I : E_P \rightarrow
+\{\true, \false\}$ \footnote{La notation $f : A \rightarrow B$ signifie que $f$
+  est une fonction depuis l’ensemble $A$ vers l’ensemble $B$.  } qui permet de
+savoir si ces propositions premières sont vraies ou fausses. Par exemple, on
+pourrait écrire ceci :
+
+\[\val_I(A) = \true\]
+\[\val_I(B) = \false\]
+\[\val_I(C) = \true\]
+
+Étant donné la fonction $\val_I$, il est possible de définir la fonction
+$\VAL_I : P \rightarrow \{\true, \false\}$, qui est une extension de
+$\val_I$ à $P$, l’ensemble de toutes les propositions. L’équivalent des
+tables de vérité pourrait être des expressions telles que~:
+
+\[\forall p \in E_P. \VAL_I(p) = \val_I(p)\]
+
+% Les définitions du type « A \land B est vrai si A et B sont vrais » me
+% paraissent être cycliques, donc je les ai plutôt écrites comme ça, mais je ne
+% sais pas si cela paraît évident pour tout le monde.
+\[\VAL_I(p \land q) = \begin{cases}
+  \true \mbox{ si } \VAL_I(p) \mbox{ et } \VAL_I(q) = \true \\
+  \false\mbox{ sinon}
+\end{cases}\]
+
+\[\VAL_I(p \lor q) = \begin{cases}
+  \false \mbox{ si } \VAL_I(p) \mbox{ ou } \VAL_I(q) = \false \\
+  \true\mbox{ sinon}
+\end{cases}\]
+
+\[\VAL_I(\lnot p) = \begin{cases}
+  \false\mbox{ si }\VAL_I(p) = \true \\
+  \true\mbox{ si }\VAL_I(p) = \false
+\end{cases}\]
+
+\[\VAL_I(p \Leftrightarrow q) = \begin{cases}
+  \true\mbox{ si }\VAL_I(p) = \VAL_I(q) \\
+  \false\mbox{ sinon}
+\end{cases}\]
+
+\[\VAL_I(p \Rightarrow q) = \begin{cases}
+  \false \mbox{ si } \VAL_I(q) = \false \mbox{ alors que } \VAL_I(p) = \true \\
+  \true\mbox{ sinon}
+\end{cases}\]
+
+Prenons un exemple concret, utilisons une interprétation pour étudier la phrase
+suivante~: « S'il fait beau à midi, j'irai promener le chien ». Nous devons
+d’abord traduire cette phrase en l’une des proposition du formalisme que nous
+avons défini, en commençant par identifier les propositions premières~:
+
+\begin{enumerate}
+\item B = « Il fait beau »~;
+\item M = « Il est midi »~;
+\item P = « Je vais promener le chien »~;
+\end{enumerate}
+
+Identifions également les connecteurs à employer~: « s’il fait beau $\land$
+  qu'il est midi $\Rightarrow$ j’irai promener le chien ». En combinant ces deux
+résultats, nous obtenons la phrase propositionnelle $(B \land M) \Rightarrow P$.
+
+Interprétons désormais notre proposition à l’aide de l’interprétation suivante~:
+\begin{enumerate}
+  \item Il fait beau~: $\val_I(B) = \true$~;
+  \item Il est midi~: $\val_I(M) = \true$~;
+  \item Je n’irai pas promener le chien~: $\val_I(P) = \false$.
+\end{enumerate}
+
+Nous pouvons alors effectuer le développement suivant~:
+
+\begin{align*}
+  \VAL_I((B \land M) \Rightarrow P) &= \begin{cases}
+    \false \mbox{ si } \VAL_I(P) = \false \mbox{ alors que } \VAL_I(B \land M) = \true \\
+    \true\mbox{ sinon}
+  \end{cases} \\
+  \mbox{ or }\VAL_I(B \land M) &= \begin{cases}
+    \true \mbox{ si } \VAL_I(B) \mbox{ et } \VAL_I(M) = \true \\
+    \false\mbox{ sinon}
+  \end{cases} \\
+  &= \true \\
+  \mbox{ donc }  \VAL_I((B \land M) \Rightarrow P) &= \begin{cases}
+    \false \mbox{ si } \VAL_I(P) = \false \\
+    \true\mbox{ sinon}
+  \end{cases} \\
+  &= \false
+\end{align*}
+
+Nous pouvons donc conclure que, dans cette interprétation, la personne ayant
+fait cette affirmation a menti. Notons néanmoins que notre homme n'aurait pas
+mentit en partant promener le chien alors qu'il pleuvait à midi, rien n'ayant
+été dit sur ce qu'il ferait dans le cas où il ne ferait pas beau.
+
+% TODO: Rajouter un exemple simple pour vérifier que l’un des connecteurs est
+% bien défini (\land, etc.) et aussi montrer la démarche :
+%   - avoir une phrase en français avec 2-3 connecteurs logiques ;
+%   - identifier les propositions primaires et les connecteurs ;
+%   - réécrire la phrase mathématiquement ;
+%   - définir une interprétation ;
+%   - l’utiliser pour évaluer la fonction.
+
+\subsection{Les modèles logiques}
+
+À partir de la notion d’interprétation, nous pouvons définir ce qu’est
+un \textbf{modèle}. Soit $B = \{b_1, b_2, \dots, b_n \}$ un ensemble de
+propositions logiques. Une interprétation $I$ est un modèle de $B$ si et
+seulement si $\forall b_i \in B. \VAL_I(b_i) = \true$. Autrement dit, $I$
+décrit un univers qui respecte toutes les règles se trouvant dans l’ensemble
+$B$.
+
+Donc, dans notre exemple précédent, l’interprétation choisie n’est pas un modèle
+de la proposition analysée, celle-ci n’étant pas validée, mais par exemple
+l’interprétation telle que $\val_I(B) = \true$, $\val_I(M) = \true$ et
+$\val_I(P) = \true$ est bien un modèle de la proposition utilisée comme
+exemple. Remarquez aussi que cela ne change rien au fait que l’interprétation
+choisie est le modèle d’autres propositions que celle étudiée (par exemple $B
+\land M$).
+
+% TODO: Exemple d’expression avec une interprétation qui est un modèle et une
+% autre qui n’en est pas un.
+\begin{description}\item[Les tautologies :] Pour certaines propositions, toute interprétation est un modèle, c’est à dire que ces propositions sont toujours
+  vraies. Par exemple, $\true$ est évidemment une tautologie, de même que $A
+  \Rightarrow A$ ou encore $A \lor \lnot A$. Le fait qu’une proposition $p$ est
+  une tautologie se note $\vDash p$.
+\item[Les contradictions :] Pour d’autres propositions, il n’existe aucun
+  modèle, c’est à dire qu’elles sont toujours fausses. Par exemple $A \land
+  \lnot A$ est une contradiction. Le fait qu’une proposition $p$ est une
+  contradiction se note $\nvDash p$.
+\item[Les contingences :] Toutes les autres propositions sont des contigences. Il
+  existe des interprétations qui sont des modèles et d’autres qui n’en sont
+  pas. Par exemple $A \land B$ est vrai pour l’interprétation $I$ telle que
+  $\val_I(A) = \val_I(B) = \true$, mais faux dans tous les autres cas.
+\end{description}
+
+		\subsubsection{Conséquence logique}
+			$p$ est conséquence logique de $q$ si et seulement si $p \Rightarrow q$ est une tautologie. En d'autres termes, si
+			\begin{center}
+			\begin{tabular}{ll}
+			$p \models q$ & $q$ est valide dans tous les modèles de $p$ \\
+			&\\
+			alors & \\
+			$\models (p \Rightarrow q)$ & $p \Rightarrow q$ est une tautologie.\\
+			&\\
+			On peut donc écrire & \\
+			$p \Rrightarrow q$ & $p$ est conséquence logique de $q$.\\
+			\end{tabular}
+			\end{center}
+			Cependant, la conséquence logique ($\Rrightarrow$) n'est pas une proposition logique (cf. syntaxe d'une proposition).
+		
+		\subsubsection{Équivalence logique}
+			Par le raisonnement ci-dessus, on peut dire que $p$ est logiquement équivalent à $q$ si et seulement si
+			\begin{center}
+			\begin{tabular}{ll}
+			$p \models q$ & $q$ est valide dans tous les modèles de $p$ \\
+			$q \models p$ & $p$ est valide dans tous les modèles de $q$ \\
+			&\\
+			et donc & \\
+			$\models (p \Rightarrow q)$ & $p \Rightarrow q$ est une tautologie et\\
+			$\models (p \Rightarrow q)$ & $p \Rightarrow q$ est une tautologie.\\
+			&\\
+			On peut donc écrire & \\
+			%impossible de trouver l'équivalence logique en symbole
+			$p \Lleftarrow \Rrightarrow q$ & $p$ est conséquence logique de $q$.\\ 
+			\end{tabular}
+			\end{center}
+			L'équivalence logique n'est pas non plus une proposition logique.\\
+			
+			Il ne faut pas non plus oublier la différence entre phrase propositionnelle ($p$, $q$, $s$,...) et propositions primaires ($P$, $Q$, $S$,...) (cf. syntaxe d'une proposition) :
+			\begin{center}
+			\begin{tabular}{ll}
+				$p \Rightarrow q$ & n'est pas une proposition\\
+				
+				mais &\\
+				$P \land Q \Rightarrow R \land \lnot S$ & en est bien une.\\
+			\end{tabular}
+			\end{center}
+	

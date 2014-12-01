@@ -1,0 +1,168 @@
+
+\section{Deux règles plus sophistiquées}
+
+\subsection{Théorème de déduction}
+
+\begin{itemize}
+\item  Pour prouver s $\Rightarrow$ t
+\item  On suppose s vrai
+\item  On déduit t
+\item  Ensuite on évacue l'hypothèse
+\end{itemize}
+
+
+\it{Notation: p $\vdash$ t (on peut prouver t à partir de p) }
+
+\subsubsection{Prémisse:}
+
+\begin{equation}
+\frac{p........................r, s \vdash t} 
+{p........................r, s \vdash (s \Rightarrow t)}
+\end{equation}
+
+\subsubsection{Conclusion:}
+
+Déduire une implication
+
+\subsection{Preuve par contradition (ou preuve indirecte)}
+
+On prend un hypothèse, et on peut prouver qu'elle est vraie ou fausse, d'où l'hypothèse n'est pas bonne.
+
+\subsubsection{Prémisse:} 
+on suppose que p...q n'a pas de problème
+
+\begin{equation}
+\begin{split}
+p........................q, r, s \vdash s \\
+\frac{p........................ q,r, s \vdash \lnot s}
+{p........................ q \vdash \lnot r}
+\end{split}
+\end{equation}
+
+\subsubsection{Conclusion:}
+
+si p...q n'a pas de problème, on se focalise alors sur r
+ 
+
+\section{Exemples de Preuves}
+
+Une preuve est une séquence de pas où chaque pas est une application de règles d'inférences et de lois logiques
+Il faut justifier à chaque étape le nom de la règle / loi, et indenter les éléments de la preuve en preuve conditionnelle indirecte.
+
+\subsection{Prémisse:} 
+
+p $\land$ q $\lor$ r
+
+\subsection{Conclusion:}
+
+$\lnot$ p $\Rightarrow$ r
+
+\subsection{Exemple sans preuve conditionnelle}
+
+\begin{enumerate}
+\item   (p $\land$ q) $\lor$ r  \it{Prémisse}
+\item   r $\lor$ (p $\land$ q)  $\lor$ r \it{Commutativité en 1}
+\item   (r $\lor$ p) $\land$ (r$\lor$q) \it{Associativité en 2}
+\item   (r $\lor$ p) \it{Simplification en 3}
+\item   (p $\lor$ r) \it{Commutativité en 4}
+\item   $\lnot$$\lnot$ p $\lor$ r \it{Loi de la négation en 5}
+\item   $\lnot$ p $\Rightarrow$ r \it{Implication en 6}
+\end{enumerate}
+
+\subsection{Exemple avec preuve conditionnelle}
+
+\begin{enumerate}
+\item (p $\land$ q) $\lor$ r  \it{Prémisse}
+\item $\lnot$ $\lnot$(p $\land$ q) $\lor$ r \it{Double négation en 1}
+\item $\lnot$ ( $\lnot$ p $\land$ $\lnot$ q) \it{Loi De Morgan en 2}
+\item $\lnot$ p $\lor$ $\lnot$ q $\Rightarrow$ r \it{Implication en 3}
+
+\begin{enumerate}
+ \item  $\lnot$ p \it{Hypothèse}
+ \item  $\lnot$ p $\lor$ $\lnot$ p \it{ Addition sur 5}
+ \item  r \it{ Modus Ponens sur 4 et 6}
+\end{enumerate}
+
+\item  $\lnot$ p $\Rightarrow$ r \it{Evacuation de l'hypothèse}
+\end{enumerate}
+
+\subsection{Exemple de Preuve par contradiction}
+
+\begin{enumerate}
+\item  (p $\land$ q) $\lor$ r  \it{Prémisse}
+\item  (p  $\lor$ r) $\land$ (q $\lor$ r) \it{Distributivité sur 1}
+\item  (p $\lor$ r)  \it{Simplification en 2}
+
+\begin{enumerate}
+ \item $\lnot$ ( $\lnot$ p $\Rightarrow$ r)  \it{Hypothèse}
+ \item $\lnot$ ( $\lnot$ $\lnot$ p $\lor$ r)\it{Implication en 4}
+ \item $\lnot$ (p $\lor$ r) \it{ Négation en 5}
+\end{enumerate}
+
+\item $\lnot$ $\lnot$ ($\lnot$ p $\Rightarrow$ r)  \it{ Preuve par contradiction}
+\item $\lnot$ p $\Rightarrow$ r \it{Négation en 7}
+\end{enumerate}
+
+
+\section{Quelques concepts}
+\subsection{Principe de dualité }
+
+\subsubsection{Dans les formules sans $\rightarrow$ :}
+
+\begin{equation}
+1 \leftrightarrow T \hspace{5cm} true \leftrightarrow false 
+\end{equation}
+\begin{align*}
+\models \lnot ( p \land q)  \Leftrightarrow \lnot p \lor \lnot q \\
+\models \lnot ( p \lor q)  \Leftrightarrow \lnot p \land \lnot q 
+\end{align*}
+
+\subsubsection{Formule quelconque:}
+
+\begin{equation}
+	1 \leftrightarrow T \hspace{5cm} true \leftrightarrow false 
+\end{equation}
+
+ Justification en raisonnant sur les modèles:
+ \begin{align*}
+	 p1,...,pn \models ssi \models (p1,...,pn \land \lnot q) \leftrightarrow false \\
+	 ssi \models ( \lnot p1 \lor ... \lor pn) \leftrightarrow true
+ \end{align*}
+
+\subsection{Forme Normale}
+
+\begin{itemize}
+  \item Conjonctive: $( p \lor q ) \land ( q \lor a ) \land ( s \lor r )$  
+  \item Disjonctive
+\end{itemize}
+
+\subsubsection{terminologie}
+
+\begin{itemize}
+	\item Littéral :$ P \lor \lnot P \approxeq L$
+	\item Clause : $\lor L{i} = ( L{1} \lor L{2} \lor L{3} ... \lor L{i} )$
+\end{itemize}
+
+\subsubsection{Forme normale conjonctive FNC}
+
+\subsection{Algorithme de normalisation}
+
+\begin{enumerate}
+\item Eliminer les $\rightarrow$ et $\leftrightarrow$
+\item Déplacer les négations vers l'intérieur (dans les propositions premières) De Morgan
+\item Déplacer les disjonctions ($\lor$) vers l'intérieur
+\item Simplifier $(P \lor \lnot P)$
+\end{enumerate}
+
+\subsubsection{Exemple}
+
+\begin{align*}
+& (p \rightarrow (Q \rightarrow R)) \rightarrow ((P \land S) \rightarrow R) \\
+& \lnot ( ... ) \lor ( ... ) \\
+& \lnot (\lnot P \lor (\lnot Q \lor R)) \lor (\lnot (P \land S) \lor R) \\
+& ( \lnot \lnot P \land \lnot (\lnot Q \lor R)) \lor ((\lnot P \lor \lnot S) \lor R) \\
+& (P \land (Q \land \lnot R)) \lor ( \lnot P \lor \lnot S \lor R) \\
+& (P \lor \lnot P \lor \lnot S \lor R) \land ( Q \lor \lnot P \lor \lnot S \lor R) \land (\lnot R \lor \lnot P \lor \lnot S \lor R) \\
+& (Q \lor \lnot P \lor \lnot S \lor R) 
+\end{align*}
+

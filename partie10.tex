@@ -1,0 +1,228 @@
+\section*{Algorithme de preuve pour la logique des prédicats}
+
+\section{Introduction}
+\subsection{3 transformations}
+\subsection{Résolution}
+\subsection{Propriétés de l'algorithme}
+
+\section{Transformation en forme prénexe}
+
+\section{Transformation en forme Skolen}
+\subsection{Intuition}
+
+Cette transformation consiste à éliminer toutes les occurences de quantificateurs existentiels.
+\smallskip
+
+$(\forall x)(\forall y)(\exists u)(\forall v) \big[ P(x) \wedge \neg Q(u,y) \wedge \neg R(a,u,y,v) \big]$
+\smallskip 
+
+
+Dans ce cas-ci, la valeur de $u$ de dépend des valeurs de $x$ et $y$. Lorsqu'on a choisi $x$ et $y$, on est alors libres de choisir $u$.
+On peut donc supposer qu'une fonction $g(x,y)$ fournit cet élément de façon à conserver la satisfaisabilité de la formule tout en supprimant $(\exists u)$.
+\smallskip
+
+$(\forall x)(\forall y)(\forall v) \big[ P(x) \wedge \neg Q(\textbf{g(x,y)},y) \wedge \neg R(a,\textbf{g(x,y)},y,v) \big]$
+\smallskip
+
+Après la transformation, l'existence des modèles est préservée.
+
+\subsection{Règle}
+
+Pour chaque élimination d'un quantificateur existentiel $(\exists x)$, on remplace sa variable quantifiée par une fonction $f(x_1,...,x_n)$ dont les arguments sont les variables des quantificateurs universels dont $x$ est dans la portée.
+\smallskip
+
+\underline{Justification par un exemple:}
+
+$p: \forall x \forall y \exists z \big[ \neg P(x,y) \vee Q(x,z) \big]$
+\smallskip
+
+$p_s: \forall x \forall y \big[ \neg P(x,y) \vee Q(x,\textbf{f(x,y)}) \big]$
+\smallskip
+
+Les modèles de p $\neq$ modèles $p_s$.
+
+\underline{Pour $p$}
+\begin{itemize}
+  \item Interprétation $I$
+  \item $D_I =$ Professeur $\cup$ Université
+  \item $Val_I(P) = P_i = $ ``a enseigné à l'université''
+  \item $Val_I(Q) = Q_i = $ ``est diplômé de l'université''
+  \item $Val_I(f)$ n'existe pas.
+\end{itemize}
+
+\vspace{5 mm}
+
+\underline{Pour $p_s$}
+\begin{itemize}
+  \item Etendre $I$
+  \item $I' = \big\{ F \vdash F_i \big\} \circ I$
+  \item $f(a,b) = $ ``l'université ayant dû diplômer $a$ pour que $a$ puisse enseigner à $b$''
+\end{itemize}
+
+\vspace{5 mm}
+$p$ admet un modèle $(I)$ SSI $p_s$ admet un modèle $(I')$.
+
+Que ça ne soit exactement le même modèle ne pose pas de problème pour notre algorithme. L'algorithme par réfutation continue à itérer jusqu'à trouver une contradiction ($false$). S'il n'y a pas de modèle pour $p_s$, il n'y a pas de modèle pour $p$ et ça suffit.
+
+\section{Transformation en forme normale conjonctive}
+
+Même manipulations qu'en logique des propositions.
+
+\section{La règle de résolution}
+
+$$ \mbox{\huge $\frac{L_1 \vee C_1, \neg L_2 \vee C_2}{(C_1 \vee C_2)\sigma}$ } $$
+
+Cette règle de résolution ne fonctionne que si $L_1$ et $L_2$ sont identiques.
+
+\begin{itemize}
+  \item $L_1 = P_1(a, y, z)$
+  \item $L_2 = P_1(x, b, z)$
+\end{itemize}
+
+Dans un modèle il y a un prédicat qui correspond au symbole $P_1$ et il y a un ensemble de triplets qui rendent vrai $P_1$.
+
+L'unification de $L_1$ et $L_2$ donne L qui représente l'intersection des deux ensembles. On écrit:
+\begin{itemize}
+  \item $L_1 \sigma = L$
+  \item $L_2 \sigma = L$
+\end{itemize}
+
+\vspace{5 mm}
+$L_1$ et $L_2$ sont unifiables s'il existe une substitution $\sigma$ telle que $L_1 \sigma = L_2 \sigma$.
+\begin{itemize}
+  \item $\sigma = \big\{(x,a),(y,b)\big\}$
+  \item $L_1 \sigma = P(a,b,z)$
+  \item $L_2 \sigma = P(a,b,z)$
+\end{itemize}
+
+\vspace{5 mm}
+\underline{Exemple:}
+\begin{itemize}
+  \item $L_1 = P_1(a,x)$
+  \item $L_2 = P_2(b,x)$
+\end{itemize}
+
+Il n'y pas de substitution qui existe car on a deux constantes différentes, l'intersection des deux ensembles est vide.
+\smallskip
+
+\underline{Exemple 2:}
+
+\begin{itemize}
+  \item $L_1 = P(f(x), z)$ 
+  \item $L_2 = P(y, a)$
+\end{itemize}
+
+Dans ce cas-ci, il y a beaucoup de subtitutions possibles telles que:
+\begin{itemize}
+  \item $\sigma_1 : \big\{ (y, f(a)), (x,a), (z,a) \big\}$ => $L_1 \sigma_1 = L_2 \sigma_1 = p(f(x), a)$
+  \item $\sigma_2 : \big\{ (y, f(x)), (z,a) \big\}$ \hspace{11 mm}=> $L_1 \sigma_2 = L_2 \sigma_2 = p(f(x), a)$
+\end{itemize}
+Dans ce cas-ci, $\sigma_2$ est plus général.\\
+
+\smallskip
+\begin{itemize}
+  \item On préfère alors la substitution $\sigma$ \underline{la plus générale}.
+  \item On peut démontrer qu'il existe \underline{un} unificateur plus général U.P.G.
+  \item U.P.G. est calculable.
+\end{itemize}
+
+\vspace{5 mm}
+\textbf{\underline{Règle de résolution:}}
+\begin{itemize}
+  \item $p_1, p_2$ clauses
+  \item $p_1 = L^{+} \vee C_1$
+  \item $p_2 = \neg L^{-} \vee C_2$
+  \item $ L^{+}$ et $L^{-}$ ont les mêmes symboles de prédicat.
+  \item $ \big\{L^{+}, L^{-}\big\}$ unifiable par $\sigma$ U.P.G.
+\end{itemize}
+
+\underline{Alors} $$ \mbox{\huge $\frac{L^{+} \vee C_1, \neg L^{-} \vee C_2}{(C_1 \vee C_2)\sigma}$ } $$
+
+\section{Algorithme}
+
+$S := \big\{ \Delta x_1, ..., \Delta x_i, \neg Th \big\}$ dont chaque formule est en forme normale conjonctive (FNC). 
+
+
+\underline{while}: \textbf{false} $\ni S$ et il existe une paire de clauses résolvables et non-résolues.
+
+\underline{do}: choisir $p_i, p_j$ dans S et L tel que:
+\begin{itemize}
+  \item $L^{+}$ dans $p_i$ 
+  \item $L^{-}$ dans $p_i$ 
+  \item $\big\{ L^{+}, L^{-} \big\}$ unifiable par $\sigma$ U.P.G.
+\end{itemize}
+
+Calculer:
+\begin{itemize}
+  \item $r:=(p_i - [L^{+}] \vee p_j - [\neg L^{-}]) \sigma$
+  \item $S_i = S \cup  \big\{ r \big\}$
+\end{itemize}
+
+\underline{end}\\
+
+\underline{If} \textbf{false} $\ni S$ \underline{then} Th prouvé. \underline{else} Th non prouvé. \underline{end}
+
+\section{Exemple}
+\begin{itemize}
+  \item $(\forall x) homme(x) \wedge fume(x) \Rightarrow mortel(x)$
+  \item $(\forall x) animal(x) \Rightarrow mortel(x)$
+  \item $homme(Ginzburg)$
+  \item $fume(Ginzburg)$
+  \item \textbf{Candidat-théorème:} $mortel(Ginzburg)$
+\end{itemize}
+
+\subsection{Initialisation de S}
+\begin{itemize}
+  \item P1: $(\forall x) homme(x) \wedge fume(x) \Rightarrow mortel(x)$
+  \item P2: $(\forall x) animal(x) \Rightarrow mortel(x)$
+  \item P3: $homme(Ginzburg)$
+  \item P4: $fume(Ginzburg)$
+  \item P5: $\neg mortel(Ginzburg)$
+\end{itemize}
+
+\subsection{Itérations}
+
+\textbf{\underline{A}}
+\begin{itemize}
+  \item P1 + P5
+  \item $\sigma = \big\{ (x, Ginzburg) \big\}$
+  \item $r = P6 = \neg homme(Ginzburg) \vee \neg fume(Ginzburg)$
+\end{itemize}
+
+\textbf{\underline{B}}
+\begin{itemize}
+  \item P3 + P6
+  \item $\sigma = \big\{ \big\}$
+  \item $r = P7 = \neg fume(Ginzburg)$
+\end{itemize}
+
+\textbf{\underline{C}}
+\begin{itemize}
+  \item P4 + P7
+  \item $\sigma = \big\{ \big\}$
+  \item $r = false.$ Inconsistence donc le candidat théorème est prouvé.
+\end{itemize}
+
+\subsection{Non-déterminisme}
+
+Importance des \underline{choix} qu'on fait.
+
+\textbf{\underline{A}}
+\begin{itemize}
+  \item P2 + P5
+  \item $\sigma = \big\{ (x, Ginzburg) \big\}$
+  \item $r = \neg animal(Ginzburg)$
+\end{itemize}
+
+Si on avait fait ce choix-ci pour la première itération, l'algorithme ne peut plus continuer et on doit faire marche-arrière.
+
+\section{Stratégies}
+
+\begin{itemize}
+  \item Quelles paires $p_i, p_j$ choisir?
+  \item Quelles $L^{+}, L^{-}$ choisir?
+\end{itemize}
+
+Les assistants de preuves utilisent des stratégies existantes, avec l'input de l'humain.
+
+Le language \textbf{Prolog}, inventé en 1972 par Alain Colmerauer et Robert Kowalski, utilise \underline{volontairement} des stratégies naives qui permettent de rendre l'algorithme prévisible. Les axiomes deviennent un \underline{programme}, c'est la programmation logique. Un exemple de stratégie naïve est la stratégie LUSH qui choisi de haut vers le bas les paires $p_i, p_j$, et de gauche à droite dans $p_i$.
