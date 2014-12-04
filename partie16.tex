@@ -1,0 +1,54 @@
+
+\author{Baptiste Degryse (27641200)}
+
+\subsection{Exemples de programmes Prolog}
+
+\paragraph{Programme (code Prolog)}
+Ce petit programme permet de calculer la factorielle d'un nombre. Il s'agit de clauses exprimant des faits, des règles et des questions. Le code commence par un fait: 0!==1. Ensuite, il défini une clause pour les factorielles de façon généralisée. Attention, les virgules et les points sont importants. Les virgules sont les séparateurs entre les littéraux dits négatifs tandis que le point marque la fermeture de la clause.
+\begin{verbatim}
+fact(0,1)
+fact(N,F) :- N>0, 
+			 N1 is N-1 
+			 fact(N1,F1), 
+			 F is N* F1 .
+\end{verbatim}
+\paragraph{Requête} Nous allons maintenant exécuter le programme fact afin de trouver la factorielle de 5 et stocker la réponse dans la variable F. Le prompt Prolog est représenté par " |?- " et la sortie standard par "->". Les commentaire sont après les "\%" ou entre "/* */". Il ne faut pas oublier le point à la fin de la requête.
+\begin{verbatim} 
+|?- fact (5,F). %requête
+-> F=120 % réponse
+\end{verbatim}
+
+\paragraph{Forme clausale}
+Le programme réécrit sous forme clausale. 
+\begin{align*}
+fact(0,1) \\
+ \wedge & \\
+&( \neg n > 0 \\
+&	\vee \neg minus( n1, n, 1) \\
+&	\vee \neg fact(n1, f1) \\
+&	\vee \neg times(f, n, f1) \\
+&	\vee fact(n, f) ) \\
+\end{align*}
+
+
+
+\paragraph{Exécution} 
+Le but de l'exécution est de prouver que $G \equiv fact(5, r)$. Pour y arriver, Prolog va faire une suite de substitutions $\sigma$ afin de vérifier les affirmations contenues dans r. La substitution finale contiendra le résultat final.
+
+\begin{align*}
+& G \equiv fact(5,r) \\
+& r= < fact(5, r) > \\
+& \% (1) \\
+& \sigma = \{ (n, 5), (f, r) \} \\
+& r= < ( 5>0 ), minus(n1, 5, 1), fact(n1, f1), times(r, 5, f1) > \sigma \\
+& \% (2) \\
+& r= < minus(n1, 5, 1), fact(n1, f1), times(r, 5, f1) > \\
+& \sigma'= \{ (n1, 4) \cup \sigma\} \\
+& r= < fact (4, f1), times(r, 5, f1) > \\
+& [...]\\
+& \sigma_{res} = \{(r,120),...\} 
+\end{align*}
+(1) avec clause 2\\
+(2) a>b existe dans le système prédéfini -> true\\
+
+
