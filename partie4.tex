@@ -1,7 +1,7 @@
 
-\chapter{Deux règles plus sophistiquées}
+\section{Deux règles plus sophistiquées}
 
-\section{Théorème de déduction}
+\subsection{Théorème de déduction}
 
 \begin{itemize}
 \item  Pour prouver s $\Rightarrow$ t
@@ -13,22 +13,22 @@
 
 \textit{Notation: p $\vdash$ t (on peut prouver t à partir de p) }
 
-\subsection{Prémisse:}
+\subsubsection{Prémisse:}
 
 \begin{equation}
 \frac{p........................r, s \vdash t} 
 {p........................r, s \vdash (s \Rightarrow t)}
 \end{equation}
 
-\subsection{Conclusion:}
+\subsubsection{Conclusion:}
 
 Déduire une implication
 
-\section{Preuve par contradition (ou preuve indirecte)}
+\subsection{Preuve par contradition (ou preuve indirecte)}
 
 On prend un hypothèse, et on peut prouver qu'elle est vraie ou fausse, d'où l'hypothèse n'est pas bonne.
 
-\subsection{Prémisse:} 
+\subsubsection{Prémisse:} 
 on suppose que p...q n'a pas de problème
 
 \begin{equation}
@@ -39,25 +39,25 @@ p........................q, r, s \vdash s \\
 \end{split}
 \end{equation}
 
-\subsection{Conclusion:}
+\subsubsection{Conclusion:}
 
 si p...q n'a pas de problème, on se focalise alors sur r
  
 
-\chapter{Exemples de Preuves}
+\section{Exemples de Preuves}
 
 Une preuve est une séquence de pas où chaque pas est une application de règles d'inférences et de lois logiques
 Il faut justifier à chaque étape le nom de la règle / loi, et indenter les éléments de la preuve en preuve conditionnelle indirecte.
 
-\section{Prémisse:} 
+\subsection{Prémisse:} 
 
 p $\land$ q $\lor$ r
 
-\section{Conclusion:}
+\subsection{Conclusion:}
 
 $\lnot$ p $\Rightarrow$ r
 
-\section{Exemple sans preuve conditionnelle}
+\subsection{Exemple sans preuve conditionnelle}
 
 \begin{enumerate}
 \item   (p $\land$ q) $\lor$ r  \textit{Prémisse}
@@ -69,7 +69,7 @@ $\lnot$ p $\Rightarrow$ r
 \item   $\lnot$ p $\Rightarrow$ r \textit{Implication en 6}
 \end{enumerate}
 
-\section{Exemple avec preuve conditionnelle}
+\subsection{Exemple avec preuve conditionnelle}
 
 \begin{enumerate}
 \item (p $\land$ q) $\lor$ r  \textit{Prémisse}
@@ -86,7 +86,7 @@ $\lnot$ p $\Rightarrow$ r
 \item  $\lnot$ p $\Rightarrow$ r \textit{Evacuation de l'hypothèse}
 \end{enumerate}
 
-\section{Exemple de Preuve par contradiction}
+\subsection{Exemple de Preuve par contradiction}
 
 \begin{enumerate}
 \item  (p $\land$ q) $\lor$ r  \textit{Prémisse}
@@ -104,10 +104,10 @@ $\lnot$ p $\Rightarrow$ r
 \end{enumerate}
 
 
-\chapter{Quelques concepts}
-\section{Principe de dualité }
+\section{Quelques concepts}
+\subsection{Principe de dualité }
 
-\subsection{Dans les formules sans $\rightarrow$ :}
+\subsubsection{Dans les formules sans $\rightarrow$ :}
 
 \begin{equation}
 1 \leftrightarrow T \hspace{5cm} true \leftrightarrow false 
@@ -117,7 +117,7 @@ $\lnot$ p $\Rightarrow$ r
 \models \lnot ( p \lor q)  \Leftrightarrow \lnot p \land \lnot q 
 \end{align*}
 
-\subsection{Formule quelconque:}
+\subsubsection{Formule quelconque:}
 
 \begin{equation}
 	1 \leftrightarrow T \hspace{5cm} true \leftrightarrow false 
@@ -129,23 +129,23 @@ $\lnot$ p $\Rightarrow$ r
 	 ssi \models ( \lnot p1 \lor ... \lor pn) \leftrightarrow true
  \end{align*}
 
-\section{Forme Normale}
+\subsection{Forme Normale}
 
 \begin{itemize}
   \item Conjonctive: $( p \lor q ) \land ( q \lor a ) \land ( s \lor r )$  
   \item Disjonctive
 \end{itemize}
 
-\subsection{terminologie}
+\subsubsection{terminologie}
 
 \begin{itemize}
 	\item Littéral :$ P \lor \lnot P \approxeq L$
 	\item Clause : $\lor L{i} = ( L{1} \lor L{2} \lor L{3} ... \lor L{i} )$
 \end{itemize}
 
-\subsection{Forme normale conjonctive FNC}
+\subsubsection{Forme normale conjonctive FNC}
 
-\section{Algorithme de normalisation}
+\subsection{Algorithme de normalisation}
 
 \begin{enumerate}
 \item Eliminer les $\rightarrow$ et $\leftrightarrow$
@@ -154,7 +154,7 @@ $\lnot$ p $\Rightarrow$ r
 \item Simplifier $(P \lor \lnot P)$
 \end{enumerate}
 
-\subsection{Exemple}
+\subsubsection{Exemple}
 
 \begin{align*}
 & (p \rightarrow (Q \rightarrow R)) \rightarrow ((P \land S) \rightarrow R) \\

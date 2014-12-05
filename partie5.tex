@@ -1,6 +1,6 @@
-\chapter{Algorithme de preuve}
+\section{Algorithme de preuve}
 
-% \section{Exemple de preuve propositionnelle}
+% \subsection{Exemple de preuve propositionnelle}
 % 
 % \noindent Voici les propositions premières : \\
 % A : tu manges bien \\
@@ -46,14 +46,14 @@ une preuve en logique des prédicats.
 Cet algorithme est une automatisation de la {\em démonstration par l'absurde}
 qui est basé sur une seule règle d'inférence, la {\em résolution}.
 
-\section{La résolution}
+\subsection{La résolution}
 
 On veut quelque chose de simple, sans toutes les règles que nous avons vues auparavant, mais le plus puissant possible. Nous n'utiliserons qu'une seule règle : la \textbf{résolution}. On peut faire des résolutions de preuves propositionnelles rien qu'en ayant cette règle. Cette règle utilise la forme normale conjonctive. 
 On utilise les preuves indirectes (preuves par l'absurde), car c'est le plus simple.
 \\
 Commençons par un exemple de résolution.
 
-\subsection{Exemple de résolution}
+\subsubsection{Exemple de résolution}
 
 \noindent Prenons comme propositions premières :\\
 
@@ -99,7 +99,7 @@ On peut fusionner les lignes 4 et 8 grâce à la résolution. La \textbf{résolu
 Par exemple : si P$_{4}$ est vrai, P$_{6}$ doit être vrai. Si P$_{4}$ est faux, P$_{5}$ doit être vrai. Donc on sait que P$_{5}$ ou P$_{6}$ doit être vrai car on sait que dans tous les cas de figure, c'est soit l'un soit l'autre qui doit être vrai. 
 
 
-\subsection{Principe de résolution}
+\subsubsection{Principe de résolution}
 \noindent p$_{1}$ $\lor$ q \\
 \noindent p$_{2}$ $\lor$ $\lnot$q \\
 \rule{3cm}{0.4pt} \\
@@ -108,7 +108,7 @@ p$_{1}$ $\lor$ p$_{2}$
 
 Cette règle représente la base de l'algorithme de résolution. On peut la vérifier en utilisant le métalangage. De plus, cette règle est aussi utilisée dans la logique des prédicats. 
 
-\subsection{La résolution préserve les modèles}
+\subsubsection{La résolution préserve les modèles}
 \noindent Tout ce qui est modèle des deux premières disjonctions sera aussi modèle de la résultante. \\
 
 \noindent $p$ : $\bigwedge\limits_{1 \leq i \leq n}$ C$_{i}$ \indent   \indent \indent \indent C$_{i}$ : disjonction : $\bigvee\limits_{1 \leq j \leq n}$ L$_{j}$ \indent  \{C$_{1}$, ..., C$_{n}$\}\\
@@ -130,7 +130,7 @@ F \\
 
 Dans les deux cas de figure, on doit démontrer que quand on a un modèle, une interprétation qui rend vrai $p$, le $r$ sera vrai aussi. Si P est vrai alors $\lnot$P est faux, donc C$_{2}$ sera vrai et donc $r$ sera vrai. Quand P est faux, le C$_{1}$ doit être vrai, donc $r$ est vrai. $r$ est donc vrai dans les deux cas. 
 
-\section{Algorithme}
+\subsection{Algorithme}
 
 \noindent C$_{i}$ : clause $\bigvee\limits_{i}$ L$_{i}$ \newline
 L$_{i}$ : P ou $\lnot$P \newline
@@ -144,7 +144,7 @@ Ce que nous voulons prouver : \{C$_{i}$,...,C$_{n}$\} $\vdash$ C \newline
 S = \{C$_{i}$,...,C$_{n}$,$\lnot$C\} \newline
 But : Déterminer si S est inconsistant. On veut faire des déductions jusqu'à arriver sur false. 
 
-\subsection{Pseudocode}
+\subsubsection{Pseudocode}
 
 \noindent
 \begin{tabbing}
@@ -160,9 +160,9 @@ But : Déterminer si S est inconsistant. On veut faire des déductions jusqu'à 
 
 La subtilité dans cet algorithme est de choisir correctement les clauses C$_{1}$ et C$_{2}$ car l'efficacité de l'algorithme en dépend. 
 
-\section{Exemples}
+\subsection{Exemples}
 
-\subsection{Exemple 1}
+\subsubsection{Exemple 1}
 \begin{tabbing}
 \hspace{3cm}\=\hspace{2cm}\=\kill
 C$_{1}$ : P $\lor$ Q \\
@@ -178,7 +178,7 @@ C$_{2}$ + $\lnot$C $\rightarrow$ R  (C$_{6}$) \newline
 C$_{3}$ + C$_{5}$ $\rightarrow$ $\lnot$R (C$_{7}$) \newline 
 C$_{6}$ + C$_{7}$ $\rightarrow$ \underline{false} ($\in$ S donc C est prouvé) \newline
 
-\subsection{Exemple 2}
+\subsubsection{Exemple 2}
 \noindent p$_{1}$ : Mal de tête $\land$ Fièvre $\Rightarrow$ Grippe \newline
 p$_{2}$ : Gorge blanche $\land$ Fièvre $\Rightarrow$ Angine \newline
 p$_{3}$ : Mal de tête \newline
@@ -191,7 +191,7 @@ p$_{4}$ : Fièvre\newline
 \end{itemize}
 Question : Grippe ?
 
-\section{Conclusion}
+\subsection{Conclusion}
 Nous pouvons tirer des conclusions sur la logique des propositions et sur notre algorithme.
 
 Pour toute théorie $B = \left\{c_1, \dots, c_n \right\}$ et $p$,
