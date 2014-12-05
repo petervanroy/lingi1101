@@ -1,4 +1,4 @@
-\section{Introduction au cours LINGI1101}
+\chapter*{Introduction au cours LINGI1101}
 
 Le cours \textit{Logique et structures discrètes} a deux buts importants:
 
@@ -10,7 +10,7 @@ Le cours \textit{Logique et structures discrètes} a deux buts importants:
 
 L'intuition est donc importante pour ce cours, mais néanmoins la connaissance des formalismes mathématiques reste essentielle.  Le cours sera coté sur les deux: intuitions (un tiers) et formalismes (deux tiers).\\
 
-\subsection{Déroulement du cours}
+\section{Déroulement du cours}
 
 Le cours est composé de deux parties. La première partie, \textit{logique formelle}, représentera deux tiers du cours. La seconde partie, \textit{structures discrètes sur Internet}, comptera quant à elle pour un tiers du cours.\\
 
@@ -25,42 +25,42 @@ Afin de suivre ce cours, nous nous baserons sur deux livres de références corr
 
 La première partie sera complétée par des sujets et exercices plus avancés qui approfondissent le traitement du livre.
 
-\subsection{Plan du cours}
+\section{Plan du cours}
 
 Cette partie va parler du rôle des raisonnements et des différentes formes de raisonnement. Nous prendrons en exemple la méthode scientifique.
 
-\subsubsection{Logique des propositions}
+\subsection{Logique des propositions}
 
 La logique des propositions est un langage formel constitué d'une syntaxe et d'une sémantique. La syntaxe décrit l'ensemble des formules qui appartiennent au langage. La sémantique permet de donner un sens aux formules de langage. C'est une logique très ancienne qui vient de l'antiquité. 
 
-\subsubsection{Logique des prédicats}
+\subsection{Logique des prédicats}
 
 C'est la logique la plus expressive et la plupart des travaux mathématiques peuvent être écrits dans ce langage. Elle est aussi définie comme la logique du premier ordre.\footnote{Il existe d'autres formes de logiques plus expressives mais plus difficiles à utiliser. Exemple : la logique du deuxième ordre, ...} En logique des prédicats, les éléments de base du langage ne sont plus des propositions mais des prédicats. 
 
-\subsubsection{Interprétations et modèles}
+\subsection{Interprétations et modèles}
 
 La logique a besoin d'un langage, de phrases pour la décrire. Cette section couvrira donc la sémantique à utiliser.
 
-\subsubsection{Théorie de preuve}
+\subsection{Théorie de preuve}
 
 Nous pouvons manipuler une phrase en logique pour obtenir un résultat. Par exemple, si A et B sont vrais, nous pouvons en déduire que A est vrai. Il y a des règles d'inférences à utiliser pour prendre une phrase en logique et en déduire une autre.
 Une preuve mathématique est une séquence de phrases liées par des règles d'inférences.
 
-\subsubsection{Algorithme de preuve}
+\subsection{Algorithme de preuve}
 C'est l'algorithme le plus puissant qui existe en logique des prédicats. Néanmoins, il est inefficace seul. Afin de le rendre efficace, il faut poser des hypothèses. Nous approfondirons ce problème dans le cadre de cette section. 
 
-\subsubsection{Théorie logique}
+\subsection{Théorie logique}
 
 Il est possible de formaliser tout objet mathématique avec une théorie logique qui lui est propre.  En exemple, citons la théorie des ensembles, des fonctions et des ordres partiels.
 
-\subsubsection{Programmation logique}
+\subsection{Programmation logique}
 
 Le rêve serait de pouvoir exprimer toute chose logique en langage de programmation efficace. Il s'agira d'appliquer ce principe avec l'algorithme de preuve, sur base d'hypothèses.
 
 \newpage
-\section{Contexte: la méthode scientifique}
+\chapter{Contexte: la méthode scientifique}
 
-\subsection{Formalisation d'un système}
+\section{Formalisation d'un système}
 
 Comment pouvons-nous formaliser un système dans le monde réel tel que les champs magnétiques ou la gravitation ?
 
@@ -72,7 +72,7 @@ Afin de formaliser un système dans le monde réel, nous devons faire une abstra
 
 Un exemple de cette formalisation pourrait être les équations de Maxwell qui sont le modèle théorique correspondant à la trajectoire des électrons et protons.
 
-\subsection{Boucle de raisonnement}
+\section{Boucle de raisonnement}
 
 Il existe trois formes de raisonnement: la déduction, l'induction et l'abduction. Ces trois formes de raisonnement peuvent être liées dans une boucle de raisonnement de la façon suivante:
 
@@ -80,15 +80,15 @@ Il existe trois formes de raisonnement: la déduction, l'induction et l'abductio
 \includegraphics[scale=0.50]{images/BoucleRaisonnement1.pdf}
 \end{center}
 
-\subsubsection{Déduction}
+\subsection{Déduction}
 
 Il s'agit de faire des calculs et des raisonnements logiques par rapport à la théorie. On en conclut une expérience. \\
 
-\subsubsection{Induction}
+\subsection{Induction}
 
 L'induction est le fait de trouver une règle générale qui décrit les résultats d'expériences. On choisit en général une règle moyenne qui deviendra la règle générale.  Il faut souligner que les résultats expérimentaux ne sont pas totalement fiables ou incomplets. Dès lors, la règle trouvée n'est pas nécessairement exacte.  Par exemple, si par induction nous avons trouvé la règle, "les oiseaux volent", cela est vrai tant que l'on a pas vu un pingouin. Autre exemple, nous pouvons supposer que demain le soleil va se lever comme depuis des milliers d'années, même si rien ne l'assure.\\
 
-\subsubsection{Abduction}
+\subsection{Abduction}
 
 On compare la règle générale trouvée lors de l'induction avec la théorie. Si cela se révèle différent, comme l'on suppose que tout est parfait dans les calculs/expériences, c'est la théorie qui est fausse. Il faut alors corriger la théorie existante ou en inventer/deviner une nouvelle. Ce type de raisonnement est l'abduction. On applique l'abduction couramment dans notre vie de tous les jours; par exemple, lorsqu'un élève entre trempé dans la classe, nous supposons qu'il pleut dehors. \\
 
@@ -96,9 +96,9 @@ On compare la règle générale trouvée lors de l'induction avec la théorie. S
 Sur ces trois concepts seul la déduction est un raisonnement sûr, les deux autres sont encore mal compris. Nous nous focaliserons dans ce cours uniquement sur la déduction. \\
 
 
-\subsection{Exemples}
+\section{Exemples}
 
-\subsubsection{Loi de Maxwell}
+\subsection{Loi de Maxwell}
 
 Nous illustrons dès à présent le fonctionnement de la boucle de raisonnement à l'aide de l'exemple cité plus haut, c'est-à-dire les équations de Maxwell :
 
@@ -110,11 +110,11 @@ Par déduction, grâce à la théorie et aux conditions initiales que nous fixon
 
 
 
-\subsubsection{Sac de billes}
+\subsection{Sac de billes}
 
 Afin d'illustrer les 3 formes de raisonnement de manière plus formelle, considérons un sac de billes pouvant contenir des billes noires ou blanches. Notons que sac(x) signifie "la bille x est dans le sac" et que blanc(x) signifie "la bille x est blanche". \\
 
-\paragraph{Déduction}
+\subsubsection{Déduction}
 
 \begin{enumerate}
   \item Règle: $\forall$ $x$, $sac(x)$ $\Rightarrow$ $blanc(x)$
@@ -125,7 +125,7 @@ Afin d'illustrer les 3 formes de raisonnement de manière plus formelle, consid�
 
 Si toutes les billes se trouvant dans le sac sont blanches et que l'on pioche une bille de ce sac, cette bille sera blanche. Cette déduction est forcément correcte.
 
-\paragraph{Induction}
+\subsubsection{Induction}
 
 \begin{enumerate}
   \item Cas: $sac(a)$, $sac(b)$,$\cdots$
@@ -136,7 +136,7 @@ Si toutes les billes se trouvant dans le sac sont blanches et que l'on pioche un
 
 Si toutes les billes qu'on l'on pioche du sac sont blanches, alors nous pouvons établir comme règle que toutes les billes dans le sac sont blanches. Cette induction n'est pas forcément correcte.
 
-\paragraph{Abduction}
+\subsubsection{Abduction}
 
 \begin{enumerate}
   \item Règle: $\forall$ $x$, $sac(x)$ $\Rightarrow$ $blanc(x)$

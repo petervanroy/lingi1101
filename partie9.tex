@@ -1,22 +1,22 @@
-\section{Partie 9}
+\chapter{Partie 9}
 
 On va terminer le point traité au cours précédent par un exemple un peu plus conséquent d'une preuve manuelle en logique des prédicats avant d'introduire l'algorithme permettant d'effectuer des preuves de manière automatisée.
-\subsection*{Exemple de preuve manuelle}
+\section*{Exemple de preuve manuelle}
 Il est important de pouvoir faire des preuves manuellement, car cela permet de bien comprendre toutes les étapes de raisonnement d'une preuve, même si par la suite on utilise un algorithme plutôt que de faire les preuves à la main. 
 
 L'exemple suivant est inspiré de l'Empire romain: 
-\subsubsection*{Prémisses}
+\subsection*{Prémisses}
 \begin{itemize}
     \item Les maîtres et esclaves sont tous des hommes adultes
     \item toutes les personnes ne sont pas des hommes adultes
 \end{itemize}
 \textit{Note: on voit dans les prémisses qu'il y a des quantificateurs: tous, toutes. 
 }
-\subsubsection*{A prouver} 
+\subsection*{A prouver} 
 \begin{itemize}
     \item il existe des personnes qui ne sont pas des maîtres
 \end{itemize}
-\subsubsection*{Preuve}
+\subsection*{Preuve}
 \begin{enumerate}
     \item $\forall{}x\ (maitre(x)\lor{}esclave(x)\implies{}adulte(x)\land{}homme(x))$ \hfill prémisse
     \item $\lnot{}\forall{}x\ (adulte(x)\land{}homme(x))$ \hfill prémisse
@@ -54,14 +54,14 @@ Lors que l'arrivée des ordinateurs, fin du 20ème siècle(années 50-60 et fin 
 \end{itemize}
 \end{small}
 \end{minipage}
-\section{Algorithme de preuve pour la logique des prédicats}
+\chapter{Algorithme de preuve pour la logique des prédicats}
 \begin{itemize}
     \item Cet algorithme s'inspire de l'algorithme de réfutation de la logique des propositions [résolution forme clausale]
     \item Pour la logique des prédicats, c'est un peu plus complique, mais ça marche!
 \end{itemize}
 On peut le faire marcher malgré la complexité des variables et des quantificateurs ce qui est assez étonnant, car c'est une logique très expressive. 
 Arriver à trouver un algorithme permettant de traiter la logique des prédicats était une sorte de Graal au 20ème siècle. 
-\subsection{3 transformations:} 
+\section{3 transformations:} 
 On va commencer par faire les transformations de normalisation. Il y a 3 transformations à effectuer: 
 \begin{enumerate}
     \item formule $\to$ forme prénexe: $$(\ldots{}\forall{}\ldots{}\exists{}\ldots{}\forall{} )\implies \forall{}\exists{}\forall{}(\ldots{})$$
@@ -73,12 +73,12 @@ On va commencer par faire les transformations de normalisation. Il y a 3 transfo
      Les modèles sont préservés lors de cette transformation. 
 \end{enumerate}
 
-\subsection{Résolution}
+\section{Résolution}
 En logique des propositions: $$\frac{L\lor C_1, \neg L \lor C_2}{C_1\lor C_2}$$
 Cela fonctionne en logique des propositions, car il n'y a pas de variables, mais ici, on peut avoir $L_1 \lor C_1$ \hspace{10pt} $\neg L_2 \lor C_2$  avec $L_1$ et $L_2$ qui ont des variables différentes. Par exemple P(x,a) et P(y,z).\\
 Pour pouvoir faire la résolution, il va falloir en quelque sorte les rendre identiques. \\
 On va donc dire: ce ne sont peut-être pas toujours les mêmes, mais, pour certaines valeurs, ils sont identiques. Si x=y et a=z alors on peut faire la résolution. 
-\subsubsection*{Unification}
+\subsection*{Unification}
 \begin{minipage}{0.25\textwidth}
 		L1:  P(x,a)\\
 		L2:  P(y,z)
@@ -98,7 +98,7 @@ On peut maintenant faire la résolution en appliquant  le même algorithme de r�
 
 $$\frac{L_1C_1, \neg L_2 \lor C_2}{(C_1 \lor C_2)\sigma}$$
 
-\subsection{Propriétés de cet algorithme}
+\section{Propriétés de cet algorithme}
 \begin{itemize}
 \item Cet algorithme est moins fort que pour la logique des propositions, car la logique des prédicats est beaucoup plus expressive.
 \item  adéquat: Si $B\vdash T$ $\to$ $B \models T$\\
@@ -112,7 +112,7 @@ $$\frac{L_1C_1, \neg L_2 \lor C_2}{(C_1 \lor C_2)\sigma}$$
 \end{itemize}
 \textit{Si ce qu'on tente de prouver est vrai dans tous les modèles, l'algorithme va finir par trouver une preuve, mais si ce n'est pas vrai, l'algorithme va tourner en rond et ne jamais se terminer. Le problème est donc que quand l'algorithme prend trop de temps à trouver une preuve, on doit l'arrêter et l'on n'est jamais certain du résultat. On ne peut jamais être sûr que l'algorithme n'aurait pas trouvé une preuve si on l'avait laissé tourner plus longtemps. Il est donc semi-décidable, car ses résultats ne sont totalement fiables que dans le cas ou une preuve est trouvée. }
 \end{itemize}
-\subsection{Transformation de la formule de base vers la forme prénexe}
+\section{Transformation de la formule de base vers la forme prénexe}
 
 Etapes de la transformation en formule logiquement équivalente:
 \begin{enumerate}
@@ -126,7 +126,7 @@ Etapes de la transformation en formule logiquement équivalente:
     \item Migrer les négations ($\neg$) vers l'intérieur, vers les prédicats. On peut faire cela, car $\neg\exists$ peut être transformé en $\forall\neg$ et vice versa.  
     \item On peut mettre tous les quantificateurs de la logique des prédicats à l'avant de la formule. 
 \end{enumerate}
-\subsubsection*{Exemple d'une transformation en forme prénexe}
+\subsection*{Exemple d'une transformation en forme prénexe}
 \begin{enumerate}
 \item $\forall x  [p(x) \land \neg (\exists y) \forall x ( \neg q(x,y)) = > \forall z \exists v \bullet p(a,x,y,v))]$\\ \textit{Expression de base}
 \item $\forall x [p(x) \land \neg(\exists y) (\forall x) ($\colorbox{lightgray}{$\neg$} $\neg q(x,y) $\colorbox{lightgray}{$\lor$} $\forall z \exists v \bullet r(a,x,y,v)]$\\\textit{Suppression des $\implies{}$} 

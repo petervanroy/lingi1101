@@ -5,8 +5,8 @@
 % \usepackage{amssymb}
 % \usepackage{array}
 % \begin{document}
-%% 	\section{Rappel}
-% 		\subsubsection{Conséquence logique}
+%% 	\chapter{Rappel}
+% 		\subsection{Conséquence logique}
 % 			$p$ est conséquence logique de $q$ si et seulement si $p \Rightarrow q$ est une tautologie. En d'autres termes, si
 % 			\begin{center}
 % 			\begin{tabular}{ll}
@@ -21,7 +21,7 @@
 % 			\end{center}
 % 			Cependant, la conséquence logique ($\Rrightarrow$) n'est pas une proposition logique (cf. syntaxe d'une proposition).
 % 		
-% 		\subsubsection{Équivalence logique}
+% 		\subsection{Équivalence logique}
 % 			Par le raisonnement ci-dessus, on peut dire que $p$ est logiquement équivalent à $q$ si et seulement si
 % 			\begin{center}
 % 			\begin{tabular}{ll}
@@ -49,7 +49,7 @@
 % 			\end{tabular}
 % 			\end{center}
 % 	
-	\section{Les preuves}
+	\chapter{Les preuves}
 		Une preuve est une manière de partir d’une formule et de dire si celle-ci est vraie ou fausse.\\
 		il y a 3 approches possibles :
 		\begin{itemize}
@@ -57,7 +57,7 @@
 			\item Preuve transformationnelle
 			\item Preuve déductive (la plus générale)		
 		\end{itemize}
-		\subsection{Preuve avec table de vérité}
+		\section{Preuve avec table de vérité}
 			\newcolumntype{x}{>{\itshape\bfseries}c}
 		Prouvons que $\lnot (P \land Q) \Leftrightarrow (\lnot P \lor \lnot Q)$ est vrai :
 			\begin{center}
@@ -72,7 +72,7 @@
 			\end{center}
 			On voit bien ici, que la table de $\lnot (P \land Q)$ est équivalente à celle de $\lnot (P \land Q)$. La preuve a donc vérifié la véracité de la proposition. \\
 			Il y a néanmoins un problème avec cette preuve car s'il y a $N$ propositions premières, on a $2^N$ lignes dans la table.
-		\subsection{Preuve transformationnelle}
+		\section{Preuve transformationnelle}
 			On va utiliser des "Lois", c'est-à-dire des équivalences.
 			\begin{center}
 			\begin{tabular}{|ll|}
@@ -88,15 +88,15 @@
 			\end{tabular}
 			\end{center}
 			On y ajoute 2 règles supplémentaires pour cette technique : 
-			\subsubsection*{Transitivité de l'équivalence}
+			\subsection*{Transitivité de l'équivalence}
 			\indent Si $p \Lleftarrow \Rrightarrow q$ et $q \Lleftarrow \Rrightarrow r$, alors $p \Lleftarrow \Rrightarrow r$.
-			\subsubsection*{Substitution}
+			\subsection*{Substitution}
 			Il est autorisé de remplacer une formule par une formule équivalente à l’intérieur d’une autre formule. Autrement dit : \\
 			\indent Soit p,q,r des formules propositionnelles.\\
 			\indent Si $p \Leftrightarrow q$ et $r(p)$, alors $r(p) \Lleftarrow \Rrightarrow r(q)$.\\
 			On peut remplacer $p$ par $q$ car elles sont équivalentes. Il faut faire attention à ces règles, car elles sont en méta-langage. Elles expliquent seulement ce qui est autorisé  faire.
 			
-			\subsubsection*{Exemple}
+			\subsection*{Exemple}
 			On veut prouver : $p \land (q \land r) \Lleftarrow \Rrightarrow (p \land q) \land r$
 			\begin{center}
 			\begin{tabular}{ll}
@@ -115,7 +115,7 @@
 			\end{center}
 			Le problème dans cette méthode de preuve c'est qu'il faut de l'idée, de la créativité et donc ce n'est pas forcément mieux que les tables de vérités, surtout si c'est compliqué de trouver l'astuce.
 		
-		\subsection{Preuve déductive}
+		\section{Preuve déductive}
 		A partir des lois logiques (lois d'équivalence) et des règles d'inférence, On va construire des preuves.\\
 		\textit{Une preuve est un objet formel défini avec précision.\\}
 		
@@ -224,7 +224,7 @@
 		\item La preuve par contradiction.
 		\end{itemize}
 		
-		\subsubsection*{Théorème de déduction}
+		\subsection*{Théorème de déduction}
 			Pour prouver $s\Rightarrow t$, On suppose $s$ vrai. On déduit $t$ et donc on sait que l'hypothèse $s\Rightarrow t$ est vraie et on l'évacue.\\
 			
 			On note ce théorème $s \vdash t$ (t peut être prouvé à partir de s, ce qui signifie qu'on peut construire une preuve (objet mathématique) qui est vraie si on applique bien les règles ci-dessus).\\
@@ -245,7 +245,7 @@
 			\end{center}
 			Ceci permet notamment de formaliser des théorèmes.
 			
-		\subsubsection*{Preuve par contradiction}
+		\subsection*{Preuve par contradiction}
 		C'est une preuve indirecte :\\
 		Implicitement, on suppose que $p$ jusqu'à $q$ n'a pas de problème, c'est-à-dire qu'on ne peut pas prouver une contradiction pour ces formules propositionnelles.
 		\begin{center}
@@ -261,7 +261,7 @@
 			
 			Tout ceci est une formalisation de choses qu'on connaît déjà, mais ça nous donne une notion précise du raisonnement à avoir.
 			
-\subsection{Exemple de preuve propositionnelle}
+\section{Exemple de preuve propositionnelle}
 
 \noindent Voici les propositions premières : \\
 A : tu manges bien \\

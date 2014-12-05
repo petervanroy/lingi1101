@@ -1,4 +1,4 @@
-\section*{Etude des structures discrètes}
+\chapter*{Etude des structures discrètes}
 \noindent
 \textbf{Exemples de structures discrètes} : entiers positifs, chaines, arbres, ensembles, relations, fonctions, ...\\
 
@@ -10,12 +10,12 @@ On peut définir ces structures avec la logique des prédicats et faire des rais
 \item On peut les utiliser dans les assistants de preuve (exemples d'assistants de preuve : \textit{Coq, Isabelle})\\
 \end{itemize}
 
-\section*{Théorie du premier ordre}
+\chapter*{Théorie du premier ordre}
 \noindent
 \textbf{Intuition} : définition logique d'une structure mathématique
 
 \noindent
-\subsection*{Définition d'une théorie}
+\section*{Définition d'une théorie}
 \begin{itemize}
 \item Sous-language de la logique du premier ordre
 \begin{itemize}
@@ -26,7 +26,7 @@ On peut définir ces structures avec la logique des prédicats et faire des rais
 \item Ensemble de règles d'inférence.
 \end{itemize}
 
-\subsection*{Exemple : théorie des liens familiaux (\bsc{fam})}
+\section*{Exemple : théorie des liens familiaux (\bsc{fam})}
 \begin{enumerate}
 \item Vocabulaire : 
 \begin{itemize}
@@ -49,7 +49,7 @@ $(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x,p(y)) \right)$&&\\
 \item Règles : \\
 Les règles sont uniquement celles de la logique des prédicats.
 \end{enumerate}
-\subsubsection*{Première interprétation}
+\subsection*{Première interprétation}
 \begin{tabular}{lll}
 $D_I$ : personnes&&\\
 $\text{val}_I(p)=\text{"père de"}$ &\hspace*{1cm} &$\text{père de} : \text{Pers}\rightarrow\text{Pers} : d \rightarrow \text{"père de" }d$\\
@@ -62,7 +62,7 @@ $\text{val}_I(GM)=\text{"Grand-mère"}$ &\hspace*{1cm} &$\text{Grand-mère}(d_1,
 Cette interprétation est un modèle de \bsc{fam} car les axiomes sont tous vérifiés.\\
 On remarque la ressemblance avec une théorie scientique, où les axiomes correspondent à la théorie et l'interprétation à ce que celle-ci signifie dans le monde réel.\\
 Une théorie peut avoir plusieurs modèles.\\ 
-\subsubsection*{Seconde interprétation}
+\subsection*{Seconde interprétation}
 Cette interprétation est également un modèle de \bsc{fam}.\\
 
 \begin{tabular}{lll}
@@ -74,7 +74,7 @@ $\text{val}_J(P)="GP_J"$ &\hspace*{1cm} &$GP_J(d_1,d_2)$ ssi $d_2=4d_1$ ou $d_2=
 $\text{val}_J(GM)="GM_J"$ &\hspace*{1cm} &$GM_J(d_1,d_2)$ ssi $d_2=6d_1$ ou $d_2=9d_1$\\
 \end{tabular}\\
 
-\section*{Propriétés des théories}
+\chapter*{Propriétés des théories}
 \begin{itemize}
 \item Une formule fermée $p$ est \textbf{valide} dans la théorie $Th$ si elle est vraie dans chaque modèle de $Th$. On écrit : 
 $$\vDash_{Th} p$$
@@ -93,7 +93,7 @@ Comment peut-on faire pour établir $\vDash_{Th} p$? Il y a deux approches diff�
 En pratique, le deuxième approche est utilisée beaucoup plus souvent.\\
 
 
-\subsubsection*{Preuve (esquisse)}
+\subsection*{Preuve (esquisse)}
 La preuve qui suit est une esquisse. Il manque plusieurs étapes.\\
 On veut montrer  : 
 $$\vDash_{\text{\bsc{fam}}} (\forall x)(\exists z) GM(x,z)$$
@@ -106,7 +106,7 @@ $\forall x \hspace*{0.1cm} GM(x,m(p(x)))$&\hspace*{1cm}&(Modus ponens)\\
 $\forall x \hspace*{0.1cm} \exists y \hspace*{0.1cm} GM(x,y)$&\hspace*{1cm}&(Introduction de $\exists$)\\
 \end{tabular}\\
 
-\section*{Qualité d'une théorie}
+\chapter*{Qualité d'une théorie}
 Certaines qualités sont directement issues de la logique:
 \begin {enumerate}
 \item {\textbf{consistante}} : il est impossible de déduire \(p\) et \(\neg p\)  de la même théorie.
@@ -118,7 +118,7 @@ $\text{VAL}_J (Ax_i)= True$
 pour $i \neq k$
 \item {\textbf{complète}} : les axiomes suffisent pour prouver la propriété d'intérêt. Sinon il faut en ajouter.
 \end {enumerate}
-\subsection*{Exemple : qualité de deux théories}
+\section*{Exemple : qualité de deux théories}
 \begin {enumerate}
 \item {\textbf{Système de Copernic}} : Chaque axiome de chaque planète est indépendant car elles tournent toutes autour du soleil.
 \item{\textbf{Système de Ptolémée}} : Chaque axiome de chaque planète dépendent de ceux de la Terre car elle représente le centre du l'univers mais est également une planète et dispose donc d'axiomes.

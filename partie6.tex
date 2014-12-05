@@ -5,9 +5,9 @@
 %\usepackage{tabularx}
 %\usepackage[usenames,dvipsnames]{color}
 
-\section{La logique des prédicats}
+\chapter{La logique des prédicats}
  
-\subsection{Introduction}
+\section{Introduction}
 
 Nous allons maintenant étudier une logique beaucoup plus expressive que la
 logique propositionnelle, la logique des prédicats, qui est aussi appelée
@@ -83,7 +83,7 @@ John peut voter & \textcolor{Red}{?R?}& voter(\textcolor{OliveGreen}{john}) \\
 Ce genre de raisonnement est très difficile à faire en logique propositionnelle alors qu'en logique des prédicats c'est beaucoup plus simple! Le john en ligne 3 et en ligne 4 sont les même john! 
 Ceci montre donc bien qu'il nous faut la logique des prédicats pour faire des relations de ce type.
 
-\subsection{Quantificateurs}
+\section{Quantificateurs}
 
 Les expressions "pour tout $x$" ($\forall x$) et "il existe $x$ tel que" ($\exists x$) sont appelés des quantificateurs en logique des prédicats. Les quantificateurs permettent d'instancier les variables dans une formule. La notion de portée d'un quantificateur est un concept très important auquel il faut faire très attention, car il peut changer complètement le sens d'une formulation. \\
 
@@ -142,7 +142,7 @@ En analysant morceau par morceau de la formule : \\
 
 Cet exemple ilustre parfaitement la ressemblance et le lien entre le monde de la programmation et celui de la logique des prédicats
 
-\subsection{Syntaxe}
+\section{Syntaxe}
 
 \begin{tabular}{|c|c|c|}
 	\hline
@@ -157,8 +157,8 @@ Cet exemple ilustre parfaitement la ressemblance et le lien entre le monde de la
 	\hline
 \end{tabular}
 
-\subsection{Grammaire}
-\subsubsection{Règles de formation}
+\section{Grammaire}
+\subsection{Règles de formation}
 \begin{tabular}{rl}
 $<formule>::=$ 	  &	$<formule$ $atomique>$ \\
 				  & $\vert$ $\neg$ $<formule>$ \\
@@ -176,7 +176,7 @@ $<connecteur$ $binaire>::=$
 
 \end{tabular}
 
-\subsection{Sémantique}
+\section{Sémantique}
 Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation qui sont déjà définis dans la logique propositionelle. Même si la logique des prédicats est beaucoup plus puissante, nous gardons une sémantique assez similaire à la logique propositionelle. \\
 L'idée dans l'interprétation c'est de dire si la formule est vraie ou fausse. Tout comme pour la logique propositionelle on va faire la même chose pour les prédicats avec les relations.\\
 

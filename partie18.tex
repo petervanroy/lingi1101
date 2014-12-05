@@ -1,7 +1,7 @@
-\section{Théorie des Graphes}
+\chapter{Théorie des Graphes}
 
 
-\subsection{Chemins et connectivité}
+\section{Chemins et connectivité}
 Nous allons commencer par rappeler la notion de chemin:
 	\begin{description}
 	\item[Chemin]: c'est une séquence de n\oe uds dont chaque paire consécutive est une arrête.
@@ -37,7 +37,7 @@ Avec les éléments que nous venons de définir, on est en mesure d'analyser tou
 	\caption{\label{gr_connexe} Graphe connexe}
 	\end{figure}
 
-\subsection{Distance entre n\oe uds}
+\section{Distance entre n\oe uds}
 Nous allons maintenant définir la longueur d'un chemin ainsi que la distance entre deux n\oe uds :
 \begin{description}
 \item[Longueur d'un chemin] : le nombre d'arêtes consécutives sur ce chemin.
@@ -46,7 +46,7 @@ Nous allons maintenant définir la longueur d'un chemin ainsi que la distance en
 
 La méthode de calcul de distance entre deux n\oe ud est la traversée en largeur d'abord (\emph{breadth-first traversal}). Cela consiste à débuter par un n\oe ud, puis à regarder tous les n\oe uds qui sont à une distance de 1 du n\oe ud de départ. À partir de tous ceux-là, on regarder les n\oe uds qui sont à une distance 1, et donc à une distance 2 du n\oe ud de départ. On continue jusqu'à arriver au n\oe ud d'arrivée. On a donc à chaque étape constitué des couches de n\oe uds se trouvant à une certaine distance. Cet algorithme sera expliqué plus en détail par après.\\
 
-\subsection{Phénomène du petit monde}
+\section{Phénomène du petit monde}
 Le « phénomène du petit monde » aussi connu sous le vocable « paradoxe de Milgram » (du nom du psycho-sociologue Stanley Milgram) est l'hypothèse que chacun puisse être relié à n'importe quel autre individu par une courte chaîne de relations sociales. La figure \ref{petit_monde} montre la probabilité qu'ont deux personnes d'être relié par $x$ intermédiaires. 
 	\begin{figure}
 	\center
@@ -61,7 +61,7 @@ Différents types de distances entre personnes existent comme:
 	\end{itemize}
 Ce phénomène de petit monde est particulièrement vrai pour les réseaux créés dynamiquement. Nous expliquerons plus en détail pourquoi cette affirmation est vraie dans la suite du cours.
 
-\subsection{Liens forts et faibles}
+\section{Liens forts et faibles}
 Un réseau peut évoluer de différentes manières et selon différents mécanismes.
 Considérons un exemple ou chaque n\oe ud correspond à une personne et les arcs correspondent à un lien d'amitié (figure \ref{fermeture_triadique}).
 	\begin{figure}
@@ -74,7 +74,7 @@ Dans cet exemple, on voit aue $A$ est amis à la fois avec $B$ et avec $C$. Dans
 Cette situation nous amène à nous intéresser à la notion de coéficient de regroupement qui reflète la probabilité qu'un arc se crée entre deux n\oe uds dans un graphe dynamique. 
 Dans l'exemple ci-dessus, cela correspondrait au fait que C et B deviennent amis. On peut démontrer qu'au plus on fait de fermeture triadique, au plus le coeficient de regroupement est elevé.
 
-\subsubsection*{Exemple}
+\subsection*{Exemple}
 Une étude a été faite dans les années 1960 par le sociologue américain Mark Granovetter dans laquelle il s'est interessé aux personnes qui changent de travail, plus particulièrement à la manière dont ils trouvent un nouveau travail. Il a remarqué que les personnes trouvent du travail plutôt via des connaissances que via des amis. Cela s'explique par la structure des graphe des amis et nous amène à définir les notions de \textbf{liens forts} et de \textbf{liens faibles} (figure \ref{liens_forts_et_faibles}). La suite de cet exemple sera expliqué plus tard.\\
 	\begin{figure}[!h]
 	\center
@@ -83,7 +83,7 @@ Une étude a été faite dans les années 1960 par le sociologue américain Mark
 	\end{figure}
 
     
-\subsection{Ponts}
+\section{Ponts}
 Pour expliquer l'exemple précédent, nous avons besoin de la notion de pont (figures \ref{Pont} et \ref{Pontlocal}).
 	\begin{description}
 	\item[Pont] Un lien entre $A$ et $B$ est un pont si l'enlèvement de ce lien aboutit à la séparation du graphe en deux composants disjoints.

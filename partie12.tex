@@ -1,7 +1,7 @@
-\section{Extension d'une théorie}
+\chapter{Extension d'une théorie}
 Lorsqu'on a une théorie déjà existante, on souhaite parfois l'étendre afin de la rendre plus complète. Pour ce faire, on ajoute des axiomes et on étend le vocabulaire. Voici deux exemples d'extension de théorie pour mieux comprendre comment effectuer cette opération. Ils étendent tous les deux la théorie des liens familiaux (FAM) décrite dans une section précédente.
 
-\subsection*{Exemple 1}
+\section*{Exemple 1}
 Considérons le nouvel axiome suivant, que nous noterons Ax.
 $$ (\forall x) \neg P(x,x) $$
 La nouvelle théorie ainsi étendue que nous noterons FAM* possède un axiome de plus : Ax. Cette théorie FAM* est \textbf{consistante}, c'est-à-dire qu'il existe au moins un modèle qui valide cette théorie. Pour s'en convaincre, il suffit de considérer la première interprétation de la théorie FAM de la section précédente, qui utilise les liens familiaux. \\
@@ -10,7 +10,7 @@ En revanche, si on considère la deuxième interprétation (deuxième modèle, n
 $$ P_J(d_1, d_2) \textrm{ ssi } d_2 = 2d_1 \textrm{ ou } d_2 = 3d_1$$
 Il suffit de choisir $x=0$ dans notre nouvel axiome Ax pour constater que le modèle $J$ ne valide pas la théorie étendue FAM*. De manière générale, l'extension d'une théorie peut donc réduire l'ensemble des modèles de celle-ci.
 
-\subsection*{Exemple 2}
+\section*{Exemple 2}
 Considérons à présent le nouvel axiome suivant, que nous noterons Adam.
 $$ (\forall y) \neg P(a,y) $$
 où $a$ est une constante arbitraire. Notons la théorie étendue FAM' = FAM + Adam. Dans cet exemple, on peut observer que FAM' est \textbf{inconsistante} car aucun modèle ne peut valider cette théorie. En effet, en partant du premier axiome de FAM (appelé "père"), nous effectuons quelques étapes pour obtenir une contradiction.
@@ -26,10 +26,10 @@ Ci-dessus, le premier axiome de FAM reformulé (père), qui est en contradiction
 \end{align*}
 Par la règle de preuve par contradiction, on démontre qu'aucun modèle n'est possible pour la théorie étendue FAM'. \'{E}tendre une théorie équivaut à faire de la manipulation syntaxique. Il est important de bien vérifier ce que notre modification a comme conséquence sur le nombre de modèles que la théorie accepte.
 
-\section{Liens entre théories}
+\chapter{Liens entre théories}
 Dans cette section nous abordons la comparaison de différentes théories : inclusion, équivalence et quelques corollaires, ainsi que la théorie des ordres partiels stricts. Dans ce qui suit, on note $Th_1$ et $Th_2$ deux théories.
 
-\subsection*{Inclusion}
+\section*{Inclusion}
 On dit que $Th_1$ est \textbf{contenue} dans $Th_2$ si
 \begin{itemize}
 \item[$\bullet$] Le vocabulaire de $Th_1$ est inclus dans le vocabulaire de $Th_2$.
@@ -38,12 +38,12 @@ On dit que $Th_1$ est \textbf{contenue} dans $Th_2$ si
 Attention, on peut donc avoir deux théories qui "parlent de la même chose" mais qui possèdent des axiomes totalement différents.
 TODO : expliquer pourquoi / Ajouter un exemple
 
-\subsection*{Equivalence}
+\section*{Equivalence}
 On dit que $Th_1$ et $Th_2$ sont \textbf{équivalentes} si elles sont contenues l'une dans l'autre. Cela signifie que les deux théories "disent la même chose" et que tout modèle d'une des théorie est également modèle de l'autre.\\
 
 Il est important de bien faire la différence entre les \textbf{liens} entre les théories et l'\textbf{extension} d'une théorie. Le premier concept exprime ce que modélisent les théories tandis que le deuxième n'est que de la manipulation syntaxique.
 
-\subsection*{Corollaires}
+\section*{Corollaires}
 On note respectivement $V_i$, $M_i$ et $Ax$ le vocabulaire, les modèles et les axiomes d'une théorie $i$. \\
 
 \noindent \underline{Si} $V_{Th_1} \subseteq V_{Th_2}$ et $M_{Th_2} \subseteq M_{Th_1}$ \underline{alors} $Th_1$ est contenue dans $Th_2$. \\
@@ -54,19 +54,19 @@ On note respectivement $V_i$, $M_i$ et $Ax$ le vocabulaire, les modèles et les 
 
 \noindent \underline{Si} $p$ une formule fermée telle que $\vDash_{Th_1} p$ et $Th_2 = Th_1 \bigcup \left\lbrace p \right\rbrace$ \underline{alors} $Th_1$ et $Th_2$ sont équivalentes. \\
 
-\section{Théorie des ordres partiels stricts}
+\chapter{Théorie des ordres partiels stricts}
 
 Nous allons donner un autre exemple de théorie ainsi que deux interprétations différentes de cette théorie.
-\subsection*{Vocabulaire}
+\section*{Vocabulaire}
 \begin{itemize}
 \item[$\bullet$] Le symbole P
 \end{itemize}
-\subsection*{Axiomes}
+\section*{Axiomes}
 \begin{itemize}
 \item[$\bullet$] $ (\forall x) \neg P(x,x) $  (irréflexivité) (OPS1)
 \item[$\bullet$] $ (\forall x) (\forall y) (\forall z) (P(x,y) \wedge P(y,z) \Rightarrow P(x,z))$ (transitivité) (OPS2)
 \end{itemize}
-\subsection*{Première interprétation}
+\section*{Première interprétation}
 Soit l'interprétation I de cette théorie. On a :
 \begin{itemize}
 \item[$\bullet$] $D_I = \mathbb{Z} $
@@ -74,7 +74,7 @@ Soit l'interprétation I de cette théorie. On a :
 \end{itemize}
 Lorsque l'on écrit $val_I(<) = "<"$, le premier symbole $<$ est un mot de vocabulaire dans la théorie tandis que le deuxième est une fonction. Cette fonction confère un sens au symbole. 
 On remarque que cette interprétation est un modèle de notre théorie. En effet, la fonction $<$ sur les entiers est irréflexive et transitive. Si on a $x < y$ et $y <z$, on peut en déduire que $x<z$.
-\subsection*{Deuxième interprétation}
+\section*{Deuxième interprétation}
 Soit l'interprétation J de cette théorie. On a : 
 \begin{itemize}
 \item[$\bullet$] $D_J = \mathbb{Z} $

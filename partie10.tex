@@ -1,14 +1,14 @@
-\section*{Algorithme de preuve pour la logique des prédicats}
+\chapter*{Algorithme de preuve pour la logique des prédicats}
 
-\section{Introduction}
-\subsection{3 transformations}
-\subsection{Résolution}
-\subsection{Propriétés de l'algorithme}
+\chapter{Introduction}
+\section{3 transformations}
+\section{Résolution}
+\section{Propriétés de l'algorithme}
 
-\section{Transformation en forme prénexe}
+\chapter{Transformation en forme prénexe}
 
-\section{Transformation en forme Skolen}
-\subsection{Intuition}
+\chapter{Transformation en forme Skolen}
+\section{Intuition}
 
 Cette transformation consiste à éliminer toutes les occurences de quantificateurs existentiels.
 \smallskip
@@ -26,7 +26,7 @@ $(\forall x)(\forall y)(\forall v) \big[ P(x) \wedge \neg Q(\textbf{g(x,y)},y) \
 
 Après la transformation, l'existence des modèles est préservée.
 
-\subsection{Règle}
+\section{Règle}
 
 Pour chaque élimination d'un quantificateur existentiel $(\exists x)$, on remplace sa variable quantifiée par une fonction $f(x_1,...,x_n)$ dont les arguments sont les variables des quantificateurs universels dont $x$ est dans la portée.
 \smallskip
@@ -64,11 +64,11 @@ $p$ admet un modèle $(I)$ SSI $p_s$ admet un modèle $(I')$.
 
 Que ça ne soit exactement le même modèle ne pose pas de problème pour notre algorithme. L'algorithme par réfutation continue à itérer jusqu'à trouver une contradiction ($false$). S'il n'y a pas de modèle pour $p_s$, il n'y a pas de modèle pour $p$ et ça suffit.
 
-\section{Transformation en forme normale conjonctive}
+\chapter{Transformation en forme normale conjonctive}
 
 Même manipulations qu'en logique des propositions.
 
-\section{La règle de résolution}
+\chapter{La règle de résolution}
 
 $$ \mbox{\huge $\frac{L_1 \vee C_1, \neg L_2 \vee C_2}{(C_1 \vee C_2)\sigma}$ } $$
 
@@ -138,7 +138,7 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
 
 \underline{Alors} $$ \mbox{\huge $\frac{L^{+} \vee C_1, \neg L^{-} \vee C_2}{(C_1 \vee C_2)\sigma}$ } $$
 
-\section{Algorithme}
+\chapter{Algorithme}
 
 $S := \big\{ \Delta x_1, ..., \Delta x_i, \neg Th \big\}$ dont chaque formule est en forme normale conjonctive (FNC). 
 
@@ -162,7 +162,7 @@ Calculer:
 
 \underline{If} \textbf{false} $\ni S$ \underline{then} Th prouvé. \underline{else} Th non prouvé. \underline{end}
 
-\section{Exemple}
+\chapter{Exemple}
 \begin{itemize}
   \item $(\forall x) homme(x) \wedge fume(x) \Rightarrow mortel(x)$
   \item $(\forall x) animal(x) \Rightarrow mortel(x)$
@@ -171,7 +171,7 @@ Calculer:
   \item \textbf{Candidat-théorème:} $mortel(Ginzburg)$
 \end{itemize}
 
-\subsection{Initialisation de S}
+\section{Initialisation de S}
 \begin{itemize}
   \item P1: $(\forall x) homme(x) \wedge fume(x) \Rightarrow mortel(x)$
   \item P2: $(\forall x) animal(x) \Rightarrow mortel(x)$
@@ -180,7 +180,7 @@ Calculer:
   \item P5: $\neg mortel(Ginzburg)$
 \end{itemize}
 
-\subsection{Itérations}
+\section{Itérations}
 
 \textbf{\underline{A}}
 \begin{itemize}
@@ -203,7 +203,7 @@ Calculer:
   \item $r = false.$ Inconsistence donc le candidat théorème est prouvé.
 \end{itemize}
 
-\subsection{Non-déterminisme}
+\section{Non-déterminisme}
 
 Importance des \underline{choix} qu'on fait.
 
@@ -216,7 +216,7 @@ Importance des \underline{choix} qu'on fait.
 
 Si on avait fait ce choix-ci pour la première itération, l'algorithme ne peut plus continuer et on doit faire marche-arrière.
 
-\section{Stratégies}
+\chapter{Stratégies}
 
 \begin{itemize}
   \item Quelles paires $p_i, p_j$ choisir?

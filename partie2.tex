@@ -1,5 +1,5 @@
 
-\section{La logique propositionnelle}
+\chapter{La logique propositionnelle}
 
 \begin{quote}
 « \textit{\foreignlanguage{english}{They don't even need to know what they're
@@ -71,7 +71,7 @@ logiques. En particulier, nous pouvons précisément définir :
   vraie, de trouver d’autres propositions vraies (par exemple à partir de $A
   \Rightarrow B$ on peut trouver $\lnot B \Rightarrow \lnot A$).
 \end{enumerate}
-\subsection{La grammaire}
+\section{La grammaire}
 
 La logique propositionnelle est un \textbf{langage} formel. Il peut être défini
 à l’aide d’une grammaire sur un \textbf{alphabet}. L’alphabet est l’ensemble des
@@ -125,7 +125,7 @@ pas une phrase propositionnelle. La grammaire précédente, la description de
 l’alphabet, et cette explication parlent de propositions logiques sans en
 être, et font donc partie de ce qui est appelé le \textbf{métalangage}.
 
-\subsection{Les tables de vérité}
+\section{Les tables de vérité}
 
 La grammaire permet de définir précisément l’ensemble des phrases
 propositionnelles, mais pas de leur donner un sens, c’est à dire de définir
@@ -230,7 +230,7 @@ vérité :
   $\false$ & $\false$ & $\false$ & $\false$ & $\false$
 \end{tabular}
 
-\subsection{Les interprétations}
+\section{Les interprétations}
 
 Une autre façon plus puissante de définir si une proposition est vraie ou fausse est d’utiliser
 une \textbf{interprétation}. Si $E_P$ est l’ensemble des propositions premières,
@@ -333,7 +333,7 @@ mentit en partant promener le chien alors qu'il pleuvait à midi, rien n'ayant
 %   - définir une interprétation ;
 %   - l’utiliser pour évaluer la fonction.
 
-\subsection{Les modèles logiques}
+\section{Les modèles logiques}
 
 À partir de la notion d’interprétation, nous pouvons définir ce qu’est
 un \textbf{modèle}. Soit $B = \{b_1, b_2, \dots, b_n \}$ un ensemble de
@@ -366,7 +366,7 @@ choisie est le modèle d’autres propositions que celle étudiée (par exemple 
   $\val_I(A) = \val_I(B) = \true$, mais faux dans tous les autres cas.
 \end{description}
 
-		\subsubsection{Conséquence logique}
+		\subsection{Conséquence logique}
 			$p$ est conséquence logique de $q$ si et seulement si $p \Rightarrow q$ est une tautologie. En d'autres termes, si
 			\begin{center}
 			\begin{tabular}{ll}
@@ -381,7 +381,7 @@ choisie est le modèle d’autres propositions que celle étudiée (par exemple 
 			\end{center}
 			Cependant, la conséquence logique ($\Rrightarrow$) n'est pas une proposition logique (cf. syntaxe d'une proposition).
 		
-		\subsubsection{Équivalence logique}
+		\subsection{Équivalence logique}
 			Par le raisonnement ci-dessus, on peut dire que $p$ est logiquement équivalent à $q$ si et seulement si
 			\begin{center}
 			\begin{tabular}{ll}
