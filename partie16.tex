@@ -1,5 +1,6 @@
 
 \author{Baptiste Degryse (27641200)}
+\author{Charles Jacquet (27811200)}
 
 \section{Exemples de programmes Prolog}
 
@@ -51,4 +52,38 @@ Le but de l'exécution est de prouver que $G \equiv fact(5, r)$. Pour y arriver,
 (1) avec clause 2\\
 (2) a>b existe dans le système prédéfini -> true\\
 
+\subsubsection{Exemple 2}
+Le but de cet exemple est de faire un "append" de deux listes:\\
+append(L1, L2, L2)
+\paragraph{Prolog:}
+\begin{itemize}
+\item append ( [] , L , L)
+\item append ([X|L1], L2, [X|L3]) :- append (L1,L2,L3)
+\end{itemize}
+\paragraph{Clausal}
+Le programme réécrit sous forme clausale.\\
+append(nil,l',l')\\
+$\land$\\
+($\neg$append($l_1,l_2,l_3$) $\land$ append (cons(x, $l_1$, $l_2$, cons(x,$l_3$)))
+\paragraph{Execution}
+Attention, l'exécution du programme est une preuve en soit.\\
+G = append (cons(1,nil), cons(2, nil), l)
+\begin{itemize}
+\item[1.] 
+		$r$= < append (cons(1,nil), cons(2,nil, l)> et
+		$\sigma_1$ = {(x,1), ($l_1$,nil), ($l_2$, cons(2,nil)), (cons(x,$l_3$),l)}
+\item[2.]
+		r=< append(nil,cons(2,nil),$l_3$)> et
+		$\sigma_2$ = { (l', cons(2, nil), ($l_3$,l') }
+		
+\item[3.]
+		r=<>
+		
+\item[Résultat]
+l = con (1, $l_3$)
+$l_3$ = l'
+l' = cons(2,nil)
+l=con(1,cons(1,nil))
 
+
+\end{itemize}
