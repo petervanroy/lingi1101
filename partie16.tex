@@ -1,6 +1,7 @@
 
 \author{Baptiste Degryse (27641200)}
 \author{Charles Jacquet (27811200)}
+\author{Jérôme Lemaire (6960100)}
 
 \section{Exemples de programmes Prolog}
 
@@ -64,7 +65,7 @@ append(L1, L2, L2)
 Le programme réécrit sous forme clausale.\\
 append(nil,l',l')\\
 $\land$\\
-($\neg$append($l_1,l_2,l_3$) $\land$ append (cons(x, $l_1$, $l_2$, cons(x,$l_3$)))
+($\neg$append($l_1,l_2,l_3$) $\land$ append (cons(x, $l_1$), $l_2$, cons(x,$l_3$))
 \paragraph{Execution}
 Attention, l'exécution du programme est une preuve en soit.\\
 G = append (cons(1,nil), cons(2, nil), l)
@@ -87,3 +88,64 @@ l=con(1,cons(1,nil))
 
 
 \end{itemize}
+
+\subsubsection{Exemple 3}
+
+Intéressons-nous à la manière dont prolog exécute la requête \textbf{|?- append (L1,L2,[1])} en nous basant sur la syntaxe définie lors de l'exemple 2.\\
+Pour information, la fonction cons prend comme premier argument une valeur et comme second argument une liste. Elle place le premier argument en tête du second argument.\\
+
+\paragraph{Requête}
+\begin{verbatim} 
+|?- append (L_{1},L_{2},[1]). %requête
+-> r = <append (l_{1}',l_{2}',cons(1,nil))> % réponse
+
+		L_{1} = [],
+		L_{2} = [1]. %clause 1
+ou		
+		L_{1} = [1],
+		L_{2} = []. %clause 2
+\end{verbatim}
+
+\paragraph{Forme clausale}
+Le programme réécrit sous forme clausale.\\
+append(nil,l',l')\\
+$\land$\\
+($\neg$append($l_{1},l_{2},l_{3}$)
+$\vee$ append (cons(x, $l_{1}$), $l_{2}$, cons(x,$l_{3}$))
+
+\paragraph{Exécution}
+Dans cette exemple, il y a plusieurs chemins pour arriver au résultat
+\begin{itemize}
+\item[] Si on choisi la clause 1: 
+\begin{align*}
+&\sigma = {(l_{1}',nil), (l_{2}',l'), (l',cons(1,nil))} \\
+&r= < > \\
+& l_{1}'=nil \\
+& l_{2}'=cons(1,nil) \\
+\end{align*}
+
+\item[] Si on choisi la clause 2: 
+\begin{align*}
+&\sigma = {(l_{1}',cons(x,l_{1})), (l_{2}',l_{2}), (x,1), (l_{3},nil)} \\
+&r= < append(l_{1},l_{2}',nil) > \\
+&\sigma = {(l_{1},nil), (l_{2},l_{2}'), (nil,l_{3})} \\
+&r= < > \\
+& l_{1}'=nil \\
+& l_{2}'=cons(1,nil) \\
+\end{align*}
+
+\end{itemize}
+
+
+Il existe deux manières de percevoir une exécution Prolog.\\
+\begin{itemize}
+\item[1] Approche "impérative" : l'exécution est vue comme une séquence de calculs
+\item[2] Approche logique : l'exécution est vue comme une preuve. Cette approche n'existe pas dans les langages classiques, c'est ce qui fait la force de Prolog.
+\end{itemize}
+Prolog est présent dans beaucoup de domaine de programmation :\\
+\begin{itemize}
+\item Dans la gestion de base de données avec Datalog
+\item Dans la semantic web
+\item Dans la programmation par contrainte. Les substitutions sont remplacées par des relations quelconques.
+\end{itemize}
+
