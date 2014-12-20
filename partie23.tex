@@ -24,15 +24,25 @@
 \section{Chapitre 13: Structure du Web}
 
 
-\subsection{Mémoire associative-Hypertexte}
+\subsection{Mémoire associative - Hypertexte}
+
+Liens hypertextes : chaque élément a des liens vers et depuis d'autres éléments. Un contenu hypertexte est un contenu auquel il est fait référence dans un document.
+
+\vspace{0.5cm}
+Deux exemples de contenus hypertextes :
 
 $
-\left. \text{\parbox{0.5\linewidth}{
+\left. 
+%\text{
+\parbox{0.5\linewidth}{
 \begin{itemize}
-\item Graphe de citations : précurseur 
-\item Renvois dans une encyclopédie (Wikipédia)
+\item \textbf{Graphe de citations} \\
+		Précurseur du web : nœuds indépendants, liens strictement vers le passé
+\item \textbf{Encyclopédie} \\
+		Les articles renvoient à d'autres articles (par exemple : Wikipédia)
 \end{itemize}
-}}\right\}
+}%}
+\right\}
 $ Réseaux d'informations
 
 
@@ -66,8 +76,8 @@ Séquene de noeuds qui commence avec A et termine avec B et où chaque paire con
 Un graphe orienté est connexe s'il existe un chemin orienté entre chaque paire de noeuds.
 \end{itemize}
 
-\subsection{Composant fortement connexe (CFC) \textit{- Strongly Connected Component (SCC)} }
-\\
+\subsection{Composant fortement connexe (CFC) \\ \textit{Strongly Connected Component (SCC)} }
+
 Dans un graphe orienté :
 \begin{itemize}
     \item Ensemble de noeuds tel qu'il existe un chemin orienté entre                   chaque paire.
@@ -75,17 +85,17 @@ Dans un graphe orienté :
 \end{itemize}
 
 Les CFCs forment un genre de \textit{"super noeud"}. Pour la connectivité, il n'y a que les CFCs qui comptent.
-\\
 
+\vspace{0.3cm}
 
 Il faut transformer le graphe en un graphe réduit : le CFC devient 1 seul "super gros" noeud. Pour trouver un chemin dans le graphe original, il suffit de trouver un chemin dans le graphe réduit. Ref : Figure 13.6
-\\
+\vspace{0.3cm}
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=500px]{images/23_schema2.png}
+\includegraphics[width=0.95\linewidth]{images/23_schema2.png}
 \caption{Exemple de transformation du graphe}
-\label{fig:cfc}
+\label{fig:cfc2}
 \end{figure}
 
 \subsection{Noeud de papillon \textit{ $\approx$ années 2000}}
@@ -93,7 +103,7 @@ Ref: Figure 13.7
 
 
 \subsection{L'émergence du Web 2.0  \textit{$\ge$ années 2000}}
-L'émergence du Web 2.0 se déroule entre 2000 et 2010. Il s'agit en fait d'un changement d'attitude général conduisant à une structuration de la toile basé sur 3 grands principes principalement. \\
+L'émergence du Web 2.0 se déroule entre 2000 et 2010. Il s'agit en fait d'un changement d'attitude général conduisant à une structuration de la toile basé sur 3 grands principes principalement. 
 \begin{enumerate}
     \item Création \underline{collaborative} de contenu plutôt que des pages personnelles.
     
@@ -115,9 +125,11 @@ L'émergence du Web 2.0 se déroule entre 2000 et 2010. Il s'agit en fait d'un c
 
 \newpage
 
-\hline 
+%\hline 
 \vspace * {0.5cm}
-    \fbox{\textbf{Un petit bout d'histoire}}\\
+    \fbox{\textbf{Un petit bout d'histoire}}
+    
+    \vspace{0.3cm}
     
     \underline{Quelques précurseurs} :
     
@@ -131,11 +143,12 @@ L'émergence du Web 2.0 se déroule entre 2000 et 2010. Il s'agit en fait d'un c
     \end{itemize}
     
 \vspace * {0.5cm}   
-\hline 
+%\hline 
 
 
 \section{Chapitre 14: Recherche dans le Web}
-Comment trouver une information ?\\
+Comment trouver une information ?
+\vspace{0.3cm}
 
 \underline{1960}:Concept de mot-clé => Limitations fortes
 
@@ -152,13 +165,17 @@ Comment trouver une information ?\\
                  \end{itemize}
 
         \end{itemize}
-    \item Limitations dûes à l'abondance d'informations. \\
-    $\left. \text{\parbox{0.5\linewidth}{
+    \item Limitations dues à l'abondance d'informations. \\
+    $\left. %\text{
+    \parbox{0.5\linewidth}{
         \begin{itemize}
             \item \underline{Avant}: Les informations sur le web étaient rares. 
             \item \underline{Maintenant}: Il y a beaucoup trop d'informations.
         \end{itemize}
-        }} \right \}$ Plus grand problème du web
+        %}
+        } \right 
+        \}
+        $ Plus grand problème du web
 \end{itemize}
     
 $\Rightarrow$ Pour solutionner ce problème d'abondance, l'utilisation de la structure du réseau est nécessaire pour trouver les informations les plus fiables.
