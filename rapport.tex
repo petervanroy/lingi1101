@@ -6,30 +6,36 @@
 \usepackage[normalem]{ulem}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[pdftex]{graphicx}
+\usepackage[pdftex]{graphicx} % needed by: 13, 14
 \usepackage{setspace}
 \usepackage{hyperref}
 % \usepackage[french]{varioref}
-\usepackage{amsmath}
+\usepackage{amsmath} % needed by: 13, 14
 \usepackage{algorithm2e} % needed by: 15
 \usepackage{mathtools}
 \usepackage{systeme}
-\usepackage{amssymb}
+\usepackage{amssymb} % needed by: 13, 14
 \usepackage[usenames,dvipsnames]{color}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \usepackage{cancel} % needed by: 9
 \usepackage{framed}
-\usepackage{array}
-%\usepackage{enumitem} % needed by: 17
-\usepackage{lmodern} % needed by: 17
-\usepackage{listings} % needed by: 17
-\usepackage{color} % needed by: 17
-\usepackage{tikz} % needed by: 17
-\usepackage{array} % needed by: 17
+%\usepackage{enumitem} % needed by: 14, 17
+\usepackage{lmodern} % needed by: 14, 17
+\usepackage{listings} % needed by: 14, 17
+\usepackage{color} % needed by: 14, 17
+\usepackage{tikz} % needed by: 14, 17
+\usepackage{array} % needed by: 14, 17
 
-\definecolor{mygreen}{rgb}{0,0.6,0} % needed by: 17
-\definecolor{mygray}{rgb}{0.5,0.5,0.5} % needed by: 17
-\definecolor{mymauve}{rgb}{0.58,0,0.82} % needed by: 17
+
+\usepackage{amsfonts} % needed by: 13, 14
+\usepackage{makeidx} % needed by: 13
+\usepackage{lmodern} % needed by: 13
+
+\definecolor{mygreen}{rgb}{0,0.6,0} % needed by: 14, 17
+\definecolor{mygray}{rgb}{0.5,0.5,0.5} % needed by: 14, 17
+\definecolor{mymauve}{rgb}{0.58,0,0.82} % needed by: 14, 17
+
+
 
 \selectlanguage{french}
 
@@ -90,12 +96,19 @@ Logique et Structures Discrètes}     % Titre
   \newpage
   \include{partie12}
   \newpage
+  \include{partie13}
+  \newpage
+  \include{partie14}
+  \newpage
   \include{partie16}
   \newpage
   \include{partie17}
   \newpage
   \include{partie18}
   \newpage
+  \include{partie19}
+  \newpage
+  
   % \include{concl}
   % \newpage
   \include{references}
