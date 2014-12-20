@@ -1,0 +1,29 @@
+Reprenons l'exemple de la section 31.4, si l'on s'intéresse à la personne A, on sait que s' il cherche du travail c'est fort probable que ce soit via B qu'il en trouve (B est une connaissance de A).Socialement, on sait que si deux amis ont un ami en commun, il y a des chances qu'ils deviennent ami aussi ou tout du moins connaissance (propriété de fermeture triadique forte).On peut donc en déduire que chaque pont local tel que celui entre A et B dans la figure 8 sera un lien faible (conséquence de la propriété de fermeture triadique forte).En effet si le lien entre A et B était fort, la propriété de fermeture triadique forte nous dirais que d'autres liens se formeraient. Par exemple entre E et B et entre A et F ce qui aurait pour conséquence que le lien A-B ne serait plus un pont.B fourni donc de nouvelles informations à A via le pont local.
+\newline
+\section{Force d'un lien dans un grand réseau}
+Pour caractériser la force d'un lien dans un grand réseau, il va falloir généraliser les concepts relatifs aux liens forts et faibles vus précédemment.
+La force d'un lien sera caractérisée en y attribuant une quantité numérique, on va utiliser la notion de chevauchement de voisinage (neighbourhood overlapping) pour ça.
+Chevauchement de voisinage = (Nombre de noeuds voisins de A et B)/(Nombre de noeuds voisins de A ou B)
+La quantité numérique augmentera en fonction de ce chevauchement. Plus cette valeur de chevauchement de voisinage tendra vers 0, plus ce lien deviendra un pont local.
+\newline
+\section{Force des liens en pratique dans un réseau téléphonique}
+Une étude portée sur les conversations cellulaires nous prouve que plus les liens entre des invidus sont fort, plus ces personnes passeront du temps au téléphone à communiquer. Effectivement, on remarque que la durée augmente au fur et à mesure que le chevauchement de voisinage augmente.
+\newline
+\section{Force des liens en pratique sur facebook}
+Facebook est un réseau social développé sur internet permettant à des indivdus de communiquer avec des personnes de leur entourage.
+Les liens entre individus sur Facebook sont nommés les liens d'amitié.
+Facebook est ainsi notamment un bon exemple où la force des liens est utilisée au maximum.
+D'après une étude réalisée sur une période d'un mois, on trouve trois catégories de liens sur Facebook, caractérisant soit:
+- une communication réciproque;
+- une communication orientée;
+- une relation maintenue.
+
+On peut faire une comparaison avec la force d'un lien, le nombre de personnes ayant un lien d'amitié avec quelqu'un augmente en fonction de la taille du voisinage. 
+On remarque également que la propagation d'informations est plus rapide avec la 3 catégorie de lien.
+\newline
+\section{Twitter}
+Twitter est un microblog qui permet de partager de petits messages (140 catactères au maximum). Il est basé sur une relation de Followers à Followees.
+Force du lien :
+- Faible si on est follower
+- Forte si on envoie un message ciblé
+Si on "suit" plus de personne, on a plus d'amis (jusqu'à un certain point, c'est une fonction logarithmique). Effectivement, cela s'explique par le fait que pour entretenir des liens forts, ceci demande un effort conditionnel. Il y a une limite physique aux nombres de liens forts que l'on peut posséder. A contrario, il ne demande pas de temps ou d'effort pour 'suivre' quelqu'un. Il y a moins de contraintes, c'est un engagement passif et c'est ce qui est proné sur Twitter.

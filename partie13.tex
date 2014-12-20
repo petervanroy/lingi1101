@@ -1,0 +1,89 @@
+%document réalisé par Scott Ivinza, Florent Lejoly, Cédric Vanden Buckle et Guillaume Demaude
+\section{Théorie de l'égalité (EG)}
+Il existe différents symboles pour représenter l'égalité : 
+\begin{itemize}
+	\item E(x,y)
+	\item $x = y$
+	\item $x == y $
+\end{itemize}
+Nous allons utilisé $'=='$ dans la suite de ce cours pour représenter l'égalité.
+
+\subsection{Axiomes} 
+Pour définir ce qu'est une égalité, nous avons d'abord besoin de définir 3 axiomes et 2 schémas d'axiomes.\\ \\
+(eg1) Réflexivité \\ \\$\forall x, x==x$\\ \\
+(eg2) Symétrie \\ \\$\forall x, \forall y, x==y \Rightarrow y==x$\\ \\
+(eg3) Transitivité \\ \\$\forall x, \forall y, \forall z, (x==y \land y==z) \Rightarrow x==z$\\ \\
+(eg4) Substituabilité dans les fonctions\\ \\$\forall x_{1}, ...,x, .. x_{n}$ ,  $x_{i}==x \Rightarrow f(x_{1}, ...,x_{i}, .. x_{n}) == f(x_{1}, ...,x, .. x_{n})$\\ \\
+(eg5) Substituabilité dans les prédicats\\ \\$\forall x_{1}, ...,x, .. x_{n}$ ,  $x_{i}==x \Rightarrow P(x_{1}, ...,x_{i}, .. x_{n}) == P(x_{1}, ...,x, .. x_{n})$ \\ \\
+
+
+\subsection{Régles d'inférences}
+En plus de ces 5 axiomes, il nous faut aussi définir deux régles d'inférences.\\ \\
+Substituabilité fonctionnelle 
+	$$ \frac{s_{1}==t_{1} \land s_{2}==t_{2} \land ... \land s_{n}==t_{n}}{f(s_{1},s_{2},...,s_{n}) == f(t_{1},t_{2},...,t_{n})}$$ 
+	Subsituabilité prédicative 
+	$$ \frac{s_{1}==t_{1} \land s_{2}==t_{2} \land ... \land s_{n}==t_{n}}{P(s_{1},s_{2},...,s_{n}) == P(t_{1},t_{2},...,t_{n})}$$ 
+Grâce aux règles sémantiques de l'égalité, on peut raionner sur des formules mais aussi bien sur une interprétation. \\ \\
+Si $VAL_{I}(t_{1}) ==  VAL_{I}(t_{2})$ alors $VAL_{I}(t_{1} == t_{2}) = true$
+\subsection*{Preuve (Métalangage)}
+Soit I, un modèle de EG ($'=='$) pour $t_{1}$ et $t_{2}$. \\ \\
+$VAL_{I}(t_{1} == t_{2}) = VAL_{I}(==)(VAL_{I}(t_{1}), VAL_{I}(t_{2}))$\\ \\
+On pose $VAL_{I}(==) = E_{I}$ et $VAL_{I}(t_{1}) = e$ et $VAL_{I}(t_{2}) = e$ \\ \\
+Donc $VAL_{I}(t_{1} == t_{2}) =E_{I}(e,e)$ \\ \\
+$\Rightarrow$ preuve en regardant les axiomes \\ \\
+$ VAL_{I}(\forall x, x==x)= true$ (eg1) \\ \\
+On cherche le $\forall x$ dans la sémantique : \\ \\
+On sait que pour tout d $\in$ Domaine de I, $VAL_{I}(d==d)=true$, \\ \\
+Si $d = e$\\ \\
+alors $E_{I}(e,e)=true$
+\subsection{Remarque}
+La théorie de l'égalité a un utilité très limitée, elle doit être étendue pour pouvoir servir à quelque chose. On appelle une telle théorie un template.
+\section{Théorie de l'ordre partiel (OP)}
+On ajoute un deuxième symbole dans le langage en plus du symbole d'égalité.
+\begin{itemize}
+	\item $==$
+	\item $\leq $
+\end{itemize}
+
+\subsection{Axiomes} 
+Aux axiomes et schémas d'axiomes de la théorie de l'égalité, on rajoute de nouveaux axiomes\\ \\
+(op1) Réflexivité \\ \\$\forall x$, $x\leq x$\\ \\
+(op2) Anti-symétrie \\ \\$\forall x$, $\forall y$, $ x\leq y \land y\leq x\Rightarrow y==x$\\ \\
+(op3) Transitivité \\ \\$\forall x$, $\forall y$, $\forall z$, $(x\leq y \land y\leq z) \Rightarrow x\leq z$\\ \\
+(op4) Substituabilité à gauche \\ \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{1}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x \leq x_{2}$\\ \\
+(op5) Substituabilité à droite \\ \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{2}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x_{1} \leq x$\\ \\ \\
+\underline{Théorème :} $\models \forall x, \forall y,  [x==y \Leftrightarrow (x\leq y)\land (y \leq x)] $
+\subsection{Preuve}
+La preuve va être démontrée en partie en métalangage et en partie en preuve formelle.\\ \\
+$\Leftarrow $ : est démontré par l'axiome anti-symétrique\\ \\
+$\Rightarrow$ :$\models_{op} \forall x, \forall y, [x\leq y \land y \leq x]$ \\ \\
+\underline{preuve formelle :}\\ \\
+$
+ (1) \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow y \leq x$ \hfill substituabilité à gauche \\ \\
+$(2) \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow x \leq y$ \hfill substituabilité à droite \\ \\
+$(3) x==y \Rightarrow x \leq x \Leftrightarrow y \leq x $ \hfill $\forall$ élimination\\ \\
+$(3) x==y \Rightarrow x \leq x \Leftrightarrow x \leq y $ \hfill $\forall$ élimination\\\\
+\underline{preuve conditionnelle :}\\ \\
+$(4) x==y$ \hfill supposition\\ \\
+$(5) y\leq x$ \hfill modus ponens (1,4)\\ \\
+$(6) x\leq y$ \hfill modus ponens (2,4)\\ \\
+$(7) y\leq x \land  x\leq y$ \hfill conjonction (5,6)\\ \\
+$(8) x==y \Rightarrow x \leq x \Leftrightarrow y\leq x \land  x\leq y$ \\ \\
+$(9) \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow y\leq x \land  x\leq y$ \hfill $\forall$ Introduction\\ \\
+\subsection{Exemples de Modèles d'OP}
+\underline{$I_{1}$} : $D_{I_{1}} =  \mathbb{Z}$ \\ \\
+$ val_{I_{1}}(==) = '=' :$ égalité d'entiers \\ \\
+$ val_{I_{1}}(\leq) = '\leq' :$ plus petit ou égal pour les entiers\\ \\
+cette interprétation va satisfaire tous les entiers.\\ \\
+\underline{$I_{2}$} : $D_{I_{2}} =  P(E)$ ensemble des sous-ensembles de E\\ \\
+$ val_{I_{2}}(==) = '=' :$ égalité d'ensemble \\ \\
+$ val_{I_{2}}(\leq) = '\subseteq' :$ inclusion d'ensemble\\ \\
+\underline{$I_{3}$} : $D_{I_{3}} = ALPH^{2} = {(l_{1},l_{2}),..}$ doublons de lettres de l'alphabet\\ \\
+$ val_{I_{3}}(==) = $ égalité des paires \\ \\
+$ val_{I_{3}}(\leq) =$ suivant ordre lexicographique\\ \\
+exemple : $(l_{i},l_{j}) \leq (l_{p},l_{q})$ si $ l_{i} < l_{p}$ ou $ l_{i} = l_{p}$ et $ l_{j} < l_{q}$ ou $ l_{j} = l_{q}$\\ \\ 
+\underline{$I_{3}$} : $D_{I_{4}} =$ ensemble de listes\\ \\\
+$ val_{I_{4}}(==) = $ = égalité de liste (se elles possèdent les même composants à la même position\\ \\
+$ val_{I_{3}}(\leq) =$ "suffixe de" \\ \\
+exemple : $l_{1} $ est suffixe de $l_{2}$ \\ \\
+$l_{1} $ = [d, e, f, g, h] et $l_{2} =$ [a, b, c, d, e, f, g, h, i]
