@@ -71,7 +71,7 @@
 			\end{tabular}
 			\end{center}
 			On voit bien ici, que la table de $\lnot (P \land Q)$ est équivalente à celle de $\lnot (P \land Q)$. La preuve a donc vérifié la véracité de la proposition. \\
-			Il y a néanmoins un problème avec cette preuve car s'il y a $N$ propositions premières, on a $2^N$ lignes dans la table.
+			Il y a néanmoins un problème avec cette preuve, car s'il y a $N$ propositions premières, on a $2^N$ lignes dans la table.
 		\section{Preuve transformationnelle}
 			On va utiliser des "Lois", c'est-à-dire des équivalences.
 			\begin{center}
@@ -94,7 +94,7 @@
 			Il est autorisé de remplacer une formule par une formule équivalente à l’intérieur d’une autre formule. Autrement dit : \\
 			\indent Soit p,q,r des formules propositionnelles.\\
 			\indent Si $p \Leftrightarrow q$ et $r(p)$, alors $r(p) \Lleftarrow \Rrightarrow r(q)$.\\
-			On peut remplacer $p$ par $q$ car elles sont équivalentes. Il faut faire attention à ces règles, car elles sont en méta-langage. Elles expliquent seulement ce qui est autorisé  faire.
+			On peut remplacer $p$ par $,q$ car elles sont équivalentes. Il faut faire attention à ces règles, car elles sont en métalangage. Elles expliquent seulement ce qui est autorisé  faire.
 			
 			\subsection*{Exemple}
 			On veut prouver : $p \land (q \land r) \Lleftarrow \Rrightarrow (p \land q) \land r$
@@ -113,10 +113,10 @@
 			& $\Lleftarrow \Rrightarrow (p \land q) \land r$\\
 			\end{tabular}
 			\end{center}
-			Le problème dans cette méthode de preuve c'est qu'il faut de l'idée, de la créativité et donc ce n'est pas forcément mieux que les tables de vérités, surtout si c'est compliqué de trouver l'astuce.
+			Le problème dans cette méthode de preuve c'est qu'il faut de l'idée, de la créativité et donc ce n'est pas forcément mieux que les tables de vérité, surtout si c'est compliqué de trouver l'astuce.
 		
 		\section{Preuve déductive}
-		A partir des lois logiques (lois d'équivalence) et des règles d'inférence, On va construire des preuves.\\
+		À partir des lois logiques (lois d'équivalence) et des règles d'inférence, on va construire des preuves.\\
 		\textit{Une preuve est un objet formel défini avec précision.\\}
 		
 		Lois de logique : 	
@@ -136,7 +136,7 @@
 			
 		Règle d'inférence : \\
 		
-		A la différence de la preuve transformationnelle, les règles d'inférences ont une direction : Elles commencent par les prémisses et se terminent par la conclusion.
+		À la différence de la preuve transformationnelle, les règles d'inférences ont une direction : elles commencent par les prémisses et se terminent par la conclusion.
 		\begin{center}
 		\begin{tabular}{llp{3cm}l}
 		
@@ -218,20 +218,20 @@
 		\end{tabular}
 		\end{center}
 		
-		On y ajoute 2 régles spéciales : 
+		On y ajoute 2 règles spéciales : 
 		\begin{itemize}
 		\item Le théorème de déduction,
 		\item La preuve par contradiction.
 		\end{itemize}
 		
 		\subsection*{Théorème de déduction}
-			Pour prouver $s\Rightarrow t$, On suppose $s$ vrai. On déduit $t$ et donc on sait que l'hypothèse $s\Rightarrow t$ est vraie et on l'évacue.\\
+			Pour prouver $s\Rightarrow t$, on suppose $s$ vrai. On déduit $t$ et donc on sait que l'hypothèse $s\Rightarrow t$ est vraie et on l'évacue.\\
 			
 			On note ce théorème $s \vdash t$ (t peut être prouvé à partir de s, ce qui signifie qu'on peut construire une preuve (objet mathématique) qui est vraie si on applique bien les règles ci-dessus).\\
 			
 			\textbf{Remarque :} $p\models t \neq p\vdash t$
 			\begin{itemize}
-			\item $p\models t$ est une notion de vérité, et donc de sémantique,
+			\item $p\models t$ est une notion de vérité, et donc de sémantique;
 			\item $ p\vdash t$ est une notion syntaxique, on peut prouver qu'une preuve est vraie.
 			\end{itemize}
 			
@@ -257,21 +257,21 @@
    			\end{tabular}\\
 			\end{center}
 			
-			Ceci signifie qu'il y a une erreur dans les prémisses, et on suppose ici que c'est la formule propositionnelle $r$ qui est fautive. On justifie qu'il n'y a aucune contradiction dans $p,...,q$ car on part du principe qu'il existe un modèle de $p,...q$.\\
+			Ceci signifie qu'il y a une erreur dans les prémisses, et on suppose ici que c'est la formule propositionnelle $r$ qui est fautive. On justifie qu'il n'y a aucune contradiction dans $,p,...,q$ car on part du principe qu'il existe un modèle de $p,...q$.\\
 			
 			Tout ceci est une formalisation de choses qu'on connaît déjà, mais ça nous donne une notion précise du raisonnement à avoir.
 			
 \section{Exemple de preuve propositionnelle}
 
 \noindent Voici les propositions premières : \\
-A : tu manges bien \\
+À : tu manges bien \\
 B : ton système digestif est en bonne santé \\
 C : tu pratiques une activité physique régulière \\
 D : tu es en bonne forme physique \\
 E : tu vis longtemps \\
 
 \noindent On peut maintenant faire une théorie et on espère qu'elle aura un modèle. \\
-A$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
+À$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
 \\
 \noindent On aimerait prouver que $\lnot$A $\land$ $\lnot$C est vrai.\\
 
@@ -279,7 +279,7 @@ A$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
 \\
 \begin{tabular}{|l|l|}
 \hline
-1. A$\Rightarrow$B & prémisse \\
+1. À$\Rightarrow$B & prémisse \\
 2. C$\Rightarrow$D & prémisse \\
 3. B$\lor$D $\Rightarrow$E & prémisse \\
 4. $\lnot$E & prémisse \\ 
@@ -287,18 +287,18 @@ A$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
 \indent 6. B & modus ponens (1) \\
 \indent 7. B$\lor$D & addition (6) \\
 \indent 8. E & modus ponens (7) \\
-9. $\lnot$A & preuve indirecte \\
+9. $\lnot$À & preuve indirecte \\
 \indent 10. C & hypothèse \\
 \indent 11. D & modus ponens (2) \\
 \indent 12. D$\lor$B & addition (11) \\
 \indent 13. B$\lor$D & commutativité (12)\\
 \indent 14. E & modus ponens (9) \\
 15. $\lnot$C & preuve indirecte \\
-16. $\lnot$A $\land$ $\lnot$C & conjonction (9,15) \\
+16. $\lnot$À $\land$ $\lnot$C & conjonction (9,15) \\
 \hline
 \end{tabular}\\
 
-Grâce à la déduction on a donc pu prouver que tu ne manges pas bien et que tu ne pratiques pas d'activité physique régulière. 
+Grâce à la déduction, on a donc pu prouver que tu ne manges pas bien et que tu ne pratiques pas d'activité physique régulière. 
 On aimerait maintenant pouvoir automatiser les preuves quand elles existent. Mais il faut savoir s'il peut tout résoudre ou pas. 
 On va donc construire un algorithme nous permettant de résoudre automatiquement les preuves en logique propositionnelle.
 

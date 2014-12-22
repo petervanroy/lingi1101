@@ -149,7 +149,7 @@ But : Déterminer si S est inconsistant. On veut faire des déductions jusqu'à 
 \noindent
 \begin{tabbing}
 \hspace{2cm}\=\kill
-\underline{while} \> false $\not\in$ S et $\exists$  ? clauses résolvables non-résolues \\
+\underline{while} \> false $\not\in$ S et $\exists$  ? clauses résolvables non résolues \\
 \newline
 \indent \underline{do} \> choisir C$_{1}$, C$_{2}$ $\in$ S tel que $\exists$ P $\in$ C$_{1}$, $\lnot$P $\in$ C$_{2}$ \\
 \> calculer r := C$_{1}$ - \{P\} $\lor$ C$_{2}$ - \{$\lnot$P\} \\
@@ -200,6 +200,6 @@ Pour toute théorie $B = \left\{c_1, \dots, c_n \right\}$ et $p$,
 \item si $B \models p$ alors $B \vdash p$ (Complet - \textit{Completeness}) ;
 \item $\forall$ $B, p$, l'exécution de l'algorithme se termine après un nombre fini d'étapes. (Décidable - \textit{Decidable})
 \end{itemize}
-Cet algorithme est donc très puissant, même s'il n'est peut être pas très efficace. Mais au moins on est sûr qu'il s'arrêtera toujours à un moment.
+Cet algorithme est donc très puissant, même s'il n'est peut-être pas très efficace. Mais, au moins, on est sûr qu'il s'arrêtera toujours à un moment.
 
 Malheureusement, la logique des propositions n'est pas très expressive. On va donc essayer de faire la même chose mais avec une logique plus puissante : la logique des prédicats. Mais nous n'arriverons pas à avoir un algorithme aussi puissant pour la logique des prédicats, car c'est une logique trop forte. 

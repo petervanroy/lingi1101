@@ -19,21 +19,21 @@ $\sigma$' $\leq$ $\sigma$\\
 Ces exemples montrent qu'on peut raisonner sur tout, y compris sur la logique et les algorithmes eux-mêmes, à partir du moment où on respecte les axiomes.
 
 \section{Théorie des ensembles}
-Elle sera utilisé pour la spécification des systèmes $\mathbb{Z}$.\\
+Elle sera utilisée pour la spécification des systèmes $\mathbb{Z}$.\\
 
 \textbf{Ensemble} : on peut définir les ensembles de façon informelle (c'est-à-dire sans les axiomes) : \\
 \begin{itemize}
 \item Un ensemble peut être défini comme une énumération d'éléments \\
-Ex: \{ 0,20,40,60,80,100 \} ou \{Mercure, Vénus, Terre, ..., Neptune\}
+Ex: \{ 0,20,40,60,80,100 \} ou \{Mercure, Vénus, terre ..., Neptune\}
 \item Il peut également être défini comme le prédicat d'un argument qui est vrai pour les membres. On appelle cette définition informelle "compréhension)". Certains langages comme Python possèdent des syntaxes particulières dédiées à la création de listes remplies par des compréhensions\\
-Ex: \{ n | n $\in$ $\mathbb{N}$ $\wedge$ $\exists$ k, k $\in$ $\mathbb{N}$ $\wedge$ 20k = n $\wedge$ 0 $\leq$ n $\leq$ 100 \} \\
+Ex.: \{ n | n $\in$ $\mathbb{N}$ $\wedge$ $\exists$ k, k $\in$ $\mathbb{N}$ $\wedge$ 20k = n $\wedge$ 0 $\leq$ n $\leq$ 100 \} \\
 \end{itemize}
 La définition formelle des ensembles passe par 8 axiomes :
 \\
 \textbf{Axiomes} \\
 
 \begin{itemize}
-\item \textbf{Egalité} (1 ère définition) \\
+\item \textbf{Égalité} (1 ère définition) \\
 A = B $\Leftrightarrow$ ($\forall$ x) (x $\in$ A $\Leftrightarrow$ x $\in$ B)\\
 \item \textbf{Ensemble vide} (sans éléments)\\
 $\emptyset$ = \{x $\vert$ x $\neq$ x\}\\
@@ -50,7 +50,7 @@ On va ici prendre des éléments de B tels que $\varphi$(x) est vrai, et les met
 $\emptyset$ $\subseteq$ A\\
 A $\subseteq$ A\\
 A $\subseteq$ B $\wedge$ B $\subseteq$ C $\Rightarrow$ A $\subseteq$ C \\
-\item \textbf{Egalité} (2 ième définition)\\
+\item \textbf{Égalité} (2e définition)\\
 (A = B) $\Leftrightarrow$ (A $\subseteq$ B) $\wedge$ (B $\subseteq$ A)\\
 \item \textbf{Taille d'un ensemble} 
     \begin{itemize}
@@ -76,7 +76,7 @@ Types:\\
 
 Schémas:\\
 \begin{itemize}
-\item Etat du système : $\rightarrow$ logique des prédicats
+\item État du système : $\rightarrow$ logique des prédicats
 \item Comportement actions : préconditions et posconditions $\rightarrow$ également logique des prédicats\\
 \end{itemize}
 
@@ -100,7 +100,7 @@ $\mathbb{F}$ Book représente un sous-ensemble fini de l'ensemble Book.\\
 \underline{Exemple du comportement}\\
 \begin{itemize}
 \item Il y a un "avant" et un "après"\\
-Les variables "avant", on les écrit normalement (sans rien changer) alors qu'on ajoute une apostrophe aux variables "après" pour pouvoir les distinguer. Ex: Stock et Stock'
+Les variables "avant", on les écrit normalement (sans rien changer) alors qu'on ajoute une apostrophe aux variables "après" pour pouvoir les distinguer. Ex.: Stock et Stock'
 \item Une exécution est une séquence d'états\\
 \newline
 \begin{center}
@@ -130,7 +130,7 @@ Cette deuxième ligne d'exemple veut dire la même chose, mais dans la condition
 Le "?" signifie qu'il s'agit d'une entrée.\\
 On peut déduire de ces prédicats que new? sera dans on\_shelf.
 
-\item Si la (les) précondition(s) ne sont pas satisfaites, on aura des erreurs que l'on devra corriger via la gestion d'erreurs. Si la (les) précondition(s) n'échoue(nt) jamais, on a affaire à une opération totale.\\
+\item Si la ou les préconditions ne sont pas satisfaites, on aura des erreurs que l'on devra corriger via la gestion d'erreurs. Si les préconditions n'échouent jamais, on a affaire à une opération totale.\\
 
 Exemple d'opération totale :\\
 

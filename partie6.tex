@@ -11,8 +11,8 @@
 
 Nous allons maintenant étudier une logique beaucoup plus expressive que la
 logique propositionnelle, la logique des prédicats, qui est aussi appelée
-la logique de premier ordre.\footnote{Il existe des logiques d'ordres supérieures
-mais ils ne feront pas l'objet de ce cours.}
+la logique de premier ordre.\footnote{Il existe des logiques d'ordres supérieures,
+mais elles ne feront pas l'objet de ce cours.}
 Voici un premier tableau qui montre les différences entre la logique propositionnelle vue jusqu'à présent et la logique des prédicats que nous allons étudier.
 \begin{center}
 \begin{tabular}{|c|c|}
@@ -48,11 +48,11 @@ Un autre exemple de prédicat:
 \begin{center}
 $\forall \alpha$ Phil($\alpha$) $\Rightarrow$ Savant($\alpha$)\\
 \vspace{3mm}
-$\hookrightarrow$ ... \textit{c'est un résumé d'un très grand nombre de faits. ça marche pour tous arguments, ça peut être un ensemble infini!}
+$\hookrightarrow$ ... \textit{c'est un résumé d'un très grand nombre de faits. Ça marche pour tous arguments, ça peut être un ensemble infini!}
 \end{center}
 Comme Socrate est un philosophe, on peut déduire que Socrate est un savant aussi!
 
-Pour dire la même chose en logique de proposition cela est beaucoup plus compliqué: \\
+Dire la même chose en logique propositionnelle serait beaucoup plus compliqué: \\
 
 "Socrate est un savant" Proposition "R"\\
 \indent "Platon est un savant" Proposition "S"\\
@@ -62,9 +62,10 @@ On va donc noter en logique propositionnelle
 (P$\Rightarrow$R) $\cup$ (Q$\Rightarrow$S) $\cup$ ...(\textit{potentiellement infini})
 \end{center}
 
-On doit tout énumérer et il n'y a aucune relations entre les différentes propositions. Si il y a un nombre infini ça ne marche pas. Il y a donc de grandes limitations dans la logique propositionnelle.
+On doit tout énumérer et il n'y a aucune relation entre les différentes propositions. S'il y a un nombre infini, ça ne marche pas. Il y a donc de grandes limitations dans la logique propositionnelle.
 
-Néanmoins parfois la logique propositionnelle est utile. Il existe des outils informatiques qui utilisent la logique propositionnelle et donc parfois ça suffit. Typiquement on peut prendre l'exemple de "SAT solver" qui donne equation booleenes très compliquées et va trouver des valeurs propositions primitives qui rendent vrais cette porposition. C'est donc assez utilisé! La logique propositionnelle est utile mais si on veut faire du raisonnement sur plus que vrai et faux, avec des relations plus que vrai faux et avec des relations entre des propositions alors la logique propositionnelle ne marche pas. Si on veut faire un logiciel qui montre une certaine intelligence alors la logique des propositions ne marche pas et il faut utiliser la logique des prédicats.\\
+Néanmoins parfois la logique propositionnelle peut être utile. 
+Il existe des outils informatiques qui utilisent la logique propositionnelle. On peut prendre l'exemple de "SAT solver" à qui on donne des équations booléennes très compliquées et qui va trouver les valeurs des propositions primitives qui rendent vraie cette proposition. C'est donc assez utilisé! La logique propositionnelle est utile, mais si l'on veut faire du raisonnement sur plus que  "vrai" et "faux" avec des relations entre des propositions,  la logique propositionnelle ne marche pas. Si on veut faire un logiciel qui montre une certaine intelligence, il faut utiliser la logique des prédicats.\\
 
 Autre exemple:
 
@@ -73,14 +74,14 @@ Autre exemple:
 Exemple & Logique propositionnelle & Logique des prédicats \\ 
 \hline
 Tout adulte peut voter & P & $\forall$x adulte(x) $\Rightarrow$ voter(x) \\ 
-John est un adulte & Q & adulte(\textcolor{OliveGreen}{john}) \\ 
+John est un adulte & Q & adulte(\textcolor{OliveGreen}{John}) \\ 
 \line(1,0){50} & \line(1,0){10} & \line(1,0){45} \\ 
 
-John peut voter & \textcolor{Red}{?R?}& voter(\textcolor{OliveGreen}{john}) \\ 
+John peut voter & \textcolor{Red}{?R?}& voter(\textcolor{OliveGreen}{John}) \\ 
 \hline
 \end{tabular}\\
 
-Ce genre de raisonnement est très difficile à faire en logique propositionnelle alors qu'en logique des prédicats c'est beaucoup plus simple! Le john en ligne 3 et en ligne 4 sont les même john! 
+Ce genre de raisonnement est très difficile à faire en logique propositionnelle alors qu'en logique des prédicats c'est beaucoup plus simple! Le John en ligne 3 et en ligne 4 sont les mêmes John! 
 Ceci montre donc bien qu'il nous faut la logique des prédicats pour faire des relations de ce type.
 
 \section{Quantificateurs}
@@ -91,24 +92,24 @@ $\forall x$ (enfants($x$) $\wedge$ intelligents($x$) $\Rightarrow$ $\exists y$ a
 
 $\forall x$ (enfants($x$) $\wedge$ intelligents($x$)) $\Rightarrow$ $\exists y$ aime($x$,$y$) \\
 
-Ces deux formules peuvent paraître équivalente, mais en réalité elles ont un sens tout à fait différent.
-En effet, dans le deuxième cas on remarque que le quantifficateurs $\forall x$ ne porte pas sur la dernière variable $x$ qui est en argument du prédicat aime($x$,$y$).
+Ces deux formules peuvent paraître équivalentes, mais en réalité elles ont un sens tout à fait différent.
+En effet, dans le deuxième cas on remarque que le quantificateur $\forall x$ ne porte pas sur la dernière variable $x$ qui est en argument du prédicat aime($x$,$y$).
 
 Il faut donc faire bien attention à quel quantificateur une variable s'identifie lorsqu'on manipule des formules. \\
 
 \begin{itemize}
 \item[$\bullet$] $\forall x$ P($x$) $\wedge$ $\exists x$ Q($x$) : contient deux variables différentes\\
  
-\item[$\bullet$] $\forall x$ $\exists x$  P($x$) $\wedge$ Q($x$) : est une forme incorecte, conflit des noms de variables \\
+\item[$\bullet$] $\forall x$ $\exists x$  P($x$) $\wedge$ Q($x$) : est une forme incorrecte, conflit des noms de variables \\
 \end{itemize}
 
-Pour résoudre ces conflits on fait appel à une nouvelle opération, le renomage. Cette opération permet de changer le nom des variables tout en conservant le sens de la formule. Ainsi on obtient : \\
+Pour résoudre ces conflits, on fait appel à une nouvelle opération, le renommage. Cette opération permet de changer le nom des variables tout en conservant le sens de la formule. Ainsi on obtient : \\
 
- $\forall x$ $\exists z$  P($x$) $\wedge$ Q($z$)  \textit{renomage (2)} \\
+ $\forall x$ $\exists z$  P($x$) $\wedge$ Q($z$)  \textit{renommage (2)} \\
  
- Le concept de variables, de leur portées ainsi que d'opérateurs en logique des prédicats fait fortement penser au langage de programmation
+ Le concept de variables, de leurs portées ainsi que d'opérateurs en logique des prédicats fait fortement penser au langage de programmation
  
-Une comparaison entre un code et une formule est tout à fait envisageable. Prenons un code tout à fait banal comprenant des variables différentes avec des portées différentes qui ont le même identificateur ainsis qu'une formule correspondante. 
+Une comparaison entre un code et une formule est tout à fait envisageable. Prenons un code tout à fait banal comprenant des variables différentes avec des portées différentes qui ont le même identificateur ainsi qu'une formule correspondante. 
 
 \begin{verbatim}
 1.  begin {
@@ -140,7 +141,7 @@ En analysant morceau par morceau de la formule : \\
 
 \end{itemize}
 
-Cet exemple ilustre parfaitement la ressemblance et le lien entre le monde de la programmation et celui de la logique des prédicats
+Cet exemple illustre parfaitement la ressemblance et le lien entre le monde de la programmation et celui de la logique des prédicats
 
 \section{Syntaxe}
 
@@ -152,7 +153,7 @@ Cet exemple ilustre parfaitement la ressemblance et le lien entre le monde de la
 	                  & variables & $x, y, z$ \\
 	                  & true, false & \\
 	\hline
-	Symboles non-logiques & symboles de prédicats & $P$ $\varphi$ $R$ + arguments $\geq 0$ \\
+	Symboles non logiques & symboles de prédicats & $P$ $\varphi$ $R$ + arguments $\geq 0$ \\
 						  & symboles de fonction & + $arguments \geq 0 $\\
 	\hline
 \end{tabular}
@@ -177,8 +178,8 @@ $<connecteur$ $binaire>::=$
 \end{tabular}
 
 \section{Sémantique}
-Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation qui sont déjà définis dans la logique propositionelle. Même si la logique des prédicats est beaucoup plus puissante, nous gardons une sémantique assez similaire à la logique propositionelle. \\
-L'idée dans l'interprétation c'est de dire si la formule est vraie ou fausse. Tout comme pour la logique propositionelle on va faire la même chose pour les prédicats avec les relations.\\
+Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation qui sont déjà définis dans la logique propositionnelle. Même si la logique des prédicats est beaucoup plus puissante, nous gardons une sémantique assez similaire à la logique propositionnelle. \\
+L'idée dans l'interprétation c'est de dire si la formule est vraie ou fausse. Tout comme pour la logique propositionnelle, on va faire la même chose pour les prédicats avec les relations.\\
 
 Illustrons par un exemple : 
 
@@ -188,7 +189,7 @@ $p : P(b,f(b)) \Rightarrow \exists y   P(a,y)$  \\
 \end{center}
 On suppose que le $a$ et le $b$ sont des constantes et que le $f$ est une fonction. Il faut donner un sens à cette formule et pour cela il faut donner un sens à : 
 \begin{itemize}
-\item[$\bullet$]P : $val_{I}(P) = $ $ \geq $ \hspace{3mm} (\textit{Considéré comme un vrai prédicat})
+\item[$\bullet$]P : $val_{I}(P) = $ $ \geq $ \hspace{3mm} (\textit{considéré comme un vrai prédicat})
 \item[$\bullet$] a : $val_{I}(a) = $ $ 2 $ 
 \item[$\bullet$] b : $val_{I}(b) = $ $ \pi $ 
 \item[$\bullet$] $f$ : $val_{I}(f) = $ $ f_{i} $ \hspace{3mm} $f_{i}= \Re \rightarrow \Re : d \rightarrow \dfrac{d}{2} $ 
@@ -197,7 +198,7 @@ Avec ces éléments, on peut donc trouver l'interprétation :
 \begin{center}
 \textit{Si $\pi \geq  \dfrac{\pi}{2}$, alors $\exists$ $ d \in \Re$ tel que $\sqrt2 \geq d$ }
 \end{center}
-Cette phrase n'est pas très utile mais avec cette interprétation, la phrase logique donne ce sens. Une autre interprétation donnerais un sens totalement différent à la phrase logique. Voici une autre interprétation totalement différente :
+Cette phrase n'est pas très utile, mais avec cette interprétation, la phrase logique donne ce sens. Une autre interprétation donnerait un sens totalement différent à la phrase logique. Voici une autre interprétation totalement différente :
 \begin{itemize}
 \item[$\bullet$] a : $val_{I}(a) = $ "Barack Obama"
 \item[$\bullet$] b : $val_{I}(b) = $ "Vladimir Putin"
@@ -209,9 +210,9 @@ Avec ce nouveau sens, on trouve l'interprétation suivante :
 \begin{center}
 \textit{Si Vladimir Putin est l'enfant du père de Vladimir Putin alors $\exists$ une personne telle que Barack Obama est l'enfant de cette personne.}
 \end{center}
-La seconde interprétation est très différente de la première malgré le fait que ce soit la même formule à l'origine ! La connexion entre une formule et son sens permet de garder une certaine souplesse dans le sens où l'on peut choisir ça. C'est un peu comme dans la logique propositionelle mais avce encore plus de souplesse. Si l'on fait ce raisonnement-ci, ce dernier sera toujours vrai pour toutes les interprétations qui sont vraies. \\
+La seconde interprétation est très différente de la première malgré le fait que ce soit la même formule à l'origine ! La connexion entre une formule et son sens permet de garder une certaine souplesse dans le sens où l'on peut choisir ça. C'est un peu comme dans la logique propositionnelle, mais avec encore plus de souplesse. Si l'on fait ce raisonnement-ci, ce dernier sera toujours vrai pour toutes les interprétations qui sont vraies. \\
 
 On peut se demander si ces deux interprétations sont des modèles de la formule ? \\
-La première interprétation est un modèle de la formule car le sens de la formule est vrai dans l'interprétation. En effet, $\pi \geq \dfrac{\pi}{2}$ et $\exists$ $ d \in \Re$ tel que $\sqrt2 \geq d$. On voit donc que le modèle est vrai.
+La première interprétation est un modèle de la formule, car le sens de la formule est vrai dans l'interprétation. En effet, $\pi \geq \dfrac{\pi}{2}$ et $\exists$ $ d \in \Re$ tel que $\sqrt2 \geq d$. On voit donc que le modèle est vrai.
 
-La deuxième interprétation est aussi un modèle de la formule car l'interprétation trouvée est vrai aussi. Cela peut paraître bizarre mais c'est correct. 
+La deuxième interprétation est aussi un modèle de la formule, car l'interprétation trouvée est vraie aussi. Cela peut paraître bizarre, mais c'est correct. 

@@ -47,7 +47,7 @@ Une proposition logique est alors :
   connecteurs logiques.
 \end{itemize}
 
-Ainsi, les exemples de propositions précédentes peuvent être réécrites
+Ainsi, les exemples de propositions précédentes peuvent être réécrits
 comme ceci (la signification précise des différents symboles sera décrite
 plus loin) :
 
@@ -88,7 +88,7 @@ symboles qui composent une proposition logique, c’est-à-dire :
 	\item Disjonction : $\lor$
 	\item Négation :  $\lnot$
 	\item Implication :  $\Rightarrow$
-	\item Equivalence :  $\Leftrightarrow$
+	\item Équivalence :  $\Leftrightarrow$
 	\end{itemize}
 \item les caractères de ponctuation « $($ » et « $)$ ».
 \end{itemize}
@@ -128,7 +128,7 @@ l’alphabet, et cette explication parlent de propositions logiques sans en
 \section{Les tables de vérité}
 
 La grammaire permet de définir précisément l’ensemble des phrases
-propositionnelles, mais pas de leur donner un sens, c’est à dire de définir
+propositionnelles, mais pas de leur donner un sens, c’est-à-dire de définir
 quand une proposition est vraie ou fausse.
 
 Pour cela, il faut décider lesquelles des propositions premières sont vraies
@@ -281,7 +281,7 @@ tables de vérité pourrait être des expressions telles que~:
 
 Prenons un exemple concret, utilisons une interprétation pour étudier la phrase
 suivante~: « S'il fait beau à midi, j'irai promener le chien ». Nous devons
-d’abord traduire cette phrase en l’une des proposition du formalisme que nous
+d’abord traduire cette phrase en l’une des propositions du formalisme que nous
 avons défini, en commençant par identifier les propositions premières~:
 
 \begin{enumerate}
@@ -322,7 +322,7 @@ Nous pouvons alors effectuer le développement suivant~:
 
 Nous pouvons donc conclure que, dans cette interprétation, la personne ayant
 fait cette affirmation a menti. Notons néanmoins que notre homme n'aurait pas
-mentit en partant promener le chien alors qu'il pleuvait à midi, rien n'ayant
+menti en partant promener le chien alors qu'il pleuvait à midi, rien n'ayant
 été dit sur ce qu'il ferait dans le cas où il ne ferait pas beau.
 
 % TODO: Rajouter un exemple simple pour vérifier que l’un des connecteurs est
@@ -339,7 +339,7 @@ mentit en partant promener le chien alors qu'il pleuvait à midi, rien n'ayant
 un \textbf{modèle}. Soit $B = \{b_1, b_2, \dots, b_n \}$ un ensemble de
 propositions logiques. Une interprétation $I$ est un modèle de $B$ si et
 seulement si $\forall b_i \in B. \VAL_I(b_i) = \true$. Autrement dit, $I$
-décrit un univers qui respecte toutes les règles se trouvant dans l’ensemble
+décris un univers qui respecte toutes les règles se trouvant dans l’ensemble
 $B$.
 
 Donc, dans notre exemple précédent, l’interprétation choisie n’est pas un modèle
@@ -352,15 +352,15 @@ choisie est le modèle d’autres propositions que celle étudiée (par exemple 
 
 % TODO: Exemple d’expression avec une interprétation qui est un modèle et une
 % autre qui n’en est pas un.
-\begin{description}\item[Les tautologies :] Pour certaines propositions, toute interprétation est un modèle, c’est à dire que ces propositions sont toujours
+\begin{description}\item[Les tautologies :] Pour certaines propositions, toute interprétation est un modèle, c’est-à-dire que ces propositions sont toujours
   vraies. Par exemple, $\true$ est évidemment une tautologie, de même que $A
   \Rightarrow A$ ou encore $A \lor \lnot A$. Le fait qu’une proposition $p$ est
   une tautologie se note $\vDash p$.
 \item[Les contradictions :] Pour d’autres propositions, il n’existe aucun
-  modèle, c’est à dire qu’elles sont toujours fausses. Par exemple $A \land
+  modèle, c’est-à-dire qu’elles sont toujours fausses. Par exemple $A \land
   \lnot A$ est une contradiction. Le fait qu’une proposition $p$ est une
   contradiction se note $\nvDash p$.
-\item[Les contingences :] Toutes les autres propositions sont des contigences. Il
+\item[Les contingences :] Toutes les autres propositions sont des contingences. Il
   existe des interprétations qui sont des modèles et d’autres qui n’en sont
   pas. Par exemple $A \land B$ est vrai pour l’interprétation $I$ telle que
   $\val_I(A) = \val_I(B) = \true$, mais faux dans tous les autres cas.

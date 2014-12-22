@@ -1,6 +1,6 @@
 \chapter*{Introduction au cours LINGI1101}
 
-Le cours \textit{Logique et structures discrètes} a deux buts importants:
+Le cours "\textit{Logique et Structures discrètes"} a deux buts importants:
 
 \begin{itemize}
 \item Donner la motivation et l'intuition de la logique, pour que cette matière devienne véritablement utile pour les étudiants.
@@ -8,7 +8,7 @@ Le cours \textit{Logique et structures discrètes} a deux buts importants:
 \end{itemize}
 
 
-L'intuition est donc importante pour ce cours, mais néanmoins la connaissance des formalismes mathématiques reste essentielle.  Le cours sera coté sur les deux: intuitions (un tiers) et formalismes (deux tiers).\\
+L'intuition est donc importante pour ce cours, néanmoins, la connaissance des formalismes mathématiques reste essentielle.  Le cours sera coté sur les deux: intuitions (un tiers) et formalismes (deux tiers).\\
 
 \section*{Déroulement du cours}
 
@@ -16,7 +16,7 @@ Le cours est composé de deux parties. La première partie, \textit{logique form
 
 L'évaluation de ce cours se compose de trois parties. Il y aura tout d'abord une interrogation au milieu du quadrimestre portant sur 5 points. Il vous sera également demandé de prendre note pendant une heure de cours par groupe de trois, ceci afin de contribuer au syllabus. Ces notes prises au cours rapporteront au maximum 2 points de la note finale à chacun des participants. L'examen sera divisé en deux parties. La première partie sur 5 points portera sur la matière de l'interrogation. La note retenue sera le maximum entre la note de l'interrogation et celle obtenue à la question de l'examen. La seconde partie de l'examen sera donc cotée sur 13 points et portera sur le reste de la matière.\\
 
-Afin de suivre ce cours, nous nous baserons sur deux livres de références correspondants chacun à une partie du cours :
+Afin de suivre ce cours, nous nous baserons sur deux livres de référence correspondants chacun à une partie du cours :
 
 \begin{itemize}
 \item Introductory Logic and Sets for Computer Scientists, by \textit{Nimal Nissanke}.
@@ -35,7 +35,7 @@ La logique des propositions est un langage formel constitué d'une syntaxe et d'
 
 \subsection*{Logique des prédicats}
 
-C'est la logique la plus expressive et la plupart des travaux mathématiques peuvent être écrits dans ce langage. Elle est aussi définie comme la logique du premier ordre.\footnote{Il existe d'autres formes de logiques plus expressives mais plus difficiles à utiliser. Exemple : la logique du deuxième ordre, ...} En logique des prédicats, les éléments de base du langage ne sont plus des propositions mais des prédicats. 
+C'est la logique la plus expressive et la plupart des travaux mathématiques peuvent être écrits dans ce langage. Elle est aussi définie comme la logique du premier ordre.\footnote{Il existe d'autres formes de logiques plus expressives, mais plus difficiles à utiliser. Exemple : la logique du deuxième ordre. } En logique des prédicats, les éléments de base du langage ne sont plus des propositions, mais des prédicats. 
 
 \subsection*{Interprétations et modèles}
 
@@ -57,12 +57,12 @@ Il est possible de formaliser tout objet mathématique avec une théorie logique
 
 Le rêve serait de pouvoir exprimer toute chose logique en langage de programmation efficace. Il s'agira d'appliquer ce principe avec l'algorithme de preuve, sur base d'hypothèses.
 
-\part{logique formelle}
+\part{Logique formelle}
 \chapter{Contexte: la méthode scientifique}
 
 \section{Formalisation d'un système}
 
-Comment pouvons-nous formaliser un système dans le monde réel tel que les champs magnétiques ou la gravitation ?
+Comment pouvons-nous formaliser un système dans le monde réel tels que les champs magnétiques ou la gravitation ?
 
 \begin{center}
 \includegraphics[scale=0.65]{images/Abstraction.pdf}
@@ -86,14 +86,14 @@ Il s'agit de faire des calculs et des raisonnements logiques par rapport à la t
 
 \subsection{Induction}
 
-L'induction est le fait de trouver une règle générale qui décrit les résultats d'expériences. On choisit en général une règle moyenne qui deviendra la règle générale.  Il faut souligner que les résultats expérimentaux ne sont pas totalement fiables ou incomplets. Dès lors, la règle trouvée n'est pas nécessairement exacte.  Par exemple, si par induction nous avons trouvé la règle, "les oiseaux volent", cela est vrai tant que l'on a pas vu un pingouin. Autre exemple, nous pouvons supposer que demain le soleil va se lever comme depuis des milliers d'années, même si rien ne l'assure.\\
+L'induction est le fait de trouver une règle générale qui décrit les résultats d'expériences. On choisit en général une règle moyenne qui deviendra la règle générale.  Il faut souligner que les résultats expérimentaux ne sont pas totalement fiables ou incomplets. Dès lors, la règle trouvée n'est pas nécessairement exacte.  Par exemple, si par induction nous avons trouvé la règle, "les oiseaux volent", cela est vrai tant que l'on n’a pas vu un pingouin. Autre exemple, nous pouvons supposer que demain le soleil va se lever comme depuis des milliers d'années, même si rien ne l'assure.\\
 
 \subsection{Abduction}
 
 On compare la règle générale trouvée lors de l'induction avec la théorie. Si cela se révèle différent, comme l'on suppose que tout est parfait dans les calculs/expériences, c'est la théorie qui est fausse. Il faut alors corriger la théorie existante ou en inventer/deviner une nouvelle. Ce type de raisonnement est l'abduction. On applique l'abduction couramment dans notre vie de tous les jours; par exemple, lorsqu'un élève entre trempé dans la classe, nous supposons qu'il pleut dehors. \\
 
 
-Sur ces trois concepts seul la déduction est un raisonnement sûr, les deux autres sont encore mal compris. Nous nous focaliserons dans ce cours uniquement sur la déduction. \\
+Sur ces trois concepts, seule la déduction est un raisonnement sûr, les deux autres sont encore mal compris. Nous nous focaliserons dans ce cours uniquement sur la déduction. \\
 
 
 \section{Exemples}
@@ -112,7 +112,7 @@ Par déduction, grâce à la théorie et aux conditions initiales que nous fixon
 
 \subsection{Sac de billes}
 
-Afin d'illustrer les 3 formes de raisonnement de manière plus formelle, considérons un sac de billes pouvant contenir des billes noires ou blanches. Notons que sac(x) signifie "la bille x est dans le sac" et que blanc(x) signifie "la bille x est blanche". \\
+Afin d'illustrer les 3 formes de raisonnements de manière plus formelle, considérons un sac de billes pouvant contenir des billes noires ou blanches. Notons que sac(x) signifie "la bille x est dans le sac" et que blanc(x) signifie "la bille x est blanche". \\
 
 \subsubsection{Déduction}
 

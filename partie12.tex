@@ -13,7 +13,7 @@ Il suffit de choisir $x=0$ dans notre nouvel axiome Ax pour constater que le mod
 \subsection*{Exemple 2}
 Considérons à présent le nouvel axiome suivant, que nous noterons Adam.
 $$ (\forall y) \neg P(a,y) $$
-où $a$ est une constante arbitraire. Notons la théorie étendue FAM' = FAM + Adam. Dans cet exemple, on peut observer que FAM' est \textbf{inconsistante} car aucun modèle ne peut valider cette théorie. En effet, en partant du premier axiome de FAM (appelé "père"), nous effectuons quelques étapes pour obtenir une contradiction.
+où $a$ est une constante arbitraire. Notons la théorie étendue FAM' = FAM + Adam. Dans cet exemple, on peut observer que FAM' est \textbf{inconsistante,} car aucun modèle ne peut valider cette théorie. En effet, en partant du premier axiome de FAM (appelé "père"), nous effectuons quelques étapes pour obtenir une contradiction.
 \begin{align*}
 & (\forall x) P(x,p(x)) \\
 \iff & P(a,p(a)) && \textrm{Elimination } \forall \\
@@ -27,7 +27,7 @@ Ci-dessus, le premier axiome de FAM reformulé (père), qui est en contradiction
 Par la règle de preuve par contradiction, on démontre qu'aucun modèle n'est possible pour la théorie étendue FAM'. \'{E}tendre une théorie équivaut à faire de la manipulation syntaxique. Il est important de bien vérifier ce que notre modification a comme conséquence sur le nombre de modèles que la théorie accepte.
 
 \section{Liens entre théories}
-Dans cette section nous abordons la comparaison de différentes théories : inclusion, équivalence et quelques corollaires, ainsi que la théorie des ordres partiels stricts. Dans ce qui suit, on note $Th_1$ et $Th_2$ deux théories.
+Dans cette section, nous abordons la comparaison de différentes théories : inclusion; équivalence; et quelques corollaires ainsi que la théorie des ordres partiels stricts. Dans ce qui suit, on note $Th_1$ et $Th_2$ deux théories.
 
 \subsection*{Inclusion}
 On dit que $Th_1$ est \textbf{contenue} dans $Th_2$ si
@@ -38,8 +38,8 @@ On dit que $Th_1$ est \textbf{contenue} dans $Th_2$ si
 Attention, on peut donc avoir deux théories qui "parlent de la même chose" mais qui possèdent des axiomes totalement différents.
 TODO : expliquer pourquoi / Ajouter un exemple
 
-\subsection*{Equivalence}
-On dit que $Th_1$ et $Th_2$ sont \textbf{équivalentes} si elles sont contenues l'une dans l'autre. Cela signifie que les deux théories "disent la même chose" et que tout modèle d'une des théorie est également modèle de l'autre.\\
+\subsection*{Équivalence}
+On dit que $Th_1$ et $Th_2$ sont \textbf{équivalentes} si elles sont contenues l'une dans l'autre. Cela signifie que les deux théories "disent la même chose" et que tout modèle d'une des théories est également modèle de l'autre.\\
 
 Il est important de bien faire la différence entre les \textbf{liens} entre les théories et l'\textbf{extension} d'une théorie. Le premier concept exprime ce que modélisent les théories tandis que le deuxième n'est que de la manipulation syntaxique.
 
@@ -84,5 +84,5 @@ Ici on change le sens du symbole $<$ :
 $$val_J(<) = "\ne"$$
 Cette interprétation n'est pas un modèle. En effet, par exemple, pour $x=5, y=3, z=5$, on a :
 $$5<3 \wedge 3<5 \nRightarrow 5<5$$
-Ceci est un contre-exemple car $5$ n'est pas différent de $5$ (irréflexivité), et donc cette interprétation ne vérifie pas l'axiome sur la transitivité!
+Ceci est un contre-exemple, car $5$ n'est pas différent de $5$ (irréflexivité), et donc cette interprétation ne vérifie pas l'axiome sur la transitivité!
 

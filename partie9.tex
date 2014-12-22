@@ -25,7 +25,7 @@ L'exemple suivant est inspiré de l'Empire romain:
     \item $(maitre(x)\lor{}esclave(x)\implies{}adulte(x)\land{}homme(x))$ \hfill $\forall{}$ elim\\
     \textit{On peut retirer le $\forall$  en réduisant le champ de x aux x rendant vraie la proposition.}
     \item $\lnot{}(maitre(x)\lor{}esclave(x))$ \hfill modus tollens
-    \item $\lnot{}maitre(x)\land{}\lnot{}esclave(x)$ \hfill de Morgan
+    \item $\lnot{}maitre(x)\land{}\lnot{}esclave(x)$ \hfill De Morgan
     \item $\lnot{}maitre(x)$ \hfill simplification
     \item $\exists{}y\ \lnot{}maitre(y)$ \hfill $\exists{}$ intro\\
     \textit{Comme dans l'interprétation, x est une personne qui rend valable cette proposition, on peut dire qu'il existe une personne rendant valable cette proposition et réintroduire le quantificateur $\exists$}
@@ -131,7 +131,7 @@ Etapes de la transformation en formule logiquement équivalente:
 \item $\forall x [p(x) \land \neg(\exists y) (\forall $\colorbox{lightgray}{$u$}$)(\neg\neg q($\colorbox{lightgray}{$u$}$,y) \lor $\colorbox{lightgray}{$\cancel{\forall z}$}$\exists v \bullet r(a,$\colorbox{lightgray}{$u$}$,y,v)]$\\\textit{Renommage des variables et suppression des quantificateurs inutiles}
 \item $\forall x [p(x) \land$ \colorbox{lightgray}{$\forall y \neg$} $ (\forall u)($ \colorbox{lightgray}{$\cancel{\neg \neg}$} $q(u,y) \lor \exists v \bullet r(a,u,y,v)] $\\$\neg\exists y\ devient\  \forall \ y\ \neg \ et\ simplification\ des\ \neg$
 \item $\forall x [p(x) \land \forall y $ \colorbox{lightgray}{$\exists u \neg$}$(q(u,y) \lor \exists v \bullet r(a,u,y,v)] $\\$\neg\forall u\ devient\  \exists \ u\ \neg$
-\item $\forall x [p(x) \land \forall y \exists u $\colorbox{lightgray}{$(\neg q(u,y) \land \neg (\exists v) \bullet r(a,u,y,v))]$}\\ \textit{Distribution des $\neg$}\textit{(de Morgan)}
+\item $\forall x [p(x) \land \forall y \exists u $\colorbox{lightgray}{$(\neg q(u,y) \land \neg (\exists v) \bullet r(a,u,y,v))]$}\\ \textit{Distribution des $\neg$}\textit{(De Morgan)}
 \item $\forall x [p(x) \land \forall y \exists u (\neg q(u,y) \land $\colorbox{lightgray}{$(\forall v) \bullet \neg$}$ r(a,u,y,v))]$\\$\neg\exists y\ devient\  \forall \ y\ \neg$
 \item $\forall x$\colorbox{lightgray}{$ \forall y \exists u \forall v  \bullet$}$ [p(x) \land (\neg q(u,y) \land  \neg r(a,u,y,v))]$\\\textit{Extraction des quantificateurs.}
 \end{enumerate}

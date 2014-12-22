@@ -45,7 +45,7 @@ Les modèles de p $\neq$ modèles $p_s$.
 
 \underline{Pour $p_s$}
 \begin{itemize}
-  \item Etendre $I$
+  \item Étendre $I$
   \item $I' = \big\{ F \vdash F_i \big\} \circ I$
   \item $f(a,b) = $ ``l'université ayant dû diplômer $a$ pour que $a$ puisse enseigner à $b$''
 \end{itemize}
@@ -57,7 +57,7 @@ Que ça ne soit exactement le même modèle ne pose pas de problème pour notre 
 
 \section{Transformation en forme normale conjonctive}
 
-Même manipulations qu'en logique des propositions.
+Mêmes manipulations qu'en logique des propositions.
 
 \section{La règle de résolution}
 
@@ -93,7 +93,7 @@ $L_1$ et $L_2$ sont unifiables s'il existe une substitution $\sigma$ telle que $
   \item $L_2 = P_2(b,x)$
 \end{itemize}
 
-Il n'y pas de substitution qui existe car on a deux constantes différentes, l'intersection des deux ensembles est vide.
+Il n'y pas de substitution qui existe, car on a deux constantes différentes, l'intersection des deux ensembles est vide.
 \smallskip
 
 \underline{Exemple 2:}
@@ -103,7 +103,7 @@ Il n'y pas de substitution qui existe car on a deux constantes différentes, l'i
   \item $L_2 = P(y, a)$
 \end{itemize}
 
-Dans ce cas-ci, il y a beaucoup de subtitutions possibles telles que:
+Dans ce cas-ci, il y a beaucoup de substitutions possibles telles que:
 \begin{itemize}
   \item $\sigma_1 : \big\{ (y, f(a)), (x,a), (z,a) \big\}$ => $L_1 \sigma_1 = L_2 \sigma_1 = p(f(x), a)$
   \item $\sigma_2 : \big\{ (y, f(x)), (z,a) \big\}$ \hspace{11 mm}=> $L_1 \sigma_2 = L_2 \sigma_2 = p(f(x), a)$
@@ -134,7 +134,7 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
 $S := \big\{ \Delta x_1, ..., \Delta x_i, \neg Th \big\}$ dont chaque formule est en forme normale conjonctive (FNC). 
 
 
-\underline{while}: \textbf{false} $\ni S$ et il existe une paire de clauses résolvables et non-résolues.
+\underline{while}: \textbf{false} $\ni S$ et il existe une paire de clauses résolvables et non résolues.
 
 \underline{do}: choisir $p_i, p_j$ dans S et L tel que:
 \begin{itemize}
@@ -205,7 +205,7 @@ Importance des \underline{choix} qu'on fait.
   \item $r = \neg animal(Ginzburg)$
 \end{itemize}
 
-Si on avait fait ce choix-ci pour la première itération, l'algorithme ne peut plus continuer et on doit faire marche-arrière.
+Si on avait fait ce choix-ci pour la première itération, l'algorithme ne peut plus continuer et on doit faire marche arrière.
 
 \section{Stratégies}
 
@@ -216,4 +216,4 @@ Si on avait fait ce choix-ci pour la première itération, l'algorithme ne peut 
 
 Les assistants de preuves utilisent des stratégies existantes, avec l'input de l'humain.
 
-Le language \textbf{Prolog}, inventé en 1972 par Alain Colmerauer et Robert Kowalski, utilise \underline{volontairement} des stratégies naives qui permettent de rendre l'algorithme prévisible. Les axiomes deviennent un \underline{programme}, c'est la programmation logique. Un exemple de stratégie naïve est la stratégie LUSH qui choisi de haut vers le bas les paires $p_i, p_j$, et de gauche à droite dans $p_i$.
+Le langage \textbf{Prolog}, inventé en 1972 par Alain Colmerauer et Robert Kowalski, utilise \underline{volontairement} des stratégies naïves qui permettent de rendre l'algorithme prévisible. Les axiomes deviennent un \underline{programme}, c'est la programmation logique. Un exemple de stratégie naïve est la stratégie LUSH qui choisi de haut vers le bas les paires $p_i, p_j$, et de gauche à droite dans $p_i$.

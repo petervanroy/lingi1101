@@ -18,7 +18,7 @@ Le programme (ressemble à une théorie):
 Exécuter un programme = faire des déductions en essayant de prouver le but. Mais est-ce que cette idée peut donner un système de programmation pratique?
 
 \paragraph{}
-Il y a une compromis entre expressivité et efficacité: Si c’est trop expressif, ça devient moins efficace, par contre si c’est trop peu expressif, on ne peut rien programmer, ça ne sert à rien non plus. Il faut donc être expressif tout en restant efficace. Le Prolog offre un bon équilibre entre expressivité et efficacité.
+Il y a un compromis entre expressivité et efficacité: si c’est trop expressif, ça devient moins efficace, par contre si c’est trop peu expressif, on ne peut rien programmer, ça ne sert à rien non plus. Il faut donc être expressif tout en restant efficace. Le Prolog offre un bon équilibre entre expressivité et efficacité.
 
 \paragraph{}
 Mais pour arriver à cela, il y a quelques problèmes à surmonter:
@@ -27,9 +27,9 @@ Mais pour arriver à cela, il y a quelques problèmes à surmonter:
 		vérité = $ p \models q $ (= $ q $ est vrai dans tous les modèles de $ p $)\\
 		preuve = $ p  \vdash q $ \\
 		$ p \models q \Rightarrow p \vdash q $ (= Si c’est vrai dans tous les modèles, on peut trouver une preuve)\\
-		Si $ p \models q $ alors l’algorithme se terminera. Cependant, on ne peut pas trouver les preuves que pour des choses vraies dans tous les modèles. (Comme c’est impossible on ne prend qu’une partie des modèles, ce qui limite le programme).
+		Si $ p \models q $ alors l’algorithme se terminera. Cependant, on ne peut pas trouver les preuves que pour des choses vraies dans tous les modèles. (Comme c’est impossible, on ne prend qu’une partie des modèles ce qui limite le programme).
 		
-		\item Même si on peut trouver une preuve, le prouveur est peut-être inefficace (utilise trop de temps ou de mémoire) ou imprévisible. $ \to $ On ne peut pas raisonner sur l’efficacité du prouveur.
+		\item Même si l'on peut trouver une preuve, le prouveur est peut-être inefficace (utilise trop de temps ou de mémoire) ou imprévisible. $ \to $ On ne peut pas raisonner sur l’efficacité du prouveur.
 		
 		\item La déduction faite par le prouveur doit être constructive  
 \end{enumerate}
@@ -139,7 +139,7 @@ $r := <G>$ … résolvante (une séquence de littéraux $\rightarrow$ $r= <A_{1}
 \While{r est non vide}{
 	\begin{itemize}
 		\item Choisir un littéral $A_{1}$ dans r (on prend le premier littéral)
-		\item Choisir une clause $Ax_{1}=(A \leftarrow B_{1},...,B_{k})$ dans P. (D’abord on prend la première clause, puis la suivantes jusqu’à ce qu’on trouve une clause unifiable avec $A_{1}$. Si aucune clause n’est unifiable on revient sur le dernier choix (backtrack))
+		\item Choisir une clause $Ax_{1}=(A \leftarrow B_{1},...,B_{k})$ dans P. (d’abord on prend la première clause, puis la suivante jusqu’à ce qu’on trouve une clause unifiable avec $A_{1}$. Si aucune clause n’est unifiable on revient sur le dernier choix (backtrack))
 		\item Nouvelle résolvante $:= <B_{1},..., B_{k}, A_{2},...,A_{m}> \sigma$
 		\item $G^{'} = G \sigma$
 	\end{itemize}
