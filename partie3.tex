@@ -62,7 +62,7 @@
 		Prouvons que $\lnot (P \land Q) \Leftrightarrow (\lnot P \lor \lnot Q)$ est vrai :
 			\begin{center}
 			\begin{tabular}{cc|ccxcx}
-			$P$ & $Q$ & $\lnot P$ & $\lnot Q$ & $(\lnot P \lor \lnot Q)$ & $P \land Q$ & $\lnot (P \land Q)$\\
+			$P$ & $Q$ & $\lnot P$ & $\lnot Q$ & $(\lnot P \lor \lnot Q)$ & $P \land Q$ & $ (\lnot P \lor \lnot Q)$\\
 			\hline
 			F&F&T&T&T&F&T\\
 			T&F&F&T&T&F&T\\
@@ -82,7 +82,7 @@
 			$(p \lor q) \lor r \Lleftarrow \Rrightarrow p \lor (q \lor r)$ & Associativité\\
 			$ \lnot \lnot p \Lleftarrow \Rrightarrow p$ & Double Négation\\
 			$p \Rightarrow q \Lleftarrow \Rrightarrow \lnot p \lor q$ & Implication\\
-			$\lnot p \land q \Lleftarrow \Rrightarrow \lnot p \lor \lnot q$ & $1^{ere}$ loi de De Morgan\\
+			$\lnot (p \land q) \Lleftarrow \Rrightarrow \lnot p \lor \lnot q$ & $1^{ere}$ loi de De Morgan\\
 			$p \Leftrightarrow q \Lleftarrow \Rrightarrow (p \Rightarrow q) \land (q \Rightarrow p)$ & Équivalence\\
 			\hline
 			\end{tabular}
@@ -119,7 +119,7 @@
 		À partir des lois logiques (lois d'équivalence) et des règles d'inférence, on va construire des preuves.\\
 		\textit{Une preuve est un objet formel défini avec précision.\\}
 		
-		Lois de logique : 	
+		Equivalences logiques : 	
 			\begin{center}
 			\begin{tabular}{ll}
 			$p \Lleftarrow \Rrightarrow p \lor p$ & Idempotence de $\lor$\\
@@ -127,8 +127,8 @@
 			$(p \lor q) \lor r \Lleftarrow \Rrightarrow p \lor (q \lor r)$ & Associativité de $\lor$\\
 			$ \lnot \lnot p \Lleftarrow \Rrightarrow p$ & Double Négation\\
 			$p \Rightarrow q \Lleftarrow \Rrightarrow \lnot p \lor q$ & Implication\\
-			$\lnot p \land q \Lleftarrow \Rrightarrow \lnot p \lor \lnot q$ & $1^{ere}$ loi de De Morgan\\
-			$\lnot p \lor q \Lleftarrow \Rrightarrow \lnot p \land \lnot q$ & $2^{eme}$ loi de De Morgan\\
+			$\lnot (p \land q) \Lleftarrow \Rrightarrow \lnot p \lor \lnot q$ & $1^{ere}$ loi de De Morgan\\
+			$\lnot (p \lor q) \Lleftarrow \Rrightarrow \lnot p \land \lnot q$ & $2^{eme}$ loi de De Morgan\\
 			$(p \land q) \lor r \Lleftarrow \Rrightarrow (p \lor r) \land (q \lor r)$ & Distributivité de $\lor$\\
 			\end{tabular}
 			\end{center}
@@ -203,9 +203,9 @@
    			Modus Tollens : &
    			\begin{tabular}{c}
       		$p \Rightarrow q$ \\
-      		$\lnot p$ \\
+      		$\lnot q$ \\
       		\hline
-      		$\lnot q$\\
+      		$\lnot p$\\
    			\end{tabular}\\
    			&\\
    			
@@ -264,14 +264,14 @@
 \section{Exemple de preuve propositionnelle}
 
 \noindent Voici les propositions premières : \\
-À : tu manges bien \\
+A : tu manges bien \\
 B : ton système digestif est en bonne santé \\
 C : tu pratiques une activité physique régulière \\
 D : tu es en bonne forme physique \\
 E : tu vis longtemps \\
 
 \noindent On peut maintenant faire une théorie et on espère qu'elle aura un modèle. \\
-À$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
+A$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
 \\
 \noindent On aimerait prouver que $\lnot$A $\land$ $\lnot$C est vrai.\\
 
@@ -279,7 +279,7 @@ E : tu vis longtemps \\
 \\
 \begin{tabular}{|l|l|}
 \hline
-1. À$\Rightarrow$B & prémisse \\
+1. A$\Rightarrow$B & prémisse \\
 2. C$\Rightarrow$D & prémisse \\
 3. B$\lor$D $\Rightarrow$E & prémisse \\
 4. $\lnot$E & prémisse \\ 
@@ -287,14 +287,14 @@ E : tu vis longtemps \\
 \indent 6. B & modus ponens (1) \\
 \indent 7. B$\lor$D & addition (6) \\
 \indent 8. E & modus ponens (7) \\
-9. $\lnot$À & preuve indirecte \\
+9. $\lnot$A & preuve indirecte \\
 \indent 10. C & hypothèse \\
 \indent 11. D & modus ponens (2) \\
 \indent 12. D$\lor$B & addition (11) \\
 \indent 13. B$\lor$D & commutativité (12)\\
 \indent 14. E & modus ponens (9) \\
 15. $\lnot$C & preuve indirecte \\
-16. $\lnot$À $\land$ $\lnot$C & conjonction (9,15) \\
+16. $\lnot$A $\land$ $\lnot$C & conjonction (9,15) \\
 \hline
 \end{tabular}\\
 
