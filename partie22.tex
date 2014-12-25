@@ -1,30 +1,30 @@
 \section{Les relations positives et négatives}
 
-Précédemment les relations étudiées étaient considérées uniquement positives (on ne peut se faire que des amis). 
+Précédemment, les relations étudiées étaient considérées comme uniquement positives (on ne peut se faire que des amis). 
 
 \includegraphics[scale=1]{images/22_force-positive}
 
-Dans ce chapitre, nous allons cette fois-ci étudier les graphes, avec en plus des relations positives, des relations négatives (on peut se faire des amis et des ennemis).
+Dans ce chapitre, nous allons étudier les graphes comportant également des relations positives et des relations négatives (on peut se faire des amis et des ennemis).
 
 \includegraphics[scale=1]{images/22_amis-ennemis3.png}
 
 \subsection{Théorie de l'équilibre de structure}
-L'équilibre dans une structure va nous permettre d'identifier les situations stables et celles qui sont instables. Cette étude se fera dans un graphe complet (c'est-à-dire que chaque paire a un lien et que chaque lien peut être + ou -).
+L'équilibre dans une structure va nous permettre d'identifier les situations stables et celles qui sont instables. Cette étude se fera dans un graphe complet (un graphe dont chaque paire a un lien et dont chaque lien peut être de type "+" ou "-").
 
 \paragraph{}
 L'idée cruciale est d'identifier dans le graphe les situations équilibrées et les situations qui ne le sont pas et qui engendrent un stress entre les nœuds.  
 
 \begin{figure}[h!]
 \label{equi}
-\caption{Relations équilibrées et non-équilibrées}
+\caption{Relations équilibrées et non équilibrées}
 \centering
 \includegraphics[width=\textwidth]{images/22_situation.png}
 \end{figure}
 
 
-Dans la figure \ref{equi}, les schémas de gauche sont considérés comme équilibrés. En effet, soit A, B et C sont tous amis et il n'y aucun conflit entre eux, soit B et C sont amis mais sont en confit avec A. 
+Dans la figure \ref{equi}, les schémas de gauche sont considérés comme équilibrés. En effet, soit A, B et C sont tous amis et il n'y aucun conflit entre eux, soit B et C sont amis, mais sont en confit avec A. 
 \paragraph{}
-Par contre, les schémas de droite sont des situations non équilibrées. Dans la 3, B et C sont amis avec A mais ennemis entre eux, on peut supposer que A doive alors choisir un camps. La 4 indique que tous sont ennemis mais il est fort probable que le graph évolue vers une situation où deux nœuds se liguent contre le troisième. 
+Par contre, les schémas de droite sont des situations non équilibrées. Dans la 3, B et C sont amis avec A mais ennemis entre eux, on peut supposer que A doive alors choisir un camp. La 4 indique que tous sont ennemis, mais il est fort probable que le graphe évolue vers une situation où deux nœuds se liguent contre le troisième. 
 
 \paragraph{}
  
@@ -32,7 +32,7 @@ Par contre, les schémas de droite sont des situations non équilibrées. Dans l
 
 \begin{figure}[h!]
 \label{equi2}
-\caption{Généralisation des relations équilibrées et non-équilibrées}
+\caption{Généralisation des relations équilibrées et non équilibrées}
 \centering
 \includegraphics[width=0.5\textwidth]{images/22_situation2.png}
 \end{figure}
@@ -42,7 +42,7 @@ Si un graphe n'est pas équilibré, il a tendance à s'équilibrer.
 
 
 \subsection{Caractérisation de l'équilibre structurel} 
-Dans le point précédent, nous avons réalisé une définition avec des conditions locales mais il est difficile de comprendre ce que cela fait pour tout le graphe.
+Dans le point précédent, nous avons réalisé une définition avec des conditions locales, mais il est difficile de comprendre ce que cela fait pour tout le graphe.
 Ainsi nous voudrions une définition globale (une caractérisation) sur l'ensemble du graphe.
 
 
@@ -126,7 +126,7 @@ Si un graphe complet est équilibré, alors:
 
 \subsubsection*{Exemple 1}
 
-On peut retrouver ce type de comportement de graphe dans les relations internationales : Lors de la séparation du Bangladesh au Pakistan en 1972, on a assisté à un surprenant soutien des États-Unis pour le Pakistan alors que celui-ci n'était pas un allié des Américains. 
+On peut retrouver ce type de comportement de graphe dans les relations internationales : lors de la séparation du Bangladesh au Pakistan en 1972, on a assisté à un surprenant soutien des États-Unis pour le Pakistan alors que celui-ci n'était pas un allié des Américains. 
 \paragraph{Explication} 
 Comme indiqué dans la figure \ref{paysconflit}, les USA désiraient se rapprocher de la Chine, pour y arriver, ils ont analysé les relations des différents pays de la région. Ils ont ainsi constaté que la Chine avait des ennemis communs avec le Pakistan. Un rapprochement avec le Pakistan lui permettait de rentrer dans le groupe des amis de la Chine.
 
@@ -151,9 +151,9 @@ Une autre approche de ce conflit peut être réalisée d'un point de vue de la C
 \end{itemize}
 
 \subsubsection*{Exemple 2}
-Un autre exemple de ce jeu diplomatique est donné à la figure 55 du livre de référence et représente le jeu des alliances des grandes puissances Européennes à la veille de la première guerre mondiale. 
+Un autre exemple de ce jeu diplomatique est donné à la figure 55 du livre de référence et représente le jeu des alliances des grandes puissances européennes à la veille de la Première Guerre mondiale. 
 \paragraph{}
- On asssite à un équilibrage du graphe des relations avec des pays qui changent continuellement d'alliés jusqu'au moment de la triple entente et de la triple alliance qui sépara tous les pays d'Europe en deux camps ennemis.
+ On assiste à un équilibrage du graphe des relations avec des pays qui changent continuellement d'alliés jusqu'au moment de la triple entente et de la triple alliance qui sépara tous les pays d'Europe en deux camps ennemis.
 
 \subsubsection*{Exemple 3}
 Dans ce troisième exemple, on touche directement les réseaux sociaux tel que Facebook et Twitter où il existe des relations \textit{Like ou Trust} et \textit{Dislike ou Distrust} dont les utilisateurs peuvent se servir pour juger le contenu des autres.
@@ -178,7 +178,7 @@ A \overset{distrust}{\longrightarrow} B \overset{distrust}{\longrightarrow} C \o
 &A \overset{distrust}{\longrightarrow} C
 \end{align*}
 
-Finalement tout est possible selon le cas rencontré : 
+Finalement, tout est possible selon le cas rencontré : 
 \begin{itemize}
 \item Si le trust signifie une relation d'amitié, la transitivité sera respectée. 
 \item Si le trust indique une confiance sur l’opinion, la transitivité ne peut être respectée. 
@@ -186,7 +186,7 @@ Finalement tout est possible selon le cas rencontré :
 \end{itemize}
 
 
-\paragraph{Conclusion :}La théorie de l'équilibre structurel sera géré selon le cas
+\paragraph{Conclusion :}La théorie de l'équilibre structurel sera gérée selon le cas
 
 
 
@@ -199,12 +199,11 @@ notion de stabilité des triangles du graphe. Mais contrairement à l'équilibre
 
 Un graphe complet annoté est faiblement équilibré si:
 \begin{itemize}
-
-\item aucun triplet est $++-$
-\item autorisés: $+++, +--, ---$
+\item aucun triplet n'est $++-$;
+\item tous les triplets sont de type $+++, +--, ---$. 
 \end{itemize}
 \paragraph{}
-L'équilibre faible permet une structure \textbf{multi-polaire}.
+L'équilibre faible permet une structure \textbf{multipolaire}.
 
 \begin{figure}[h!]
 \label{fig:multipolaire}
@@ -234,11 +233,11 @@ Si graphe complet annoté est faiblement équilibré, alors on peut diviser ses 
 \begin{enumerate}
 
 \item Nœud A + tous ses amis appartiennent au groupe X \\
-$\to$ amis mutuels car ($+++$).
+$\to$ amis mutuels, car ($+++$).
 
 \item A $+$ ses amis sont ennemis avec tous les autres.
 
-\item Enlever A $+$ ses amis : Nouveau graphe.\\
+\item Enlever A $+$ ses amis : nouveau graphe.\\
 $\to$ raisonnement récursif
 
 \end{enumerate}
