@@ -1,21 +1,21 @@
 \subsection{Réseaux dans leurs contextes}
 \begin{itemize}
 \item réseau social : similitude entre amis (on voudrait mettre ces similitudes dans le réseau)
-\item réseau d'affiliation - social \includegraphics[scale=0.2]{images/Sim.png} <- explication d'une similitude \\
+\item réseau d'affiliation - social \includegraphics[scale=0.2]{images/21_Sim.png} <- explication d'une similitude \\
 	- personnes \\
 	- points d'intérêts 
 \end{itemize}
 
 \textbf{Idée générale}
 
-\includegraphics[scale=0.4]{images/IdeeGenerale.png}
+\includegraphics[scale=0.4]{images/21_IdeeGenerale.png}
 
 \subsection{Exemples}
 Il y a trois formes de fermeture
 \begin{enumerate}
-\item Fermeture triadique \includegraphics[scale=0.1]{images/FermetureTriadique.png}
-\item Fermeture focale \includegraphics[scale=0.1]{images/FermetureFocale.png}
-\item Fermeture d'adhésion \includegraphics[scale=0.1]{images/FermetureAdhesion.png}
+\item Fermeture triadique \includegraphics[scale=0.1]{images/21_FermetureTriadique.png}
+\item Fermeture focale \includegraphics[scale=0.1]{images/21_FermetureFocale.png}
+\item Fermeture d'adhésion \includegraphics[scale=0.1]{images/21_FermetureAdhesion.png}
 \end{enumerate}
 
 \section{La formation des liens (selon les 3 approches)}
@@ -46,18 +46,18 @@ La probabilité qu'aucun lien se forme quand il y a un ami en commun est de $(1-
 On en déduit que pour "k" amis en commun, la probabilité est de $ (1-p)^{k}$\\
 Dès lors, la probabilité qu'au moins 1 lien se forme pour k amis en commun est de $ 1-(1-p)^{k}$. C'est ce qui est égal à T(k).
 
-\includegraphics[width=\textwidth]{images/emailFriends.jpg}
+\includegraphics[width=\textwidth]{images/21_emailFriends.jpg}
 
 On voit sur la figure 4.9 (fermeture triadique) que la probabilité qu'un lien se forme augmente exponentiellement avec le nombre d'amis en commun.
 
 \paragraph{Attention !}
 Le comportement et donc les calculs sont différents pour la fermeture focale et d'adhésion !
 
-\includegraphics[width=\textwidth]{images/pointsCommuns.jpg}
+\includegraphics[width=\textwidth]{images/21_pointsCommuns.jpg}
 
 La figure 4.10 (fermeture focale) nous montre que dans le cas où l'on considère le nombre d'intérêts en commun (ici, des cours), on arrive à un certains moment à saturation. Augmenter le nombre de points d'intérêts communs n'augmente plus la probabilité de création d'un lien à partir d'un certain point (ici 3 cours en communs).
 
-\includegraphics[width=\textwidth]{images/community.jpg}
+\includegraphics[width=\textwidth]{images/21_community.jpg}
 
 Enfin, la figure 4.11 (fermeture d'adhésion) présente aussi un saturation à partir d'un certains nombre d'amis qui ont le même point d'intérêt.
 
@@ -81,4 +81,4 @@ Notons dès lors que la similitude ne peut pas être plus petit que 0 ni plus gr
 \item On compare la similitude avant et après cette rupture (figure 4.13). C'est surtout la sélection qui joue avant, et l'influence sociale rentre en jeu après.
 \end{itemize}
 
-\includegraphics[width=\textwidth]{images/wikipedia.jpg}
+\includegraphics[width=\textwidth]{images/21_wikipedia.jpg}
