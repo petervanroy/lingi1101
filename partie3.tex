@@ -70,7 +70,7 @@
 			T&T&F&F&F&T&F\\
 			\end{tabular}
 			\end{center}
-			On voit bien ici, que la table de $\lnot (P \land Q)$ est équivalente à celle de $\lnot (P \land Q)$. La preuve a donc vérifié la véracité de la proposition. \\
+			On voit bien ici, que la table de $\lnot (P \land Q)$ est équivalente à celle de $(\lnot P \lor  \lnot Q)$. La preuve a donc vérifié la véracité de la proposition. \\
 			Il y a néanmoins un problème avec cette preuve, car s'il y a $N$ propositions premières, on a $2^N$ lignes dans la table.
 		\section{Preuve transformationnelle}
 			On va utiliser des "Lois", c'est-à-dire des équivalences.
@@ -94,7 +94,7 @@
 			Il est autorisé de remplacer une formule par une formule équivalente à l’intérieur d’une autre formule. Autrement dit : \\
 			\indent Soit p,q,r des formules propositionnelles.\\
 			\indent Si $p \Leftrightarrow q$ et $r(p)$, alors $r(p) \Lleftarrow \Rrightarrow r(q)$.\\
-			On peut remplacer $p$ par $,q$ car elles sont équivalentes. Il faut faire attention à ces règles, car elles sont en métalangage. Elles expliquent seulement ce qui est autorisé  faire.
+			On peut remplacer $p$ par $,q$ car elles sont équivalentes. Il faut faire attention à ces règles, car elles sont en métalangage. Elles expliquent seulement ce qui est autorisé de faire.
 			
 			\subsection*{Exemple}
 			On veut prouver : $p \land (q \land r) \Lleftarrow \Rrightarrow (p \land q) \land r$
@@ -113,7 +113,7 @@
 			& $\Lleftarrow \Rrightarrow (p \land q) \land r$\\
 			\end{tabular}
 			\end{center}
-			Le problème dans cette méthode de preuve c'est qu'il faut de l'idée, de la créativité et donc ce n'est pas forcément mieux que les tables de vérité, surtout si c'est compliqué de trouver l'astuce.
+			Le problème dans cette méthode de preuve c'est qu'il faut de l'intuition, de la créativité et donc ce n'est pas forcément mieux que les tables de vérité, surtout si c'est compliqué de trouver l'astuce.
 		
 		\section{Preuve déductive}
 		À partir des lois logiques (lois d'équivalence) et des règles d'inférence, on va construire des preuves.\\
@@ -136,7 +136,7 @@
 			
 		Règle d'inférence : \\
 		
-		À la différence de la preuve transformationnelle, les règles d'inférences ont une direction : elles commencent par les prémisses et se terminent par la conclusion.
+		À la différence de la preuve transformationnelle, les règles d'inférences ont une direction : elles commencent par les prémisses\footnote{Les prémisses sont toujours vraies.} et se terminent par la conclusion.
 		\begin{center}
 		\begin{tabular}{llp{3cm}l}
 		
