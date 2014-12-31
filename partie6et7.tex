@@ -177,7 +177,7 @@ $<connecteur$ $binaire>::=$
 
 \end{tabular}
 
-\section{Sémantique}
+\section{Exemple de sémantique}
 Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation qui sont déjà définis dans la logique propositionnelle. Même si la logique des prédicats est beaucoup plus puissante, nous gardons une sémantique assez similaire à la logique propositionnelle. \\
 L'idée dans l'interprétation c'est de dire si la formule est vraie ou fausse. Tout comme pour la logique propositionnelle, on va faire la même chose pour les prédicats avec les relations.\\
 
@@ -218,27 +218,31 @@ La première interprétation est un modèle de la formule, car le sens de la for
 La deuxième interprétation est aussi un modèle de la formule, car l'interprétation trouvée est vraie aussi. Cela peut paraître bizarre, mais c'est correct. 
 %Partie 7
 \section{Détails techniques}
-\subsubsection{}
 La première question que l'on se pose est: comment faire des preuves en logique des prédicats ? Il faut noter que les quantificateurs $\forall$ et $\exists$ rendent le raisonnement plus subtil. Il faudra des règles pour pouvoir raisonner sur ces quantificateurs.
-\section{Sémantique}
-\subsubsection{}
+\subsection{Sémantique}
 La sémantique en logique des prédicats est très proche de celle en logique propositionnelle. Cependant, l'interprétation, I, est plus précise qu'en logique propositionnelle, mais est également plus compliquée à utiliser à cause des variables et des symboles de fonction. Cette interprétation peut être décrite comme une paire: $I = pair(D_{I}, val_{I}) $ avec D le domaine de discours I et la fonction val qui est l'interprétation de tous les symboles. $D_{I} \ne \emptyset $ $ \forall s \in S$ avec s soit un symbole de prédicat soit une fonction. $val_{I}(S) = P_{I}$ une fonction $P_{I}:D_{I}^{n} \rightarrow (True,False)$ avec S symbole d'une fonction. Il existe aussi une vraie fonction $f_{I}:D_{I}^{n} \rightarrow D_{I}$ avec n le nombre d'arguments tel que $val_{I}(S) = f_{I} $. Cela implique que dans le domaine de discours chaque fonction correspond à une vraie fonction et chaque prédicat correspond à un vrai prédicat. 
-\subsubsection{}
-Si l'on rajoute une variable, x par exemple, l'expression devient: $ (var, x) \rightarrow val_{I}(x) = x_{I} \in D_{I}$. L'interprétation d'une variable, $x_{i}$ est un élément (n'importe lequel en fonction de l'interprétation) de $D_{I}$. La fonction $VAL_{I}$ est la même fonction, mais pour les formules et pas uniquement pour les symboles comme avant. Néanmoins, on ne doit pas redéfinir $,VAL_{I}$ car elle existe à partir du moment ou $val_{I} et D_{I}$ existe. Définition: $VAL_{I}: TERM \cup  PRED \rightarrow D_{I} \cup (True, False) $ avec TERM l'ensemble des termes et PRED l'ensemble des
-prédicats (toutes les formules en logique des prédicats). Les termes peuvent être définis comme $ t \rightarrow VAL_{I}(t)$ et les prédicats comme $ P \rightarrow VAL_{I}(P)$ avec P une formule.Il y a une relation entre 
 
-$val_{I} $ et $ VAL_{I}: val_{I}((P(T_{1},...,T_{n})) = P_{I}(VAL_{I}(t_{1}),...,VAL_{I}(t_{n}))$ avec $ P_{I} = VAL_{I}(P)$ 
+
+Si l'on rajoute une variable, x par exemple, l'expression devient: $ (var, x) \rightarrow val_{I}(x) = x_{I} \in D_{I}$. L'interprétation d'une variable, $x_{I}$ est un élément (n'importe lequel en fonction de l'interprétation) de $D_{I}$. La fonction $VAL_{I}$ est la même fonction, mais pour les formules et pas uniquement pour les symboles comme avant. Néanmoins, on ne doit pas redéfinir $,VAL_{I}$ car elle existe à partir du moment ou $val_{I}$ et $D_{I}$ existent. Définition: $VAL_{I}: TERM \cup  PRED \rightarrow D_{I} \cup (True, False) $ avec TERM l'ensemble des termes et PRED l'ensemble des
+prédicats (toutes les formules en logique des prédicats). Les termes peuvent être définis comme $ t \rightarrow VAL_{I}(t)$ et les prédicats comme $ P \rightarrow VAL_{I}(P)$ avec P une formule. Il y a une forte relation entre $val_{I} $ et $VAL_{I}: val_{I}((P(T_{1},...,T_{n})) = P_{I}(VAL_{I}(t_{1}),...,VAL_{I}(t_{n}))$ avec $ P_{I} = VAL_{I}(P)$ 
 La première partie de l'égalité est un prédicat avec des arguments tandis que la seconde est formée de plusieurs prédicats avec un argument. 
-\subsubsection{}
-Définissons d'autres formules. $VAL_{I}(P \wedge Q) $ est true si $VAL_{I}(P) = True$ et $VAL_{I}(Q) = True$. false sinon. Donc il faut $VAL_{I}(\forall x.P) = True$ avec P une formule pouvant dépendre de x (il faut remplacer toutes les occurrences de x dans P et la formule doit rester vraie. Si pour chaque d $\in D_{I}$ $ I' = I \cup (x \leftarrow d)$ et $val_{I}(x) = d$ alors l'interprétation de x doit être: $VAL_{I}'(P) = True$.
+
+
+Définissons d'autres formules: $VAL_{I}(P \wedge Q) $ est true si $VAL_{I}(P) = True$ et $VAL_{I}(Q) = True$. false sinon. Donc il faut $VAL_{I}(\forall x.P) = True$ avec P une formule pouvant dépendre de x (il faut remplacer toutes les occurrences de x dans P et la formule doit rester vraie. Si pour chaque d $\in D_{I}$ $ I' = I \cup (x \leftarrow d)$ et $val_{I}(x) = d$ alors l'interprétation de x doit être: $VAL_{I}'(P) = True$.
 Pour $VAL_{I}(\exists x.P) = True$ le raisonnement est identique en remplaçant $\forall$ par $\exists$.
 \section{Différence avec la logique des propositions}
-Les trois différences entre les deux logiques sont: les variables, les quantificateurs et les symboles de fonction (moins important). Imaginons un modèle $B: 
-\left\{
+Les trois différences entre les deux logiques sont:
+\begin{enumerate}
+\item les variables,
+\item les quantificateurs,
+\item les symboles de fonction (moins important).
+\end{enumerate}  
+Imaginons un modèle $B:
+\{
   \begin{array}{rcr}
     P_{1},...P_{n}
   \end{array}
-\right\}
+\}
 $
 Si nous utilisons une interprétation I pour B cela donne:
 $\forall P_{I} \in B VAL_{I}(P_{I}) = True$ qui est très générale, car $P_{I}$ peut avoir des variables, des quantificateurs ...
@@ -247,15 +251,14 @@ $\forall P_{I} \in B VAL_{I}(P_{I}) = True$ qui est très générale, car $P_{I}
 
 \section{Preuves avec règles}
 
-\subsubsection{}
     Il est possible de faire des preuves avec des règles de preuve. Une preuve est une simple manipulation de symboles qui sont des règles. Mais il faut justifier ces règles pour obtenir des résultats vrais. Elles sont justifiées en raisonnant sur les interprétations pour vérifier si elles sont correctes ou non. Tout cela est la sémantique. C'est la base pour pouvoir faire des preuves.
- \subsubsection{}
+
     
 Beaucoup de choses restent les mêmes que dans la logique des propositions. La preuve est toujours un objet mathématique, une séquence avec des formules, des justifications, une application des règles. Elle commence avec des prémisses et finit par une conclusion.
 
-\subsubsection{}
+
 Il est possible de faire des preuves manuelles, mais aussi des preuves automatisées. C'est une généralisation de l'approche de la logique des propositions. 
-\subsubsection{}
+
 
 Il y a toujours :
 
@@ -267,27 +270,18 @@ Il y a toujours :
 
 \end{itemize}
 
-\subsubsection{}
+
 Qu'est-ce qu'il est possible de faire avec ce genre d'algorithme qui est moins fort?
 
-\subsubsection{}
+
 Il y a deux possibilités : 
-\subsubsection{}
-
-1) Faire un assistant de preuve
-
-\subsubsection{}
-    C'est un outil qui aide les gens à faire des preuves formelles. Deux exemples d'assistants de preuves sont Coq et Isabelle. C'est un outil très sophistiqué, mais qui a permis de prouver des choses de manière totalement formelle, alors qu'avant des preuves prenaient des dizaines voire des centaines de pages de preuves mathématiques. Mais cet assistant ne fait pas tout parce que l'algorithme est moins bon. Cependant, il aide beaucoup. C'est à l'être humain de lui donner des coups de pouce sous forme de lemmes, hypothèses, chemins, stratégies ... Ensuite, l'algorithme s'occupe de la manipulation des symboles.
-\subsubsection{}
-    
-    Un exemple très célèbre est le théorème de la coloration d'une carte. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
-
-\subsubsection{}
-2) L'utiliser dans les langages de programmation
-\subsubsection{}
-
-    L'algorithme peut être considéré comme le moteur d'un programme. C'est ce qu'on appelle maintenant la programmation logique. Elle consiste à utiliser la logique dans un programme. Le langage le plus célèbre qui a suivi cette approche est Prolog. Ce fut un énorme succès, car les gens ne croyaient pas que c'était possible de faire un programme en logique qui pouvait tourner. Cela a donné naissance à la programmation par contraintes (une contrainte est une relation logique). Cette discipline est très utile pour les optimisations, par exemple dans le cas du "voyageur de commerce".
-
+\begin{itemize}
+\item Faire un assistant de preuve\\
+C'est un outil qui aide les gens à faire des preuves formelles. Deux exemples d'assistants de preuves sont Coq et Isabelle. C'est un outil très sophistiqué, mais qui a permis de prouver des choses de manière totalement formelle, alors qu'avant des preuves prenaient des dizaines voire des centaines de pages de preuves mathématiques. Mais cet assistant ne fait pas tout parce que l'algorithme est moins bon. Cependant, il aide beaucoup. C'est à l'être humain de lui donner des coups de pouce sous forme de lemmes, hypothèses, chemins, stratégies ... Ensuite, l'algorithme s'occupe de la manipulation des symboles.\\
+Un exemple très célèbre est le théorème de la coloration d'une carte. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
+\item L'utiliser dans les langages de programmation\\ 
+L'algorithme peut être considéré comme le moteur d'un programme. C'est ce qu'on appelle maintenant la programmation logique. Elle consiste à utiliser la logique dans un programme. Le langage le plus célèbre qui a suivi cette approche est Prolog. Ce fut un énorme succès, car les gens ne croyaient pas que c'était possible de faire un programme en logique qui pouvait tourner. Cela a donné naissance à la programmation par contraintes (une contrainte est une relation logique). Cette discipline est très utile pour les optimisations, par exemple dans le cas du "voyageur de commerce".
+\end{itemize}
 \subsubsection{}
 La logique des prédicats n'est donc pas quelque chose de seulement théorique, destiné uniquement aux mathématiciens. Les gens ont vraiment essayé avec succès d'utiliser la logique dans l'exécution des programmes.
 \subsubsection{}
