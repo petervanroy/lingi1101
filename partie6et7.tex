@@ -253,17 +253,12 @@ $\forall P_{I} \in B VAL_{I}(P_{I}) = True$ qui est très générale, car $P_{I}
 
     Il est possible de faire des preuves avec des règles de preuve. Une preuve est une simple manipulation de symboles qui sont des règles. Mais il faut justifier ces règles pour obtenir des résultats vrais. Elles sont justifiées en raisonnant sur les interprétations pour vérifier si elles sont correctes ou non. Tout cela est la sémantique. C'est la base pour pouvoir faire des preuves.
 
-    
-Beaucoup de choses restent les mêmes que dans la logique des propositions. La preuve est toujours un objet mathématique, une séquence avec des formules, des justifications, une application des règles. Elle commence avec des prémisses et finit par une conclusion.
 
-
-Il est possible de faire des preuves manuelles, mais aussi des preuves automatisées. C'est une généralisation de l'approche de la logique des propositions. 
+Beaucoup de choses restent les mêmes que dans la logique des propositions. La preuve est toujours un objet mathématique, une séquence avec des formules, des justifications, une application des règles. Elle commence avec des prémisses et finit par une conclusion. Il est possible de faire des preuves manuelles, mais aussi des preuves automatisées. C'est une généralisation de l'approche de la logique des propositions. 
 
 
 Il y a toujours :
-
 \begin{itemize}
-
   \item Une règle de résolution pour les preuves automatisées, mais celle-ci est plus générale. Elle va utiliser un concept appelé "unification". Ce nouveau concept est introduit à cause des variables. En effet, celles-ci peuvent être différentes, il faut donc trouver un nouveau moyen de les fusionner.
   \item Une forme normale, qui  est plus compliquée à cause des quantificateurs et des symboles de fonctions, mais qu'il est encore possible de l'obtenir.
   \item un algorithme avec ses propriétés. Mais il est moins fort/complet que l'algorithme développé pour la logique des propositions. Il ne sera plus décidable, mais seulement semi-décidable. C'est-à-dire que parfois il tournera en boucle. Cela est dû aux variables et aux quantificateurs. La logique des prédicats est beaucoup plus riche que la logique des propositions, mais en contrepartie l'algorithme arrive à prouver moins de choses. Cependant, l'algorithme sera toujours adéquat, mais pas forcément complet. Il ne sera pas toujours possible de trouver une preuve, même quand elle existe parce qu'elle sera trop compliquée.
@@ -289,7 +284,7 @@ La logique des prédicats n'est donc pas quelque chose de seulement théorique, 
 %partie 3 de 30 à 45 min (Guillaume)
 \chapter{Preuves en logique des prédicats}
 
-On va généraliser l'approche de la logique propositionnelle, car le langage des prédicats est beaucoup plus riche.  Il ajoute entre autres :
+On va généraliser l'approche de la logique propositionnelle, car comme vu précédemment le langage des prédicats est beaucoup plus riche.  Il ajoute entre autres :
 
 \begin{itemize}
     \item Des variables
@@ -305,7 +300,7 @@ Les preuves en logique des prédicats ressemblent très fort aux preuves en logi
 \fbox{
 $
 \begin{array}{l l l}
-  1. & \fbox{\ldots} &  Premisses \\
+  1. & \fbox{\ldots} &  Prémisses \\
   2. & \fbox{Formule, regle} &  Justification \\
   \ldots & \ldots &  \ldots \\
   n. & \fbox{Conclusion} &  Justification \\
@@ -328,7 +323,7 @@ $
 Les étapes difficiles à réaliser correctement sont les étapes $1$ et $3$. Voici la preuve en "français" :
 
 En retirant les quantificateurs des prémisses, cela donne :
-"Alors, $P(x) \wedge Q(x)$ est vrai pour tout $x$ donc $P(x)$ est vrai pour tout $x$". 
+"Comme $P(x) \wedge Q(x)$ est vrai pour tout $x$, alors $P(x)$ est vrai pour tout $x$". 
 De là, on peut remettre les quantificateurs pour obtenir $\forall x \cdot P(x)$. De façon similaire, on obtient $\forall x \cdot Q(x)$. Et on conclut en remettant les quantificateurs: $\forall x \cdot P(x) \wedge \forall x \cdot Q(x)$, en utilisant la conjonction.
 
 En preuve formelle, cela donne :
@@ -388,7 +383,6 @@ Une manipulation fréquente en logique des prédicats est la \textbf{substitutio
 
 Si on a une formule $p[x/t]$ (où $p$ veut dire "toutes les formules"). On va remplacer toutes les occurrences libres de $x$ par $t$.\\
 On peut aussi écrire cela de la manière suivante :\\
-
 $p[x/t]$ possède deux portées :
 \begin{itemize}
 \item[] La première se note $p[x]$ et correspond à une partie de la règle.
