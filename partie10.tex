@@ -8,7 +8,7 @@ $(\forall x)(\forall y)(\exists u)(\forall v) \big[ P(x) \wedge \neg Q(u,y) \wed
 \smallskip 
 
 
-Dans ce cas-ci, la valeur de $u$ de dépend des valeurs de $x$ et $y$. Lorsqu'on a choisi $x$ et $y$, on est alors libres de choisir $u$.
+Dans ce cas-ci, la valeur de $u$ dépend des valeurs de $x$ et $y$. Lorsqu'on a choisi $x$ et $y$, on est alors libre de choisir $u$.
 On peut donc supposer qu'une fonction $g(x,y)$ fournit cet élément de façon à conserver la satisfaisabilité de la formule tout en supprimant $(\exists u)$.
 \smallskip
 
@@ -134,12 +134,12 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
 $S := \big\{ \Delta x_1, ..., \Delta x_i, \neg Th \big\}$ dont chaque formule est en forme normale conjonctive (FNC). 
 
 
-\underline{while}: \textbf{false} $\ni S$ et il existe une paire de clauses résolvables et non résolues.
+\underline{while}: \textbf{false} $\notin S$ et il existe une paire de clauses résolvables et non résolues.
 
 \underline{do}: choisir $p_i, p_j$ dans S et L tel que:
 \begin{itemize}
   \item $L^{+}$ dans $p_i$ 
-  \item $L^{-}$ dans $p_i$ 
+  \item $L^{-}$ dans $p_j$ 
   \item $\big\{ L^{+}, L^{-} \big\}$ unifiable par $\sigma$ U.P.G.
 \end{itemize}
 
@@ -151,7 +151,9 @@ Calculer:
 
 \underline{end}\\
 
-\underline{If} \textbf{false} $\ni S$ \underline{then} Th prouvé. \underline{else} Th non prouvé. \underline{end}
+\underline{If} \textbf{false} $\in S$ \underline{then} Th prouvé \\
+\underline{else} Th non prouvé \\
+\underline{end}
 
 \section{Exemple}
 \begin{itemize}

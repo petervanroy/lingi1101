@@ -35,7 +35,7 @@ On peut définir ces structures avec la logique des prédicats et faire des rais
 \item 3 symboles de prédicats : $P/2$, $GM/2$, $GP/2$\\
 \end{itemize}
 
-On peut interpréter les fonctions $p$ et $m$ comme "père de" et "mère de", et les prédicats $P$, $GM$ et $GP$ comme "parent de", "grand-mère de" et "grand-père de". On donnera plus de précisions sur cette interprétation dans la suite.\\
+On peut interpréter les fonctions $p$ et $m$ comme "père de" et "mère de", et les prédicats $P$, $GM$ et $GP$ comme "parent de", "grand-mère de" et "grand-père de". On donnera plus de précisions sur cette interprétation par la suite.\\
 
 \item Axiomes : \\
 \begin{center}
@@ -43,7 +43,7 @@ On peut interpréter les fonctions $p$ et $m$ comme "père de" et "mère de", et
 $(\forall x) \left(P(x,p(x))\right)$ & \hspace*{2cm}& (père)\\
 $(\forall x) \left(P(x,m(x))\right)$ & \hspace*{2cm}& (mère)\\
 $(\forall x)(\forall y) \left(P(x,y)\Rightarrow GP(x,p(y)) \right)$&&\\
-$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x,p(y)) \right)$&&\\
+$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x,m(y)) \right)$&&\\
 \end{tabular}
 \end{center}
 
@@ -55,9 +55,9 @@ Les règles sont uniquement celles de la logique des prédicats.
 $D_I$ : personnes&&\\
 $\text{val}_I(p)=\text{"père de"}$ &\hspace*{1cm} &$\text{père de} : \text{Pers}\rightarrow\text{Pers} : d \rightarrow \text{"père de" }d$\\
 $\text{val}_I(m)=\text{"mère de"}$ &\hspace*{1cm} &$\text{mère de} : \text{Pers}\rightarrow\text{Pers} : d \rightarrow \text{"mère de" }d$\\
-$\text{val}_I(P)=\text{"Parent"}$ &\hspace*{1cm} &$\text{Parent}(d_1,d_2)=V$ ssi $d_2$ est un parent de $d_1$\\
-$\text{val}_I(GP)=\text{"Grand-père"}$ &\hspace*{1cm} &$\text{Grand-père}(d_1,d_2)=V$ ssi $d_2$ est un grand-père de $d_1$\\
-$\text{val}_I(GM)=\text{"Grand-mère"}$ &\hspace*{1cm} &$\text{Grand-mère}(d_1,d_2)=V$ ssi $d_2$ est une grand-mère de $d_1$\\
+$\text{val}_I(P)=\text{"Parent"}$ &\hspace*{1cm} &$\text{Parent}(d_1,d_2)=T$ ssi $d_2$ est un parent de $d_1$\\
+$\text{val}_I(GP)=\text{"Grand-père"}$ &\hspace*{1cm} &$\text{Grand-père}(d_1,d_2)=T$ ssi $d_2$ est un grand-père de $d_1$\\
+$\text{val}_I(GM)=\text{"Grand-mère"}$ &\hspace*{1cm} &$\text{Grand-mère}(d_1,d_2)=T$ ssi $d_2$ est une grand-mère de $d_1$\\
 \end{tabular}\\
 
 Cette interprétation est un modèle de \bsc{fam} car les axiomes sont tous vérifiés.\\
