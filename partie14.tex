@@ -1,30 +1,11 @@
 %\section*{Suite des exemples de la première heure}
-
-I$_{5}$ : Soit D$_{I_{5}}$ l'ensemble des formules en logique des propositions. On commence à utiliser la logique pour parler d'elle-même\\
-VAL$_{I_{5}}$(==) = "$<\equiv>$" $\rightarrow$ L'égalité est synonyme d'équivalence en logique des propositions\\
-VAL$_{I_{5}}$($\leq$) = "$\models$" $\rightarrow$ Le signe d'inclusion entre les ensembles de modèles\\
-Maintenant qu'on a défini la sémantique de l'ordre partiel en utilisant la notion de modèles, on peut prendre quelques exemples en raisonnant sur la logique :\\
-\newline
-p $\leq_{I_{5}}$ q   \hspace{1.5cm} p $\models_{I_{5}}$ q \hspace{1.5cm} $\models$ p $\Rightarrow$ q\\
-\newline
-
-I$_{6}$ : D$_{I_{6}}$ = l'ensemble des unificateurs d'un ensemble S de termes ou de formules\\
-VAL$_{I_{6}}$(==) = égalité entre substitutions \{ (x$_{i}$,t$_{i}$)... \} : un ensemble de paires avec une variable et un terme\\
-VAL$_{I_{6}}$($\leq$) = "moins général que"\\
-\newline
-Exemple: P(x,f(y)) \hspace{1cm} $\underbrace{P(x,z)}_{\sigma}$\\
-$\sigma$' = $\sigma$ $\cup$ \{(z, f(y)\} donc 
-$\sigma$' $\leq$ $\sigma$\\
-
-Ces exemples montrent qu'on peut raisonner sur tout, y compris sur la logique et les algorithmes eux-mêmes, à partir du moment où on respecte les axiomes.
-
 \section{Théorie des ensembles}
 Elle sera utilisée pour la spécification des systèmes $\mathbb{Z}$.\\
 
 \textbf{Ensemble} : on peut définir les ensembles de façon informelle (c'est-à-dire sans les axiomes) : \\
 \begin{itemize}
 \item Un ensemble peut être défini comme une énumération d'éléments \\
-Ex: \{ 0,20,40,60,80,100 \} ou \{Mercure, Vénus, terre ..., Neptune\}
+Ex: \{0,20,40,60,80,100 \} ou \{Mercure, Vénus, terre ..., Neptune\}
 \item Il peut également être défini comme le prédicat d'un argument qui est vrai pour les membres. On appelle cette définition informelle "compréhension)". Certains langages comme Python possèdent des syntaxes particulières dédiées à la création de listes remplies par des compréhensions\\
 Ex.: \{ n | n $\in$ $\mathbb{N}$ $\wedge$ $\exists$ k, k $\in$ $\mathbb{N}$ $\wedge$ 20k = n $\wedge$ 0 $\leq$ n $\leq$ 100 \} \\
 \end{itemize}
@@ -71,7 +52,7 @@ Cette approche est "Orientée modèle" : On ne donne pas que des équations, mai
 Types:\\
 \begin{itemize} 
 \item Types génériques (ensembles): par exemple : Book, Location
-\item Types énumérés: par exemple : Statuts := $\underbrace{In}_{Dans \hspace{0.1cm} la \hspace{0.1cm} bibliothèque, \hspace{0.1cm} disponible}$ $\vert$ $\overbrace{Out}^{Prêté}$ $\vert$ $\underbrace{Ref}_{Livre \hspace{0.1cm} de \hspace{0.1cm} référence}$ \\
+\item Types énumérés: par exemple : \\Statuts := $\underbrace{In}_{Dans \hspace{0.1cm} la \hspace{0.1cm} bibliothèque, \hspace{0.1cm} disponible}$ $\vert$ $\overbrace{Out}^{Prêté}$ $\vert$ $\underbrace{Ref}_{Livre \hspace{0.1cm} de \hspace{0.1cm} référence}$ \\
 \end{itemize}
 
 Schémas:\\
