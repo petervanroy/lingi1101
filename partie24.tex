@@ -54,26 +54,23 @@ conc (p)   & = & 1 \\
  
  \includegraphics[scale=0.5]{images/ref/fig-14-5.jpeg}
 	
- Comme nous pouvons voir, l'algorithme compte le nombre de liens entrants pour attribuer un poids à chaque place. Puis on normalise les valeurs trouvaient qui correspondent au poids de la page.
- Au plus grand est le poids d'une page au plus son autorité sera grande.\\
+Comme nous pouvons voir, l'algorithme compte le nombre de liens entrants pour attribuer un poids à chaque place. Puis on normalise les valeurs trouvées, ce qui correspond au poids de la page.
+Au plus grand est le poids d'une page au plus son autorité sera grande.\\
 \section{PageRank}
-
-- Consolider autorités et concentrateurs  \\
-- Une valeur par noeud $ \rightarrow $ son "PageRank" que nous allons calculer. \\
-- Intuition: Un "fluide" qui circule dans le réseau. \\
- \\
- \textbf{ Algorithme PageRank :}\\
- \\
- 1) N noeuds (chaque noeud représentant une page) : Initialisation Pr(p) =  $\frac{1}{n}$\\
- 2) Choisir un nombre de pas k\\
- 3) K mises à jour:\\
- \\
- Pr(p) = $ \sum_ {p'}\frac{Pr(p')}{n(p')} $ avec n(p') le nombre de liens sortant de p' et Pr(p') le poids (ou PageRank de p') à la $k^{ème}$ itération.\\
- \\
- \textbf{Exemple de PageRank :}\\
- \\
- Voir graphe ci-dessous : \\
- 
+\begin{itemize}
+\item Consolider autorités et concentrateurs.
+\item Une valeur par noeud $ \rightarrow $ son "PageRank" que nous allons calculer. 
+\item Intuition: Un "fluide" qui circule dans le réseau. 
+\end{itemize}
+\textbf{ Algorithme PageRank :}
+\begin{enumerate}
+\item N noeuds (chaque noeud représentant une page) : Initialisation Pr(p) =  $\frac{1}{n}$
+\item Choisir un nombre de pas k
+\item K mises à jour:\\
+Pr(p) = $ \sum_ {p'}\frac{Pr(p')}{n(p')} $ avec n(p') le nombre de liens sortant de p' et Pr(p') le poids (ou PageRank de p') à la $k^{ème}$ itération.
+\end{enumerate}
+\textbf{Exemple de PageRank :}\\
+Voir graphe ci-dessous : \\ 
  \includegraphics[scale=0.8]{images/24_imagePr.pdf}
  
  	\begin{tabular}{|c| c |c |c |}
