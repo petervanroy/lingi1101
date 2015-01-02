@@ -27,7 +27,7 @@ premières. Par exemple :
 \item il fait nuit.
 \end{enumerate}
 
-Le contenu exact de ces propositions n’a en fait aucune importance. C’est
+Le contenu exact de ces propositions n'a en fait aucune importance. C'est
 pourquoi elles seront remplacées par des lettres majuscules :
 
 \begin{enumerate}
@@ -255,12 +255,12 @@ tables de vérité pourrait être des expressions telles que~:
 % paraissent être cycliques, donc je les ai plutôt écrites comme ça, mais je ne
 % sais pas si cela paraît évident pour tout le monde.
 \[\VAL_I(p \land q) = \begin{cases}
-  \true \mbox{ si } \VAL_I(p) \mbox{ et } \VAL_I(q) = \true \\
+  \true \mbox{ si } \VAL_I(p)= \true  \mbox{ et } \VAL_I(q) = \true \\
   \false\mbox{ sinon}
 \end{cases}\]
 
 \[\VAL_I(p \lor q) = \begin{cases}
-  \false \mbox{ si } \VAL_I(p) \mbox{ ou } \VAL_I(q) = \false \\
+  \false \mbox{ si } \VAL_I(p)= \false  \mbox{ et } \VAL_I(q) = \false \\
   \true\mbox{ sinon}
 \end{cases}\]
 
@@ -301,26 +301,30 @@ Interprétons désormais notre proposition à l’aide de l’interprétation su
   \item Je n’irai pas promener le chien~: $\val_I(P) = \false$.
 \end{enumerate}
 
-Nous pouvons alors effectuer le développement suivant~:
+Nous pouvons alors effectuer le développement suivant:
 
-\begin{align*}
-  \VAL_I((B \land M) \Rightarrow P) &= \begin{cases}
-    \false \mbox{ si } \VAL_I(P) = \false \mbox{ alors que } \VAL_I(B \land M) = \true \\
-    \true\mbox{ sinon}
-  \end{cases} \\
-  \mbox{ or }\VAL_I(B \land M) &= \begin{cases}
-    \true \mbox{ si } \VAL_I(B) \mbox{ et } \VAL_I(M) = \true \\
-    \false\mbox{ sinon}
-  \end{cases} \\
-  &= \true \\
-  \mbox{ donc }  \VAL_I((B \land M) \Rightarrow P) &= \begin{cases}
-    \false \mbox{ si } \VAL_I(P) = \false \\
-    \true\mbox{ sinon}
-  \end{cases} \\
-  &= \false
-\end{align*}
+\[
+VAL_I((B \land M) \implies P) = 
+	\begin{cases}
+		false \text{ si }VAL_I(P) = false \text{ alors que } VAL_I(B \land M) = true\\
+		true  \text{ sinon }
+	\end{cases}
+\]
 
-Nous pouvons donc conclure que, dans cette interprétation, la personne ayant
+\[
+VAL_I(B \land M) = 
+	\begin{cases}
+		true \text{ si }VAL_I(B) = true \text{ et } VAL_I(M) = true\\
+		false  \text{ sinon }
+	\end{cases}
+\]
+Dans notre cas: 
+\[val_I(B \land M) = true \land true =true \]
+Donc: 
+\[val_I((B \land M)\implies P) = true \implies \false = false\]
+
+
+Nous pouvons donc en conclure que, dans cette interprétation, la personne ayant
 fait cette affirmation a menti. Notons néanmoins que notre homme n'aurait pas
 menti en partant promener le chien alors qu'il pleuvait à midi, rien n'ayant
 été dit sur ce qu'il ferait dans le cas où il ne ferait pas beau.
@@ -342,12 +346,12 @@ seulement si $\forall b_i \in B. \VAL_I(b_i) = \true$. Autrement dit, $I$
 décris un univers qui respecte toutes les règles se trouvant dans l’ensemble
 $B$.
 
-Donc, dans notre exemple précédent, l’interprétation choisie n’est pas un modèle
-de la proposition analysée, celle-ci n’étant pas validée, mais par exemple
+Dans l'exemple précédent, l’interprétation choisie n’est donc pas un modèle
+de la proposition analysée, celle-ci n’étant pas validée. Par contre, 
 l’interprétation telle que $\val_I(B) = \true$, $\val_I(M) = \true$ et
 $\val_I(P) = \true$ est bien un modèle de la proposition utilisée comme
 exemple. Remarquez aussi que cela ne change rien au fait que l’interprétation
-choisie est le modèle d’autres propositions que celle étudiée (par exemple $B
+choisie soit le modèle d’autres propositions que celle étudiée ou non (par exemple $B
 \land M$).
 
 % TODO: Exemple d’expression avec une interprétation qui est un modèle et une

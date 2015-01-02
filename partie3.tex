@@ -70,9 +70,11 @@
 			T&T&F&F&F&T&F\\
 			\end{tabular}
 			\end{center}
-			On voit bien ici, que la table de $\lnot (P \land Q)$ est équivalente à celle de $(\lnot P \lor  \lnot Q)$. La preuve a donc vérifié la véracité de la proposition. \\
-			Il y a néanmoins un problème avec cette preuve, car s'il y a $N$ propositions premières, on a $2^N$ lignes dans la table.
-		\section{Preuve transformationnelle}
+
+On peut constater que le vecteur de vérité de $\lnot (P \land Q)$ est équivalent à celui de $(\lnot P \lor  \lnot Q)$. La preuve a donc vérifié la véracité de la proposition. \\
+L'inconvénient de cette méthode de preuve est qu'elle devient rapidement très lourde quand le nombre de propositions premières augmente. Il faut en effet $2^n$ lignes dans la table pour $n$ propositions. 
+
+\section{Preuve transformationnelle}
 			On va utiliser des "Lois", c'est-à-dire des équivalences.
 			\begin{center}
 			\begin{tabular}{|ll|}
@@ -94,7 +96,9 @@
 			Il est autorisé de remplacer une formule par une formule équivalente à l’intérieur d’une autre formule. Autrement dit : \\
 			\indent Soit p,q,r des formules propositionnelles.\\
 			\indent Si $p \Leftrightarrow q$ et $r(p)$, alors $r(p) \Lleftarrow \Rrightarrow r(q)$.\\
-			On peut remplacer $p$ par $,q$ car elles sont équivalentes. Il faut faire attention à ces règles, car elles sont en métalangage. Elles expliquent seulement ce qui est autorisé de faire.
+			On peut remplacer $p$ par $,q$ car elles sont équivalentes. 
+			
+			{\color{red}{\danger}Ces règles sont en métalangage. Elles expliquent ce qu'il est autorisé de faire mais ne sont pas des propositions logiques.}
 			
 			\subsection*{Exemple}
 			On veut prouver : $p \land (q \land r) \Lleftarrow \Rrightarrow (p \land q) \land r$
@@ -113,13 +117,13 @@
 			& $\Lleftarrow \Rrightarrow (p \land q) \land r$\\
 			\end{tabular}
 			\end{center}
-			Le problème dans cette méthode de preuve c'est qu'il faut de l'intuition, de la créativité et donc ce n'est pas forcément mieux que les tables de vérité, surtout si c'est compliqué de trouver l'astuce.
+Le problème de cette méthode de preuve est qu'elle requiert de l'intuition, de la créativité. Elle n'est donc pas forcément plus efficace que les tables de vérité, surtout si "l'astuce" est difficile à trouver.
 		
 		\section{Preuve déductive}
 		À partir des lois logiques (lois d'équivalence) et des règles d'inférence, on va construire des preuves.\\
 		\textit{Une preuve est un objet formel défini avec précision.\\}
 		
-		Equivalences logiques : 	
+\subsection{Equivalences logiques}
 			\begin{center}
 			\begin{tabular}{ll}
 			$p \Lleftarrow \Rrightarrow p \lor p$ & Idempotence de $\lor$\\
@@ -134,9 +138,9 @@
 			\end{center}
 			Mais également l'idempotence, la commutativité, l'associativité et la distributivité de $\land$.\\
 			
-		Règle d'inférence : \\
+\subsection{Règles d'inférences}
 		
-		À la différence de la preuve transformationnelle, les règles d'inférences ont une direction : elles commencent par les prémisses\footnote{Les prémisses sont toujours vraies.} et se terminent par la conclusion.
+À la différence de la preuve transformationnelle, les règles d'inférences ont une direction : elles commencent par les prémisses\footnote{Les prémisses sont toujours vraies.} et se terminent par la conclusion.
 		\begin{center}
 		\begin{tabular}{llp{3cm}l}
 		
@@ -224,7 +228,7 @@
 		\item La preuve par contradiction.
 		\end{itemize}
 		
-		\subsection*{Théorème de déduction}
+\subsection*{Théorème de déduction}
 			Pour prouver $s\Rightarrow t$, on suppose $s$ vrai. On déduit $t$ et donc on sait que l'hypothèse $s\Rightarrow t$ est vraie et on l'évacue.\\
 			
 			On note ce théorème $s \vdash t$ (t peut être prouvé à partir de s, ce qui signifie qu'on peut construire une preuve (objet mathématique) qui est vraie si on applique bien les règles ci-dessus).\\
@@ -263,20 +267,28 @@
 			
 \section{Exemple de preuve propositionnelle}
 
-\noindent Voici les propositions premières : \\
-A : tu manges bien \\
-B : ton système digestif est en bonne santé \\
-C : tu pratiques une activité physique régulière \\
-D : tu es en bonne forme physique \\
-E : tu vis longtemps \\
+Voici les propositions premières :
+\begin{enumerate}
+\item[A =] "tu manges bien"
+\item[B =] "ton système digestif est en bonne santé"
+\item[C =] "tu pratiques une activité physique régulière"
+\item[D =] "tu es en bonne forme physique"
+\item[E =] "tu vis longtemps"
+\end{enumerate}
 
-\noindent On peut maintenant faire une théorie et on espère qu'elle aura un modèle. \\
-A$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
-\\
-\noindent On aimerait prouver que $\lnot$A $\land$ $\lnot$C est vrai.\\
+On peut maintenant établir une théorie dont on espère qu'elle aura un modèle. 
 
-\noindent Preuve : \\
-\\
+\paragraph{Théorie} 
+\begin{enumerate}
+\item $A \implies B$
+\item $C \implies D$
+\item $B \lor D \implies E$
+\item $\lnot E$
+\end{enumerate}
+
+\paragraph{A Prouver} $\lnot A \land \lnot C$
+
+\paragraph{Preuve}
 \begin{tabular}{|l|l|}
 \hline
 1. A$\Rightarrow$B & prémisse \\
@@ -298,8 +310,7 @@ A$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
 \hline
 \end{tabular}\\
 
-Grâce à la déduction, on a donc pu prouver que tu ne manges pas bien et que tu ne pratiques pas d'activité physique régulière. 
+Grâce à la déduction, nous avons pu prouver que tu ne manges pas bien et que tu ne pratiques pas d'activité physique régulière. 
 On aimerait maintenant pouvoir automatiser les preuves quand elles existent. Mais il faut savoir s'il peut tout résoudre ou pas. 
 On va donc construire un algorithme nous permettant de résoudre automatiquement les preuves en logique propositionnelle.
-
 % \end{document}

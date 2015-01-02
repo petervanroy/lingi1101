@@ -146,19 +146,19 @@ But : Déterminer si S est inconsistant. On veut faire des déductions jusqu'à 
 
 \subsubsection{Pseudocode}
 
-\noindent
-\begin{tabbing}
-\hspace{2cm}\=\kill
-\underline{while} \> false $\not\in$ S et $\exists$  ? clauses résolvables non résolues \\
-\newline
-\indent \underline{do} \> choisir C$_{1}$, C$_{2}$ $\in$ S tel que $\exists$ P $\in$ C$_{1}$, $\lnot$P $\in$ C$_{2}$ \\
-\> calculer r := C$_{1}$ - \{P\} $\lor$ C$_{2}$ - \{$\lnot$P\} \\
-\> calcul S := S $\cup$ \{r\} \\
-\underline{end}
-\end{tabbing}
-\underline{if} false $\in$ S \underline{then} \emph{C est prouvé} \underline{else} \emph{C n'est pas prouvé} \newline
+\begin{algorithm}[H]
+\While{$false \not\in S$ et $\exists$? clauses résolvables non résolues}{
+	\begin{itemize}
+		\item choisir $C_1,C_2 \in S$ tel que $\exists P \in C_1, \lnot P \in C_2$ 		
+		\item calculer r:=$C_1 - \{P\} \land C_2 - \{\lnot P\}$
+		\item calculer S:= $S \cup \{r\}$
+	\end{itemize}
+}
+\eIf{$false \in S$}{C est prouvé}{C n'est pas prouvé}
+\end{algorithm}
 
-La subtilité dans cet algorithme est de choisir correctement les clauses C$_{1}$ et C$_{2}$ car l'efficacité de l'algorithme en dépend. 
+
+La subtilité de cet algorithme est de choisir correctement les clauses C$_{1}$ et C$_{2}$ car l'efficacité de l'algorithme en dépend. 
 
 \subsection{Exemples}
 
@@ -200,6 +200,9 @@ Pour toute théorie $B = \left\{c_1, \dots, c_n \right\}$ et $p$,
 \item si $B \models p$ alors $B \vdash p$ (Complet - \textit{Completeness}) ;
 \item $\forall$ $B, p$, l'exécution de l'algorithme se termine après un nombre fini d'étapes. (Décidable - \textit{Decidable})
 \end{itemize}
-Cet algorithme est donc très puissant, même s'il n'est peut-être pas très efficace. Mais, au moins, on est sûr qu'il s'arrêtera toujours à un moment.
 
-Malheureusement, la logique des propositions n'est pas très expressive. On va donc essayer de faire la même chose mais avec une logique plus puissante : la logique des prédicats. Mais nous n'arriverons pas à avoir un algorithme aussi puissant pour la logique des prédicats, car c'est une logique trop forte. 
+Cet algorithme est très puissant mais n'est pas toujours très efficace. Par contre, quoi qu'il arrive, on peut au moins être sûr qu'il s'arrêtera toujours à un moment.
+
+La logique des propositions n'est malheureusement pas très expressive. Elle ne permet pas de relations entre les propositions. 
+Nous allons essayer d'appliquer la même démarche mais avec une logique plus puissante : la logique des prédicats. 
+Il n'est par contre pas possible d'arriver à un algorithme aussi puissant avec la logique des prédicats, la logique étant trop forte. 

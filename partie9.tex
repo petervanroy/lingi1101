@@ -44,7 +44,7 @@ Lors que l'arrivée des ordinateurs, fin du 20ème siècle(années 50-60 et fin 
 \begin{itemize}
 \item Création de l'Algorithme de Preuves (1965):
 \begin{itemize}
-\item Alan Robinson crée La Règle de Résolution (qui va être expliquée aujourd'hui)
+\item Alan Robinson crée La Règle de Résolution (qui va être expliquée au chapitre suivant)
 \item Création de prouveurs (assistants de preuve) par exemple Coq et Isabelle en 1972
 \item Création de la logique de programmation qui aide à l'élaboration de la programmation par contraintes: Prolog (1972) 
 \end{itemize}
@@ -65,15 +65,18 @@ On va commencer par faire les transformations de normalisation. Il y a 3 transfo
     \item formule $\to$ forme prénexe: $$(\ldots{}\forall{}\ldots{}\exists{}\ldots{}\forall{} )\implies \forall{}\exists{}\forall{}(\ldots{})$$
     Tous les quantificateurs sont mis en tête de la formule. Les quantificateurs étant très compliqués à gérer, on transforme la formule pour les extraire de celle-ci. \\Les modèles sont conservés durant cette transformation.
     \item forme prénexe $\to$ forme Skolem (élimination des $\exists{}$): $$ \forall{}\exists{}\forall{}(\ldots{})  \implies \forall{}\forall{}\forall{}(\ldots{}) $$
-    Les quantificateurs existentiels sont très embêtants, car ils sont restrictifs. Ils disent qu'il existe des éléments, mais ne précisent pas lesquels, on va donc les éliminer. \\    Cette transformation préserve l'existence des modèles, mais pas les modèles eux-mêmes. Ils doivent être modifiés pour conserver la même signification. 
-    \item forme Skolem $\to$ forme normale conjonctive: $$\forall\ldots\forall \land_i(\lor_j L_{ij})$$ $$(meme\ algorithme\ que\ pour\ la\ logique\ des\ propositions)$$
-    Cette transformation est la même que celle effectuée dans la logique des propositions. \\
-     Les modèles sont préservés lors de cette transformation. 
+    Les quantificateurs existentiels sont très embêtants, car ils sont restrictifs. Ils disent qu'il existe des éléments, mais ne précisent pas lesquels, on va donc les éliminer. \\
+    Cette transformation préserve l'existence des modèles, mais pas les modèles eux-mêmes. Ils doivent être modifiés pour conserver la même signification. 
+    \item forme Skolem $\to$ forme normale conjonctive: 
+    \[\forall \ldots \forall \land_i(\lor_j L_{ij})\]
+
+Cette transformation est la même que celle effectuée dans la logique des propositions. \\
+Les modèles sont préservés lors de cette transformation. 
 \end{enumerate}
 
 \section{Résolution}
 En logique des propositions: $$\frac{L\lor C_1, \neg L \lor C_2}{C_1\lor C_2}$$
-Cela fonctionne en logique des propositions, car il n'y a pas de variables, mais ici, on peut avoir $L_1 \lor C_1$ \hspace{10pt} $\neg L_2 \lor C_2$  avec $L_1$ et $L_2$ qui ont des variables différentes. Par exemple P(x,a) et P(y,z).\\
+Cette technique fonctionne en logique des propositions, car il n'y a pas de variables, mais ici, on peut avoir $L_1 \lor C_1$ \hspace{10pt} $\neg L_2 \lor C_2$  avec $L_1$ et $L_2$ qui ont des variables différentes. Par exemple P(x,a) et P(y,z).\\
 Pour pouvoir faire la résolution, il va falloir en quelque sorte les rendre identiques. \\
 On va donc dire: ce ne sont peut-être pas toujours les mêmes, mais, pour certaines valeurs, ils sont identiques. Si x=y et a=z alors on peut faire la résolution. 
 \subsection{Unification}

@@ -48,7 +48,7 @@ Un autre exemple de prédicat:
 \begin{center}
 $\forall \alpha$ Phil($\alpha$) $\Rightarrow$ Savant($\alpha$)\\
 \vspace{3mm}
-$\hookrightarrow$ ... \textit{c'est un résumé d'un très grand nombre de faits. Ça marche pour tous arguments, ça peut être un ensemble infini!}
+$\hookrightarrow$ ... \textit{cette formulation permet de résumer un très grand nombre de faits. L'ensemble des arguments $\alpha$ peut être infini}
 \end{center}
 Comme Socrate est un philosophe, on peut déduire que Socrate est un savant aussi!
 
@@ -62,7 +62,7 @@ On va donc noter en logique propositionnelle
 (P$\Rightarrow$R) $\cup$ (Q$\Rightarrow$S) $\cup$ ...(\textit{potentiellement infini})
 \end{center}
 
-On doit tout énumérer et il n'y a aucune relation entre les différentes propositions. S'il y a un nombre infini, ça ne marche pas. Il y a donc de grandes limitations dans la logique propositionnelle.
+On doit tout énumérer car il n'y a aucune relation entre les différentes propositions. S'il y a un nombre infini, ça ne marche pas. Il y a donc de grandes limitations dans la logique propositionnelle.
 
 Néanmoins parfois la logique propositionnelle peut être utile. 
 Il existe des outils informatiques qui utilisent la logique propositionnelle. On peut prendre l'exemple de "SAT solver" à qui on donne des équations booléennes très compliquées et qui va trouver les valeurs des propositions primitives qui rendent vraie cette proposition. C'est donc assez utilisé! La logique propositionnelle est utile, mais si l'on veut faire du raisonnement sur plus que  "vrai" et "faux" avec des relations entre des propositions,  la logique propositionnelle ne marche pas. Si on veut faire un logiciel qui montre une certaine intelligence, il faut utiliser la logique des prédicats.\\
@@ -178,8 +178,8 @@ $<connecteur$ $binaire>::=$
 \end{tabular}
 
 \section{Exemple de sémantique}
-Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation qui sont déjà définis dans la logique propositionnelle. Même si la logique des prédicats est beaucoup plus puissante, nous gardons une sémantique assez similaire à la logique propositionnelle. \\
-L'idée dans l'interprétation c'est de dire si la formule est vraie ou fausse. Tout comme pour la logique propositionnelle, on va faire la même chose pour les prédicats avec les relations.\\
+Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation déjà définis dans la logique propositionnelle. Même si la logique des prédicats est beaucoup plus puissante, sa sémantique reste similaire à la logique propositionnelle.
+Comme pour la logique propositionnelle, une interprétation peut avoir une valeur (true, false).
 
 Illustrons par un exemple : 
 
@@ -210,7 +210,7 @@ Avec ce nouveau sens, on trouve l'interprétation suivante :
 \begin{center}
 \textit{Si Vladimir Putin est l'enfant du père de Vladimir Putin alors $\exists$ une personne telle que Barack Obama est l'enfant de cette personne.}
 \end{center}
-La seconde interprétation est très différente de la première malgré le fait que ce soit la même formule à l'origine ! La connexion entre une formule et son sens permet de garder une certaine souplesse dans le sens où l'on peut choisir ça. C'est un peu comme dans la logique propositionnelle, mais avec encore plus de souplesse. Si l'on fait ce raisonnement-ci, ce dernier sera toujours vrai pour toutes les interprétations qui sont vraies. \\
+La seconde interprétation est très différente de la première malgré le fait que ce soit la même formule à l'origine ! La connexion entre une formule et son sens permet de garder une certaine souplesse dans le sens où l'on peut choisir ça. C'est un peu comme dans la logique propositionnelle, mais avec encore plus de souplesse.
 
 On peut se demander si ces deux interprétations sont des modèles de la formule ? \\
 La première interprétation est un modèle de la formule, car le sens de la formule est vrai dans l'interprétation. En effet, $\pi \geq \dfrac{\pi}{2}$ et $\exists$ $ d \in \Re$ tel que $\sqrt2 \geq d$. On voit donc que le modèle est vrai.
@@ -220,7 +220,7 @@ La deuxième interprétation est aussi un modèle de la formule, car l'interpré
 \section{Détails techniques}
 La première question que l'on se pose est: comment faire des preuves en logique des prédicats ? Il faut noter que les quantificateurs $\forall$ et $\exists$ rendent le raisonnement plus subtil. Il faudra des règles pour pouvoir raisonner sur ces quantificateurs.
 \subsection{Sémantique}
-La sémantique en logique des prédicats est très proche de celle en logique propositionnelle. Cependant, l'interprétation, I, est plus précise qu'en logique propositionnelle, mais est également plus compliquée à utiliser à cause des variables et des symboles de fonction. Cette interprétation peut être décrite comme une paire: $I = pair(D_{I}, val_{I}) $ avec D le domaine de discours I et la fonction val qui est l'interprétation de tous les symboles. $D_{I} \ne \emptyset $ $ \forall s \in S$ avec s soit un symbole de prédicat soit une fonction. $val_{I}(S) = P_{I}$ une fonction $P_{I}:D_{I}^{n} \rightarrow (True,False)$ avec S symbole d'une fonction. Il existe aussi une vraie fonction $f_{I}:D_{I}^{n} \rightarrow D_{I}$ avec n le nombre d'arguments tel que $val_{I}(S) = f_{I} $. Cela implique que dans le domaine de discours chaque fonction correspond à une vraie fonction et chaque prédicat correspond à un vrai prédicat. 
+La sémantique en logique des prédicats est très proche de celle en logique propositionnelle. Cependant, l'interprétation, I, est plus précise qu'en logique propositionnelle et est également plus compliquée à utiliser à cause des variables et des symboles de fonction. Cette interprétation peut être décrite comme une paire: $I = pair(D_{I}, val_{I}) $ avec D le domaine de discours I et la fonction val qui est l'interprétation de tous les symboles. $D_{I} \ne \emptyset $ $ \forall s \in S$ avec s soit un symbole de prédicat soit une fonction. $val_{I}(S) = P_{I}$ une fonction $P_{I}:D_{I}^{n} \rightarrow (True,False)$ avec S symbole d'une fonction. Il existe aussi une vraie fonction $f_{I}:D_{I}^{n} \rightarrow D_{I}$ avec n le nombre d'arguments tel que $val_{I}(S) = f_{I} $. Cela implique que dans le domaine de discours chaque fonction correspond à une vraie fonction et chaque prédicat correspond à un vrai prédicat. 
 
 
 Si l'on rajoute une variable, x par exemple, l'expression devient: $ (var, x) \rightarrow val_{I}(x) = x_{I} \in D_{I}$. L'interprétation d'une variable, $x_{I}$ est un élément (n'importe lequel en fonction de l'interprétation) de $D_{I}$. La fonction $VAL_{I}$ est la même fonction, mais pour les formules et pas uniquement pour les symboles comme avant. Néanmoins, on ne doit pas redéfinir $,VAL_{I}$ car elle existe à partir du moment ou $val_{I}$ et $D_{I}$ existent. Définition: $VAL_{I}: TERM \cup  PRED \rightarrow D_{I} \cup (True, False) $ avec TERM l'ensemble des termes et PRED l'ensemble des
@@ -253,28 +253,22 @@ $\forall P_{I} \in B VAL_{I}(P_{I}) = True$ qui est très générale, car $P_{I}
 
     Il est possible de faire des preuves avec des règles de preuve. Une preuve est une simple manipulation de symboles qui sont des règles. Mais il faut justifier ces règles pour obtenir des résultats vrais. Elles sont justifiées en raisonnant sur les interprétations pour vérifier si elles sont correctes ou non. Tout cela est la sémantique. C'est la base pour pouvoir faire des preuves.
 
-
 Beaucoup de choses restent les mêmes que dans la logique des propositions. La preuve est toujours un objet mathématique, une séquence avec des formules, des justifications, une application des règles. Elle commence avec des prémisses et finit par une conclusion. Il est possible de faire des preuves manuelles, mais aussi des preuves automatisées. C'est une généralisation de l'approche de la logique des propositions. 
-
 
 Il y a toujours :
 \begin{itemize}
   \item Une règle de résolution pour les preuves automatisées, mais celle-ci est plus générale. Elle va utiliser un concept appelé "unification". Ce nouveau concept est introduit à cause des variables. En effet, celles-ci peuvent être différentes, il faut donc trouver un nouveau moyen de les fusionner.
   \item Une forme normale, qui  est plus compliquée à cause des quantificateurs et des symboles de fonctions, mais qu'il est encore possible de l'obtenir.
   \item un algorithme avec ses propriétés. Mais il est moins fort/complet que l'algorithme développé pour la logique des propositions. Il ne sera plus décidable, mais seulement semi-décidable. C'est-à-dire que parfois il tournera en boucle. Cela est dû aux variables et aux quantificateurs. La logique des prédicats est beaucoup plus riche que la logique des propositions, mais en contrepartie l'algorithme arrive à prouver moins de choses. Cependant, l'algorithme sera toujours adéquat, mais pas forcément complet. Il ne sera pas toujours possible de trouver une preuve, même quand elle existe parce qu'elle sera trop compliquée.
-
 \end{itemize}
-
-
-Qu'est-ce qu'il est possible de faire avec ce genre d'algorithme qui est moins fort?
-
+Qu'est il possible de faire avec ce genre d'algorithme moins fort?
 
 Il y a deux possibilités : 
 \begin{itemize}
-\item Faire un assistant de preuve\\
+\item Un assistant de preuve\\
 C'est un outil qui aide les gens à faire des preuves formelles. Deux exemples d'assistants de preuves sont Coq et Isabelle. C'est un outil très sophistiqué, mais qui a permis de prouver des choses de manière totalement formelle, alors qu'avant des preuves prenaient des dizaines voire des centaines de pages de preuves mathématiques. Mais cet assistant ne fait pas tout parce que l'algorithme est moins bon. Cependant, il aide beaucoup. C'est à l'être humain de lui donner des coups de pouce sous forme de lemmes, hypothèses, chemins, stratégies ... Ensuite, l'algorithme s'occupe de la manipulation des symboles.\\
 Un exemple très célèbre est le théorème de la coloration d'une carte. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
-\item L'utiliser dans les langages de programmation\\ 
+\item L'utiliser dans les langages de programmation\\
 L'algorithme peut être considéré comme le moteur d'un programme. C'est ce qu'on appelle maintenant la programmation logique. Elle consiste à utiliser la logique dans un programme. Le langage le plus célèbre qui a suivi cette approche est Prolog. Ce fut un énorme succès, car les gens ne croyaient pas que c'était possible de faire un programme en logique qui pouvait tourner. Cela a donné naissance à la programmation par contraintes (une contrainte est une relation logique). Cette discipline est très utile pour les optimisations, par exemple dans le cas du "voyageur de commerce".
 \end{itemize}
 \subsubsection{}

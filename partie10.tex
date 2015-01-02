@@ -51,7 +51,7 @@ Les modèles de p $\neq$ modèles $p_s$.
 \end{itemize}
 
 \vspace{5 mm}
-$p$ admet un modèle $(I)$ SSI $p_s$ admet un modèle $(I')$.
+$p$ admet un modèle $(I)$ si et seulement si $p_s$ admet un modèle $(I')$.
 
 Que ça ne soit exactement le même modèle ne pose pas de problème pour notre algorithme. L'algorithme par réfutation continue à itérer jusqu'à trouver une contradiction ($false$). S'il n'y a pas de modèle pour $p_s$, il n'y a pas de modèle pour $p$ et ça suffit.
 
@@ -130,30 +130,24 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
 \underline{Alors} $$ \mbox{\huge $\frac{L^{+} \vee C_1, \neg L^{-} \vee C_2}{(C_1 \vee C_2)\sigma}$ } $$
 
 \section{Algorithme}
+\begin{algorithm}
+\KwIn{$S := \big\{ \Delta x_1, ..., \Delta x_i, \neg Th \big\}$ dont chaque formule est en forme normale conjonctive (FNC).}
+\While{$ false \notin S$ et il existe une paire de clauses résolvables et non résolues.}{
+	Choisir $p_i, p_j$ dans S et L tel que:
+	\begin{itemize}
+  		\item $L^{+}$ dans $p_i$ 
+  		\item $L^{-}$ dans $p_j$ 
+  		\item $\big\{ L^{+}, L^{-} \big\}$ unifiable par $\sigma$ U.P.G.
+	\end{itemize}
 
-$S := \big\{ \Delta x_1, ..., \Delta x_i, \neg Th \big\}$ dont chaque formule est en forme normale conjonctive (FNC). 
-
-
-\underline{while}: \textbf{false} $\notin S$ et il existe une paire de clauses résolvables et non résolues.
-
-\underline{do}: choisir $p_i, p_j$ dans S et L tel que:
-\begin{itemize}
-  \item $L^{+}$ dans $p_i$ 
-  \item $L^{-}$ dans $p_j$ 
-  \item $\big\{ L^{+}, L^{-} \big\}$ unifiable par $\sigma$ U.P.G.
-\end{itemize}
-
-Calculer:
-\begin{itemize}
-  \item $r:=(p_i - [L^{+}] \vee p_j - [\neg L^{-}]) \sigma$
-  \item $S_i = S \cup  \big\{ r \big\}$
-\end{itemize}
-
-\underline{end}\\
-
-\underline{If} \textbf{false} $\in S$ \underline{then} Th prouvé \\
-\underline{else} Th non prouvé \\
-\underline{end}
+	Calculer:
+	\begin{itemize}
+  		\item $r:=(p_i - [L^{+}] \vee p_j - [\neg L^{-}]) \sigma$
+  		\item $S_i = S \cup  \big\{ r \big\}$
+	\end{itemize}
+}
+\eIf{$false \in S$}{Th prouvé.}{Th non prouvé.}
+\end{algorithm}
 
 \section{Exemple}
 \begin{itemize}
