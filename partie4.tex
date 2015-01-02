@@ -14,8 +14,8 @@
 \subsubsection{Prémisse:}
 
 \begin{equation}
-\frac{p........................r, s \vdash t} 
-{p........................r, s \vdash (s \Rightarrow t)}
+\frac{p,..., r, s \vdash t} 
+{p,..., r \vdash (s \Rightarrow t)}
 \end{equation}
 
 \subsubsection{Conclusion:}
@@ -31,9 +31,9 @@ on suppose que p...q n'a pas de problème
 
 \begin{equation}
 \begin{split}
-p........................q, r, s \vdash s \\
-\frac{p........................ q,r, s \vdash \lnot s}
-{p........................ q \vdash \lnot r}
+p,...,q, r, s \vdash s \\
+\frac{p,...,q, r, s \vdash \lnot s}
+{p,...,q \vdash \lnot r}
 \end{split}
 \end{equation}
 
@@ -49,7 +49,7 @@ Il faut justifier à chaque étape le nom de la règle / loi, et indenter les é
 
 \subsection{Prémisse:} 
 
-p $\land$ q $\lor$ r
+$(p \land q) \lor r$
 
 \subsection{Conclusion:}
 
@@ -102,14 +102,15 @@ $\lnot$ p $\Rightarrow$ r
 \end{enumerate}
 
 
-\section{Quelques concepts}
+\section{Quelques concepts supplémentaires}
 \subsection{Principe de dualité }
 
 \subsubsection{Dans les formules sans $\rightarrow$ :}
 
-\begin{equation}
-1 \leftrightarrow T \hspace{5cm} true \leftrightarrow false 
-\end{equation}
+\begin{align*}
+\land \leftrightarrow \lor \\ 
+true \leftrightarrow false 
+\end{align*}
 \begin{align*}
 \models \lnot ( p \land q)  \Leftrightarrow \lnot p \lor \lnot q \\
 \models \lnot ( p \lor q)  \Leftrightarrow \lnot p \land \lnot q 
@@ -117,33 +118,39 @@ $\lnot$ p $\Rightarrow$ r
 
 \subsubsection{Formule quelconque:}
 
-\begin{equation}
-	1 \leftrightarrow T \hspace{5cm} true \leftrightarrow false 
-\end{equation}
+\begin{align*}
+\land \leftrightarrow \lor \\ 
+true \leftrightarrow false \\ 
+p \leftrightarrow \lnot p 
+\end{align*}
 
  Justification en raisonnant sur les modèles:
  \begin{align*}
-	 p1,...,pn \models ssi \models (p1,...,pn \land \lnot q) \leftrightarrow false \\
-	 ssi \models ( \lnot p1 \lor ... \lor pn) \leftrightarrow true
+	 (p_1,...,p_n) \models q \hspace{1cm} ssi \models (p_1 \land ... \land p_n \land q) \leftrightarrow false \\
+	 ssi \models ( \lnot p_1 \lor ... \lor \lnot p_n \lor q) \leftrightarrow true
  \end{align*}
 
-\subsection{Forme Normale}
+
+
+\subsection{Algorithme de normalisation}
+
+Une formule quelconque peut être transformée en une formule équivalente de forme normale.
+
+\subsubsection{Forme Normale}
 
 \begin{itemize}
   \item Conjonctive: $( p \lor q ) \land ( q \lor a ) \land ( s \lor r )$  
-  \item Disjonctive
+  \item Disjonctive: $( p \land q ) \lor ( q \land a ) \lor ( s \land r )$  
 \end{itemize}
 
-\subsubsection{terminologie}
+\subsubsection{Terminologie}
 
 \begin{itemize}
-	\item Littéral :$ P \lor \lnot P \approxeq L$
-	\item Clause : $\lor L{i} = ( L{1} \lor L{2} \lor L{3} ... \lor L{i} )$
+	\item Littéral : $P \lor \lnot P \approxeq L$
+	\item Clause : $\lor L_i = ( L_1 \lor L_2 \lor L_3 \lor ... \lor L_i )$
 \end{itemize}
 
-\subsubsection{Forme normale conjonctive FNC}
-
-\subsection{Algorithme de normalisation}
+\subsubsection{Algorithme de normalisation}
 
 \begin{enumerate}
 \item Eliminer les $\rightarrow$ et $\leftrightarrow$
@@ -152,7 +159,7 @@ $\lnot$ p $\Rightarrow$ r
 \item Simplifier $(P \lor \lnot P)$
 \end{enumerate}
 
-\subsubsection{Exemple}
+\subsubsection{Exemple de normalisation}
 
 \begin{align*}
 & (p \rightarrow (Q \rightarrow R)) \rightarrow ((P \land S) \rightarrow R) \\
