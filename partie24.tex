@@ -16,43 +16,78 @@ Car beaucoup d'utilisateurs ont des pages concentrés sur ces sites et comme dan
 \paragraph{Comment pouvoir trouver la meilleure page?}
 \begin{enumerate}
 \item Liens entrants $ \rightarrow $ votes
-\item  Liens sortants  calcul du$ \rightarrow$  poids
+\item Liens sortants  calcul du$ \rightarrow$  poids
 \item Mise à jour des liens entrants
 \item Mise à jour des liens sortants 
 \end{enumerate}
 
 \subsubsection{Algorithme}
-Pages autorité (entrants (liens)) auto (p) \\
-Pages concentrateurs (sortants ) conc (p)\\
-Mises à jour :auto'(p) =  $ \sum_ {p'\rightarrow p}conc(p') $ \\
-avec $p'\rightarrow p $ les pages p' qui ont un lien vers P  \\
-conc'(p) = $ \sum_ {p\rightarrow p'}auto(p') $ \\
-avec  $p \rightarrow p' $ les pages p' qui sont référencées à partir de p  \\
+
+\begin{itemize}
+\item Pages autorité (liens entrants) $ \rightarrow $ auto (p)
+\item Pages concentrateurs (liens sortants) $ \rightarrow $ conc (p)
+\item Mises à jour des liens entrants:
+\begin{align*}
+ auto'(p) =   \sum_ {p'\rightarrow p}conc(p') &&
+\text{\emph{avec $p'\rightarrow p $ les pages p' qui ont un lien vers P}}
+\end{align*}
+
+\item Mises à jour des liens sortants: 
+\begin{align*}
+conc'(p) = \sum_ {p\rightarrow p'}auto(p') &&
+\text{\emph{avec $p \rightarrow p' $ les pages p' qui sont référencées à partir de p}} 
+\end{align*}
+
+\end{itemize}
+
+
 
 \subsubsection*{Itération}}
 
-$ \forall p(page) $ : \[
+\begin{equation}
+\forall p(page) :
 \left \{
-\begin{array}{r c l}
-auto(p)  & = & 1 \\
-conc (p)   & = & 1 \\
+\begin{array}{l}
+auto(p) = 1 \\
+conc (p) = 1 
 
 \end{array}
-\right .
-\]
- \\
- Mise à jour , normalisation, auto'(p) = $\frac{auto (p)}{  \sum auto(p')  }$\\
- conc' (p) = $\frac{conc (p)}{  \sum conc(p)  }$\\
- Cet algorithme converge \\
- \\
- En appliquant maintenant cet algorithme,  la Requête News Papers nous donnerait les résultats suivants:\\
- \includegraphics[scale=0.5]{images/ref/fig-14-2.jpeg}
+\right.
+\end{equation}
+
+ Mise à jour, normalisation :
  
- \includegraphics[scale=0.5]{images/ref/fig-14-3.jpeg}
- 
- \includegraphics[scale=0.5]{images/ref/fig-14-4.jpeg}
- 
- \includegraphics[scale=0.5]{images/ref/fig-14-5.jpeg}
+ \begin{align*}
+ auto'(p) = \frac{auto (p)}{\sum auto(p')}
+ \end{align*}
+ \begin{align*}
+ conc' (p) = \frac{conc (p)}{\sum conc(p)}
+ \end{align*}
+ Cet algorithme converge
+
+
+En appliquant maintenant cet algorithme, la Requête News Papers nous donnerait les résultats suivants:
+
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{images/ref/fig-14-2.jpeg}
+\includegraphics[scale=0.5]{images/ref/fig-14-4.jpeg}
+
+\caption{}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{images/ref/fig-14-3.jpeg}
+\includegraphics[scale=0.5]{images/ref/fig-14-5.jpeg}
+\caption{}
+\end{figure}
+
+
+
+\newpage
+
 	
 Comme nous pouvons voir, l'algorithme compte le nombre de liens entrants pour attribuer un poids à chaque place. Puis on normalise les valeurs trouvées, ce qui correspond au poids de la page.
 Au plus grand est le poids d'une page au plus son autorité sera grande.\\
