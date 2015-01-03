@@ -59,11 +59,15 @@ Il faut construire un résultat.
 	Par exemple : il faut commencer par prouver $A_{1}$ puis $A_{2}$... dans cet ordre là.\\
 	$\rightarrow$ Le programmeur donnera des heuristiques. Attention : ces heuristiques ne changent pas la sémantique \underline{logique du programme}. Elles ont seulement un effet sur l’efficacité !
 	\begin{equation}
-		C_{1} = \neg A_{1} \vee \neg A_{2} \vee ... \vee A_{n} \vee A
+		\text{ordre des axiomes}\left \{
+		\begin{array}{l}
+		C_{1} = \neg A_{1} \vee \neg A_{2} \vee ... \vee A_{n} \vee A \\
+	
+		C_{2} = \underbrace{\neg B_{1} \vee \neg B_{2} \vee ... \vee B_{k} \vee A}_{\text{ordre des littéraux dans un axiome}}
+		\end{array}
+		\right.
 	\end{equation}
-	\begin{equation}
-		C_{2} = \neg B_{1} \vee \neg B_{2} \vee ... \vee B_{k} \vee A
-	\end{equation}
+	
 \end{enumerate}
 
 Le langage Prolog utilise ces 2 ordres.

@@ -22,7 +22,7 @@ $\forall$ = pour tout $x_{I}$ $\in$ $P_{I}$ : $P_{I}$($x_{I}$) est vrai$\linebre
 \end{enumerate}
 
 \section{Élimination de $\exists$}
-$\exists$x $\bullet$ P(x) $\rightarrow$ P(x) $\>$ x = nouvelle constante qui apparaît nulle part ailleurs ($val_{I}(a) = x_{I}$)\\
+$\exists$x $\bullet$ P(x) $\rightarrow$ P(a) $\>$ a = nouvelle constante qui apparaît nulle part ailleurs ($val_{I}(a) = x_{I}$)\\
 Il existe un $x_{I}$ $\in$ $D_{I}$ avec $P_{I}$($x_{I}$) est vrai\\
 $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\nrightarrow$ P(y) $\>$ y = variable qui existe d\'ej\`a dans la preuve \\
 $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\rightarrow$ P(z) $\>$ z = nouvelle variable dans la preuve $\>$ $val_{I}(z) = x_{I}$\\
@@ -33,7 +33,7 @@ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\rightarrow$ P(z) $\>$ z = nouvelle var
 \item chef(y) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$Élimination de $\exists$
 \item \sout{voleur(y)} $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Élimination de $\exists$ $\>$ \textcolor{red}{y n'est pas une nouvelle variable dans la preuve}
 \item chef(y) $\wedge$ voleur(y) $\>$ $\>$ $\>$ $\>$ $\>$ Conjonction
-\item $\exists$y $\bullet$ chef(y) $\wedge$ voleur(y) $\>$ Introduction de $\exists$
+\item \sout{$\exists$y $\bullet$ chef(y) $\wedge$ voleur(y) $\>$} Introduction de $\exists$ \textcolor{red}{FAUX}
 \end{enumerate}
 
 \underline{Exemple 2 :}\\
