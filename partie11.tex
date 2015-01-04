@@ -71,7 +71,7 @@ $D_J$ : $\mathbb{N}$&&\\
 $\text{val}_J(p)="p_J"$ &\hspace*{1cm} &$p_J : \mathbb{N}\rightarrow\mathbb{N} : d \rightarrow 2d$\\
 $\text{val}_J(m)="m_J"$ &\hspace*{1cm} &$m_J : \mathbb{N}\rightarrow\mathbb{N} : d \rightarrow 3d$\\
 $\text{val}_J(P)="P_J"$ &\hspace*{1cm} &$P_J(d_1,d_2)$ ssi $d_2=2d_1$ ou $d_2=3d_1$\\
-$\text{val}_J(P)="GP_J"$ &\hspace*{1cm} &$GP_J(d_1,d_2)$ ssi $d_2=4d_1$ ou $d_2=6d_1$\\
+$\text{val}_J(GP)="GP_J"$ &\hspace*{1cm} &$GP_J(d_1,d_2)$ ssi $d_2=4d_1$ ou $d_2=6d_1$\\
 $\text{val}_J(GM)="GM_J"$ &\hspace*{1cm} &$GM_J(d_1,d_2)$ ssi $d_2=6d_1$ ou $d_2=9d_1$\\
 \end{tabular}\\
 
@@ -88,7 +88,7 @@ $$p \vDash_{Th} q$$
 
 Comment peut-on faire pour établir $\vDash_{Th} p$? Il y a deux approches différentes :
 \begin{enumerate}
-\item \textbf{l'approche sémantique} : on prend un modèle quelconque de $Th$ et on évalue $\text{VAL}_I (p)$ en utilisant le fait que $\text{VAL}_I (Ax_i)=V$ ;
+\item \textbf{l'approche sémantique} : on prend un modèle quelconque de $Th$ et on évalue $\text{VAL}_I (p)$ en utilisant le fait que $\text{VAL}_I (Ax_i)=T$ ;
 \item \textbf{l'approche syntaxique} : théorie de preuve : on essaye de construire une preuve de $p$ à partir des axiomes, en appliquant les règles de $Th$.\\
 \end{enumerate}
 En pratique, la deuxième approche est beaucoup plus souvent utilisée.\\
@@ -111,7 +111,7 @@ $\forall x \hspace*{0.1cm} \exists y \hspace*{0.1cm} GM(x,y)$&\hspace*{1cm}&(Int
 Certaines qualités sont directement issues de la logique:
 \begin {enumerate}
 \item {\textbf{consistante}} : il est impossible de déduire \(p\) et \(\neg p\)  de la même théorie.
-\item {\textbf{minimale}} : les axiomes son indépendants: 
+\item {\textbf{minimale}} : les axiomes sont indépendants: 
 $\{Ax_1, \hdots, Ax_n\}$   $\nvDash Ax_k $\\
 \textbf{Vérification} : Construction d'interprétations.\\
 $\text{VAL}_J (Ax_k)= False$\\

@@ -57,8 +57,12 @@ Aux axiomes et schémas d'axiomes de la théorie de l'égalité, on rajoute de n
 \underline{Théorème :} $\models \forall x, \forall y,  [x==y \Leftrightarrow (x\leq y)\land (y \leq x)] $
 \subsection{Preuve}
 La preuve va être démontrée en partie en métalangage et en partie en preuve formelle.\\ \\
-$\Leftarrow $ : est démontré par l'axiome antisymétrique\\ \\
-$\Rightarrow$ :$\models_{op} \forall x, \forall y, [x\leq y \land y \leq x]$ \\ \\
+\begin{align*}
+\Leftrightarrow \text{equivant à :} \Leftarrow \land \Rightarrow \\
+\Leftarrow \text{: est démontré par l'axiome antisymétrique} \\	
+\Rightarrow \models_{op} \forall x, \forall y, [x\leq y \land y \leq x] 
+\end{align*}
+
 \underline{preuve formelle :}
 \begin{enumerate}
 \item $ \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow y \leq x$ \hfill substituabilité à gauche
@@ -72,7 +76,7 @@ $\Rightarrow$ :$\models_{op} \forall x, \forall y, [x\leq y \land y \leq x]$ \\ 
 \item $ x==y$ \hfill supposition
 \item $ y\leq x$ \hfill modus ponens (1,4)
 \item $ x\leq y$ \hfill modus ponens (2,4)
-\item $ y\leq x \land  x\leq y$ \hfill conjonction (5,6)
+\item $ y\leq x \land  x\leq y$ \hfill conjonction (6,7)
 \item $ x==y \Rightarrow x \leq x \Leftrightarrow y\leq x \land  x\leq y$
 \item $ \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow y\leq x \land  x\leq y$ \hfill $\forall$ Introduction
 \end{enumerate}
