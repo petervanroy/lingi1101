@@ -1,61 +1,58 @@
-\section{Deux règles plus sophistiquées}
-\subsection{Théorème de déduction}
+%% Partie 4 commence ici
 
+% \section{Deux règles plus sophistiquées}
+% \subsection{Théorème de déduction}
+% 
+% \begin{itemize}
+% \item  Pour prouver s $\Rightarrow$ t
+% \item  On suppose s vrai
+% \item  On déduit t
+% \item  Ensuite, on évacue l'hypothèse
+% \end{itemize}
+% 
+% 
+% \textit{Notation: p $\vdash$ t (on peut prouver t à partir de p) }
+% 
+% \subsubsection{Prémisse:}
+% 
+% \begin{equation}
+% \frac{p,..., r, s \vdash t} 
+% {p,..., r \vdash (s \Rightarrow t)}
+% \end{equation}
+% 
+% \subsubsection{Conclusion:}
+% 
+% Déduire une implication
+% 
+% \subsection{Preuve par contradiction (ou preuve indirecte)}
+% 
+% On prend une hypothèse, et on peut prouver qu'elle est vraie ou fausse, d'où l'hypothèse n'est pas bonne.
+% 
+% \subsubsection{Prémisse:} 
+% on suppose que p...q n'a pas de problème
+% 
+% \begin{equation}
+% \begin{split}
+% p,...,q, r, s \vdash s \\
+% \frac{p,...,q, r, s \vdash \lnot s}
+% {p,...,q \vdash \lnot r}
+% \end{split}
+% \end{equation}
+% 
+% \subsubsection{Conclusion:}
+% 
+% si p...q n'a pas de problème, on se focalise alors sur r
+
+\section{Exemples de l'utilisation des schémas}
+
+Pour illustrer l'utilisation des deux schémas, la preuve conditionnelle et la preuve par contradiction,
+nous allons prouver la même conclusion en trois manières, avec chaque schéma et sans schéma.
 \begin{itemize}
-\item  Pour prouver s $\Rightarrow$ t
-\item  On suppose s vrai
-\item  On déduit t
-\item  Ensuite, on évacue l'hypothèse
+\item Prémisse: $(p \land q) \lor r$
+\item Conclusion: $\lnot$ p $\Rightarrow$ r
 \end{itemize}
 
-
-\textit{Notation: p $\vdash$ t (on peut prouver t à partir de p) }
-
-\subsubsection{Prémisse:}
-
-\begin{equation}
-\frac{p,..., r, s \vdash t} 
-{p,..., r \vdash (s \Rightarrow t)}
-\end{equation}
-
-\subsubsection{Conclusion:}
-
-Déduire une implication
-
-\subsection{Preuve par contradiction (ou preuve indirecte)}
-
-On prend une hypothèse, et on peut prouver qu'elle est vraie ou fausse, d'où l'hypothèse n'est pas bonne.
-
-\subsubsection{Prémisse:} 
-on suppose que p...q n'a pas de problème
-
-\begin{equation}
-\begin{split}
-p,...,q, r, s \vdash s \\
-\frac{p,...,q, r, s \vdash \lnot s}
-{p,...,q \vdash \lnot r}
-\end{split}
-\end{equation}
-
-\subsubsection{Conclusion:}
-
-si p...q n'a pas de problème, on se focalise alors sur r
- 
-
-\section{Exemples de preuves}
-
-Une preuve est une séquence de pas où chaque pas est une application de règles d'inférences et de lois logiques
-Il faut justifier à chaque étape le nom de la règle / loi, et indenter les éléments de la preuve en preuve conditionnelle indirecte.
-
-\subsection{Prémisse:} 
-
-$(p \land q) \lor r$
-
-\subsection{Conclusion:}
-
-$\lnot$ p $\Rightarrow$ r
-
-\subsection{Exemple sans preuve conditionnelle}
+\subsection{Exemple sans schéma}
 
 \begin{tabular}{|l|l|}
 \hline
@@ -69,8 +66,7 @@ $\lnot$ p $\Rightarrow$ r
 \hline
 \end{tabular}
 
-\subsection{Exemple avec preuve conditionnelle}
-
+\subsection{Exemple de preuve conditionnelle}
 
 \begin{tabular}{|l|l|}
 \hline

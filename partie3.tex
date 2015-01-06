@@ -151,11 +151,11 @@ Le problème de cette méthode de preuve est qu'elle requiert de l'intuition, de
 
 Une preuve déductive est un objet mathématique qui formalise une séquence
 de pas de raisonnement simples.
-Ces pas sont une formalisation de trois différentes techniques de raisonnements:
+Chaque pas doit être justifié avec le nom de la règle ou la loi qui est utilisée.
+Les pas utilisent trois techniques de raisonnement différentes:
 les équivalences logiques, les règles d'inférence et les schémas de preuve.
-En utilisant ces techniques,
-une preuve déductive est beaucoup plus proche à une preuve informelle faite par un être humain,
-tout en restant formelle.
+Avec ces techniques,
+une preuve déductive est beaucoup plus expressive qu'une preuve transformationnelle.
 
 \subsection{Equivalences logiques}
 			\begin{center}
@@ -264,11 +264,12 @@ Nous utilisons un raisonnement informel pour justifier chaque règle.
 En plus des équivalences logiques et des règles d'inférence,
 nous ajoutons deux schémas de preuve qui formalisent des
 techniques de raisonnement plus abstraites:
-le théorème de déduction et la preuve par contradiction.
-Ces schémas donnent à une preuve déductive une grande expressivité,
+le théorème de déduction et la démonstration par l'absurde.
+Ces schémas donnent à l'approche de preuve déductive une grande expressivité,
 beaucoup plus qu'une preuve transformationnelle.
 
-\subsubsection*{Théorème de déduction}
+\subsubsection*{Théorème de déduction (preuve conditionnelle)}
+
 Pour prouver la proposition $s\Rightarrow t$, on suppose $s$ vrai.
 La proposition $s$ s'ajoute donc aux prémisses utilisées dans la preuve.  
 Ensuite, on fait une preuve de $t$:
@@ -291,9 +292,14 @@ On déduit $t$ et donc on sait que l'hypothèse $s\Rightarrow t$ est vraie et on
 car une preuve est une séquence de manipulations syntaxiques.
 			\end{itemize}
 			
-\subsubsection*{Preuve par contradiction}
-		C'est une preuve indirecte :\\
-		Implicitement, on suppose que $p$ jusqu'à $q$ n'a pas de problème, c'est-à-dire qu'on ne peut pas prouver une contradiction pour ces formules propositionnelles.
+\subsubsection*{Démonstration par l'absurde (preuve par contradiction)}
+		On suppose que les prémisses $p, ..., q$ n'ont pas de problème,
+c'est-à-dire qu'on ne peut pas prouver une contradiction à partir de ces propositions.
+Ensuite, on ajoute $r$ aux prémisses.
+S'il est possible de prouver $s$ et aussi de prouver $\lnot s$, cela signifie qu'il y a une erreur dans les prémisses.
+On suppose que c'est l'ajout $r$ qui est fautif.
+On justifie qu'il n'y a aucune contradiction dans $p, ... ,q$ car on part du principe qu'il existe un modèle de $p,...q$.
+On écrit ce schéma ainsi:
 		\begin{center}
 			\begin{tabular}{c}
       		$p,...,q,r \vdash s$ \\
@@ -303,12 +309,9 @@ car une preuve est une séquence de manipulations syntaxiques.
    			\end{tabular}\\
 			\end{center}
 			
-			Ceci signifie qu'il y a une erreur dans les prémisses, et on suppose ici que c'est la formule propositionnelle $r$ qui est fautive. On justifie qu'il n'y a aucune contradiction dans $,p,...,q$ car on part du principe qu'il existe un modèle de $p,...q$.\\
-			
-			Tout ceci est une formalisation de choses qu'on connaît déjà, mais ça nous donne une notion précise du raisonnement à avoir.
-			
-\section{Exemple de preuve propositionnelle}
+\section{Exemple de preuve déductive}
 
+Nous donnons un premier exemple de preuve déductive.
 Voici les propositions premières :
 \begin{enumerate}
 \item[A =] "tu manges bien"
@@ -317,8 +320,8 @@ Voici les propositions premières :
 \item[D =] "tu es en bonne forme physique"
 \item[E =] "tu vis longtemps"
 \end{enumerate}
-
-On peut maintenant établir une théorie dont on espère qu'elle aura un modèle. 
+On peut maintenant établir une théorie, c'est-à-dire, un ensemble de propositions,
+dont on espère qu'elle aura un modèle.
 
 \paragraph{Théorie} 
 \begin{enumerate}
@@ -328,9 +331,16 @@ On peut maintenant établir une théorie dont on espère qu'elle aura un modèle
 \item $\lnot E$
 \end{enumerate}
 
-\paragraph{A Prouver} $\lnot A \land \lnot C$
+\paragraph{À prouver} $\lnot A \land \lnot C$
 
 \paragraph{Preuve}
+Voici la preuve déductive.  Nous la mettons dans un cadre pour souligner qu'elle est un objet mathématique.
+Chaque ligne est où une prémisse, où un pas de raisonnement (une équivalence ou une règle d'inférence).
+Pour chaque ligne il faut donner le nom de la règle qui est appliquée, cela s'appelle la {\em justification}
+et c'est une partie importante de la preuve.
+Les deux schémas se présentent avec des indentations; la partie indentée d'une preuve contient une prémisse
+en plus ($s$ pour la preuve conditionnelle, $r$ pour la preuve indirecte).
+
 \begin{tabular}{|l|l|}
 \hline
 1. A$\Rightarrow$B & prémisse \\
@@ -352,7 +362,191 @@ On peut maintenant établir une théorie dont on espère qu'elle aura un modèle
 \hline
 \end{tabular}\\
 
-Grâce à la déduction, nous avons pu prouver que tu ne manges pas bien et que tu ne pratiques pas d'activité physique régulière. 
-On aimerait maintenant pouvoir automatiser les preuves quand elles existent. Mais il faut savoir s'il peut tout résoudre ou pas. 
-On va donc construire un algorithme nous permettant de résoudre automatiquement les preuves en logique propositionnelle.
+Les quatre premières lignes introduisent les prémisses (les propositions de la théorie).
+La ligne 5 commence une première preuve indirecte: on fait l'hypothèse A
+et ensuite on déduit E (sur la ligne 8).  C'est une contradiction avec la prémisse $\lnot$E
+et donc on vient de prouver $\lnot$A (sur la ligne 9).
+La ligne 10 commence une deuxième preuve indirecte: on fait l'hypothèse C
+et ensuite on déduit E (sur la ligne 14).  De nouveau, c'est une contradiction (avec la prémisse $\lnot$E)
+et donc on vient de prouver $\lnot$C (sur la ligne 15).
+Les justifications pour les lignes 9 et 15 sont {\em preuve indirecte}.
+
+Avec cette preuve déductive,
+nous avons pu prouver que tu ne manges pas bien et que tu ne pratiques pas d'activité physique régulière. 
+% Maintenant nous allons automatiser les preuves, quand elles existent.
+% Mais il faut savoir s'il peut tout résoudre ou pas. 
+% Dans la section suivante
+% on va donc construire un algorithme nous permettant de trouver automatiquement les preuves en logique propositionnelle.
 % \end{document}
+
+%% Partie 4 commence ici
+
+% \section{Deux règles plus sophistiquées}
+% \subsection{Théorème de déduction}
+% 
+% \begin{itemize}
+% \item  Pour prouver s $\Rightarrow$ t
+% \item  On suppose s vrai
+% \item  On déduit t
+% \item  Ensuite, on évacue l'hypothèse
+% \end{itemize}
+% 
+% 
+% \textit{Notation: p $\vdash$ t (on peut prouver t à partir de p) }
+% 
+% \subsubsection{Prémisse:}
+% 
+% \begin{equation}
+% \frac{p,..., r, s \vdash t} 
+% {p,..., r \vdash (s \Rightarrow t)}
+% \end{equation}
+% 
+% \subsubsection{Conclusion:}
+% 
+% Déduire une implication
+% 
+% \subsection{Preuve par contradiction (ou preuve indirecte)}
+% 
+% On prend une hypothèse, et on peut prouver qu'elle est vraie ou fausse, d'où l'hypothèse n'est pas bonne.
+% 
+% \subsubsection{Prémisse:} 
+% on suppose que p...q n'a pas de problème
+% 
+% \begin{equation}
+% \begin{split}
+% p,...,q, r, s \vdash s \\
+% \frac{p,...,q, r, s \vdash \lnot s}
+% {p,...,q \vdash \lnot r}
+% \end{split}
+% \end{equation}
+% 
+% \subsubsection{Conclusion:}
+% 
+% si p...q n'a pas de problème, on se focalise alors sur r
+
+\section{Exemples de l'utilisation des schémas}
+
+Pour illustrer l'utilisation des deux schémas, la preuve conditionnelle et la preuve par contradiction,
+nous allons prouver la même conclusion en trois manières, avec chaque schéma et sans schéma.
+\begin{itemize}
+\item Prémisse: $(p \land q) \lor r$
+\item Conclusion: $\lnot$ p $\Rightarrow$ r
+\end{itemize}
+
+\subsection{Exemple sans schéma}
+
+\begin{tabular}{|l|l|}
+\hline
+1. $(p \land q) \lor r$ & \textit{Prémisse} \\
+2. $r \lor (p \land q)$ & \textit{Commutativité en 1} \\
+3. $(r \lor p) \land (r \lor q)$ & \textit{Associativité en 2}\\
+4. $(r \lor p)$ & \textit{Simplification en 3}\\
+5. $(p \lor r)$ & \textit{Commutativité en 4}\\
+6. $\lnot \lnot p \lor r $ & \textit{Loi de la négation en 5}\\
+7. $\lnot p \Rightarrow r $ & \textit{Implication en 6}\\
+\hline
+\end{tabular}
+
+\subsection{Exemple de preuve conditionnelle}
+
+\begin{tabular}{|l|l|}
+\hline
+1. $(p \land q) \lor r $ & \textit{Prémisse} \\
+2. $\lnot \lnot(p \land q) \lor r $ & \textit{Double négation en 1} \\
+3. $\lnot ( \lnot p \lor \lnot q) \lor r $ & \textit{Loi De Morgan en 2} \\
+4. $\lnot p \lor \lnot q \Rightarrow r $ & \textit{Implication en 3}\\
+\indent 5.  $\lnot p $ & \textit{Hypothèse}\\
+\indent 6.  $\lnot p \lor \lnot q $& \textit{ Addition sur 5}\\
+\indent 7.  $r$ & \textit{ Modus Ponens sur 4 et 6}\\
+8.  $\lnot p \Rightarrow r $& \textit{Evacuation de l'hypothèse}\\
+\hline
+\end{tabular}
+
+\subsection{Exemple de preuve par contradiction}
+
+\begin{tabular}{|l|l|}
+\hline
+1. $(p \land q) \lor r $ & \textit{Prémisse}\\
+2. $ (p  \lor r) \land (q \lor r)$ & \textit{Distributivité sur 1}\\
+3. $(p \lor r)$ & \textit{Simplification en 2}\\
+
+ \indent 4. $\lnot ( \lnot p \Rightarrow r)$ & \textit{Hypothèse}\\
+ \indent 5. $\lnot ( \lnot \lnot p \lor r)$ &\textit{Implication en 4}\\
+ \indent 6. $\lnot (p \lor r)$ & \textit{ Négation en 5}\\
+
+
+7. $\lnot \lnot (\lnot p \Rightarrow r) $ & \textit{ Preuve par contradiction}\\
+8. $\lnot p \Rightarrow r $ & \textit{Négation en 7}\\
+\hline
+\end{tabular}
+
+
+\section{Quelques concepts supplémentaires}
+\subsection{Principe de dualité }
+
+\subsubsection{Dans les formules sans $\rightarrow$ :}
+
+\begin{align*}
+\land \leftrightarrow \lor \\ 
+true \leftrightarrow false 
+\end{align*}
+\begin{align*}
+\models \lnot ( p \land q)  \Leftrightarrow \lnot p \lor \lnot q \\
+\models \lnot ( p \lor q)  \Leftrightarrow \lnot p \land \lnot q 
+\end{align*}
+
+\subsubsection{Formule quelconque:}
+
+\begin{align*}
+\land \leftrightarrow \lor \\ 
+true \leftrightarrow false \\ 
+p \leftrightarrow \lnot p 
+\end{align*}
+
+ Justification en raisonnant sur les modèles:
+ \begin{align*}
+	 (p_1,...,p_n) \models q \hspace{1cm} ssi \models (p_1 \land ... \land p_n \land q) \leftrightarrow false \\
+	 ssi \models ( \lnot p_1 \lor ... \lor \lnot p_n \lor q) \leftrightarrow true
+ \end{align*}
+
+
+
+\subsection{Algorithme de normalisation}
+
+Une formule quelconque peut être transformée en une formule équivalente de forme normale.
+
+\subsubsection{Forme Normale}
+
+\begin{itemize}
+  \item Conjonctive: $( p \lor q ) \land ( q \lor a ) \land ( s \lor r )$  
+  \item Disjonctive: $( p \land q ) \lor ( q \land a ) \lor ( s \land r )$  
+\end{itemize}
+
+\subsubsection{Terminologie}
+
+\begin{itemize}
+	\item Littéral : $P \lor \lnot P \approxeq L$
+	\item Clause : $\lor L_i = ( L_1 \lor L_2 \lor L_3 \lor ... \lor L_i )$
+\end{itemize}
+
+\subsubsection{Algorithme de normalisation}
+
+\begin{enumerate}
+\item Eliminer les $\rightarrow$ et $\leftrightarrow$
+\item Déplacer les négations vers l'intérieur (dans les propositions premières) De Morgan
+\item Déplacer les disjonctions ($\lor$) vers l'intérieur
+\item Simplifier $(P \lor \lnot P)$
+\end{enumerate}
+
+\subsubsection{Exemple de normalisation}
+
+\begin{align*}
+& (p \rightarrow (Q \rightarrow R)) \rightarrow ((P \land S) \rightarrow R) \\
+& \lnot ( ... ) \lor ( ... ) \\
+& \lnot (\lnot P \lor (\lnot Q \lor R)) \lor (\lnot (P \land S) \lor R) \\
+& ( \lnot \lnot P \land \lnot (\lnot Q \lor R)) \lor ((\lnot P \lor \lnot S) \lor R) \\
+& (P \land (Q \land \lnot R)) \lor ( \lnot P \lor \lnot S \lor R) \\
+& (P \lor \lnot P \lor \lnot S \lor R) \land ( Q \lor \lnot P \lor \lnot S \lor R) \land (\lnot R \lor \lnot P \lor \lnot S \lor R) \\
+& (Q \lor \lnot P \lor \lnot S \lor R) 
+\end{align*}
+
