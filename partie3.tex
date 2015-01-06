@@ -147,10 +147,16 @@ On ajoute deux règles supplémentaires : la transitivité et la substitution.
 			\end{center}
 Le problème de cette méthode de preuve est qu'elle requiert de l'intuition, de la créativité. Elle n'est donc pas forcément plus efficace que les tables de vérité, surtout si "l'astuce" est difficile à trouver.
 		
-		\section{Preuve déductive}
-		À partir des lois logiques (lois d'équivalence) et des règles d'inférence, on va construire des preuves.\\
-		\textit{Une preuve est un objet formel défini avec précision.\\}
-		
+\section{Preuve déductive}
+
+Une preuve déductive est un objet mathématique qui formalise une séquence
+de pas de raisonnement simples.
+Ces pas sont une formalisation de trois différentes techniques de raisonnements:
+les équivalences logiques, les règles d'inférence et les schémas de preuve.
+En utilisant ces techniques,
+une preuve déductive est beaucoup plus proche à une preuve informelle faite par un être humain,
+tout en restant formelle.
+
 \subsection{Equivalences logiques}
 			\begin{center}
 			\begin{tabular}{ll}
@@ -164,11 +170,14 @@ Le problème de cette méthode de preuve est qu'elle requiert de l'intuition, de
 			$(p \land q) \lor r \Lleftarrow \Rrightarrow (p \lor r) \land (q \lor r)$ & Distributivité de $\lor$\\
 			\end{tabular}
 			\end{center}
-			Mais également l'idempotence, la commutativité, l'associativité et la distributivité de $\land$.\\
+À ces équivalence nous ajoutons aussi l'idempotence, la commutativité, l'associativité et
+la distributivité de $\land$.\\
 			
-\subsection{Règles d'inférences}
+\subsection{Règles d'inférence}
 		
-À la différence de la preuve transformationnelle, les règles d'inférences ont une direction : elles commencent par les prémisses\footnote{Les prémisses sont toujours vraies.} et se terminent par la conclusion.
+À la différence de la preuve transformationnelle, les règles d'inférences ont une direction : elles commencent par les prémisses et se terminent par la conclusion.
+Pour chaque règle, si les prémisses sont vraies, alors la conclusion est vraie.
+Nous utilisons un raisonnement informel pour justifier chaque règle.
 		\begin{center}
 		\begin{tabular}{llp{3cm}l}
 		
@@ -250,24 +259,22 @@ Le problème de cette méthode de preuve est qu'elle requiert de l'intuition, de
 		\end{tabular}
 		\end{center}
 		
-		On y ajoute 2 règles spéciales : 
-		\begin{itemize}
-		\item Le théorème de déduction,
-		\item La preuve par contradiction.
-		\end{itemize}
-		
-\subsection*{Théorème de déduction}
-			Pour prouver $s\Rightarrow t$, on suppose $s$ vrai. On déduit $t$ et donc on sait que l'hypothèse $s\Rightarrow t$ est vraie et on l'évacue.\\
-			
-			On note ce théorème $s \vdash t$ (t peut être prouvé à partir de s, ce qui signifie qu'on peut construire une preuve (objet mathématique) qui est vraie si on applique bien les règles ci-dessus).\\
-			
-			\textbf{Remarque :} $p\models t \neq p\vdash t$
-			\begin{itemize}
-			\item $p\models t$ est une notion de vérité, et donc de sémantique;
-			\item $ p\vdash t$ est une notion syntaxique, on peut prouver qu'une preuve est vraie.
-			\end{itemize}
-			
-			Notion de prouvabilité : on peut créer une preuve, et donc on peut créer une séquence de prémisses et de conclusions.
+\subsection{Schémas de preuve}
+
+En plus des équivalences logiques et des règles d'inférence,
+nous ajoutons deux schémas de preuve qui formalisent des
+techniques de raisonnement plus abstraites:
+le théorème de déduction et la preuve par contradiction.
+Ces schémas donnent à une preuve déductive une grande expressivité,
+beaucoup plus qu'une preuve transformationnelle.
+
+\subsubsection*{Théorème de déduction}
+Pour prouver la proposition $s\Rightarrow t$, on suppose $s$ vrai.
+La proposition $s$ s'ajoute donc aux prémisses utilisées dans la preuve.  
+Ensuite, on fait une preuve de $t$:
+on peut construire une preuve (objet mathématique) de $t$ en commençant de $s$.
+On note ce théorème $s \vdash t$.
+On écrit ce schéma un peu comme une règle d'inférence:
 			\begin{center}
 			\begin{tabular}{c}
       		$p,...,r,s \vdash t$ \\
@@ -275,9 +282,16 @@ Le problème de cette méthode de preuve est qu'elle requiert de l'intuition, de
       		$p,...,r \vdash s\Rightarrow t$\\
    			\end{tabular}\\
 			\end{center}
-			Ceci permet notamment de formaliser des théorèmes.
+On déduit $t$ et donc on sait que l'hypothèse $s\Rightarrow t$ est vraie et on l'évacue.
 			
-		\subsection*{Preuve par contradiction}
+			\textbf{Remarque :} Il ne faut pas confondre les deux notations $p\models t$ et $p\vdash t$.
+			\begin{itemize}
+			\item $p\models t$ est une notion de vérité (tout modèle de $p$ est un modèle de $t$), et donc de sémantique;
+			\item $ p\vdash t$ est une notion syntaxique (en commençant de $p$ on peut construire une preuve de $t$),
+car une preuve est une séquence de manipulations syntaxiques.
+			\end{itemize}
+			
+\subsubsection*{Preuve par contradiction}
 		C'est une preuve indirecte :\\
 		Implicitement, on suppose que $p$ jusqu'à $q$ n'a pas de problème, c'est-à-dire qu'on ne peut pas prouver une contradiction pour ces formules propositionnelles.
 		\begin{center}
