@@ -65,18 +65,18 @@ nous permet d’effectuer des raisonnements formels sur les propositions
 logiques. En particulier, nous pouvons précisément définir :
 
 \begin{enumerate}
-\item une \textbf{syntaxe} (définie par une grammaire)
+\item une \textit{syntaxe} (définie par une grammaire)
 qui définit ce qui est une proposition logique et ce qui ne l’est pas ;
-\item une \textbf{sémantique} qui donne un sens à chaque proposition logique ;
-\item une \textbf{théorie de preuve} permettant, en sachant qu’une proposition est
+\item une \textit{sémantique} qui donne un sens à chaque proposition logique ;
+\item une \textit{théorie de preuve} permettant, en sachant qu’une proposition est
   vraie, de trouver d’autres propositions vraies (par exemple à partir de $A
   \Rightarrow B$ on peut trouver $\lnot B \Rightarrow \lnot A$).
 \end{enumerate}
 
 \section{La syntaxe}
 
-La logique propositionnelle est un \textbf{langage formel}. Ce langage peut être défini
-à l’aide d’une grammaire sur un \textbf{alphabet}. L’alphabet est l’ensemble des
+La logique propositionnelle est un \textit{langage formel}. Ce langage peut être défini
+à l’aide d’une grammaire sur un \textit{alphabet}. L’alphabet est l’ensemble des
 symboles qui composent une proposition logique, c’est-à-dire :
 
 \begin{itemize}
@@ -116,28 +116,53 @@ les phrases propositionnelles doivent respecter~:
 
 Remarquez que seules les séquences de symboles qui respectent cette
 grammaire sont des phrases propositionnelles. Ainsi, $p \Leftrightarrow q$
-n’est \textbf{pas} une phrase propositionnelle parce que les propositions
-premières doivent \textbf{toujours} être représentées par des lettres majuscules ; de même les phrases en français —
+n’est \textit{pas} une phrase propositionnelle parce que les propositions
+premières doivent \textit{toujours} être
+représentées par des lettres majuscules ; de même les phrases en français —
 ou en klingon, ou encore dans d’autres formalismes mathématiques – comme «
   s’il fait beau alors je vais dehors » ne respectent pas la grammaire
 précédente et ne sont donc pas des phrases propositionnelles.
 
-Notez aussi que le discours à propos des phrases propositionnelles n’est
+\paragraph{Métalangage}
+Notez que notre discours (en français et en notation mathématique)
+à propos des phrases propositionnelles n’est
 pas une phrase propositionnelle. La grammaire précédente, la description de
-l’alphabet, et cette explication parlent de propositions logiques sans en
-être, et font donc partie de ce qui est appelé le \textbf{métalangage}.
+l’alphabet, et cette explication en français parlent de propositions logiques sans en
+être, et font donc partie de ce qui est appelé le \textit{métalangage}.
+Un métalangage est un deuxième langage utilisé pour parler d'un premier langage.
+Dans notre discours, le premier langage est la logique propositionnelle,
+et le deuxième langage est le français augmenté avec des notations mathématiques.
+
+Le concept de métalangage est important pour distinguer le raisonnement formel
+(en utilisant les opérations logiques définies formellement) et
+le raisonnement informel (typiquement en langage naturel augmenté par des notations mathématiques).
+Le raisonnement informel reste très important, même si le but ultime est de faire le plus
+possible en raisonnement formel, parce qu'il est plus facile d'éviter des erreurs
+de raisonnement dans un raisonnement formel.
 
 \section{Les tables de vérité}
 
-La grammaire permet de définir précisément l’ensemble des phrases
-propositionnelles, mais pas de leur donner un sens, c’est-à-dire de définir
-quand une proposition est vraie ou fausse.
+La grammaire définie dans la section précédente permet d'écrire
+les propositions en logique propositionnelle,
+mais elle ne leur donne pas un sens,
+c’est-à-dire de définir quand une proposition est vraie ou fausse.
+Plus précisément, le sens d'une proposition s'appelle la sémantique
+de la proposition.
+Pour savoir si une proposition est vraie ou fausse, il faut commencer
+par choisir pour chacune de ses propositions premières si elle est vraie ou fausse.
+Ensuite on peut déterminer si la proposition est vraie ou fausse.
+Il y a deux approches principales pour faire cela:
+les {\em tables de vérité} et les {\em interprétations}.
+Dans cette section nous expliquerons les tables de vérité.
+Dans la section suivante nous expliquerons les interprétations.
 
-Pour cela, il faut décider lesquelles des propositions premières sont vraies
-et lesquelles sont fausses. Rappelez-vous que la signification des
-propositions premières n’a aucune importance, ce choix est donc complètement
-arbitraire (le choix qui décrit au mieux le monde réel n’est qu’un des choix
-possibles parmi tous les autres). On sait également que les propositions
+Rappelez-vous que la signification des
+propositions premières n’a aucune importance, le choix de sa véracité
+est donc complètement
+arbitraire.
+Le choix qui décrit au mieux le monde réel n’est qu’un des choix
+possibles parmi tous les autres.
+On sait également que les propositions
 $\true$ et $\false$ sont, respectivement, toujours vraies et toujours
 fausses.
 
@@ -234,13 +259,14 @@ vérité :
 
 \section{Les interprétations}
 
-Une autre façon plus puissante de définir si une proposition est vraie ou fausse est d’utiliser
-une \textbf{interprétation}. Si $E_P$ est l’ensemble des propositions premières,
+Une autre façon de définir si une proposition est vraie ou fausse est d’utiliser
+une \textit{interprétation}. Si $E_P$ est l’ensemble des propositions premières,
 alors une interprétation $I$ définit la fonction $\val_I : E_P \rightarrow
-\{\true, \false\}$ \footnote{La notation $f : A \rightarrow B$ signifie que $f$
-  est une fonction depuis l’ensemble $A$ vers l’ensemble $B$.  } qui permet de
-savoir si ces propositions premières sont vraies ou fausses. Par exemple, on
-pourrait écrire ceci :
+\{\true, \false\}$ 
+qui permet de savoir si ces propositions premières sont vraies ou fausses.\footnote{La notation
+$f : A \rightarrow B$ signifie que $f$
+est une fonction depuis l’ensemble $A$ vers l’ensemble $B$.  } 
+Par exemple, on pourrait écrire ceci :
 
 \[\val_I(A) = \true\]
 \[\val_I(B) = \false\]
@@ -341,14 +367,21 @@ menti en partant promener le chien alors qu'il pleuvait à midi, rien n'ayant
 
 \section{Les modèles logiques}
 
+Dans le premier chapitre, nous avons parlés de modèles théoriques (ou théories)
+d'un système dans le monde réel.
+Dans le contexte de la méthode scientifique,
+nous avons fait de la déduction à partir de ces modèles théoriques.
+Maintenant que nous avons introduit notre première logique et sa sémantique,
+nous pouvons rendre ces notions plus concrètes.
+
 À partir de la notion d’interprétation, nous pouvons définir ce qu’est
-un \textbf{modèle}. Soit $B = \{b_1, b_2, \dots, b_n \}$ un ensemble de
+un \textit{modèle}. Soit $B = \{b_1, b_2, \dots, b_n \}$ un ensemble de
 propositions logiques. Une interprétation $I$ est un modèle de $B$ si et
 seulement si $\forall b_i \in B. \VAL_I(b_i) = \true$. Autrement dit, $I$
-décris un univers qui respecte toutes les règles se trouvant dans l’ensemble
+décrit un univers qui respecte toutes les règles se trouvant dans l’ensemble
 $B$.
 
-Dans l'exemple précédent, l’interprétation choisie n’est donc pas un modèle
+Dans l'exemple de la section précédente, l’interprétation choisie n’est donc pas un modèle
 de la proposition analysée, celle-ci n’étant pas validée. Par contre, 
 l’interprétation telle que $\val_I(B) = \true$, $\val_I(M) = \true$ et
 $\val_I(P) = \true$ est bien un modèle de la proposition utilisée comme
@@ -405,13 +438,13 @@ choisie soit le modèle d’autres propositions que celle étudiée ou non (par 
 			\end{center}
 			L'équivalence logique n'est pas non plus une proposition logique.\\
 			
-			Il ne faut pas non plus oublier la différence entre phrase propositionnelle ($p$, $q$, $s$,...) et propositions primaires ($P$, $Q$, $S$,...) (cf. syntaxe d'une proposition) :
+			Il ne faut pas non plus oublier la différence entre phrase propositionnelle ($p$, $q$, $s$,...) et propositions premières ($P$, $Q$, $S$,...) (cf. syntaxe d'une proposition) :
 			\begin{center}
-			\begin{tabular}{ll}
-				$p \Rightarrow q$ & n'est pas une proposition\\
+			\begin{tabular}{lll}
+				& $p \Rightarrow q$ & n'est pas une proposition\\
 				
-				mais &\\
-				$P \land Q \Rightarrow R \land \lnot S$ & en est bien une.\\
+				mais &&\\
+				&$P \land Q \Rightarrow R \land \lnot S$ & en est bien une.\\
 			\end{tabular}
 			\end{center}
 	
