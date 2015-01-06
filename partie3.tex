@@ -50,14 +50,33 @@
 % 			\end{center}
 % 	
 	\chapter{Preuves en logique propositionnelle}
-		Une preuve est une manière de partir d’une formule et de dire si celle-ci est vraie ou fausse.\\
-		il y a 3 approches possibles :
+		Une preuve est un raisonnement déductif qui démontre si une proposition
+est vraie ou fausse.
+On distingue des preuves informelles et des preuves formelles.
+Une preuve informelle est un raisonnement en langage naturel, parfois augmenté avec des
+notations mathématiques.
+Une preuve formelle est un objet mathématique qui formalise le raisonnement déductif.
+Un des buts de la logique mathématique est de prouver le plus possibles des résultats
+mathématiques avec des preuves formelles.
+
+Au 20ème siècle les mathématiciens sont arrivés à prouver la plupart des mathématiques
+classiques (telles qu'utilisées par des ingénieurs) avec des preuves formelles.
+Un des résultats les plus célèbres est la preuve formelle du théorème des quatre couleurs,
+fait par Georges Gonthier et Benjamin Werner avec l'assistant de preuve Coq (un logiciel
+qui automatise la plupart des manipulations formelles nécessaires).
+Ce théorème dit que toute carte découpée en régions connexes peut être colorée avec seulement
+quatre couleurs, de sorte que deux régions adjacentes ont toujours des couleurs distinctes.
+
+Dans ce chapitre nous allons définir des preuves formelles pour la logique propositionnelle.
+Nous présenterons trois approches:
 		\begin{itemize}
 			\item Table de vérité
 			\item Preuve transformationnelle
 			\item Preuve déductive (la plus générale)		
 		\end{itemize}
+
 		\section{Preuve avec table de vérité}
+La preuve formelle la plus simple est une table de vérité.
 			\newcolumntype{x}{>{\itshape\bfseries}c}
 		Prouvons que $\lnot (P \land Q) \Leftrightarrow (\lnot P \lor \lnot Q)$ est vrai :
 			\begin{center}
@@ -71,11 +90,21 @@
 			\end{tabular}
 			\end{center}
 
-On peut constater que le vecteur de vérité de $\lnot (P \land Q)$ est équivalent à celui de $(\lnot P \lor  \lnot Q)$. La preuve a donc vérifié la véracité de la proposition. \\
+On peut constater que le vecteur de vérité de $\lnot (P \land Q)$ est équivalent à celui de $(\lnot P \lor  \lnot Q)$. La preuve a donc vérifié la véracité de la proposition.
+Notez qu'une table de vérité est un objet mathématique en métalangage
+parce qu'elle n'est pas une proposition.
+
 L'inconvénient de cette méthode de preuve est qu'elle devient rapidement très lourde quand le nombre de propositions premières augmente. Il faut en effet $2^n$ lignes dans la table pour $n$ propositions. 
 
 \section{Preuve transformationnelle}
-			On va utiliser des "Lois", c'est-à-dire des équivalences.
+
+Une preuve transformationnelle est une séquence de transformations
+$p_1 \Lleftarrow \Rrightarrow p_2 \Lleftarrow \Rrightarrow \cdots \Lleftarrow \Rrightarrow p_n$,
+dans laquelle on a toujours $p_i \Lleftarrow \Rrightarrow p_{i+1}$
+(équivalence logique entre éléments adjacents dans la séquence).
+Une preuve transformationnelle est aussi un objet mathématique en métalangage.
+Pour faciliter la création d'une preuve transformationnelle,
+on utilise des "Lois", c'est-à-dire des équivalences connues.
 			\begin{center}
 			\begin{tabular}{|ll|}
 			\hline
@@ -89,16 +118,15 @@ L'inconvénient de cette méthode de preuve est qu'elle devient rapidement très
 			\hline
 			\end{tabular}
 			\end{center}
-			On y ajoute 2 règles supplémentaires pour cette technique : 
+On ajoute deux règles supplémentaires : la transitivité et la substitution.
 			\subsection*{Transitivité de l'équivalence}
 			\indent Si $p \Lleftarrow \Rrightarrow q$ et $q \Lleftarrow \Rrightarrow r$, alors $p \Lleftarrow \Rrightarrow r$.
 			\subsection*{Substitution}
 			Il est autorisé de remplacer une formule par une formule équivalente à l’intérieur d’une autre formule. Autrement dit : \\
 			\indent Soit p,q,r des formules propositionnelles.\\
 			\indent Si $p \Leftrightarrow q$ et $r(p)$, alors $r(p) \Lleftarrow \Rrightarrow r(q)$.\\
-			On peut remplacer $p$ par $,q$ car elles sont équivalentes. 
+			On peut remplacer $p$ par $q$ car elles sont équivalentes. 
 			
-			{\color{red}{\danger}Ces règles sont en métalangage. Elles expliquent ce qu'il est autorisé de faire mais ne sont pas des propositions logiques.}
 			
 			\subsection*{Exemple}
 			On veut prouver : $p \land (q \land r) \Lleftarrow \Rrightarrow (p \land q) \land r$
