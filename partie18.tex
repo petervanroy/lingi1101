@@ -1,17 +1,45 @@
 \chapter{Théorie des Graphes}
 
+\section{Définitions\\}
+Graphe G = ensemble de liens et de nœuds. Un lien est une paire de deux nœuds.
+\begin{center}
+\textbf{
+G = (N,E)\\
+N = nœud\\
+E = edge (lien, arête)\\
+}
+\end{center}
+Deux types de graphes :
+\begin{itemize}
+
+\item \textbf{Les graphes orientés} (avec flèches et principe de direction). Une arête/lien est une paire de nœuds. L'ordre a de l'importance. Dans cet exemple, les paires de nœuds sont : (A,B), (A,C), (D,A) et (C,D). 
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{images/17_oriente.png}
+\caption{Graphe orienté}
+\end{figure}
+\item \textbf{Les graphes non orientés} (sans flèche, sans direction). Une arête est un ensemble de deux nœuds. On ne parle pas de "paire" vu que l'ordre des nœuds n'a pas d'importance. Ici, parler de l'arête (A,B) ou (B,A) revient à la même chose.
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=1]{images/17_non-oriente.png}
+\caption{Graphe non orienté}
+\end{figure}
+\\
+\end{itemize}
+Dans le cours, on aura surtout affaire à des graphes non orientés.
 
 \section{Chemins et connectivité}
 Nous allons commencer par rappeler la notion de chemin:
 	\begin{description}
-	\item[Chemin]: c'est une séquence de n\oe uds dont chaque paire consécutive est une arrête.
-    \item[Chemin simple]: c'est un chemin dont chaque n\oe ud se trouve au maximum une fois dans la séquence de n\oe uds.
-    \item[Cycle]: c'est un chemin dont le premier et le dernier n\oe ud sont les mêmes. Un cycle possède au moins 3 liens (arêtes).\\
+	\item [Chaine] : Dans un graphe non orienté, une chaîne reliant une somme $x$ à un sommet $y$ est une suite finie d'arêtes consécutives, reliant $x$ à $y$
+	\item[Chemin]: c'est une séquence de n\oe uds dont chaque paire consécutive est relié par une arrête.
+    	\item[Chemin simple]: c'est un chemin dont chaque n\oe ud se trouve au maximum une fois dans la séquence de n\oe uds.
+    	\item[Cycle]: c'est un chemin dont le premier et le dernier n\oe ud sont les mêmes. Un cycle possède au moins 3 liens (arêtes).\\
 	\end{description}
 
 Maintenant, nous allons définir la notion de connectivité d'un graphe.
 	\begin{description}
-    \item[Connectivité]: un graphe est dit connexe si pour toutes paires de n\oe uds A et B, il existe au moins un chemin de A vers B.\\
+    	\item[Connectivité]: un graphe est dit connexe si pour toutes paires de n\oe uds A et B, il existe au moins un chemin de A vers B.\\
 	\end{description}
 
 Tous les graphes ne sont en effet pas connexes. La figure \ref{graphe_non_connexe} montre un exemple de graphe non connexe.
