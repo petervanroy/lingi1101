@@ -7,7 +7,8 @@ talking about.}} » --- Richard Feynman à propos des mathématiciens.
 \end{quote}
 
 La logique propositionnelle est la plus simple des formes de logique. Elle
-permet de formaliser des expressions telles que les suivantes :
+permet de formaliser des connexions logiques entre des propositions.
+Par exemple, prenons les expressions suivantes:
 
 \begin{enumerate}
 \item « S’il fait beau, alors je vais dehors. »
@@ -15,8 +16,7 @@ permet de formaliser des expressions telles que les suivantes :
 \item « Il fait jour mais pas nuit. »
 \end{enumerate}
 
-Plus précisément, nous partons d’un ensemble de propositions
-premières. Par exemple :
+Dans ces expressions, nous pouvons définir des propositions premières:
 
 \begin{enumerate}
 \item il fait beau ;
@@ -27,7 +27,8 @@ premières. Par exemple :
 \item il fait nuit.
 \end{enumerate}
 
-Le contenu exact de ces propositions n'a en fait aucune importance. C'est
+Le sens de ces propositions en langue naturelle n'a aucune importance
+dans la logique propositionnelle. C'est
 pourquoi elles seront remplacées par des lettres majuscules :
 
 \begin{enumerate}
@@ -64,16 +65,17 @@ nous permet d’effectuer des raisonnements formels sur les propositions
 logiques. En particulier, nous pouvons précisément définir :
 
 \begin{enumerate}
-\item une \textbf{grammaire} qui définit ce qui est une proposition logique et ce qui
-  ne l’est pas ;
+\item une \textbf{syntaxe} (définie par une grammaire)
+qui définit ce qui est une proposition logique et ce qui ne l’est pas ;
 \item une \textbf{sémantique} qui donne un sens à chaque proposition logique ;
 \item une \textbf{théorie de preuve} permettant, en sachant qu’une proposition est
   vraie, de trouver d’autres propositions vraies (par exemple à partir de $A
   \Rightarrow B$ on peut trouver $\lnot B \Rightarrow \lnot A$).
 \end{enumerate}
-\section{La grammaire}
 
-La logique propositionnelle est un \textbf{langage} formel. Il peut être défini
+\section{La syntaxe}
+
+La logique propositionnelle est un \textbf{langage formel}. Ce langage peut être défini
 à l’aide d’une grammaire sur un \textbf{alphabet}. L’alphabet est l’ensemble des
 symboles qui composent une proposition logique, c’est-à-dire :
 
@@ -84,8 +86,8 @@ symboles qui composent une proposition logique, c’est-à-dire :
   respectivement toujours vraies et toujours fausses ;
 \item les différents connecteurs logiques :
 	\begin{itemize}
-	\item Conjonction : $\land$
-	\item Disjonction : $\lor$
+	\item Conjonction (« et ») : $\land$
+	\item Disjonction (« ou ») : $\lor$
 	\item Négation :  $\lnot$
 	\item Implication :  $\Rightarrow$
 	\item Équivalence :  $\Leftrightarrow$
@@ -97,18 +99,18 @@ Cependant, toutes les séquences composées de ces caractères ne sont pas des
 phrases propositionnelles. La grammaire suivante permet de donner les règles que
 les phrases propositionnelles doivent respecter~:
 
-\begin{tabular}{rl}
-  $\textrm{<identificateur>}$ & = $A$ | $B$ | $C$ | $D$ | \dots \\
+\begin{tabular}{rrl}
+  $\textrm{<identificateur>}$ & ::= & $A$ | $B$ | $C$ | $D$ | \dots \\
   $\textrm{<proposition>}$
-  & = $\true$ \\
-  & | $\false$ \\
-  & | $\textrm{<identificateur>}$ \\
-  & | $(\textrm{<proposition>})$ \\
-  & | $\lnot \textrm{<proposition>}$ \\
-  & | $\textrm{<proposition>} \land \textrm{<proposition>}$ \\
-  & | $\textrm{<proposition>} \lor \textrm{<proposition>}$ \\
-  & | $\textrm{<proposition>} \Rightarrow \textrm{<proposition>}$ \\
-  & | $\textrm{<proposition>} \Leftrightarrow \textrm{<proposition>}$
+  & ::= & $\true$ \\
+  & | & $\false$ \\
+  & | & $\textrm{<identificateur>}$ \\
+  & | & $(\textrm{<proposition>})$ \\
+  & | & $\lnot \textrm{<proposition>}$ \\
+  & | & $\textrm{<proposition>} \land \textrm{<proposition>}$ \\
+  & | & $\textrm{<proposition>} \lor \textrm{<proposition>}$ \\
+  & | & $\textrm{<proposition>} \Rightarrow \textrm{<proposition>}$ \\
+  & | & $\textrm{<proposition>} \Leftrightarrow \textrm{<proposition>}$
 \end{tabular}
 \vspace{2 mm}
 
