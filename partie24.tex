@@ -2,18 +2,24 @@
 \begin{itemize}
 \item Concentrateurs ( Hubs )
 \item Autorités ( Authorities )
-\item Comment trouver la meilleure page ?
+\item Comment trouver la meilleure page ? (Voir ~\ref{fig-14-1}	)
 \end{itemize}
 
-Voir figure ci-dessous \\	
 
+
+\begin{figure}[!h]
+\centering
 \includegraphics[scale=0.5]{images/ref/fig-14-1.jpeg}
+\caption{Counting in-links to pages for the query "newspapers.	"}
+\label{fig-14-1}
+\end{figure}
+
 \subsection{Requête News Papers}
 
 \paragraph{Pourquoi Facebook, Yahoo, Amazon, se retrouvent-ils dans la requette News Papers ?}
-Car beaucoup d'utilisateurs ont des pages concentrés sur ces sites et comme dans cet exemple on utilise un algorithme qui n'est pas très sophistiqué, elles apparaissent. 
+Car beaucoup d'utilisateurs ont des pages concentrées sur ces sites et comme dans cet exemple on utilise un algorithme qui n'est pas très sophistiqué, elles apparaissent. 
 
-\paragraph{Comment pouvoir trouver la meilleure page?}
+\paragraph{Comment trouver la meilleure page ?}
 \begin{enumerate}
 \item Liens entrants $ \rightarrow $ votes
 \item Liens sortants  calcul du$ \rightarrow$  poids
@@ -66,22 +72,24 @@ conc (p) = 1
  Cet algorithme converge
 
 
-En appliquant maintenant cet algorithme, la Requête News Papers nous donnerait les résultats suivants:
+En appliquant maintenant cet algorithme, la Requête News Papers nous donnerait les résultats suivants (~\ref{pageRankNews1} et ~\ref{pageRankNews2}):
 
 
 \begin{figure}
 \centering
 \includegraphics[scale=0.5]{images/ref/fig-14-2.jpeg}
-\includegraphics[scale=0.5]{images/ref/fig-14-4.jpeg}
-
-\caption{}
+\includegraphics[scale=0.5]{images/ref/fig-14-3.jpeg}
+\caption{Page Rank}
+\label{pageRankNews1}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.5]{images/ref/fig-14-3.jpeg}
+
+\includegraphics[scale=0.5]{images/ref/fig-14-4.jpeg}
 \includegraphics[scale=0.5]{images/ref/fig-14-5.jpeg}
-\caption{}
+\caption{Page Rank}
+\label{pageRankNews2}
 \end{figure}
 
 
@@ -104,9 +112,14 @@ Au plus grand est le poids d'une page au plus son autorité sera grande.\\
 \item K mises à jour:\\
 Pr(p) = $ \sum_ {p'}\frac{Pr(p')}{n(p')} $ avec n(p') le nombre de liens sortant de p' et Pr(p') le poids (ou PageRank de p') à la $k^{ème}$ itération.
 \end{enumerate}
-\textbf{Exemple de PageRank :}\\
-Voir graphe ci-dessous : \\ 
+\subsection*{Exemple de PageRank :}
+
+\begin{figure}[h!]
+\centering
  \includegraphics[scale=0.8]{images/24_imagePr.pdf}
+\label{graphPageRank}
+\end{figure}
+
  
  	\begin{tabular}{|c| c |c |c |}
 		\hline
@@ -125,35 +138,43 @@ Voir graphe ci-dessous : \\
 		\hline
 	\end{tabular}
 
- Si nous continuons à laisser travailler l'algorithme, pour un nombre n fini d'itérations telles que k=n, il y aura convergence de l'algorithme. Dans cet exemple-ci,  nous aurons :\\
- \\
- Pr(A) = 4/13 ; Pr(B) = 2/13 ; Pr(C) = 2/13 ; Pr(Autres) = 1/13 \\
- Et la condition $ \sum Pr(p) = 1 $ est toujours vérifiée .
+
+ Si nous continuons à laisser travailler l'algorithme, pour un nombre n fini d'itérations telles que k=n, il y aura convergence de l'algorithme. Dans cet exemple-ci,  nous aurons :
+
+	\begin{align*}
+ 	Pr(A) = 4/13 ; Pr(B) = 2/13 ; Pr(C) = 2/13 ; Pr(Autres) = 1/13 \\
+ 	\text{Et la condition} \sum Pr(p) = 1 ~\text{est toujours vérifiée.}
+	\end{align*}
  
- L'équilibre est vérifié si le graphe est connexe, s’il ne l'est pas un problème se pose: Le fluide peut arriver au mauvais noeud (analogie réseau d'eau )  :
+ L'équilibre est vérifié si le graphe est connexe,par contre si il ne l'est pas un problème se pose: Le fluide peut arriver au mauvais noeud (analogie réseau d'eau )  :
 
 \includegraphics[scale=0.8]{images/24_Nconnexe.pdf}
 
-\subsubsection*{Solution du problème}
+\subsection*{Solution du problème}
 \begin{itemize}
 \item Fermer la boucle
 \item Créer des cycles
 \item Analogie : Circulation d'eau dans l'atmosphère
 \end{itemize}
- 	Il faut un peu de fluide partout dans chaque itération.\\
+ 	La solution est de réinjecter un peu de fluide partout à chaque itération pour éviter que le fluide se concentre dans les noeuds qui n'ont que des liens entrants et pas de liens sortant.
+
+	Ancienne règle de mise à jour :
+	\begin{align*}
+	Pr(p) =  \sum_ {p'}\frac{Pr(p')}{n(p')}
+	\end{align*}
  	Nouvelle règle de mise à jour : \\
- 	
-      Pr(p) = $ \sum_ {p'}\frac{Pr(p')}{n(p')} $ (ancien) \\
-     \\
-         Pr(p) = Sx(Pr(p) + (1-S)x$\frac{1}{n}$) \\
-         S est un paramètre : $ 0 \le S \le 1 $ \\
-         \\
-        \textbf{ Autre manière de voir l'algorithme :} \\
-        \\
-        Marche aléatoire : 
-        \\
-        Probabilité de S : Suivre un lien \\
-        (1-S) : Choisi un nœud au hasard \\
-        $\rightarrow $ La même valeur pour Pr(p) \\
+	\begin{align*}
+         Pr(p) = Sx(Pr(p) + (1-S)  \times \frac{1}{n}) \\
+	 \text{Ou S est un paramètre : $ 0 \le S \le 1 $} 
+	\end{align*}
+        
+\subsection*{ Une autre manière de voir l'algorithme:}
+        Marche aléatoire d'un utilisateur sur le web : 
+	\begin{itemize}
+        \item Probabilité de S : Suivre un lien dans la page web ou l'on se trouve \\
+        \item (1-S) : Choisi un n\oe ud au hasard, par exemple, taper une adresse URL et accéder directement à un site \\
+        \item $\rightarrow $ La même valeur pour Pr(p) \\
+	\end{itemize}
         PageRank : (début 1990) \\
-        - Abandon partiel en 2003/2004 à cause de SEO : Search engine optimisation (Tricheurs )
+        - Abandon partiel en 2003/2004 à cause des SEO : Search engine optimisation (Tricheurs)
+
