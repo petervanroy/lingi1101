@@ -481,32 +481,46 @@ nous allons prouver la même conclusion en trois manières, avec chaque schéma 
 \end{tabular}
 
 
-\section{Quelques concepts supplémentaires}
-\subsection{Principe de dualité }
+\section{Principe de dualité}
+
+Le principe de dualité affirme que l'on peut transformer
+une propriété vraie en une autre propriété vraie en
+remplaçant systématiquement tout symbole par un autre
+selon un schéma de correspondances.
 
 \subsubsection{Dans les formules sans $\rightarrow$ :}
 
+Les correspondances sont:
 \begin{align*}
 \land \leftrightarrow \lor \\ 
 \true \leftrightarrow \false 
 \end{align*}
+Par exemple, si on prend la tautologie suivante:
 \begin{align*}
-\models \lnot ( p \land q)  \Leftrightarrow \lnot p \lor \lnot q \\
+\models \lnot ( p \land q)  \Leftrightarrow \lnot p \lor \lnot q
+\end{align*}
+en remplaçant chaque symbole par le symbole correspondant on obtient une autre tautologie:
+\begin{align*}
 \models \lnot ( p \lor q)  \Leftrightarrow \lnot p \land \lnot q 
 \end{align*}
 
-\subsubsection{Formule quelconque:}
+\subsubsection{Dans une formule quelconque:}
 
+Les correspondances sont:
 \begin{align*}
 \land \leftrightarrow \lor \\ 
 \true \leftrightarrow \false \\ 
 p \leftrightarrow \lnot p 
 \end{align*}
-
- Justification en raisonnant sur les modèles:
+Par exemple, si on prend la définition suivante:
  \begin{align*}
-	 (p_1,...,p_n) \models q \hspace{1cm} ssi \models (p_1 \land ... \land p_n \land q) \leftrightarrow false \\
-	 ssi \models ( \lnot p_1 \lor ... \lor \lnot p_n \lor q) \leftrightarrow \true
+	 \{p_1,...,p_n\} \models q \hspace{0.5cm}
+         ssi \hspace{0.5cm} \models (p_1 \land ... \land p_n \land \lnot q) \leftrightarrow \false
+ \end{align*}
+en remplaçant chaque symbole par le symbole correspondant on obtient une propriété vraie:
+ \begin{align*}
+	 \{p_1,...,p_n\} \models q \hspace{0.5cm}
+         ssi \hspace{0.5cm} \models ( \lnot p_1 \lor ... \lor \lnot p_n \lor q) \leftrightarrow \true
  \end{align*}
 
 
