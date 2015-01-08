@@ -46,6 +46,57 @@ une preuve en logique propositionnelle.
 Cet algorithme est une automatisation de la {\em démonstration par l'absurde}
 qui est basé sur une seule règle d'inférence, la {\em résolution}.
 
+\subsection{Transformation en forme normale conjonctive}
+
+Toute formule peut être transformée en une formule équivalente, la forme normale conjonctive,
+qui a toujours la même forme.
+La forme normale conjonctive facilite la manipulation des formules nécessaire
+par l'algorithme de preuve.
+
+\subsubsection{Forme normale conjonctive}
+
+Il y a deux formes normales qui sont souvent utilisées:
+la forme normale conjonctive (FNC) et la forme normale disjonctive (FND).
+Pour l'algorithme de preuve, nous allons utiliser la FNC, mais comme la FND est parfois importante,
+nous les définissons toutes les deux.
+Dans la FNC, la formule est écrite comme une conjonction de disjonctions.
+Dans la FND, la formule est écrite comme une disjonction de conjonctions.
+À l'intérieur de chaque forme normale on trouve des propositions premières ou des négations des propositions premières.
+Voici un exemple de chaque forme normale:
+\begin{itemize}
+  \item FNC: $( P \lor \lnot Q ) \land ( Q \lor A ) \land ( \lnot S \lor R )$  
+  \item FND: $( P \land \lnot Q ) \lor ( Q \land A ) \lor ( \lnot S \land R )$  
+\end{itemize}
+Pour faciliter la discussion autour des formes normales, nous introduisons une terminologie:
+\begin{itemize}
+\item Un {\em littéral}, écrit $L$, est où une proposition première où la négation d'une proposition première.
+Pour une proposition première $P$ on peut faire deux littéraux,
+$P$ et $\lnot P$.
+\item Une {\em clause}, écrite $C$, est (pour la forme normale conjonctive) une disjonction de littéraux.
+On écrit $\lor L_i$ ou $( L_1 \lor L_2 \lor L_3 \lor ... \lor L_i )$.
+\end{itemize}
+
+\subsubsection{L'algorithme de normalisation}
+
+L'algorithme de normalisation se fait en quatre phases:
+\begin{enumerate}
+\item Eliminer les $\rightarrow$ et $\leftrightarrow$ en les remplaçant par des formules équivalentes.  Par exemple, $p \rightarrow q$ sera remplacée par $\lnot p \lor q$.
+\item Déplacer les négations vers l'intérieur (jusqu'à dans les propositions premières) en utilisant les formules de De Morgan.
+\item Déplacer les disjonctions ($\lor$) vers l'intérieur en utlisant les lois distributives.
+\item Simplifier en éliminant les formes $(P \lor \lnot P)$ dans chaque disjonction.
+\end{enumerate}
+
+\subsubsection{Exemple de normalisation}
+
+\begin{align*}
+& (P \rightarrow (Q \rightarrow R)) \rightarrow ((P \land S) \rightarrow R) \\
+& \lnot (\lnot P \lor (\lnot Q \lor R)) \lor (\lnot (P \land S) \lor R) \\
+& ( \lnot \lnot P \land \lnot (\lnot Q \lor R)) \lor ((\lnot P \lor \lnot S) \lor R) \\
+& (P \land (Q \land \lnot R)) \lor ( \lnot P \lor \lnot S \lor R) \\
+& (P \lor \lnot P \lor \lnot S \lor R) \land ( Q \lor \lnot P \lor \lnot S \lor R) \land (\lnot R \lor \lnot P \lor \lnot S \lor R) \\
+& (Q \lor \lnot P \lor \lnot S \lor R) 
+\end{align*}
+
 \subsection{La résolution}
 
 On veut quelque chose de simple, sans toutes les règles que nous avons vues auparavant, mais le plus puissant possible. Nous n'utiliserons qu'une seule règle : la \textbf{résolution}. On peut faire des résolutions de preuves propositionnelles rien qu'en ayant cette règle. Cette règle utilise la forme normale conjonctive. 

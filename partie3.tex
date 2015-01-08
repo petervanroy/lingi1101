@@ -430,7 +430,7 @@ Pour illustrer l'utilisation des deux schémas, la preuve conditionnelle et la p
 nous allons prouver la même conclusion en trois manières, avec chaque schéma et sans schéma.
 \begin{itemize}
 \item Prémisse: $(p \land q) \lor r$
-\item Conclusion: $\lnot$ p $\Rightarrow$ r
+\item Conclusion: $\lnot p \Rightarrow r$
 \end{itemize}
 
 \subsection{Exemple sans schéma}
@@ -488,7 +488,7 @@ nous allons prouver la même conclusion en trois manières, avec chaque schéma 
 
 \begin{align*}
 \land \leftrightarrow \lor \\ 
-true \leftrightarrow false 
+\true \leftrightarrow \false 
 \end{align*}
 \begin{align*}
 \models \lnot ( p \land q)  \Leftrightarrow \lnot p \lor \lnot q \\
@@ -499,54 +499,68 @@ true \leftrightarrow false
 
 \begin{align*}
 \land \leftrightarrow \lor \\ 
-true \leftrightarrow false \\ 
+\true \leftrightarrow \false \\ 
 p \leftrightarrow \lnot p 
 \end{align*}
 
  Justification en raisonnant sur les modèles:
  \begin{align*}
 	 (p_1,...,p_n) \models q \hspace{1cm} ssi \models (p_1 \land ... \land p_n \land q) \leftrightarrow false \\
-	 ssi \models ( \lnot p_1 \lor ... \lor \lnot p_n \lor q) \leftrightarrow true
+	 ssi \models ( \lnot p_1 \lor ... \lor \lnot p_n \lor q) \leftrightarrow \true
  \end{align*}
 
 
 
-\subsection{Algorithme de normalisation}
-
-Une formule quelconque peut être transformée en une formule équivalente de forme normale.
-
-\subsubsection{Forme Normale}
-
-\begin{itemize}
-  \item Conjonctive: $( p \lor q ) \land ( q \lor a ) \land ( s \lor r )$  
-  \item Disjonctive: $( p \land q ) \lor ( q \land a ) \lor ( s \land r )$  
-\end{itemize}
-
-\subsubsection{Terminologie}
-
-\begin{itemize}
-	\item Littéral : $P \lor \lnot P \approxeq L$
-	\item Clause : $\lor L_i = ( L_1 \lor L_2 \lor L_3 \lor ... \lor L_i )$
-\end{itemize}
-
-\subsubsection{Algorithme de normalisation}
-
-\begin{enumerate}
-\item Eliminer les $\rightarrow$ et $\leftrightarrow$
-\item Déplacer les négations vers l'intérieur (dans les propositions premières) De Morgan
-\item Déplacer les disjonctions ($\lor$) vers l'intérieur
-\item Simplifier $(P \lor \lnot P)$
-\end{enumerate}
-
-\subsubsection{Exemple de normalisation}
-
-\begin{align*}
-& (p \rightarrow (Q \rightarrow R)) \rightarrow ((P \land S) \rightarrow R) \\
-& \lnot ( ... ) \lor ( ... ) \\
-& \lnot (\lnot P \lor (\lnot Q \lor R)) \lor (\lnot (P \land S) \lor R) \\
-& ( \lnot \lnot P \land \lnot (\lnot Q \lor R)) \lor ((\lnot P \lor \lnot S) \lor R) \\
-& (P \land (Q \land \lnot R)) \lor ( \lnot P \lor \lnot S \lor R) \\
-& (P \lor \lnot P \lor \lnot S \lor R) \land ( Q \lor \lnot P \lor \lnot S \lor R) \land (\lnot R \lor \lnot P \lor \lnot S \lor R) \\
-& (Q \lor \lnot P \lor \lnot S \lor R) 
-\end{align*}
-
+% \subsection{Algorithme de normalisation}
+% 
+% Toute formule peut être transformée en une formule équivalente, la forme normale,
+% qui a toujours la même forme.
+% La forme normale facilite les manipulations des formules par des algorithmes.
+% Nous allons introduire une forme normale que nous allons utiliser pour l'algorithme de preuve.
+% 
+% \subsubsection{Forme normale}
+% 
+% Il y a deux formes normales qui sont souvent utilisées:
+% la forme normale conjonctive (FNC) et la forme normale disjonctive (FND).
+% Pour l'algorithme de preuve, nous allons utiliser la FNC, mais comme la FND est parfois importante,
+% nous les définissons toutes les deux.
+% Dans la FNC, la formule est écrite comme une conjonction de disjonctions.
+% Dans la FND, la formule est écrite comme une disjonction de conjonctions.
+% À l'intérieur de chaque forme normale on trouve des propositions premières ou des négations des propositions premières.
+% Voici un exemple de chaque forme normale:
+% \begin{itemize}
+%   \item FNC: $( P \lor \lnot Q ) \land ( Q \lor A ) \land ( \lnot S \lor R )$  
+%   \item FND: $( P \land \lnot Q ) \lor ( Q \land A ) \lor ( \lnot S \land R )$  
+% \end{itemize}
+% Pour faciliter la discussion autour des formes normales, nous introduisons une terminologie:
+% \begin{itemize}
+% \item Un {\em littéral}, écrit $L$, est où une proposition première où la négation d'une proposition première.
+% Pour une proposition première $P$ on peut faire deux littéraux,
+% $P$ et $\lnot P$.
+% \item Une {\em clause}, écrite $C$, est (pour la forme normale conjonctive) une disjonction de littéraux.
+% On écrit $\lor L_i$ ou $( L_1 \lor L_2 \lor L_3 \lor ... \lor L_i )$.
+% \end{itemize}
+% 
+% \subsubsection{Algorithme de normalisation}
+% 
+% Nous donnons une explication brève de l'algorithme de normalisation,
+% qui peut transformer toute formule en forme normale conjonctive.
+% L'algorithme a quatre phases:
+% \begin{enumerate}
+% \item Eliminer les $\rightarrow$ et $\leftrightarrow$ en les remplaçant par des formules équivalentes.  Par exemple, $p \rightarrow q$ sera remplacée par $\lnot p \lor q$.
+% \item Déplacer les négations vers l'intérieur (jusqu'à dans les propositions premières) en utilisant les formules de De Morgan.
+% \item Déplacer les disjonctions ($\lor$) vers l'intérieur en utlisant les lois distributives.
+% \item Simplifier en éliminant les formes $(P \lor \lnot P)$ dans chaque disjonction.
+% \end{enumerate}
+% 
+% \subsubsection{Exemple de normalisation}
+% 
+% \begin{align*}
+% & (P \rightarrow (Q \rightarrow R)) \rightarrow ((P \land S) \rightarrow R) \\
+% & \lnot (\lnot P \lor (\lnot Q \lor R)) \lor (\lnot (P \land S) \lor R) \\
+% & ( \lnot \lnot P \land \lnot (\lnot Q \lor R)) \lor ((\lnot P \lor \lnot S) \lor R) \\
+% & (P \land (Q \land \lnot R)) \lor ( \lnot P \lor \lnot S \lor R) \\
+% & (P \lor \lnot P \lor \lnot S \lor R) \land ( Q \lor \lnot P \lor \lnot S \lor R) \land (\lnot R \lor \lnot P \lor \lnot S \lor R) \\
+% & (Q \lor \lnot P \lor \lnot S \lor R) 
+% \end{align*}
+% 
