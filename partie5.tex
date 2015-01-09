@@ -185,17 +185,25 @@ Dans les deux cas de figure, on doit démontrer que quand on a un modèle, une i
 
 \subsection{Algorithme}
 
-\noindent C$_{i}$ : clause $\bigvee\limits_{i}$ L$_{i}$ \newline
-L$_{i}$ : P ou $\lnot$P \newline
-\{C$_{i}$,...,C$_{n}$\} $\models$ C \newline
-s.s.i \newline
-\{C$_{i}$,...,C$_{n}$,$\lnot$C\} $\models$ false \newline
-C$_{i}$ : axiomes \newline
-C: candidat théorème \newline
-Ce que nous voulons prouver : \{C$_{i}$,...,C$_{n}$\} $\vdash$ C \newline
-\noindent \emph{Il existe une preuve avec les règles d'inférence \{C$_{i}$,...,C$_{n}$\} tel qu'on obtient C.} \newline
-S = \{C$_{i}$,...,C$_{n}$,$\lnot$C\} \newline
-But : Déterminer si S est inconsistant. On veut faire des déductions jusqu'à arriver sur false. 
+Prenons des axiomes $C_{i}$ qui sont normalisés:
+\begin{align*}
+C_{i} = \bigvee\limits_{i} L_{i} \\
+L_{i} = P \mbox{ ou } \lnot P
+\end{align*}
+et un candidat théorème C à démontrer.
+Nous voulons donc démontrer:
+\begin{align*}
+& \{C_{i}, ..., C_{n}\} \vdash C
+\end{align*}
+C'est-à-dire, qu'il existe une preuve avec les règles d'inférence $\{C_{i}, ..., C_{n}\}$ tel qu'on obtient $C$.
+Nous savons que 
+$\{C_{i}, ..., C_{n}\} \models C$ ssi $\{C_{i}, ..., C_{n}, \lnot C\} \models \false$.
+Il suffit donc de démontrer que
+$S = \{C_{i}, ..., C_{n}, \lnot C\}$ est inconsistant.
+Pour arriver à cela, nous allons combiner des éléments de S avec la résolution,
+jusqu'à que l'on arrive sur le résultat $\false$ ou qu'il n'y a plus de possibilités d'utiliser la résolution.
+Dans le premier cas, nous avons prouvé $C$.
+Dans le deuxième cas, il n'existe pas de preuve de $C$.
 
 \subsubsection{Pseudocode}
 
