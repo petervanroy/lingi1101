@@ -211,7 +211,7 @@ Dans le deuxième cas, il n'existe pas de preuve de $C$.
 \While{$false \not\in S$ et $\exists$? clauses résolvables non résolues}{
 	\begin{itemize}
 		\item choisir $C_1,C_2 \in S$ tel que $\exists P \in C_1, \lnot P \in C_2$ 		
-		\item calculer r:=$C_1 - \{P\} \land C_2 - \{\lnot P\}$
+		\item calculer r:=$C_1 - \{P\} \lor C_2 - \{\lnot P\}$
 		\item calculer S:= $S \cup \{r\}$
 	\end{itemize}
 }
