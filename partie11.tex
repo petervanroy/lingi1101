@@ -31,8 +31,8 @@ On peut définir ces structures avec la logique des prédicats et faire des rais
 \begin{enumerate}
 \item Vocabulaire : 
 \begin{itemize}
-\item 2 symboles de fonctions : $p/1$, $m/1$
-\item 3 symboles de prédicats : $P/2$, $GM/2$, $GP/2$\\
+\item 2 symboles de fonctions à un paramètre : $p/1$, $m/1$
+\item 3 symboles de prédicats à deux paramètres : $P/2$, $GM/2$, $GP/2$\\
 \end{itemize}
 
 On peut interpréter les fonctions $p$ et $m$ comme "père de" et "mère de", et les prédicats $P$, $GM$ et $GP$ comme "parent de", "grand-mère de" et "grand-père de". On donnera plus de précisions sur cette interprétation par la suite.\\
@@ -102,13 +102,13 @@ $$\vDash_{\text{\bsc{fam}}} (\forall x)(\exists z) GM(x,z)$$
 \begin{tabular}{lll}
 $(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x, m(y)) \right)$&\hspace*{1cm}&($Ax$)\\
 $(\forall x) \left(P(x,p(x))\Rightarrow GM(x, m(p(x))) \right)$&\hspace*{1cm}&(Elimination de $\forall y$ et substitution $y/p(x)$)\\
-$\left( \forall x \hspace*{0.1cm} P(x,p(x)) \right)\Rightarrow \forall x \hspace*{0.1cm} GM(x,m(p(x)))$&\hspace*{1cm}&(Distribution $\forall/\Rightarrow$)\\
+$\left( \forall x \hspace*{0.1cm} Ax \right)\Rightarrow \forall x \hspace*{0.1cm} GM(x,m(p(x)))$&\hspace*{1cm}&\\
 $\forall x \hspace*{0.1cm} GM(x,m(p(x)))$&\hspace*{1cm}&(Modus ponens)\\
 $\forall x \hspace*{0.1cm} \exists y \hspace*{0.1cm} GM(x,y)$&\hspace*{1cm}&(Introduction de $\exists$)\\
 \end{tabular}\\
 
 \section{Qualité d'une théorie}
-Certaines qualités sont directement issues de la logique:
+Une théorie peut posséder certaines qualités. Ces qualités sont directement issues de la logique:
 \begin {enumerate}
 \item {\textbf{consistante}} : il est impossible de déduire \(p\) et \(\neg p\)  de la même théorie.
 \item {\textbf{minimale}} : les axiomes sont indépendants: 
