@@ -57,7 +57,7 @@ Que ça ne soit exactement le même modèle ne pose pas de problème pour notre 
 
 \section{Transformation en forme normale conjonctive}
 
-Mêmes manipulations qu'en logique des propositions.
+Mêmes manipulations qu'en logique des propositions (voir section \ref{transfo_propositionelle}). On veut transformer la formule en une conjonction de disjonctions.
 
 \section{La règle de résolution}
 
@@ -105,7 +105,7 @@ Il n'y pas de substitution qui existe, car on a deux constantes différentes, l'
 
 Dans ce cas-ci, il y a beaucoup de substitutions possibles telles que:
 \begin{itemize}
-  \item $\sigma_1 : \big\{ (y, f(a)), (x,a), (z,a) \big\}$ => $L_1 \sigma_1 = L_2 \sigma_1 = p(f(x), a)$
+  \item $\sigma_1 : \big\{ (y, f(a)), (x,a), (z,a) \big\}$ => $L_1 \sigma_1 = L_2 \sigma_1 = p(f(a), a)$
   \item $\sigma_2 : \big\{ (y, f(x)), (z,a) \big\}$ \hspace{11 mm}=> $L_1 \sigma_2 = L_2 \sigma_2 = p(f(x), a)$
 \end{itemize}
 Dans ce cas-ci, $\sigma_2$ est plus général.\\
@@ -160,8 +160,8 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
 
 \subsection{Initialisation de S}
 \begin{itemize}
-  \item P1: $(\forall x) homme(x) \wedge fume(x) \Rightarrow mortel(x)$
-  \item P2: $(\forall x) animal(x) \Rightarrow mortel(x)$
+  \item P1: $(\forall x) \neg (homme(x)\wedge fume(x)) \vee mortel(x)$
+  \item P2: $(\forall x) \neg animal(x) \vee mortel(x)$
   \item P3: $homme(Ginzburg)$
   \item P4: $fume(Ginzburg)$
   \item P5: $\neg mortel(Ginzburg)$
@@ -169,21 +169,21 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
 
 \subsection{Itérations}
 
-\textbf{\underline{A}}
+\textbf{\underline{1}}
 \begin{itemize}
   \item P1 + P5
   \item $\sigma = \big\{ (x, Ginzburg) \big\}$
   \item $r = P6 = \neg homme(Ginzburg) \vee \neg fume(Ginzburg)$
 \end{itemize}
 
-\textbf{\underline{B}}
+\textbf{\underline{2}}
 \begin{itemize}
   \item P3 + P6
   \item $\sigma = \big\{ \big\}$
   \item $r = P7 = \neg fume(Ginzburg)$
 \end{itemize}
 
-\textbf{\underline{C}}
+\textbf{\underline{3}}
 \begin{itemize}
   \item P4 + P7
   \item $\sigma = \big\{ \big\}$
@@ -192,9 +192,9 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
 
 \subsection{Non-déterminisme}
 
-Importance des \underline{choix} qu'on fait.
+Importance des \underline{choix} qu'on fait. Voici un déroulement alternatif :
 
-\textbf{\underline{A}}
+\textbf{\underline{1}}
 \begin{itemize}
   \item P2 + P5
   \item $\sigma = \big\{ (x, Ginzburg) \big\}$
@@ -213,3 +213,5 @@ Si on avait fait ce choix-ci pour la première itération, l'algorithme ne peut 
 Les assistants de preuves utilisent des stratégies existantes, avec l'input de l'humain.
 
 Le langage \textbf{Prolog}, inventé en 1972 par Alain Colmerauer et Robert Kowalski, utilise \underline{volontairement} des stratégies naïves qui permettent de rendre l'algorithme prévisible. Les axiomes deviennent un \underline{programme}, c'est la programmation logique. Un exemple de stratégie naïve est la stratégie LUSH qui choisi de haut vers le bas les paires $p_i, p_j$, et de gauche à droite dans $p_i$.
+
+La programmation logique sera expliquée plus avant dans la partie \ref{prolog}.
