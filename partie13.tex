@@ -14,8 +14,8 @@ Pour définir ce qu'est une égalité, nous avons d'abord besoin de définir 3 a
 \item Réflexivité \\$\forall x, x==x$
 \item Symétrie \\$\forall x, \forall y, x==y \Rightarrow y==x$
 \item Transitivité \\$\forall x, \forall y, \forall z, (x==y \land y==z) \Rightarrow x==z$
-\item Substituabilité dans les fonctions\\$\forall x_{1}, ...,x, .. x_{n}$ ,  $x_{i}==x \Rightarrow f(x_{1}, ...,x_{i}, .. x_{n}) == f(x_{1}, ...,x, .. x_{n})$
-\item Substituabilité dans les prédicats\\$\forall x_{1}, ...,x, .. x_{n}$ ,  $x_{i}==x \Rightarrow P(x_{1}, ...,x_{i}, .. x_{n}) == P(x_{1}, ...,x, .. x_{n})$ 
+\item Substituabilité dans les fonctions\\$\forall x_{1}, ...,x_i, .. x_{n}$ ,  $k==x_i \Rightarrow f(x_{1}, ...,k, .. x_{n}) == f(x_{1}, ...,x_i, .. x_{n})$
+\item Substituabilité dans les prédicats\\$\forall x_{1}, ...,x_i, .. x_{n}$ ,  $k==x_i \Rightarrow P(x_{1}, ...,k, .. x_{n}) == P(x_{1}, ...,x_i, .. x_{n})$ 
 \end{enumerate}
 \subsection{Règles d'inférences}
 En plus de ces 5 axiomes, il nous faut aussi définir deux règles d'inférences.\\ \\
@@ -36,7 +36,7 @@ On cherche le $\forall x$ dans la sémantique : \\
 On sait que pour tout d $\in$ Domaine de I, $VAL_{I}(d==d)=true$, \\
 Si $d = e$\\
 alors $E_{I}(e,e)=true$
-\subsection{Remarque}
+\textbf{Remarque}
 La théorie de l'égalité a une utilité très limitée, elle doit être étendue pour pouvoir servir à quelque chose. On appelle une telle théorie un template.
 \section{Théorie de l'ordre partiel (OP)}
 On ajoute un deuxième symbole dans le langage en plus du symbole d'égalité.
@@ -58,19 +58,20 @@ Aux axiomes et schémas d'axiomes de la théorie de l'égalité, on rajoute de n
 \subsection{Preuve}
 La preuve va être démontrée en partie en métalangage et en partie en preuve formelle.\\ \\
 \begin{align*}
-\Leftrightarrow \text{equivant à :} \Leftarrow \land \Rightarrow \\
+\Leftrightarrow \text{equivaut à :} \Leftarrow \land \Rightarrow \\
 \Leftarrow \text{: est démontré par l'axiome antisymétrique} \\	
 \Rightarrow \models_{op} \forall x, \forall y, [x\leq y \land y \leq x] 
 \end{align*}
 
-\underline{preuve formelle :}
+\underline{Preuve formelle :}
 \begin{enumerate}
 \item $ \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow y \leq x$ \hfill substituabilité à gauche
 \item $ \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow x \leq y$ \hfill substituabilité à droite
 \item $ x==y \Rightarrow x \leq x \Leftrightarrow y \leq x $ \hfill $\forall$ élimination
 \item $ x==y \Rightarrow x \leq x \Leftrightarrow x \leq y $ \hfill $\forall$ élimination
 \end{enumerate}
-\underline{preuve conditionnelle :}
+
+\underline{Preuve conditionnelle :}
 \begin{enumerate}
 \setcounter{enumi}{4}
 \item $ x==y$ \hfill supposition
@@ -85,22 +86,22 @@ La preuve va être démontrée en partie en métalangage et en partie en preuve 
 \item \underline{$I_{1}$} : $D_{I_{1}} =  \mathbb{Z}$ \\
 $ val_{I_{1}}(==) = '=' :$ égalité d'entiers \\
 $ val_{I_{1}}(\leq) = '\leq' :$ plus petit ou égal pour les entiers\\
-cette interprétation va satisfaire tous les entiers.
+Cette interprétation va satisfaire tous les entiers.
 \item \underline{$I_{2}$} : $D_{I_{2}} =  P(E)$ ensemble des sous-ensembles de E\\
 $ val_{I_{2}}(==) = '=' :$ égalité d'ensemble \\
 $ val_{I_{2}}(\leq) = '\subseteq' :$ inclusion d'ensemble
 \item \underline{$I_{3}$} : $D_{I_{3}} = ALPH^{2} = {(l_{1},l_{2}),..}$ doublons de lettres de l'alphabet\\
 $ val_{I_{3}}(==) = $ égalité des paires \\
 $ val_{I_{3}}(\leq) =$ suivant ordre lexicographique\\
-exemple : $(l_{i},l_{j}) \leq (l_{p},l_{q})$ si $ l_{i} < l_{p}$ ou $ l_{i} = l_{p}$ et $ l_{j} < l_{q}$ ou $ l_{j} = l_{q}$
+Exemple : $(l_{i},l_{j}) \leq (l_{p},l_{q})$ si $ l_{i} < l_{p}$ ou $ l_{i} = l_{p}$ et $ l_{j} < l_{q}$ ou $ l_{j} = l_{q}$
 \item \underline{$I_{3}$} : $D_{I_{4}} =$ ensemble de listes\\
 $ val_{I_{4}}(==) = $ = égalité de liste (si elles possèdent les mêmes composants à la même position)\\
 $ val_{I_{3}}(\leq) =$ "suffixe de" \\
-exemple : $l_{1} $ est suffixe de $l_{2}$ \\
+Exemple : $l_{1} $ est suffixe de $l_{2}$ \\
 $l_{1} $ = [d, e, f, g, h] et $l_{2} =$ [a, b, c, d, e, f, g, h, i]
 \item \underline{$I_{5}$} : Soit D$_{I_{5}}$ l'ensemble des formules en logique des propositions. On commence à utiliser la logique pour parler d'elle-même:\\
-VAL$_{I_{5}}$(==) = "$<\equiv>$" $\rightarrow$ L'égalité est synonyme d'équivalence en logique des propositions
-VAL$_{I_{5}}$($\leq$) = "$\models$" $\rightarrow$ Le signe d'inclusion entre les ensembles de modèles.
+VAL$_{I_{5}}$(==) = "$\Lleftarrow \Rrightarrow$" : L'égalité est synonyme d'équivalence en logique des propositions \\
+VAL$_{I_{5}}$($\leq$) = "$\models$" : Le signe d'inclusion entre les ensembles de modèles.
 Maintenant qu'on a défini la sémantique de l'ordre partiel en utilisant la notion de modèles, on peut prendre quelques exemples en raisonnant sur la logique :\\
 p $\leq_{I_{5}}$ q   \hspace{1.5cm} p $\models_{I_{5}}$ q \hspace{1.5cm} $\models$ p $\Rightarrow$ q
 \item \underline{$I_{6}$} : D$_{I_{6}}$ = l'ensemble des unificateurs d'un ensemble S de termes ou de formules

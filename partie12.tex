@@ -3,7 +3,7 @@ Lorsqu'on a une théorie déjà existante, on souhaite parfois l'étendre afin d
 
 \subsection*{Exemple 1}
 Considérons le nouvel axiome suivant, que nous noterons Ax.
-$$ (\forall x) \neg P(x,x) $$
+$$ Ax \equiv (\forall x) \neg P(x,x) $$
 La nouvelle théorie ainsi étendue que nous noterons FAM* possède un axiome de plus : Ax. Cette théorie FAM* est \textbf{consistante}, c'est-à-dire qu'il existe au moins un modèle qui valide cette théorie. Pour s'en convaincre, il suffit de considérer la première interprétation de la théorie FAM de la section précédente, qui utilise les liens familiaux. \\
 
 En revanche, si on considère la deuxième interprétation (deuxième modèle, noté $J$) de FAM qui associe les symboles $p$ et $m$ aux fonctions mathématiques $p_J : \mathbb{N} \rightarrow \mathbb{N} : d \rightarrow 2d$ et $m_J : \mathbb{N} \rightarrow \mathbb{N} : d \rightarrow 3d$, on observe une contradiction. En effet, dans le modèle $J$ on a la définition suivante du prédicat $P$ :
@@ -16,13 +16,13 @@ $$ (\forall y) \neg P(a,y) $$
 où $a$ est une constante arbitraire. Notons la théorie étendue FAM' = FAM + Adam. Dans cet exemple, on peut observer que FAM' est \textbf{inconsistante,} car aucun modèle ne peut valider cette théorie. En effet, en partant du premier axiome de FAM (appelé "père"), nous effectuons quelques étapes pour obtenir une contradiction.
 \begin{align*}
 & (\forall x) P(x,p(x)) \\
-\iff & P(a,p(a)) && \textrm{Elimination } \forall \\
-\iff & (\exists y) P(a,y) && \textrm{Intro } \exists
+\Leftrightarrow & P(a,p(a)) && \textrm{Elimination } \forall \\
+\Leftrightarrow & (\exists y) P(a,y) && \textrm{Intro } \exists
 \end{align*}
 Ci-dessus, le premier axiome de FAM reformulé (père), qui est en contradiction avec le nouvel axiome (Adam), que nous reformulons ci-dessous.
 \begin{align*}
 & (\forall y) \neg P(a,y) \\
-\iff & \neg (\exists y) P(a,y)
+\Leftrightarrow & \neg (\exists y) P(a,y)
 \end{align*}
 Par la règle de preuve par contradiction, on démontre qu'aucun modèle n'est possible pour la théorie étendue FAM'. \'{E}tendre une théorie équivaut à faire de la manipulation syntaxique. Il est important de bien vérifier ce que notre modification a comme conséquence sur le nombre de modèles que la théorie accepte.
 
@@ -41,7 +41,7 @@ TODO : expliquer pourquoi / Ajouter un exemple
 \subsection*{Équivalence}
 On dit que $Th_1$ et $Th_2$ sont \textbf{équivalentes} si elles sont contenues l'une dans l'autre. Cela signifie que les deux théories "disent la même chose" et que tout modèle d'une des théories est également modèle de l'autre.\\
 
-Il est important de bien faire la différence entre les \textbf{liens} entre les théories et l'\textbf{extension} d'une théorie. Le premier concept exprime ce que modélisent les théories tandis que le deuxième n'est que de la manipulation syntaxique.
+Il est important de bien faire la différence entre les \textbf{liens} entre les théories et l'\textbf{extension} d'une théorie. Le premier concept est basé sur les similitudes entre ce que modélisent les théories, alors que le deuxième est une manipulation syntaxique qui modifie une théorie existante pour en créer une nouvelle.
 
 \subsection*{Corolaires}
 On note respectivement $V_i$, $M_i$ et $Ax$ le vocabulaire, les modèles et les axiomes d'une théorie $i$. \\
@@ -59,7 +59,7 @@ On note respectivement $V_i$, $M_i$ et $Ax$ le vocabulaire, les modèles et les 
 Nous allons donner un autre exemple de théorie ainsi que deux interprétations différentes de cette théorie.
 \subsection*{Vocabulaire}
 \begin{itemize}
-\item[$\bullet$] Le symbole P
+\item[$\bullet$] Le symbole P/2
 \end{itemize}
 \subsection*{Axiomes}
 \begin{itemize}
@@ -83,6 +83,7 @@ Soit l'interprétation J de cette théorie. On a :
 Ici on change le sens du symbole $<$ :
 $$val_J(<) = "\ne"$$
 Cette interprétation n'est pas un modèle. En effet, par exemple, pour $x=5, y=3, z=5$, on a :
-$$5<3 \wedge 3<5 \nRightarrow 5<5$$
+$$x<y \wedge y<z \nRightarrow x<z$$
+$$5 \neq 3 \wedge 3 \neq 5 \nRightarrow 5 \neq 5$$
 Ceci est un contre-exemple, car $5$ n'est pas différent de $5$ (irréflexivité), et donc cette interprétation ne vérifie pas l'axiome sur la transitivité!
 
