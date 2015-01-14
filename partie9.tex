@@ -59,7 +59,7 @@ Lors que l'arrivée des ordinateurs, fin du 20ème siècle(années 50-60 et fin 
 \end{itemize}
 On peut le faire marcher malgré la complexité des variables et des quantificateurs ce qui est assez étonnant, car c'est une logique très expressive. 
 Arriver à trouver un algorithme permettant de traiter la logique des prédicats était une sorte de Graal au 20ème siècle. 
-\section{3 transformations} 
+\section{Trois transformations} 
 On va commencer par faire les transformations de normalisation. Il y a 3 transformations à effectuer: 
 \begin{enumerate}
     \item formule $\to$ forme prénexe: $$(\ldots{}\forall{}\ldots{}\exists{}\ldots{}\forall{} )\implies \forall{}\exists{}\forall{}(\ldots{})$$
@@ -70,7 +70,7 @@ On va commencer par faire les transformations de normalisation. Il y a 3 transfo
     \item forme Skolem $\to$ forme normale conjonctive: 
     \[\forall \ldots \forall \land_i(\lor_j L_{ij})\]
 
-Cette transformation est la même que celle effectuée dans la logique des propositions. \\
+Cette transformation consiste à transformer la formule en une conjonction de disjonctions ($\land$ de $\lor$). Les règles pour cette transformation sont les mêmes règles qu'en logique propositionnelle. \\
 Les modèles sont préservés lors de cette transformation. 
 \end{enumerate}
 
@@ -88,7 +88,7 @@ On va donc dire: ce ne sont peut-être pas toujours les mêmes, mais, pour certa
 		Pour que $L_1$ et $L_2$ soient identiques, on va restreindre les variables et faire une substitution.
 \end{minipage}
 
-$$(a: constante,\ x,yz:variables)$$
+$$(a: constante,\ x,y,z : variables)$$
 $$\sigma=\{(x,y),(z,a)\}$$
 $$P(x,a) \to P(y,a)$$
 $$P(y,z) \to P(y,a)$$
@@ -117,7 +117,7 @@ $$\frac{L_1C_1, \neg L_2 \lor C_2}{(C_1 \lor C_2)\sigma}$$
 
 Etapes de la transformation en formule logiquement équivalente:
 \begin{enumerate}
-    \item Éliminer $\Leftrightarrow$ et $\implies{}$
+    \item Éliminer $\Leftrightarrow$ et $\Rightarrow$
     \item Renommer les variables. 
     \begin{itemize}
     \item Chaque quantificateur ne porte que sur une variable, il faudra en créer de nouvelles si besoin en prenant soin de conserver l'équivalence de la formule . 
