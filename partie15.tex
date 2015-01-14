@@ -1,24 +1,24 @@
 \section{Introduction à la programmation logique}
-\label{p2}
+\label{prolog}
 \subsection{Introduction à la programmation logique}
 
-\textbf{Prolog} est l’un des principaux langages de programmation logique. Il est à la base de nombreux fondements. 
+\textbf{Prolog} est l'un des principaux langages de programmation logique. Il est à la base de nombreux fondements. 
 
 La programmation logique fait de la déduction sur les axiomes.
-On utilise la logique comme un langage de programmation : on va adapter l’algorithme de réfutation vu précédemment
+On utilise la logique comme un langage de programmation : on va adapter l'algorithme de réfutation vu précédemment.
 
-Le programme (ressemble à une théorie):
+Le programme (qui est similaire à une théorie):
 \begin{itemize}
-	\item Axiomes en logique des prédicats
-	\item Une requête, un but (=goal)$\rightarrow$ le but du système est d'apporter une preuve
-	\item Un prouveur de théorème $\rightarrow$ attention: il faut des conditions sur le prouveur car il faut être capable de prévoir le temps et l’espace utilisé par le programme.
+	\item Axiomes en logique des prédicats.
+	\item Une requête, un but (le goal) : le but du système est d'apporter une preuve.
+	\item Un prouveur de théorème. Attention : il faut des conditions sur le prouveur car il faut être capable de prévoir le temps et l'espace utilisé par le programme.
 \end{itemize}
 
 \paragraph{}
 Exécuter un programme = faire des déductions en essayant de prouver le but. Mais est-ce que cette idée peut donner un système de programmation pratique?
 
 \paragraph{}
-Il y a un compromis entre expressivité et efficacité: si c’est trop expressif, ça devient moins efficace, par contre si c’est trop peu expressif, on ne peut rien programmer, ça ne sert à rien non plus. Il faut donc être expressif tout en restant efficace. Le Prolog offre un bon équilibre entre expressivité et efficacité.
+Il y a un compromis entre expressivité et efficacité: si c'est trop expressif, ça devient moins efficace, par contre si c'est trop peu expressif, on ne peut rien programmer, ça ne sert à rien non plus. Il faut donc être expressif tout en restant efficace. Prolog offre un bon équilibre entre expressivité et efficacité.
 
 \paragraph{}
 Mais pour arriver à cela, il y a quelques problèmes à surmonter:
@@ -27,57 +27,49 @@ Mais pour arriver à cela, il y a quelques problèmes à surmonter:
 		vérité = $ p \models q $ (= $ q $ est vrai dans tous les modèles de $ p $)\\
 		preuve = $ p  \vdash q $ \\
 		$ p \models q \Rightarrow p \vdash q $ (= Si c’est vrai dans tous les modèles, on peut trouver une preuve)\\
-		Si $ p \models q $ alors l’algorithme se terminera. Cependant, on ne peut pas trouver les preuves que pour des choses vraies dans tous les modèles. (Comme c’est impossible, on ne prend qu’une partie des modèles ce qui limite le programme).
+		Si $ p \models q $ alors algorithme se terminera. Cependant, on ne peut trouver de preuve que pour des choses vraies dans tous les modèles (en pratique il est impossible d'analyser l'ensemble des modèles, on ne prend qu'une partie des modèles ce qui limite le programme).
 		
-		\item Même si l'on peut trouver une preuve, le prouveur est peut-être inefficace (utilise trop de temps ou de mémoire) ou imprévisible. $ \to $ On ne peut pas raisonner sur l’efficacité du prouveur.
+		\item Même si l'on peut trouver une preuve, le prouveur est peut-être inefficace (utilise trop de temps ou de mémoire) ou imprévisible. $ \to $ On ne peut pas raisonner sur l'efficacité du prouveur.
 		
 		\item La déduction faite par le prouveur doit être constructive  
 \end{enumerate}
 
-		Si le prouveur affirme : $ (\exists X) P(X) $  alors le prouveur doit donner une valeur de x (c’est quoi $ x $).
+		Si le prouveur affirme : $ (\exists X) P(X) $  alors le prouveur doit donner une valeur de x (c'est quoi $ x $).
 
 
 
 Il faut construire un résultat.
 
-\underline{Pour résoudre ces problèmes…}
+\underline{Pour résoudre ces problèmes}
 \begin{enumerate}
 	\item Restrictions sur la forme des axiomes.\\
 	typiquement : 
-	\begin{equation}
-		(\forall X_{1}) ... (\forall X_{n}) A_{1} \wedge A_{2} \wedge ... \wedge A_{n} \Rightarrow A
-	\end{equation}
-	\begin{equation}
-		C_{i} = \neg A_{1} \vee \neg A_{2} \vee ... \vee \neg A_{n} \vee A
-	\end{equation}
+	$$(\forall X_{1}) ... (\forall X_{n}) A_{1} \wedge A_{2} \wedge ... \wedge A_{n} \Rightarrow A$$
+	$$C_{i} = \neg A_{1} \vee \neg A_{2} \vee ... \vee \neg A_{n} \vee A$$
 	Il n’y a qu’un seul littéral sans négation. (Pour prouver A, il faut prouver $A_{1}$; $A_{2}$, ..., $A_{n}$).\\
 	$C_{i}$ est une clause. Le programme tout entier est une série de clauses :
-	\begin{equation}
-		C_{1} \wedge C_{2} \wedge ... \wedge C_{k}
-	\end{equation}
+	$$C_{1} \wedge C_{2} \wedge ... \wedge C_{k}$$
 	\item Le programmeur va aider le prouveur.
 	Par exemple : il faut commencer par prouver $A_{1}$ puis $A_{2}$... dans cet ordre là.\\
-	$\rightarrow$ Le programmeur donnera des heuristiques. Attention : ces heuristiques ne changent pas la sémantique \underline{logique du programme}. Elles ont seulement un effet sur l’efficacité !
-	\begin{equation}
-		\text{ordre des axiomes}\left \{
+	Le programmeur donnera des heuristiques, des méthodes de calcul. Attention : ces heuristiques ne changent pas la sémantique logique du programme. Elles ont seulement un effet sur l'efficacité !
+	$$\text{ordre des axiomes}\left \{
 		\begin{array}{l}
 		C_{1} = \neg A_{1} \vee \neg A_{2} \vee ... \vee A_{n} \vee A \\
 	
 		C_{2} = \underbrace{\neg B_{1} \vee \neg B_{2} \vee ... \vee B_{k} \vee A}_{\text{ordre des littéraux dans un axiome}}
 		\end{array}
-		\right.
-	\end{equation}
+		\right.$$
 	
 \end{enumerate}
 
-Le langage Prolog utilise ces 2 ordres.
+Le langage Prolog utilise ces deux ordres.
 
 \underline{Bref historique :}
 \begin{enumerate}
 	\item 1965 : 	La règle de résolution a été inventée par A. Robinson
 	\item 1972 :	Invention du langage Prolog / premier interprète (de Prolog) par A. Calmerauer, R. Kowalski et Ph. Roussel. 
 Ils voulaient faire un langage de programmation logique, et connaissaient les différentes formes de logique ainsi que la résolution. Ils ont donc inventé un langage très simple qu'ils ont appelé Prolog (pour Programmation Logique).  Il s'avère que ce langage a un compromis très intéressant par rapport à la tension entre efficacité et expressivité.
-Aujourd'hui, on peut faire une implémentation extrêmement efficace de Prolog. Il est extrêmement expressif, ce qui permet de faire des programmes complexes. C’est un langage à part entière.
+Aujourd'hui, on peut faire une implémentation extrêmement efficace de Prolog. Il est extrêmement expressif, ce qui permet de faire des programmes complexes. C'est un langage à part entière.
 \end{enumerate}
 
 \subsection{Introduction à Prolog}
