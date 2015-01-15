@@ -1,8 +1,8 @@
-\section{L’Analyse des liens}
+\section{L'analyse des liens}
 \begin{itemize}
-\item Concentrateurs ( Hubs )
-\item Autorités ( Authorities )
-\item Comment trouver la meilleure page ? (Voir ~\ref{fig-14-1}	)
+\item Concentrateurs (\textit{Hubs})
+\item Autorités (\textit{Authorities})
+\item Comment trouver la meilleure page ? (Voir figure \ref{fig-14-1}	)
 \end{itemize}
 
 
@@ -10,21 +10,21 @@
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=0.5]{images/ref/fig-14-1.jpeg}
-\caption{Counting in-links to pages for the query "newspapers.	"}
+\caption{Comptage des liens entrants pour la recherche "newspapers"}
 \label{fig-14-1}
 \end{figure}
 
-\subsection{Requête News Papers}
+\subsection*{Requête "newspapers"}
 
 \paragraph{Pourquoi Facebook, Yahoo, Amazon, se retrouvent-ils dans la requette News Papers ?}
 Car beaucoup d'utilisateurs ont des pages concentrées sur ces sites et comme dans cet exemple on utilise un algorithme qui n'est pas très sophistiqué, elles apparaissent. 
 
 \paragraph{Comment trouver la meilleure page ?}
 \begin{enumerate}
-\item Liens entrants $ \rightarrow $ votes
-\item Liens sortants  calcul du$ \rightarrow$  poids
-\item Mise à jour des liens entrants
-\item Mise à jour des liens sortants 
+\item Compter les liens entrants comme une estimateur de la qualité d'une autorité.
+\item Classer les concentrateurs en fonction de la qualité des pages qu'elles référencent.
+\item Mettre à jour la qualité des autorités en fonction du poids de la source des liens.
+\item Mettre à jour les concentrateurs.
 \end{enumerate}
 
 \subsubsection{Algorithme}
@@ -41,7 +41,7 @@ Car beaucoup d'utilisateurs ont des pages concentrées sur ces sites et comme da
 \item Mises à jour des liens sortants: 
 \begin{align*}
 conc'(p) = \sum_ {p\rightarrow p'}auto(p') &&
-\text{\emph{avec $p \rightarrow p' $ les pages p' qui sont référencées à partir de p}} 
+\text{\emph{avec $p \rightarrow p' $ les pages p' qui sont référencées par p}} 
 \end{align*}
 
 \end{itemize}
@@ -50,8 +50,8 @@ conc'(p) = \sum_ {p\rightarrow p'}auto(p') &&
 
 \subsubsection*{Itération}}
 
-\begin{equation}
-\forall p(page) :
+$$
+\forall~p~in~pages :
 \left \{
 \begin{array}{l}
 auto(p) = 1 \\
@@ -59,7 +59,7 @@ conc (p) = 1
 
 \end{array}
 \right.
-\end{equation}
+$$
 
  Mise à jour, normalisation :
  
@@ -72,13 +72,13 @@ conc (p) = 1
  Cet algorithme converge
 
 
-En appliquant maintenant cet algorithme, la Requête News Papers nous donnerait les résultats suivants (~\ref{pageRankNews1} et ~\ref{pageRankNews2}):
+En appliquant maintenant cet algorithme, la requête "newspapers" nous donnerait les résultats suivants (\ref{pageRankNews1} et \ref{pageRankNews2}):
 
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.5]{images/ref/fig-14-2.jpeg}
-\includegraphics[scale=0.5]{images/ref/fig-14-3.jpeg}
+\includegraphics[scale=0.45]{images/ref/fig-14-2.jpeg}
+\includegraphics[scale=0.45]{images/ref/fig-14-3.jpeg}
 \caption{Page Rank}
 \label{pageRankNews1}
 \end{figure}
@@ -86,8 +86,8 @@ En appliquant maintenant cet algorithme, la Requête News Papers nous donnerait 
 \begin{figure}
 \centering
 
-\includegraphics[scale=0.5]{images/ref/fig-14-4.jpeg}
-\includegraphics[scale=0.5]{images/ref/fig-14-5.jpeg}
+\includegraphics[scale=0.45]{images/ref/fig-14-4.jpeg}
+\includegraphics[scale=0.45]{images/ref/fig-14-5.jpeg}
 \caption{Page Rank}
 \label{pageRankNews2}
 \end{figure}
@@ -98,19 +98,22 @@ En appliquant maintenant cet algorithme, la Requête News Papers nous donnerait 
 
 	
 Comme nous pouvons voir, l'algorithme compte le nombre de liens entrants pour attribuer un poids à chaque place. Puis on normalise les valeurs trouvées, ce qui correspond au poids de la page.
-Au plus grand est le poids d'une page au plus son autorité sera grande.\\
+Au plus grand est le poids d'une page au plus son autorité sera grande.
+
 \section{PageRank}
 \begin{itemize}
-\item Consolider autorités et concentrateurs.
-\item Une valeur par noeud $ \rightarrow $ son "PageRank" que nous allons calculer. 
-\item Intuition: Un "fluide" qui circule dans le réseau. 
+	\item Consolider autorités et concentrateurs.
+	\item Une valeur par nœud : son "PageRank" que nous allons calculer. 
+	\item Intuition: Un "fluide" qui circule dans le réseau. 
 \end{itemize}
+
 \textbf{ Algorithme PageRank :}
 \begin{enumerate}
-\item N noeuds (chaque noeud représentant une page) : Initialisation Pr(p) =  $\frac{1}{n}$
-\item Choisir un nombre de pas k
-\item K mises à jour:\\
-Pr(p) = $ \sum_ {p'}\frac{Pr(p')}{n(p')} $ avec n(p') le nombre de liens sortant de p' et Pr(p') le poids (ou PageRank de p') à la $k^{ème}$ itération.
+	\item N noeuds (chaque noeud représentant une page) :
+	Initialisation Pr(p) =  $\frac{1}{n}$
+	\item Choisir un nombre de pas k
+	\item K mises à jour:\\
+	Pr(p) = $ \sum_ {p'}\frac{Pr(p')}{n(p')} $ avec n(p') le nombre de liens sortant de p' et Pr(p') le poids (ou PageRank) de p' à la $k^{ème}$ itération.
 \end{enumerate}
 \subsection*{Exemple de PageRank :}
 
@@ -141,10 +144,9 @@ Pr(p) = $ \sum_ {p'}\frac{Pr(p')}{n(p')} $ avec n(p') le nombre de liens sortant
 
  Si nous continuons à laisser travailler l'algorithme, pour un nombre n fini d'itérations telles que k=n, il y aura convergence de l'algorithme. Dans cet exemple-ci,  nous aurons :
 
-	\begin{align*}
- 	Pr(A) = 4/13 ; Pr(B) = 2/13 ; Pr(C) = 2/13 ; Pr(Autres) = 1/13 \\
- 	\text{Et la condition} \sum Pr(p) = 1 ~\text{est toujours vérifiée.}
-	\end{align*}
+	$$Pr(A) = 4/13 ; Pr(B) = 2/13 ; Pr(C) = 2/13 ; Pr(Autres) = 1/13$$
+ 
+Et la condition $\sum Pr(p) = 1$ est toujours vérifiée.
  
  L'équilibre est vérifié si le graphe est connexe,par contre si il ne l'est pas un problème se pose: Le fluide peut arriver au mauvais noeud (analogie réseau d'eau )  :
 
@@ -175,6 +177,12 @@ Pr(p) = $ \sum_ {p'}\frac{Pr(p')}{n(p')} $ avec n(p') le nombre de liens sortant
         \item (1-S) : Choisi un n\oe ud au hasard, par exemple, taper une adresse URL et accéder directement à un site \\
         \item $\rightarrow $ La même valeur pour Pr(p) \\
 	\end{itemize}
-        PageRank : (début 1990) \\
-        - Abandon partiel en 2003/2004 à cause des SEO : Search engine optimisation (Tricheurs)
+	
+\subsection*{Historique de PageRank}
+
+	PageRank a commencé à être utilisée au début des années 1990, mais a été en partie abandonné à partir de 2003-2004 pour bloquer les services de SEO (\textit{Search Engine Optimisation}) et autres manipulations du système comme les Google bombs\footnote{wikipedia.org/wiki/Google\_bomb}.
+	
+	Ceux-ci consistent à altérer les résultats de recherche soit en créant de nombreuses pages contenant des liens vers une page en particulier, soit en utilisant de gros concentrateurs qui contiennent énormément de mots-clés.
+	
+	Outre les modifications à l'algorithme de tri, certains sites utilisent aussi un attribut html "\textit{nofollow}" qui a pour effet que ces liens n'entrent pas en compte dans le PageRank d'une page. C'est notamment utilisé par les sites de blogging et les sites collaboratifs comme les wikis afin que personne n'ait intérêt à saboter une page pour ajouter un lien et améliorer le classement d'un site en particulier.\footnote{wikipedia.org/wiki/Nofollow}
 
