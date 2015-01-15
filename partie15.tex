@@ -145,3 +145,18 @@ $r := <G>$ … résolvante (une séquence de littéraux $\rightarrow$ $r= <A_{1}
 \end{algorithm}
 
 On peut également avoir une boucle infinie (l’algorithme est non déterministe).
+
+Dans l'algorithme, la condition de sortie "Si il n'y a plus de clauses unifiables" n'est pas explicité. La condition de sortie du while étant juste "r est vide". 
+Cependant, lorsque qu'il n'y a plus de clause unifiable, la boucle est interrompue.  Cette interruption est causé par les retours en arrière s'il n'y a plus de clauses unifiables (ce qui s'appelle un échec - "failure"). 
+Chaque fois que l'on choisit une clause à unifier avec le début de la résolvante, cela marque un endroit où l'on peut faire un retour en arrière. 
+
+Pendant l'exécution de la boucle, il y a donc une *séquence* de choix qui sont faits. Si au dernier choix il n'y a plus de clauses unifiables, on retourne à l'avant-dernier choix et on continue avec un nouveau choix. 
+
+Cela se fait récursivement: si à l'avant-dernier choix il n'y a plus de choix qui donne une solution, on retourne à l'avant-avant-dernier choix. Et ainsi de suite. 
+
+Si on arrive au tout premier choix qui a été fait quand on a commencé la boucle et il n'y a plus de clauses unifiables, alors on sort de la boucle avec une résolvante qui n'est pas vide. Et dans ce cas l'algorithme n'a pas trouvé de solution. 
+
+Toute cette gestion de choix et de retours en arrière n'est pas codée explicitement dans l'algorithme, sinon cela devient incompréhensible. Il est plus facile de comprendre l'algorithme tel quel, et supposez qu'il y a une gestion des choix qui est imposée dessus. Chaque fois que l'on fait un choix, on sauvegarde l'état actuel de l'exécution dans la séquence de choix. Un retour en arrière fera une restoration de cet état (qui contient toutes les anciennes valeurs des variables utilisées dans la boucle y compris r et G).
+
+
+Dans l'exemple append(l,m,cons(1,nil)) plus bas, on voit comment cela marche en pratique: cela permet effectivement d'obtenir plusieurs solutions (pour cet exemple, une solution avec l=nil et m=cons(1,nil) et une autre solution avec l=cons(1,nil) et m=nil).
