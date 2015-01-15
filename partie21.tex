@@ -1,16 +1,22 @@
 \subsection{Réseaux dans leurs contextes}
 \begin{itemize}
 \item réseau social : similitude entre amis (on voudrait mettre ces similitudes dans le réseau)
-\item réseau d'affiliation - social \includegraphics[scale=0.2]{images/21_Sim.png} <- explication d'une similitude \\
-	- personnes \\
-	- points d'intérêts 
+\item réseau d'affiliation social \includegraphics[scale=0.05]{images/21_Sim.png} qui permet d'expliquer les similitudes
+	\begin{itemize}
+	\item personnes en contact
+	\item points d'intérêts communs
+	\end{itemize}
 \end{itemize}
 
+\vspace{1ex}
 \textbf{Idée générale}
 
-\includegraphics[scale=0.4]{images/21_IdeeGenerale.png}
+\begin{figure}!h]
+	\centering
+	\includegraphics[scale=0.4]{images/21_IdeeGenerale.png}
+\end{figure}
 
-\subsection{Exemples}
+\subsection*{Exemples}
 Il y a trois formes de fermeture
 \begin{enumerate}
 \item Fermeture triadique \includegraphics[scale=0.1]{images/21_FermetureTriadique.png}
@@ -19,10 +25,11 @@ Il y a trois formes de fermeture
 \end{enumerate}
 
 \section{La formation des liens (selon les 3 approches)}
+Grâce à l'accès aux informations et aux outils d'analyse de réseau social, on peut observer les liens de plusieurs façons.
 \begin{itemize}
-\item On a des données réelles -> réseaux sociaux \\
+\item On a des données réelles via les réseaux sociaux \\
 		On a plus facilement un accès direct au graphes qu'avant.
-\item mesurer empiriquement le taux de création des liens en fonction du nombres d'amis communs.
+\item On peut mesurer empiriquement le taux de création des liens en fonction du nombres d'amis communs.
 \end{itemize}
 
 \subsection{Algorithme}
@@ -37,9 +44,9 @@ Il y a trois formes de fermeture
 => On calcule T(k) = fraction des paires qui ont formé un lien
 
 \subsection{Modèle pour expliquer ce résultat (fermeture triadique)}
-Si on prend deux personnes : s'il y a 1 ami en commun, il y a une probabilité "p" qu'un lien se forme.\\
-Quelle est la probabilité pour "k" amis en commun ?\\
-=> On calcule la probabilité de "aucun lien se forme".
+Si on prend deux personnes : s'il y a 1 ami en commun, il y a une probabilité "p" qu'un lien se forme.
+
+Quelle est la probabilité pour "k" amis en commun ?
 
 \paragraph*{}
 La probabilité qu'aucun lien se forme quand il y a un ami en commun est de $(1-p)$.\\
@@ -69,16 +76,18 @@ Les mécanismes de similitude :
 \end{itemize}
 \subsection{Comment quantifier cela ?}
 \paragraph*{Par exemple wikipédia}
-Il peut exister une similitude de comportement entre rédacteurs. Par exemple les articles sur lesquels ils travaillent.\\
+Il peut exister une similitude de comportement entre rédacteurs. Par exemple les articles sur lesquels ils travaillent.
+
 Raisonnement :
 \begin{itemize}
 \item On a des rédacteurs
 \item Un lien entre deux rédacteurs : ils communiquent par la "Talk page" (chaque article a une "Talk page"). Autrement dit, si un rédacteur B communique sur la page de A, alors il y a un lien.
 \item Les "points d'intérêts" ici sont les articles.
-\item Quantification de la similitude = $\displaystyle\frac{\mbox{nombre d'articles rédigés par A ET B}}{\mbox{nombre d'articles rédigés par A OU B}}$\\
-Notons dès lors que la similitude ne peut pas être plus petit que 0 ni plus grand que 1. $0 \leq sim \leq 1$
-\item La rupture se fait quand le lien est créé. %schéma
-\item On compare la similitude avant et après cette rupture (figure 4.13). C'est surtout la sélection qui joue avant, et l'influence sociale rentre en jeu après.
+\item Quantification de la similitude
+	$$\displaystyle\frac{\mbox{nombre d'articles rédigés par A ET B}}{\mbox{nombre d'articles rédigés par A OU B}}$$
+Notons dès lors que la similitude ne peut pas être plus petite que 0 ni plus grand que 1. $0 \leq sim \leq 1$
+\item Le moment de rupture est le moment où le lien est créé.
+\item On compare la similitude avant et après cette rupture (figure 4.13). C'est surtout la sélection qui joue avant, car chaque rédacteur choisit ce qu'il doit ajouter ou modifier par rapport à ce qu'a mis l'autre rédacteur. Après la rupture, c'est principalement l'influence sociale qui entre en jeu car les deux rédacteurs mettent leurs idées en commun. %TODO utiliser plus la figure 4.13 pour cet exemple
 \end{itemize}
 
 \includegraphics[width=\textwidth]{images/21_wikipedia.jpg}
