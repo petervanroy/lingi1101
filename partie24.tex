@@ -153,29 +153,29 @@ Et la condition $\sum Pr(p) = 1$ est toujours vérifiée.
 \includegraphics[scale=0.8]{images/24_Nconnexe.pdf}
 
 \subsection*{Solution du problème}
-\begin{itemize}
-\item Fermer la boucle
-\item Créer des cycles
-\item Analogie : Circulation d'eau dans l'atmosphère
-\end{itemize}
- 	La solution est de réinjecter un peu de fluide partout à chaque itération pour éviter que le fluide se concentre dans les noeuds qui n'ont que des liens entrants et pas de liens sortant.
+	La solution dans le cas où le PageRank s'amasse dans un nœuds serait de former des cycles afin d'assurer que le fluide continue à circuler.
+	
+ 	En pratique, on va réinjecter un peu de fluide partout à chaque itération pour éviter que le fluide se concentre dans les nœuds qui n'ont que des liens entrants et pas de liens sortant. De cette façon on referme la boucle et le fluide peut continuer à circuler.
+ 	
+ 	Cela peut s'apparenter à la circulation de l'eau dans l'atmosphère : le fluide s'évapore un peu partout et retombe de façon équitable.
 
 	Ancienne règle de mise à jour :
 	\begin{align*}
 	Pr(p) =  \sum_ {p'}\frac{Pr(p')}{n(p')}
 	\end{align*}
+	
  	Nouvelle règle de mise à jour : \\
 	\begin{align*}
-         Pr(p) = Sx(Pr(p) + (1-S)  \times \frac{1}{n}) \\
-	 \text{Ou S est un paramètre : $ 0 \le S \le 1 $} 
+         Pr(p) = S*Pr(p) + (1-S)  \times \frac{1}{n} \\
+	 \text{Où S est un paramètre : $ 0 \le S \le 1 $} 
 	\end{align*}
         
 \subsection*{ Une autre manière de voir l'algorithme:}
-        Marche aléatoire d'un utilisateur sur le web : 
+    Cet algorithme correspond aussi au comportement des utilisateurs sur le web. La marche aléatoire d'un utilisateur sur le web peut être vue comme : 
 	\begin{itemize}
-        \item Probabilité de S : Suivre un lien dans la page web ou l'on se trouve \\
-        \item (1-S) : Choisi un n\oe ud au hasard, par exemple, taper une adresse URL et accéder directement à un site \\
-        \item $\rightarrow $ La même valeur pour Pr(p) \\
+        \item Probabilité de S : Suivre un lien dans la page web ou l'on se trouve.
+        \item (1-S) : Choisir un n\oe ud au hasard, par exemple, taper une URL et accéder directement à un site.
+        \item Pr(p), tel que calculé dans la nouvelle règle de PageRank, est la probabilité de tomber sur la page p.
 	\end{itemize}
 	
 \subsection*{Historique de PageRank}
