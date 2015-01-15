@@ -1,112 +1,125 @@
 \chapter{Théorie des Graphes}
 
-\section{Définitions\\}
-Graphe G = ensemble de liens et de nœuds. Un lien est une paire de deux nœuds.
+\section{Définitions}
+Un graphe G est un ensemble de liens et de nœuds. Un lien est une paire de deux nœuds.
 \begin{center}
-\textbf{
-G = (N,E)\\
-N = nœud\\
-E = edge (lien, arête)\\
-}
+	G = (N,E)\\
+	N = nœud\\
+	E = edge (lien, arête)\\
 \end{center}
-Deux types de graphes :
-\begin{itemize}
 
+Deux types de graphes :
+
+\begin{itemize}
 \item \textbf{Les graphes orientés} (avec flèches et principe de direction). Une arête/lien est une paire de nœuds. L'ordre a de l'importance. Dans cet exemple, les paires de nœuds sont : (A,B), (A,C), (D,A) et (C,D). 
-\begin{figure}[!h]
+\begin{figure}[!h] %TODO : cette figure pourrait bénéficier d'un peu d'anti-aliasing
 \centering
 \includegraphics[scale=1]{images/17_oriente.png}
 \caption{Graphe orienté}
 \end{figure}
+
 \item \textbf{Les graphes non orientés} (sans flèche, sans direction). Une arête est un ensemble de deux nœuds. On ne parle pas de "paire" vu que l'ordre des nœuds n'a pas d'importance. Ici, parler de l'arête (A,B) ou (B,A) revient à la même chose.
-\begin{figure}[!h]
+\begin{figure}[!h] %TODO : cette figure pourrait bénéficier d'un peu d'anti-aliasing
 \centering
 \includegraphics[scale=1]{images/17_non-oriente.png}
 \caption{Graphe non orienté}
 \end{figure}
-\\
 \end{itemize}
-Dans le cours, on aura surtout affaire à des graphes non orientés.
+
+\vspace{0.3cm}
+Ce cours s'intéressera principalement aux graphes non orientés.
 
 \section{Chemins et connectivité}
-Nous allons commencer par rappeler la notion de chemin:
+	Voici la définition des différents types de chemins dans un graphe :
 	\begin{description}
 	\item [Chaine] : Dans un graphe non orienté, une chaîne reliant un sommet $x$ à un sommet $y$ est une suite finie d'arêtes consécutives, reliant $x$ à $y$
-	\item[Chemin]: c'est une séquence de n\oe uds dont chaque paire consécutive est relié par une arête.
+	\item[Chemin]: séquence de n\oe uds dont chaque paire consécutive est reliée par une arête.
     	\item[Chemin simple]: c'est un chemin dont chaque n\oe ud se trouve au maximum une fois dans la séquence de n\oe uds.
     	\item[Cycle]: c'est un chemin dont le premier et le dernier n\oe ud sont les mêmes. Un cycle possède au moins 3 liens (arêtes).\\
 	\end{description}
 
-Maintenant, nous allons définir la notion de connectivité d'un graphe.
+Une fois la notion de chemin connue, on peut définir la notion de connectivité d'un graphe.
 	\begin{description}
     	\item[Connectivité]: un graphe est dit connexe si pour toutes paires de n\oe uds A et B, il existe au moins un chemin de A vers B.\\
 	\end{description}
 
-Tous les graphes ne sont en effet pas connexes. La figure \ref{graphe_non_connexe} montre un exemple de graphe non connexe.
-	\begin{figure}
+Il existe des graphes qui ne sont pas connexes. La figure \ref{graphe_non_connexe} montre un exemple de graphe non connexe.
+
+	\begin{figure}[!h]
 	\center
 	\includegraphics[scale=0.3]{images/18_graphe_non_connexe.png}
 	\caption{\label{graphe_non_connexe} Graphe non connexe}
 	\end{figure}
-Ce graphe possède deux composants, $AB$ et $CDE$. Ces composants (qui sont maximaux) sont les parties connexes du graphe. On a les définitions suivantes:
+	
+Ce graphe possède deux composants, $AB$ et $CDE$. Ces composants sont les parties connexes du graphe. On ajoute donc deux définitions pour les composants.
 	\begin{description}
     \item[Composant d'un graphe]: c'est un sous-graphe (partie de graphe) qui est connexe. Il est maximal s'il ne fait pas partie d'un composant plus grand.
     \item[Composant géant] : il s'agit d'un composant qui contient une fraction significative de l'ensemble des n\oe uds contenus dans le graphe.
     \end{description}
     
-    Par exemple, le graphe des amitiés mondiales n'est sûrement pas connexe. En effet, il peut y avoir des habitants d'une île reculée qui se connaissent entre eux, mais qui n'ont pas de connexion avec le reste du monde. Cependant, la majorité du monde est connectée; on a donc un énorme composant géant.\\
+    Par exemple, le graphe des amitiés mondiales n'est sûrement pas connexe. En effet, il peut y avoir des habitants d'une île reculée qui se connaissent entre eux, mais qui n'ont pas de connexion avec le reste du monde. Il peut aussi y avoir un seul individu asocial qui n'ai pas d'ami et forme un composant à lui seul. Cependant, la majorité du monde est connectée; on a donc un énorme composant géant.
     
-    C'est une propriété générale des grands graphes complexes: il est rare qu'ils soient connexes, mais ils ont très souvent un composant géant. Avoir plusieurs composants géants est instable: il arrive vite qu'un lien se forme entre les deux composants, formant ainsi un seul composant géant. Si avant le \textsc{xv}\textsuperscript{ème} siècle, il y avait un composant géant eurasien et un autre Américain, il n'a fallu qu'un lien (la découverte de l'Amérique par Christophe Colomb) pour assembler les deux composants, avec toutes les conséquences que cela a entraîné (maladies, exploitation, etc.).\\
+    \vspace{1ex}
+    C'est une propriété générale des grands graphes complexes: il est rare qu'ils soient connexes, mais ils ont très souvent un composant géant. Avoir plusieurs composants géants est instable: il arrive vite qu'un lien se forme entre les deux composants, formant ainsi un seul composant géant. Si avant le \textsc{xv}\textsuperscript{ème} siècle, il y avait un composant géant eurasien et un autre Américain, il n'a fallu qu'un lien (la découverte de l'Amérique par Christophe Colomb) pour assembler les deux composants, avec toutes les conséquences que cela a entraîné (maladies, exploitation, etc.).
+    		
+    \vspace{1ex}
     
-Avec les éléments que nous venons de définir, on est en mesure d'analyser tout un graphe. On peut le partitionner en composants et regarder la structure interne de chacun d'entre eux. Par exemple, dans la figure \ref{gr_connexe}, on peut partitionner en deux composantes, $ABC$ et $DEF$. On constate que le lien $CD$ est un lien spécial, car si on l'enlève, il déconnecte de graphe.\\
-	\begin{figure}
+	\begin{figure}[!h]
 	\center
 	\includegraphics[scale=0.3]{images/18_gr_connexe.png}
 	\caption{\label{gr_connexe} Graphe connexe}
 	\end{figure}
+	
+	Avec les éléments que nous venons de définir, on est en mesure d'analyser tout un graphe. On peut le partitionner en composants et regarder la structure interne de chacun d'entre eux. Par exemple, dans la figure \ref{gr_connexe}, on peut partitionner en deux composantes, $ABC$ et $DEF$. On constate que le lien $CD$ est un lien spécial, car si on l'enlève, il déconnecte le graphe en deux composants distincts.
+
+	
 
 \section{Distance entre n\oe uds}
 Nous allons maintenant définir la longueur d'un chemin ainsi que la distance entre deux n\oe uds :
 \begin{description}
 \item[Longueur d'un chemin] : le nombre d'arêtes consécutives sur ce chemin.
-\item [Distance entre 2 n\oe uds] : le chemin le plus court entre ces deux n\oe uds.
+\item [Distance entre deux n\oe uds] : le chemin le plus court entre ces deux n\oe uds.
 \end{description}
 
-La méthode de calcul de distance entre deux n\oe uds est la traversée en largeur d'abord (\emph{breadth-first traversal}). Cela consiste à débuter par un n\oe ud, puis à regarder tous les n\oe uds qui sont à une distance de 1 du n\oe ud de départ. À partir de tous ceux-là, on regarde les n\oe uds qui sont à une distance 1, et donc à une distance 2 du n\oe ud de départ. On continue jusqu'à arriver au n\oe ud d'arrivée. On a donc, à chaque étape, constitué des couches de n\oe uds se trouvant à une certaine distance. Cet algorithme sera expliqué plus en détail par après.\\
+La méthode de calcul de distance entre deux n\oe uds est la traversée en largeur d'abord (\emph{breadth-first traversal}). Cela consiste à débuter par un n\oe ud, puis à regarder tous les n\oe uds qui sont à une distance de 1 du n\oe ud de départ. À partir de tous ceux-là, on regarde les n\oe uds qui sont adjacents, et donc à une distance 2 du n\oe ud de départ. On continue jusqu'à arriver au n\oe ud d'arrivée. On a donc, à chaque étape, constitué des couches de n\oe uds se trouvant à une certaine distance. Cet algorithme sera expliqué plus en détail par après.
 
 \section{Phénomène du petit monde}
 Le « phénomène du petit monde », aussi connu sous le vocable « paradoxe de Milgram » (du nom du psychosociologue  \textit{Stanley Milgram}), est l'hypothèse que chacun puisse être relié à n'importe quel autre individu par une courte chaîne de relations sociales. La figure \ref{petit_monde} montre la probabilité qu'ont deux personnes d'être reliés par $x$ intermédiaires. 
 	\begin{figure}
 	\center
-	\includegraphics[scale=1]{images/18_fig.png}
+	\includegraphics[scale=0.5]{images/18_fig.png}
 	\caption{\label{petit_monde} Statistiques du phénomène du petit monde}
 	\end{figure}
 Cette  courte chaîne de relations sociales a été approfondie par la théorie des « six degrés de séparation » affirmant qu'en prenant deux personnes, il est possible de trouver une chaîne d'amis entre eux de taille maximum 6.
 Différents types de distances entre des personnes existent, comme:
 	\begin{itemize}
-	\item Le nombre d'Erdos est la distance de collaboration avec le célèbre mathématicien  \textit{Paul Erdös} qui a réalisé de très nombreuses co-publications. Avoir réalisé une publication en collaboration avec Erdös correspond au nombre d'Erdös 1. Avoir écrit une publication avec quelqu'un qui a co publié avec Erdös équivaut au nombre 2, etc.
+	\item Le nombre d'Erdös est la distance de collaboration avec le célèbre mathématicien  \textit{Paul Erdös} qui a réalisé de très nombreuses co-publications. Avoir réalisé une publication en collaboration avec Erdös correspond au nombre d'Erdös 1. Avoir écrit une publication avec quelqu'un qui a co publié avec Erdös équivaut au nombre 2, etc. \footnote{xkcd.com/599/}
 	\item Le nombre de Bacon est la distance de collaboration dans un film avec l'acteur  \textit{Kevin Bacon}.
 	\end{itemize}
 Ce phénomène de petit monde est particulièrement vrai pour les réseaux créés dynamiquement. Nous expliquerons plus en détail pourquoi cette affirmation est vraie dans la suite du cours.
 
 \section{Liens forts et faibles}
+
 Un réseau peut évoluer de différentes manières et selon différents mécanismes.
 Considérons un exemple où chaque n\oe ud correspond à une personne et les arcs correspondent à un lien d'amitié (figure \ref{fermeture_triadique}).
-	\begin{figure}
+	\begin{figure}[!h]
 	\center
 	\includegraphics[scale=0.5]{images/18_fermeture_triadique.png}
 	\caption{\label{fermeture_triadique} Exemple de fermeture triadique}
 	\end{figure}
-Dans cet exemple, on voit que $A$ est ami à la fois avec $B$ et avec $C$. Dans cette condition, il est fort probable que $B$ et $C$ deviennent eux-mêmes amis. C'est ce qu'on appelle la fermeture triadique.\\
-\\
+Dans cet exemple, on voit que $A$ est ami à la fois avec $B$ et avec $C$. Dans cette condition, il est fort probable que $B$ et $C$ deviennent eux-mêmes amis. C'est ce qu'on appelle la fermeture triadique.
+
+\textbf{Propriété de fermeture triadique forte} : si A a un lien fort avec B et avec C, alors un lien au moins faible va se créer entre B et C.
+
 Cette situation nous amène à nous intéresser à la notion de coefficient de regroupement qui reflète la probabilité qu'un arc se crée entre deux n\oe uds dans un graphe dynamique. 
 Dans l'exemple ci-dessus, cela correspondrait au fait que $C$ et $B$ deviennent amis. On peut démontrer qu'au plus on fait de fermetures triadiques, au plus le coefficient de regroupement est élevé.
 
 \subsection*{Exemple}
-Une étude a été faite dans les années 1960, par le sociologue américain \textit{Mark Granovetter}, dans laquelle il s'est intéressé aux personnes qui changent de travail et plus particulièrement à la manière dont ils trouvent un nouveau travail. Il a remarqué que les personnes trouvent du travail plutôt via des connaissances que via des amis. Cela s'explique par la structure des graphes des amis et nous amène à définir les notions de \textbf{liens forts} et de \textbf{liens faibles} (figure \ref{liens_forts_et_faibles}). La suite de cet exemple sera expliquée plus tard.\\
+Une étude a été faite dans les années 1960, par le sociologue américain \textit{Mark Granovetter}, dans laquelle il s'est intéressé aux personnes qui changent de travail et plus particulièrement à la manière dont ils trouvent un nouveau travail. Il a remarqué que les personnes trouvent du travail plutôt via des connaissances que via des amis. Cela s'explique par la structure des graphes des amis et nous amène à définir les notions de \textbf{liens forts} et de \textbf{liens faibles} (figure \ref{liens_forts_et_faibles}). Nous reviendrons sur cet exemple plus tard.
+
 	\begin{figure}[!h]
 	\center
-	\includegraphics[scale=0.4]{images/18_liens_forts_et_faibles.png}
+	\includegraphics[scale=0.25]{images/18_liens_forts_et_faibles.png}
 	\caption{\label{liens_forts_et_faibles} Liens forts et faibles}
 	\end{figure}
 
@@ -118,14 +131,14 @@ Pour expliquer l'exemple précédent, nous avons besoin de la notion de pont (fi
     \item[Pont local] Un lien entre $A$ et $B$ est un pont local si l'enlèvement de ce lien aboutit au fait que deux composantes sont reliées par un chemin significativement plus long.
     \end{description}
     
-    \begin{figure}
+    \begin{figure}[ht]
     \center
-    \includegraphics[scale=0.4]{images/18_Pont.png}
+    \includegraphics[scale=0.25]{images/18_Pont.png}
     \caption{\label{Pont} Pont}
     \end{figure}
     
-    \begin{figure}
+    \begin{figure}[ht]
     \center
-    \includegraphics[scale=0.5]{images/18_Pontlocal.png}
+    \includegraphics[scale=0.3]{images/18_Pontlocal.png}
     \caption{\label{Pontlocal} Pont local}
     \end{figure}
