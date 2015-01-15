@@ -1,7 +1,9 @@
 \chapter{Structures discrètes sur l'Internet}
 
 \section{Ressources}
-Livre : sur iCampus 
+Ressource pour cette partie du cours :\\
+Networks, Crowds, and Markets: Reasoning About a Highly Connected World, by David Easley and Jon Kleinberg
+
 \begin{itemize}
 \item Chapitre 1-5 (Graphe = modèle des réseaux) définitions, concepts (liens forts et faibles), contexte des réseaux, relations positives et négatives
 \item Chapitre 13 (Structure du web)
@@ -9,13 +11,16 @@ Livre : sur iCampus
 \item Chapitre 18 (Lois de puissances)
 \item Chapitre 20 (Les phénomènes de petit monde)
 \end{itemize}
+
 \section{Exemple et analyse de graphes}
 Voici quelques commentaires réalisés sur les figures du $1^{er}$ chapitre :
+
 \begin{itemize}
 
 	\item \textbf{Figure 1.1} (ci-dessous : Figure \ref{karate} Illustration des relations amicales entre 34 personnes dans un club de karaté.
 Chaque nœud représente une personne et chaque lien, un lien d'amitié entre ces personnes.
-On constate que tout le monde n'est pas ami avec tout le monde. Grâce à cette structure, on peut déduire certaines choses, par exemple : deux personnes ont beaucoup de liens d'amitié avec d'autres personnes, mais pas entre eux.\\
+On constate que tout le monde n'est pas ami avec tout le monde. Grâce à cette structure, on peut déduire certaines choses, par exemple : deux personnes ont beaucoup de liens d'amitié avec d'autres personnes, mais pas entre eux.
+
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=1]{images/17_karate_club.jpg}
@@ -26,61 +31,74 @@ On constate que tout le monde n'est pas ami avec tout le monde. Grâce à cette 
 	\item \textbf{Figure 1.2} Des employés dans un laboratoire de recherche (nœud) ont des liens entre eux :
 Lignes claires = communication e-mail.
 Lignes foncées = hiérarchie, organisation du laboratoire.
-On voit que la communication entre les gens suit relativement bien la structure hiérarchique, mais pas complètement. On peut voir comment les gens collaborent, leurs degrés de collaboration, etc. \\
+On voit que la communication entre les gens suit relativement bien la structure hiérarchique, mais pas complètement. On peut voir comment les gens collaborent, leurs degrés de collaboration, etc.
 
-	\item \textbf{Figure 1.3} On constate que dans cette illustration, il y a beaucoup plus de nœuds. Chaque nœud est une institution financière (banque par exemple). Chaque nœud a un chemin vers un autre nœud (il y a des liens entre toutes les banques). Le centre est très dense, ça montre une faiblesse du système financier : si une banque dans le centre fait faillite par exemple, toutes les autres banques liées à elle sont également mises en danger . Donc si le noyau central est trop grand, c'est une faiblesse. En regardant cette structure, on peut trouver les faiblesses et les comprendre. Ça peut être très important.\\
+	\item \textbf{Figure 1.3} On constate que dans cette illustration, il y a beaucoup plus de nœuds. Chaque nœud est une institution financière (banque par exemple). Les liens représente des relations entre les banques, c'est à dire des prêts faits par une banque à une autre. Le graphe est connexe (il y a des chemins entre toutes les banques). Le centre est très dense, ça montre une faiblesse du système financier : si une banque dans le centre fait faillite par exemple, toutes les autres banques liées à elle sont également mises en danger . Donc si le noyau central est trop grand, c'est une faiblesse. En regardant cette structure, on peut trouver les faiblesses et les comprendre. Ça peut être très important.
 
-	\item \textbf{Figure 1.4} Un nœud représente un blog politique et un lien, une référence vers un autre blog. Nous avons deux partis qui représentent chacun un noyau : les démocrates et les républicains. On constate qu'il y a moins de connexions entre les deux noyaux qu'à l'intérieur de ceux-ci. On peut visualiser cette structure et se poser des questions : est-ce que ce monde bipolaire est un problème ?\\\
+	\item \textbf{Figure 1.4} Un nœud représente un blog politique et un lien, une référence vers un autre blog. Nous avons deux partis qui représentent chacun un noyau : les démocrates et les républicains. On constate qu'il y a moins de connexions entre les deux noyaux qu'à l'intérieur de ceux-ci. On peut visualiser cette structure et se poser des questions : est-ce que cette absence de contact entre les deux factions d'un monde bipolaire est un problème ?
 \end{itemize}
 
-Ce sont divers exemples que nous allons essayer d'analyser. Sur Internet, il y a beaucoup de nœuds avec de grandes capacités de calcul et de stockage. On peut maintenant regarder ces structures (pas avant). 
+Ce sont divers exemples que nous allons essayer d'analyser. Sur Internet, il y a beaucoup de nœuds avec de grandes capacités de calcul et de stockage. Grâce à de nouveaux outils utilisés sur internet pour analyser l'information, on peut observer la structure des graphes (ce qu'on ne pouvait pas faire avant).
+
 \section{Introduction}
 \begin{itemize}
 \item Structure des réseaux (Facebook, Twitter, réseau économique,...).
 \item Comportement des participants (interactions : chaque nœud sera un participant et va interagir).En principe, chaque nœud ne voit que son voisinage et interagit en conséquence.
+
 \begin{itemize}
-
-
-	\item Interactions LOCALES avec conséquence GLOBALES.
+	\item Interactions \textit{locales} avec conséquences \textit{globales}.
 	Il faut faire le lien entre ces deux choses.
-	\item Effets non attendus. Ex: réseaux routiers (nœud = automobilistes, lien = routes) : \\
-	S'il y a des bouchons, on augmente la capacité du réseau (ajouter une voie par exemple)
-	Le résultat peut être non intuitif, ça peut être :
+	\item Effets non attendus. Par exemple les réseaux routiers : s'il y a des bouchons, on augmente la capacité du réseau (en ajoutant une voie). 
+	Le résultat peut être contre intuitif, ça peut être :
 	\begin{itemize} 
 		\item Une réduction des transferts.
 		\item Une augmentation du trafic. (résultat opposé à celui attendu)
 	\end{itemize}	
 	\item Le \textbf{Paradoxe de Braess} nous dit que l'ajout d'une nouvelle capacité à un réseau peut réduire la performance globale (effet non attendu).
-Il faut donc comprendre comment le réseau fonctionne au lieu de faire n'importe quoi et avoir des effets non attendus.
+Il faut donc comprendre comment le réseau fonctionne pour prévoir la réaction à une modification plutôt que d'agir impulsivement et avoir des effets non attendus.
 \end{itemize}
 \end{itemize}
+
 \section{Nouvelle discipline}
-Les graphes et leurs propriétés évoluent avec le temps, ce n'est pas statique.\\
-$\Rightarrow$Nouvelles disciplines pour analyser des graphes YouTube, Flicker, etc.\\
+Les graphes et leurs propriétés évoluent avec le temps, ce n'est pas statique.
+
+Nouvelles disciplines pour analyser des graphes d'informations tirés de sites comme YouTube, Flicker, etc.
+
 Synthèse de 3 disciplines :
 \begin{enumerate}
 
-	\item La théorie des graphes => mathématique
-	\item La théorie des jeux => mathématique
-		Exemple : YouTube impose ses règles et ceux qui utilisent YouTube sont des joueurs.
-	\item La sociologie (étude des groupes sociaux): les participants sont humains ou guidés par un humain. Il n'est pas uniquement question de mathématiques, il faut aussi comprendre les humains.\\
+	\item Mathématiques : théorie des graphes
+	\item Mathématiques : théorie des jeux\\
+		Exemple : YouTube impose ses règles, c'est le croupier, et ceux qui utilisent YouTube sont des joueurs.
+	\item Sociologie : étude des groupes sociaux\\
+		les participants sont humains ou guidés par un humain. Il n'est pas uniquement question de mathématiques, il faut aussi comprendre les humains.
 \end{enumerate}
-Dans ce cours, nous nous concentrerons principalement sur la théorie des graphes. La théorie des jeux sera très intuitive, et nous parlerons un peu de la sociologie.
+
+Dans ce cours, nous nous concentrerons principalement sur la théorie des graphes. La théorie des jeux sera abordée de façon intuitive, et nous parlerons un peu de la sociologie.
+
 \subsection{Théorie des jeux}
 On a un ensemble de participants qui jouent à "un jeu" (un ensemble de règles suivies par tous les participants). Chaque participant doit agir : 
-\begin{itemize}
 
+\begin{itemize}
 \item Simple à spécifier (comme les échecs : 2 participants et 1 action en alternance). 
 \item Compliqué : pas d'alternance, tout le monde agit en même temps. C'est un système concurrent.
 \end{itemize}
-Exemple d'action simple : la vente aux enchères : 
-	n participants,
-	règles simples (différentes techniques) \\
-	
-On va rester intuitif sur ce sujet, mais si on veut être plus précis, il y a des mathématiques pour ça.
-\begin{itemize}
 
-\item \textbf{Figure 1.8} Réseau d'interaction économique entre pays. Structure de l'économie mondiale : Hong Kong a un gros avantage, il a une porte d'entrée vers la Chine (à l'époque). Certains pays sont des partenaires privilégie des États-Unis... 
-\item \textbf{Figure 1.9} Chemins de commerces médiévaux en Europe. L'endroit comporte des avantages : la position dans le graphe. On a toute une série d'avantages qui viennent de la structure du réseau (le comportement d'un participant peut dépendre de la structure). Si on est malin et qu'on comprend le réseau dans lequel on est, on peut essayer de se mettre dans une structure ou on a plus de pouvoir. 
+Exemple d'action simple : la vente aux enchères : 
+	nombre fini de participants,
+	règles simples et définies (différentes techniques sont possibles)
+	
+\vspace{1cm}
+
+On va rester intuitif sur ce sujet, mais si on veut être plus précis, il y a des champs mathématiques qui étudient les systèmes concurrents.
+
+Enfin, on peut aussi voir que la position dans le graphe peut aussi apporter des avantages.
+
+\begin{itemize}
+	\item \textbf{Figure 1.8} Réseau d'interaction économique entre pays. Structure de l'économie mondiale : Hong Kong a un gros avantage, il a une porte d'entrée vers la Chine (à l'époque). Certains pays sont des partenaires privilégie des États-Unis... 
+	\item \textbf{Figure 1.9} Chemins de commerces médiévaux en Europe. Une position stratégique donne des avantages. Tous ces avantages viennent de la structure du réseau (notons que le comportement d'un participant peut dépendre de la structure).
 \end{itemize}
-Si on connaît la structure, une petite action peut suffire pour arrêter une épidémie.
+
+Si on observe correctement le réseau, on peut se placer en position d'avantage et se mettre à une position qui donne plus de pouvoir.
+
+Si on connaît la structure, une petite action peut suffire pour arrêter une épidémie en coupant les liens par lesquels cette épidémie pourrait se répandre.
