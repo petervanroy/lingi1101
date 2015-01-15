@@ -3,9 +3,9 @@
 \subsubsection{Programme (code Prolog)}
 Ce petit programme permet de calculer la factorielle d'un nombre. Il s'agit de clauses exprimant des faits, des règles et des questions. Le code commence par un fait: 0!==1. Ensuite, il définit une clause pour les factorielles de façon généralisée. Attention, les virgules et les points sont importants. Les virgules sont les séparateurs entre les littéraux dits négatifs tandis que le point marque la fermeture de la clause.
 \begin{verbatim}
-fact(0,1)
+fact(0,1).
 fact(N,F) :- N>0, 
-			 N1 is N-1 
+			 N1 is N-1,
 			 fact(N1,F1), 
 			 F is N* F1 .
 \end{verbatim}
