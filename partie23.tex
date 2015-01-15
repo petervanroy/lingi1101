@@ -26,10 +26,10 @@ $ Réseaux d'informations
 
 
 \begin{figure}[!h]
-\centering
-\includegraphics{images/23_image1.png}
-\caption{Hypertexte -liens vers des articles}
-\label{hypertexte}
+	\centering
+	\includegraphics[scale=0.75]{images/23_image1.png}
+	\caption{Liens hypertexte vers des articles}
+	\label{hypertexte}
 \end{figure}
 
 \textbf{Problème de cohérence}
@@ -38,13 +38,14 @@ $ Réseaux d'informations
 \item \underline{Web}: Cohérence \textit{"a posteriori"} 
 						\vspace{0.1cm}
                        \\ Le web n'ayant pas d'organisation, on va devoir en trouver une : un index ou un moteur de recherche
+                       \vspace{0.2cm}
       
 \item \underline{Wikipedia}: Cohérence \textit{"a priori"}
 							\vspace{0.1cm}
                              \\ Une structure existe déjà, définie par les rédacteurs, les modérateurs et les règles de structure.
 \end{itemize}
 
-Le succès du Web réside dans la possibilité de trouver une structure à ce dernier, notamment grâce à l'algorithme PageRank. Altavista, Google, Lycos, ... proposent tous leur version de moteur de recherche. C'est grâce à l'efficacité de PageRank que Google s'est imposé largement comme moteur de recherche dominant.
+Le succès du Web réside dans la possibilité de trouver une structure \textit{a posteriori} à ce dernier, notamment grâce à l'algorithme PageRank. Altavista, Google, Lycos, ... proposent tous leur version de moteur de recherche. C'est grâce à l'efficacité de PageRank que Google s'est imposé largement comme moteur de recherche dominant.
 
 \section{Le Web est un graphe orienté}
 \begin{itemize}
@@ -62,7 +63,7 @@ Le succès du Web réside dans la possibilité de trouver une structure à ce de
 À l'intérieur d'un graphe orienté, un composant fortement connexe est :
 \begin{itemize}
     \item Un ensemble de nœuds tel qu'il existe un chemin orienté entre chaque paire.
-    \item L'ensemble ne fait pas partie d'un plus grand environnement qui à la même propriété. 
+    \item L'ensemble ne fait pas partie d'un plus grand environnement ayant la même propriété. 
 \end{itemize}
 
 \begin{figure}[!ht]
@@ -76,7 +77,7 @@ Les CFCs forment un genre de \textit{"super noeud"}. Pour la connectivité, on p
 
 \vspace{0.3cm}
 
-On peut donc transformer le graphe en un graphe réduit : le CFC devient un unique nœud. Pour trouver un chemin dans le graphe original, il suffit de trouver un chemin dans le graphe réduit.
+On peut donc transformer le graphe en un graphe réduit : le CFC devient un unique nœud. Pour trouver qu'un chemin existe dans le graphe original, il suffit de trouver un chemin dans le graphe réduit.
 Un exemple de transformation de ce type est illustré sur la figure \ref{cfc_transformation}.
 \vspace{0.3cm}
 
@@ -88,7 +89,7 @@ Un exemple de transformation de ce type est illustré sur la figure \ref{cfc_tra
 \end{figure}
 
 
-\section{Nœud papillon (\textit{$\approx$ années 2000})}
+\section{Web en nœud papillon (\textit{$\approx$ années 2000})}
 	Maintenant, à quoi ressemble le graphe réduit du web ? Autour des années 2000, sa structure était proche de celle d'un nœud papillon, tel que celui représenté sur la figure \ref{noeud_papillon}.
 	
 	On repère trois composants principaux :
@@ -128,8 +129,8 @@ L'émergence du Web 2.0 se déroule entre 2000 et 2010. Il s'agit en fait d'un c
 \newpage
 
 %\hline 
-\vspace * {0.5cm}
-    \fbox{\textbf{Un petit bout d'histoire}}
+\vspace{0.5cm}
+    \textbf{Un petit bout d'histoire}
     
     \vspace{0.3cm}
     
@@ -144,8 +145,7 @@ L'émergence du Web 2.0 se déroule entre 2000 et 2010. Il s'agit en fait d'un c
         Ils se sont inspirés des écrits de Vannevar Bush pour inventer le WWW, avec sa structure de pages indépendantes reliées par des liens hypertextes.
     \end{itemize}
     
-\vspace * {0.5cm}   
-%\hline 
+\vspace{0.5cm}
 
 
 \chapter{Recherche dans le Web} %chapitre 14
@@ -165,7 +165,7 @@ Comment trouver une information ?
         
         Autrement dit, il n'y a pas de bijection entre les mots et les concepts.
         
-    \item Limitations dues à l'abondance d'informations.\\
+    \item Limitations dues à l'abondance d'informations. \vspace*{0.2cm} \\
     $\left. %\text{
     \parbox{0.5\linewidth}{
         \begin{itemize}
