@@ -41,7 +41,7 @@ Platon est un philosophe & Q & Phil(Platon) \\
 \end{tabular} 
 \end{center}
 
-En logique propositionnelle il n'y a aucunes relations entre P et Q, alors qu'en logique des prédicats on peut lier Socrate et Platon avec le prédicat Philosophe qui prend en argument le nom du philosophe (Socrate ou Platon dans ce cas). Phil(Socrate) est donc vrai. On peut donc dire grâce aux prédicats que Socrate et Platon sont "la même chose", des philosophes.\\
+En logique propositionnelle il n'y a aucune relation entre P et Q, alors qu'en logique des prédicats on peut lier Socrate et Platon avec le prédicat Philosophe qui prend en argument le nom du philosophe (Socrate ou Platon dans ce cas). Phil(Socrate) est donc vrai. On peut donc dire grâce aux prédicats que Socrate et Platon sont "la même chose", des philosophes.\\
 
 Un autre exemple de prédicat:
 
@@ -65,7 +65,8 @@ On va donc noter en logique propositionnelle
 On doit tout énumérer car il n'y a aucune relation entre les différentes propositions. S'il y a un nombre infini, ça ne marche pas. Il y a donc de grandes limitations dans la logique propositionnelle.
 
 Néanmoins parfois la logique propositionnelle peut être utile. 
-Il existe des outils informatiques qui utilisent la logique propositionnelle. On peut prendre l'exemple de "SAT solver" à qui on donne des équations booléennes très compliquées et qui va trouver les valeurs des propositions primitives qui rendent vraie cette proposition. C'est donc assez utilisé! La logique propositionnelle est utile, mais si l'on veut faire du raisonnement sur plus que  "vrai" et "faux" avec des relations entre des propositions,  la logique propositionnelle ne marche pas. Si on veut faire un logiciel qui montre une certaine intelligence, il faut utiliser la logique des prédicats.\\
+Il existe des outils informatiques qui utilisent la logique propositionnelle. On peut prendre l'exemple de ``SAT solver'' à qui on donne des équations booléennes très compliquées et qui va trouver les valeurs des propositions primitives qui rendent vraie cette proposition.
+La logique propositionnelle est utile, mais si l'on veut faire du raisonnement sur plus que  "vrai" et "faux" avec des relations entre des propositions,  la logique propositionnelle ne marche pas. Si on veut faire un logiciel qui montre une certaine intelligence, il faut utiliser la logique des prédicats.\\
 
 Autre exemple:
 
@@ -81,21 +82,26 @@ John peut voter & \textcolor{Red}{?R?}& voter(\textcolor{OliveGreen}{John}) \\
 \hline
 \end{tabular}\\
 
-Ce genre de raisonnement est très difficile à faire en logique propositionnelle alors qu'en logique des prédicats c'est beaucoup plus simple! Le John en ligne 3 et en ligne 4 correspond à la même personne, ou de manière plus général à la même variable! 
-Ceci montre donc bien qu'il nous faut la logique des prédicats pour faire des relations de ce type.
+Ce genre de raisonnement est très difficile à faire en logique propositionnelle alors qu'en logique des prédicats c'est beaucoup plus simple.
+Le John en ligne 3 et en ligne 4 correspond à la même personne, ou de manière plus général à la même variable.
+Ceci montre donc bien l'utilité de la logique des prédicats pour faire des relations de ce type.
 
 \section{Quantificateurs}
 
-Les expressions "pour tout $x$" ($\forall x$) et "il existe $x$ tel que" ($\exists x$) sont appelés des quantificateurs en logique des prédicats. Les quantificateurs permettent d'instancier les variables dans une formule. La notion de portée d'un quantificateur est un concept très important auquel il faut faire très attention, car il peut changer complètement le sens d'une formulation. \\
+Les expressions "pour tout $x$" ($\forall x$) et "il existe $x$ tel que" ($\exists x$) sont appelés des {\em quantificateurs}.
+Les quantificateurs permettent de résumer un grand nombre de formules en une formule.
+La notion de {\em portée} d'un quantificateur est un concept très important auquel il faut faire très attention,
+car il peut changer complètement le sens d'une formulation.
+Par exemple, les deux formules suivantes:
 
 $\forall x$ (enfants($x$) $\wedge$ intelligents($x$) $\Rightarrow$ $\exists y$ aime($x$,$y$)) \\
 
 $\forall x$ (enfants($x$) $\wedge$ intelligents($x$)) $\Rightarrow$ $\exists y$ aime($x$,$y$) \\
 
 Ces deux formules peuvent paraître équivalentes, mais en réalité elles ont un sens tout à fait différent.
-En effet, dans le deuxième cas on remarque que le quantificateur $\forall x$ ne porte pas sur la dernière variable $x$ qui est en argument du prédicat aime($x$,$y$).
-
-Il faut donc faire bien attention à quel quantificateur une variable s'identifie lorsqu'on manipule des formules. \\
+En effet, dans le deuxième cas on remarque que le quantificateur $\forall x$ ne porte pas sur
+la dernière variable $x$ qui est l'argument du prédicat aime($x$,$y$).
+Il faut donc faire bien attention à quel quantificateur une variable s'identifie lorsqu'on manipule des formules.
 
 \begin{itemize}
 \item[$\bullet$] $\forall x$ P($x$) $\wedge$ $\exists x$ Q($x$) : contient deux variables différentes\\
@@ -103,13 +109,15 @@ Il faut donc faire bien attention à quel quantificateur une variable s'identifi
 \item[$\bullet$] $\forall x$ $\exists x$  P($x$) $\wedge$ Q($x$) : est une forme incorrecte, conflit des noms de variables \\
 \end{itemize}
 
-Pour résoudre ces conflits, on fait appel à une nouvelle opération, le renommage. Cette opération permet de changer le nom des variables tout en conservant le sens de la formule. Ainsi on obtient : \\
+Pour résoudre ces conflits, on fait appel à une nouvelle opération, le {\em renommage}.
+Cette opération permet de changer le nom des variables tout en conservant le sens de la formule. Ainsi on obtient : \\
 
- $\forall x$ $\exists z$  P($x$) $\wedge$ Q($z$)  \textit{renommage (2)} \\
+$\forall x$ $\exists z$  P($x$) $\wedge$ Q($z$)  \textit{renommage (2)} \\
  
- Le concept de variables, de leurs portées ainsi que d'opérateurs en logique des prédicats fait fortement penser au langage de programmation
+Le concept de variables, de leurs portées ainsi que d'opérateurs en logique des prédicats fait fortement penser au langage de programmation
  
-Une comparaison entre un code et une formule est tout à fait envisageable. Prenons un code tout à fait banal comprenant des variables différentes avec des portées différentes qui ont le même identificateur ainsi qu'une formule correspondante. 
+Une comparaison peut être faite entre un code de programme et une formule.
+Prenons un code tout à fait banal comprenant des variables différentes avec des portées différentes qui ont le même identificateur ainsi qu'une formule correspondante. 
 
 \begin{verbatim}
 1.  begin {
@@ -135,15 +143,16 @@ En analysant la formule morceau par morceau : \\
 
 \begin{itemize}
 
-\item[$\bullet$] " \textcolor{Green}{$\forall x$} \textcolor{Red}{$\forall y$} p(\textcolor{Green}{$x$}) $\wedge$ " correspond aux points $\lbrace 2,3,4 \rbrace$ du code \\
+\item[$\bullet$] " \textcolor{Green}{$\forall x$} \textcolor{Red}{$\forall y$} p(\textcolor{Green}{$x$}) $\wedge$ " correspond aux lignes $\lbrace 2,3,4 \rbrace$ du code \\
 
-\item[$\bullet$]" \textcolor{Blue}{$\exists x$}  q(\textcolor{Blue}{$x$},\textcolor{Red}{$y$}) $\vee$ " correspond aux points $\lbrace 7,8,9 \rbrace$ \\
+\item[$\bullet$]" \textcolor{Blue}{$\exists x$}  q(\textcolor{Blue}{$x$},\textcolor{Red}{$y$}) $\vee$ " correspond aux lignes $\lbrace 7,8,9 \rbrace$ \\
  
-\item[$\bullet$]" r(\textcolor{Green}{$x$},\textcolor{Red}{$y$})) "  correspond au point $\lbrace 11 \rbrace$ \\
+\item[$\bullet$]" r(\textcolor{Green}{$x$},\textcolor{Red}{$y$})) "  correspond à la ligne $\lbrace 11 \rbrace$ \\
 
 \end{itemize}
 
-Cet exemple illustre parfaitement la ressemblance et le lien entre le monde de la programmation et celui de la logique des prédicats
+Cet exemple montre bien la correspondance entre le concept de portée
+dans le monde de la programmation et celui de la logique des prédicats.
 
 \section{Syntaxe}
 
@@ -180,7 +189,7 @@ $<connecteur$ $binaire>::=$
 \end{tabular}
 
 \section{Exemple de sémantique}
-Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation déjà définis dans la logique propositionnelle. Même si la logique des prédicats est beaucoup plus puissante, sa sémantique reste similaire à la logique propositionnelle.
+Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation déjà définies dans la logique propositionnelle. Même si la logique des prédicats est beaucoup plus puissante, sa sémantique reste similaire à la logique propositionnelle.
 Comme pour la logique propositionnelle, une interprétation peut avoir une valeur (true, false).
 
 Illustrons par un exemple : 
