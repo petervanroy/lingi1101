@@ -156,21 +156,27 @@ dans le monde de la programmation et celui de la logique des prédicats.
 
 \section{Syntaxe}
 
+\subsection{Symboles}
+
+Voici les différents symboles utilisés dans une formule de la logique des prédicats.
+Nous appelons {\em arité} d'un prédicat ou d'une fonction son nombre d'arguments
+(fonction unaire, prédicat binaire, etc.).
+
 \begin{tabular}{|c|c|c|}
 	\hline
 	Symboles logiques & quantificateurs & $\forall$ $\exists$ \\
 	                  & connecteurs logiques & $\wedge$ $\vee$ $\neg$ $\Rightarrow$ $\Leftrightarrow$ \\
 	                  & parenthèses & ( ) \\
 	                  & variables & $x, y, z$ \\
-	                  & true, false & \\
+	                  & & true, false\\
 	\hline
-	Symboles non logiques & symboles de prédicats & $P$ $\varphi$ $R$ + arguments $\geq 0$ \\
-						  & symboles de fonction & + $arguments \geq 0 $\\
+	Symboles non logiques & symboles de prédicat & $P$ $Q$ $R$ (avec arité $\geq 0$) \\
+	   		      & symboles de fonction & $f$ $g$ $h$ (avec arité $\geq 0$) \\
+	   		      & symboles de constante & $a$ $b$ $c$ (si arité $= 0$) \\
 	\hline
 \end{tabular}
 
-\section{Grammaire}
-\subsection{Règles de formation}
+\subsection{Règles de Grammaire}
 \begin{tabular}{rl}
 $<formule>::=$ 	  &	$<formule$ $atomique>$ \\
 				  & $\vert$ $\neg$ $<formule>$ \\
@@ -188,7 +194,8 @@ $<connecteur$ $binaire>::=$
 
 \end{tabular}
 
-\section{Exemple de sémantique}
+\section{Sémantique}
+
 Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation déjà définies dans la logique propositionnelle. Même si la logique des prédicats est beaucoup plus puissante, sa sémantique reste similaire à la logique propositionnelle.
 Comme pour la logique propositionnelle, une interprétation peut avoir une valeur (true, false).
 
@@ -198,28 +205,30 @@ Illustrons par un exemple :
 $p : P(b,f(b)) \Rightarrow \exists y   P(a,y)$  \\
 \vspace{3mm}
 \end{center}
-On suppose que le $a$ et le $b$ sont des constantes et que le $f$ est une fonction. Il faut donner un sens à cette formule et pour cela il faut donner un sens à : 
+On suppose que le $a$ et le $b$ sont des constantes et que le $f$ est une fonction.
+Une interprétation possible de cette formule est la suivante:
 \begin{itemize}
 \item[$\bullet$]P : $val_{I}(P) = $ $ \geq $ \hspace{3mm} (\textit{considéré comme un vrai prédicat})
-\item[$\bullet$] a : $val_{I}(a) = $ $ 2 $ 
+\item[$\bullet$] a : $val_{I}(a) = $ $ \sqrt{2} $ 
 \item[$\bullet$] b : $val_{I}(b) = $ $ \pi $ 
 \item[$\bullet$] $f$ : $val_{I}(f) = $ $ f_{i} $ \hspace{3mm} $f_{i}= \Re \rightarrow \Re : d \rightarrow \dfrac{d}{2} $ 
 \end{itemize}
-Avec ces éléments, on peut donc trouver l'interprétation : 
+Avec ces éléments, on peut donc interpréter la formule $p$:
 \begin{center}
 \textit{Si $\pi \geq  \dfrac{\pi}{2}$, alors $\exists$ $ d \in \Re$ tel que $\sqrt2 \geq d$ }
 \end{center}
-Cette phrase n'est pas très utile, mais avec cette interprétation, la phrase logique donne ce sens. Une autre interprétation donnerait un sens totalement différent à la phrase logique. Voici une autre interprétation totalement différente :
+Avec cette interprétation, la phrase logique donne ce sens.
+Une autre interprétation donnerait un sens totalement différent à la phrase logique. Voici une autre interprétation totalement différente :
 \begin{itemize}
 \item[$\bullet$] a : $val_{I}(a) = $ "Barack Obama"
 \item[$\bullet$] b : $val_{I}(b) = $ "Vladimir Putin"
-\item[$\bullet$] $f$ : $val_{I}(f) = $ $ f_{i} $ \hspace{3mm} $f_{i} \rightarrow$ père(d) 
+\item[$\bullet$] $f$ : $val_{I}(f) = $ $ f_{i} $ \hspace{3mm} $f_{i}: d \rightarrow \mathrm{père}(d)$
 \item[$\bullet$] P :  $val_{I}(P) = $ $P_{I}$ \hspace{3mm} $d_{1}$ est enfant de $d_{2}$\\
 \end{itemize}
 
 Avec ce nouveau sens, on trouve l'interprétation suivante : 
 \begin{center}
-\textit{Si Vladimir Putin est l'enfant du père de Vladimir Putin alors $\exists$ une personne telle que Barack Obama est l'enfant de cette personne.}
+\textit{Si Vladimir Putin est un enfant du père de Vladimir Putin alors il existe une personne telle que Barack Obama est un enfant de cette personne.}
 \end{center}
 La seconde interprétation est très différente de la première malgré le fait que ce soit la même formule à l'origine ! La connexion entre une formule et son sens permet de garder une certaine souplesse dans le sens où l'on peut choisir ça. C'est un peu comme dans la logique propositionnelle, mais avec encore plus de souplesse.
 
