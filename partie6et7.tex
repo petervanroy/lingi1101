@@ -199,6 +199,7 @@ $<connecteur$ $binaire>::=$
 Dans la logique des prédicats, nous gardons les notions de modèle et d'interprétation déjà définies dans la logique propositionnelle. Même si la logique des prédicats est beaucoup plus puissante, sa sémantique reste similaire à la logique propositionnelle.
 Comme pour la logique propositionnelle, une interprétation peut avoir une valeur (true, false).
 
+\subsection{Exemple}
 Illustrons par un exemple : 
 
 \begin{center}
@@ -237,66 +238,146 @@ La première interprétation est un modèle de la formule, car le sens de la for
 
 La deuxième interprétation est aussi un modèle de la formule, car l'interprétation trouvée est vraie aussi. Cela peut paraître bizarre, mais c'est correct. 
 %Partie 7
-\section{Détails techniques}
-La première question que l'on se pose est: comment faire des preuves en logique des prédicats ? Il faut noter que les quantificateurs $\forall$ et $\exists$ rendent le raisonnement plus subtil. Il faudra des règles pour pouvoir raisonner sur ces quantificateurs.
-\subsection{Sémantique}
-La sémantique en logique des prédicats est très proche de celle en logique propositionnelle. Cependant, l'interprétation, I, est plus précise qu'en logique propositionnelle et est également plus compliquée à utiliser à cause des variables et des symboles de fonction. Cette interprétation peut être décrite comme une paire: $I = pair(D_{I}, val_{I}) $ avec D le domaine de discours I et la fonction val qui est l'interprétation de tous les symboles. $D_{I} \ne \emptyset $ $ \forall s \in S$ avec s soit un symbole de prédicat soit une fonction. $val_{I}(S) = P_{I}$ une fonction $P_{I}:D_{I}^{n} \rightarrow (True,False)$ avec S symbole d'une fonction. Il existe aussi une vraie fonction $f_{I}:D_{I}^{n} \rightarrow D_{I}$ avec n le nombre d'arguments tel que $val_{I}(S) = f_{I} $. Cela implique que dans le domaine de discours chaque fonction correspond à une vraie fonction et chaque prédicat correspond à un vrai prédicat. 
 
+\subsection{Interprétation}
 
-Si l'on rajoute une variable, x par exemple, l'expression devient: $ (var, x) \rightarrow val_{I}(x) = x_{I} \in D_{I}$. L'interprétation d'une variable, $x_{I}$ est un élément (n'importe lequel en fonction de l'interprétation) de $D_{I}$. La fonction $VAL_{I}$ est la même fonction, mais pour les formules et pas uniquement pour les symboles comme avant. Néanmoins, on ne doit pas redéfinir $,VAL_{I}$ car elle existe à partir du moment ou $val_{I}$ et $D_{I}$ existent. Définition: $VAL_{I}: TERM \cup  PRED \rightarrow D_{I} \cup (True, False) $ avec TERM l'ensemble des termes et PRED l'ensemble des
-prédicats (toutes les formules en logique des prédicats). Les termes peuvent être définis comme $ t \rightarrow VAL_{I}(t)$ et les prédicats comme $ P \rightarrow VAL_{I}(P)$ avec P une formule. Il y a une forte relation entre $val_{I} $ et $VAL_{I}: val_{I}((P(T_{1},...,T_{n})) = P_{I}(VAL_{I}(t_{1}),...,VAL_{I}(t_{n}))$ avec $ P_{I} = VAL_{I}(P)$ 
-La première partie de l'égalité est un prédicat avec des arguments tandis que la seconde est formée de plusieurs prédicats avec un argument. 
+\subsubsection{Interprétation des symboles}
 
+L'approche que nous utilisons pour définir une sémantique de la logique des prédicats est très proche 
+de l'approche que nous avons utilisée pour la logique propositionnelle.
+Nous allons définir une interprétation $I$ de chaque formule, qui nous permettra de calculer si la formule est vraie ou fausse.
+Cependant, l'interprétation en logique des prédicats est plus générale qu'en logique propositionnelle.
+En plus des propositions, nous avons des variables, des fonctions et des prédicats avec des arguments,
+et des quantificateurs ($\forall$ et $\exists$).
 
-Définissons d'autres formules: $VAL_{I}(P \wedge Q) $ est true si $VAL_{I}(P) = True$ et $VAL_{I}(Q) = True$. false sinon. Donc il faut $VAL_{I}(\forall x.P) = True$ avec P une formule pouvant dépendre de x (il faut remplacer toutes les occurrences de x dans P et la formule doit rester vraie. Si pour chaque d $\in D_{I}$ $ I' = I \cup (x \leftarrow d)$ et $val_{I}(x) = d$ alors l'interprétation de x doit être: $VAL_{I}'(P) = True$.
-Pour $VAL_{I}(\exists x.P) = True$ le raisonnement est identique en remplaçant $\forall$ par $\exists$.
-\section{Différence avec la logique des propositions}
-Les trois différences entre les deux logiques sont:
-\begin{enumerate}
-\item les variables,
-\item les quantificateurs,
-\item les symboles de fonction (moins important).
-\end{enumerate}  
-Imaginons un modèle $B:
-\{
-  \begin{array}{rcr}
-    P_{1},...P_{n}
-  \end{array}
-\}
-$
-Si nous utilisons une interprétation I pour B cela donne:
-$\forall P_{I} \in B : VAL_{I} (P_{I}) = True$ qui est très générale, car $P_{I}$ peut avoir des variables, des quantificateurs ...
+Une {\em interprétation} $I$ en logique des prédicats est une paire $I = (D_I, \mathrm{val}_I)$,
+avec un ensemble $D_I$ qui s'appelle le {\em domaine de discours} et une fonction $\mathrm{val}_I$ qui s'appelle
+la {\em fonction de valuation} qui renvoie un élément de $D_I$ pour chaque symbole.
+Nous avons donc pour chaque symbole $s$:
+\begin{itemize}
+\item Si $s$ est un symbole de prédicat,
+ $\mathrm{val}_{I}(s) = P_{I}$ une fonction $P_{I}:D_{I}^{n} \rightarrow (\mathrm{true},\mathrm{false})$.
+\item Si $s$ est un symbole de fonction,
+ $\mathrm{val}_I(s) = f_I$ une fonction $f_{I}:D_{I}^{n} \rightarrow D_{I}$ avec $n$ le nombre d'arguments.
+\item Si $s$ est une constante (une fonction avec zéro arguments),
+ $\mathrm{val}_I(s) = c$ un élément de $D_I$.
+\item Si $s$ est une variable,
+ $\mathrm{val}_{I}(x) = x_{I}$, un élément $D_{I}$.
+\end{itemize}
+Cela implique chaque fonction correspond à une vraie fonction, chaque prédicat
+correspond à un vrai prédicat, et chaque constante et chaque variable correspondent à une constante dans le domaine de discours.
+
+Attention à la différence entre les variables et les constantes.
+Pour les deux, l'interprétation est un élément de $D_I$,
+mais on peut utiliser les variables dans les quantificateurs et pas les constantes.
+Cela veut dire que dans une formule, la valeur d'une variable dépend de l'endroit où se trouve la formule,
+ce qui n'est pas vrai pour une constante.
+
+\subsubsection{Interprétation des termes et formules}
+
+Avec la fonction $\mathrm{val}_I$ qui est définie sur tous les symboles, nous pouvons définir une fonction
+$\mathrm{VAL}_I$ sur les termes et les formules:
+\begin{equation}
+\mathrm{VAL}_I : \mathrm{TERM} \cup \mathrm{PRED} \rightarrow D_I \cup \{T, F\}
+\end{equation}
+Ici, $\mathrm{TERM}$ est l'ensemble des termes et $\mathrm{PRED}$ est l'ensemble des formules.
+Nous avons donc:
+\begin{itemize}
+\item Si $t$ est un terme, $t \rightarrow \mathrm{VAL}_I(t)$.
+\item Si $p$ est une formule, $p \rightarrow \mathrm{VAL}_I(p)$.
+\end{itemize}
+Nous pouvons définir $\mathrm{VAL}_I$ avec $\mathrm{val}_I$, en suivant la définition de la syntaxe des formules:
+\begin{itemize}
+\item $\mathrm{VAL}_I ( P(t_1, \ldots, t_m) = (\mathrm{val}_I(P)) (\mathrm{VAL}_I(t_1), \ldots, \mathrm{VAL}_I(t_m))$.
+\item $\mathrm{VAL}_I ( \forall x.p ) = T$ si pour chaque $d \in D_I$, $\mathrm{VAL}_{\{x \leftarrow d\} \circ I}(p) = T$.  Sinon, c'est $F$.
+En clair, $d$ est l'interprétation de $x$ dans la formule $p$.  Si pour tous les $d$, l'interprétation de $p$ est vraie, alors le
+quantificateur universel est vrai aussi.
+\item $\mathrm{VAL}_I ( \exists x.p ) = T$ s'il existe un élément $d \in D_I$ tel que $\mathrm{VAL}_{\{x \leftarrow d\} \circ I}(p) = T$.
+Sinon, c'est $F$.
+\item $\mathrm{VAL}_I(p \wedge q) = T$ si $\mathrm{VAL}_I(p)=T$ et $\mathrm{VAL}_I(q)=T$.  Si au moins un des deux est $F$, c'est $F$.
+\item $\mathrm{VAL}_I(p \vee q) = T$ si $\mathrm{VAL}_I(p)=T$ ou $\mathrm{VAL}_I(q)=T$.  Si tous les deux sont $F$, c'est $F$.
+\item $\mathrm{VAL}_I(c) = \mathrm{val}_I(c)$ si $c$ est un symbole de constante.
+\item $\mathrm{VAL}_I(x) = \mathrm{val}_I(x)$ si $x$ est un symbole de variable.
+\item $\mathrm{VAL}_I(f(t_1, \ldots, t_n)) = (\mathrm{val}_I(f))(\mathrm{VAL}_I(t_1), \ldots, \mathrm{VAL}_I(t_n))$ si $f$ est un symbole de fonction.
+\item $\mathrm{VAL}_I(\mathrm{true}) = T$.
+\item $\mathrm{VAL}_I(\mathrm{false}) = F$.
+\item Dans cette énumération, j'ai omis de mentionner l'implication $\Rightarrow$ et l'équivalence $\Leftrightarrow$.
+Je vous les laisse en exercice.
+\end{itemize}
+En décomposant une formule $p$ en ses symboles de base, nous pouvons donc calculer $\mathrm{VAL}_I(p)$, c'est-à-dire si la formule
+est vraie ou fausse, à partir de la fonction $\mathrm{val}_I$.
+
+\subsubsection{Modèle}
+
+Un modèle d'un ensemble de formules est une interprétation qui rend toutes les formules vraies.
+Formellement, si on a un ensemble de formules $B = \{ p_1, \ldots, p_n \}$,
+une interprétation $I$ pour $B$ est un {\em modèle} si et seulement si:
+\begin{equation}
+\forall p_i \in B: \mathrm{VAL}_I(p_i) = T
+\end{equation}
+
+% \section{Différence avec la logique des propositions}
+% Les trois différences entre les deux logiques sont:
+% \begin{enumerate}
+% \item les variables,
+% \item les quantificateurs,
+% \item les symboles de fonction (moins important).
+% \end{enumerate}  
+% Imaginons un modèle $B:
+% \{
+%   \begin{array}{rcr}
+%     P_{1},...P_{n}
+%   \end{array}
+% \}
+% $
+% Si nous utilisons une interprétation I pour B cela donne:
+% $\forall P_{I} \in B : VAL_{I} (P_{I}) = True$ qui est très générale, car $P_{I}$ peut avoir des variables, des quantificateurs ...
 
 % partie 1 (15 à 30 min) Thomas)
 
 \section{Preuves avec règles}
 
-    Il est possible de faire des preuves avec des règles de preuve. Une preuve est une simple manipulation de symboles qui sont des règles. Mais il faut justifier ces règles pour obtenir des résultats vrais. Elles sont justifiées en raisonnant sur les interprétations pour vérifier si elles sont correctes ou non. Tout cela est la sémantique. C'est la base pour pouvoir faire des preuves.
+Comme pour la logique propositionnelle, il est important de pouvoir faire des preuves avec la logique des prédicats.
+Il y a deux approches principales: la preuve manuelle et la preuve automatisée.
+Pour les deux approches, la preuve est toujours un objet mathématique, une séquence de déductions avec ses formules et
+ses justifications, qui sont une application des règles de preuve.
 
-Beaucoup de choses restent les mêmes que dans la logique des propositions. La preuve est toujours un objet mathématique, une séquence avec des formules, des justifications, une application des règles. Elle commence avec des prémisses et finit par une conclusion. Il est possible de faire des preuves manuelles, mais aussi des preuves automatisées. C'est une généralisation de l'approche de la logique des propositions. 
+\subsection{Preuves manuelles}
 
+Les preuves manuelles sont le sujet du chapitre \ref{preuvemanuelle}.
+
+\subsection{Preuves automatisées}
+
+Les preuves automatisées sont le sujet du chapitre \ref{algorithmepreuve}.
+L'algorithme de preuve que nous allons définir est une généralisation de l'algorithme pour la logique propositionnelle.
 Il y a toujours :
 \begin{itemize}
-  \item Une règle de résolution pour les preuves automatisées, mais celle-ci est plus générale. Elle va utiliser un concept appelé "unification". Ce nouveau concept est introduit à cause des variables. En effet, celles-ci peuvent être différentes, il faut donc trouver un nouveau moyen de les fusionner.
+  \item Une règle de résolution pour les preuves automatisées, mais celle-ci est plus générale. Elle va utiliser un concept appelé
+``unification''. Ce nouveau concept est nécessaire à cause des variables.
+En effet, celles-ci peuvent être différentes, il faut donc trouver un nouveau moyen de les fusionner.
   \item Une forme normale, qui  est plus compliquée à cause des quantificateurs et des symboles de fonctions, mais qu'il est encore possible de l'obtenir.
-  \item un algorithme avec ses propriétés. Mais il est moins fort/complet que l'algorithme développé pour la logique des propositions. Il ne sera plus décidable, mais seulement semi-décidable. C'est-à-dire que parfois il tournera en boucle. Cela est dû aux variables et aux quantificateurs. La logique des prédicats est beaucoup plus riche que la logique des propositions, mais en contrepartie l'algorithme arrive à prouver moins de choses. Cependant, l'algorithme sera toujours adéquat, mais pas forcément complet. Il ne sera pas toujours possible de trouver une preuve, même quand elle existe parce qu'elle sera trop compliquée.
+  \item Un algorithme avec ses propriétés. Mais il est moins fort/complet que l'algorithme développé pour la logique des propositions. Il ne sera plus décidable, mais seulement semi-décidable. C'est-à-dire que parfois il tournera en boucle. Cela est dû aux variables et aux quantificateurs. La logique des prédicats est beaucoup plus riche que la logique des propositions, mais en contrepartie l'algorithme arrive à prouver moins de choses. Cependant, l'algorithme sera toujours adéquat, mais pas forcément complet. Il ne sera pas toujours possible de trouver une preuve, même quand elle existe parce qu'elle sera trop compliquée.
 \end{itemize}
 Qu'est il possible de faire avec ce genre d'algorithme moins fort?
 
+\subsubsection{L'utilisation de l'algorithme de preuve}
+
 Il y a deux possibilités : 
 \begin{itemize}
-\item Un assistant de preuve\\
+\item {\em Un assistant de preuve}
 C'est un outil qui aide les gens à faire des preuves formelles. Deux exemples d'assistants de preuves sont Coq et Isabelle. C'est un outil très sophistiqué, mais qui a permis de prouver des choses de manière totalement formelle, alors qu'avant des preuves prenaient des dizaines voire des centaines de pages de preuves mathématiques. Mais cet assistant ne fait pas tout parce que l'algorithme est moins bon. Cependant, il aide beaucoup. C'est à l'être humain de lui donner des coups de pouce sous forme de lemmes, hypothèses, chemins, stratégies ... Ensuite, l'algorithme s'occupe de la manipulation des symboles.\\
 Un exemple très célèbre est le théorème de la coloration d'une carte. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
-\item L'utiliser dans les langages de programmation\\
+\item {\em Un langage de programmation}
 L'algorithme peut être considéré comme le moteur d'un programme. C'est ce qu'on appelle maintenant la programmation logique. Elle consiste à utiliser la logique dans un programme. Le langage le plus célèbre qui a suivi cette approche est Prolog. Ce fut un énorme succès, car les gens ne croyaient pas que c'était possible de faire un programme en logique qui pouvait tourner. Cela a donné naissance à la programmation par contraintes (une contrainte est une relation logique). Cette discipline est très utile pour les optimisations, par exemple dans le cas du "voyageur de commerce".
 \end{itemize}
-\subsubsection{}
-La logique des prédicats n'est donc pas quelque chose de seulement théorique, destiné uniquement aux mathématiciens. Les gens ont vraiment essayé avec succès d'utiliser la logique dans l'exécution des programmes.
-\subsubsection{}
+
+La logique des prédicats n'est donc pas quelque chose de seulement théorique, destiné uniquement aux mathématiciens.
+Elle a été utilisée avec succès dans les programmes.
 
 %partie 3 de 30 à 45 min (Guillaume)
+
 \chapter{Preuves en logique des prédicats}
+\label{preuvemanuelle}
 
 On va généraliser l'approche de la logique propositionnelle, car comme vu précédemment le langage des prédicats est beaucoup plus riche.  Il ajoute entre autres :
 
