@@ -712,12 +712,23 @@ Lors que l'arrivée des ordinateurs, fin du 20ème siècle (années 50-60 et fin
 
 \chapter{Algorithme de preuve pour la logique des prédicats}
 \label{algorithmepreuve}
-\begin{itemize}
-    \item Cet algorithme s'inspire de l'algorithme de réfutation de la logique des propositions [résolution forme clausale]
-    \item Pour la logique des prédicats, c'est un peu plus complique, mais ça marche!
-\end{itemize}
-On peut le faire marcher malgré la complexité des variables et des quantificateurs ce qui est assez étonnant, car c'est une logique très expressive. 
+
+Dans le chapitre précédent nous avons introduit des règles pour faire des preuves manuelles.
+Avec l'arrivée des ordinateurs, les logiciens ont tout de suite essayé de faire des preuves mécanisées.
+Nous avons vu dans le chapitre \ref{preuveprop} (Section \ref{algorithmeprop})
+un algorithme de preuve pour la logique propositionnelle qui utilise la réfutation.
+La logique des prédicats est beaucoup plus expressive que la logique propositionnelle
+et les raisonnement est plus délicat (voir chapitre précédent!).
+Est-ce que nous pouvons faire un algorithme de preuve pour la logique des prédicats?
+Cela ne semble pas évident.
+Beaucoup de logiciens ont travaillé sur cette question.
+La réponse affirmative à la question est un des grands résultats des mathématiques du 20ème siècle.
+Dans ce chapitre nous verrons un algorithme de preuve avec une grande puissance.
+
+On peut le faire marcher malgré la complexité des variables et des quantificateurs ce qui est assez étonnant,
+car c'est une logique très expressive. 
 Arriver à trouver un algorithme permettant de traiter la logique des prédicats était une sorte de Graal au 20ème siècle. 
+
 \section{Trois transformations} 
 On va commencer par faire les transformations de normalisation. Il y a 3 transformations à effectuer: 
 \begin{enumerate}
