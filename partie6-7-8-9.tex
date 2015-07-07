@@ -719,72 +719,114 @@ Nous avons vu dans le chapitre \ref{preuveprop} (Section \ref{algorithmeprop})
 un algorithme de preuve pour la logique propositionnelle qui utilise la réfutation.
 La logique des prédicats est beaucoup plus expressive que la logique propositionnelle
 et les raisonnement est plus délicat (voir chapitre précédent!).
+
 Est-ce que nous pouvons faire un algorithme de preuve pour la logique des prédicats?
 Cela ne semble pas évident.
 Beaucoup de logiciens ont travaillé sur cette question.
 La réponse affirmative à la question est un des grands résultats des mathématiques du 20ème siècle.
 Dans ce chapitre nous verrons un algorithme de preuve avec une grande puissance.
-
 On peut le faire marcher malgré la complexité des variables et des quantificateurs ce qui est assez étonnant,
 car c'est une logique très expressive. 
-Arriver à trouver un algorithme permettant de traiter la logique des prédicats était une sorte de Graal au 20ème siècle. 
+
+\subsubsection{Propriétés de l'algorithme}
+
+L'algorithme pour la logique des prédicats
+ne garde pas toutes les propriétés de l'algorithme pour la logique propositionnelle,
+car la logique des prédicats est beaucoup plus expressive.
+En particulier, là où l'algorithme pour la logique propositionnelle est décidable,
+l'algorithm pour la logique des prédicats n'est que semi-décidable.
+
+Supposons $B$ l'ensemble des axiomes (prémisses) et $T$ le théorème que l'on veut prouver.
+On a les propriétés suivantes:
+\begin{itemize}
+\item L'algorithme est {\em adéquat} (``{\em consistent}''): Si $B\vdash T$ alors $B \models T$\\
+Si l'algorithme trouve une preuve de $T$ avec les axiomes $B$ alors $T$ sera vraie dans tous les modèles de $B$.
+\item L'algorithme est {\em complet} (``{\em complete}''): Si $B \models T$ alors $B\vdash T$\\
+Si $T$ est vrai dans tous les modèles de $B$ alors l'algorithme trouvera une preuve de $T$ avec les axiomes $B$.
+\item L'algorithme est {\em semi-décidable}:
+\begin{itemize}
+\item Si $B \models T$ alors l'algorithme trouve une preuve. 
+\item Si $B \not\models T$ il peut tourner en rond indéfiniment.
+\end{itemize}
+Si $T$ est vrai dans tous les modèles, l'algorithme trouvera une preuve, mais si $T$ n'est pas
+vrai dans tous les modèles, l'algorithme peut tourner en rond et ne jamais se terminer.
+Le problème est donc que quand l'algorithme prend trop de temps à trouver une preuve,
+à un certain moment on doit l'arrêter et l'on n'est jamais certain du résultat.
+On ne peut jamais être sûr que l'algorithme n'aurait pas trouvé une preuve si on l'avait laissé tourner plus longtemps.
+Il est donc semi-décidable, car ses résultats ne sont totalement fiables que dans le cas ou une preuve est trouvée.
+\end{itemize}
 
 \section{Concepts de base}
 
-\subsection{Trois transformations} 
-On va commencer par faire les transformations de normalisation. Il y a 3 transformations à effectuer: 
-\begin{enumerate}
-    \item formule $\to$ forme prénexe: $$(\ldots{}\forall{}\ldots{}\exists{}\ldots{}\forall{} )\implies \forall{}\exists{}\forall{}(\ldots{})$$
-    Tous les quantificateurs sont mis en tête de la formule. Les quantificateurs étant très compliqués à gérer, on transforme la formule pour les extraire de celle-ci. \\Les modèles sont conservés durant cette transformation.
-    \item forme prénexe $\to$ forme Skolem (élimination des $\exists{}$): $$ \forall{}\exists{}\forall{}(\ldots{})  \implies \forall{}\forall{}\forall{}(\ldots{}) $$
-    Les quantificateurs existentiels sont très embêtants, car ils sont restrictifs. Ils disent qu'il existe des éléments, mais ne précisent pas lesquels, on va donc les éliminer. \\
-    Cette transformation préserve l'existence des modèles, mais pas les modèles eux-mêmes. Ils doivent être modifiés pour conserver la même signification. 
-    \item forme Skolem $\to$ forme normale conjonctive: 
-    \[\forall \ldots \forall \land_i(\lor_j L_{ij})\]
+L'algorithme de preuve est basé sur deux idées:
+\begin{itemize}
+\item Simplification des prémisses.
+On transforme les prémisses dans une forme uniforme et simple qui s'appelle forme clausale.
+\item Simplification des règles d'inférence.
+On garde une seule règle d'inférence, la résolution, qui marche sur la forme clausale.
+\end{itemize}
+Avec ces deux simplifications, la définition de l'algorithme devient simple aussi.
 
-Cette transformation consiste à transformer la formule en une conjonction de disjonctions ($\land$ de $\lor$). Les règles pour cette transformation sont les mêmes règles qu'en logique propositionnelle. \\
-Les modèles sont préservés lors de cette transformation. 
+\subsection{Forme normale conjonctive (forme clausale)} 
+
+Pour transformer les prémisses en forme clausale, il y a trois étapes:
+\begin{enumerate}
+    \item Formule $\to$ forme prénexe: $$(\ldots{}\forall{}\ldots{}\exists{}\ldots{}\forall{} )\implies \forall{}\exists{}\forall{}(\ldots{})$$
+    Tous les quantificateurs sont mis en tête de la formule. Les quantificateurs étant très compliqués à gérer, on transforme la formule pour les extraire de celle-ci. \\
+    Les modèles sont préservés durant cette transformation, la formule avant la transformation a les mêmes modèles
+    que la formule après la transformation.
+    Cela est vrai parce que les deux formules sont équivalentes.
+    \item Forme prénexe $\to$ forme Skolem (élimination des $\exists{}$): $$ \forall{}\exists{}\forall{}(\ldots{})  \implies \forall{}\forall{}\forall{}(\ldots{}) $$
+    Les quantificateurs existentiels sont très embêtants, car ils sont restrictifs. Ils disent qu'il existe des éléments, mais ne précisent pas lesquels, on va donc les éliminer. \\
+    Cette transformation préserve l'{\em existence} des modèles (la satisfaisabilité),
+    mais pas les modèles eux-mêmes. Ils doivent être modifiés pour conserver la même signification. 
+    \item Forme Skolem $\to$ forme normale conjonctive (forme clausale):  
+    \[\forall \ldots \forall \land_i(\lor_j L_{ij})\]
+    Cette transformation consiste à transformer la formule en
+    une conjonction de disjonctions ($\land$ de $\lor$). Les règles pour cette transformation sont
+    les mêmes règles qu'en logique propositionnelle. \\
+    Les modèles sont préservés lors de cette transformation. 
 \end{enumerate}
 
 \subsection{Résolution}
-En logique des propositions: $$\frac{L\lor C_1, \neg L \lor C_2}{C_1\lor C_2}$$
-Cette technique fonctionne en logique des propositions, car il n'y a pas de variables, mais ici, on peut avoir $L_1 \lor C_1$ \hspace{10pt} $\neg L_2 \lor C_2$  avec $L_1$ et $L_2$ qui ont des variables différentes. Par exemple P(x,a) et P(y,z).\\
-Pour pouvoir faire la résolution, il va falloir en quelque sorte les rendre identiques. \\
-On va donc dire: ce ne sont peut-être pas toujours les mêmes, mais, pour certaines valeurs, ils sont identiques. Si x=y et a=z alors on peut faire la résolution. 
-\subsubsection{Unification}
+
+La seule règle d'inférence gardée par l'algorithme s'appelle la résolution.
+Cette règle existe déjà dans une forme plus simple dans la
+logique des propositions: $$\frac{L\lor C_1, \neg L \lor C_2}{C_1\lor C_2}$$
+Cette règle est simple en logique des propositions, car il n'y a pas de variables: $L$ et $\neg L$ sont directement comparables
+(il y a le même $L$ dans les deux).
+En logique des prédicats ce n'est plus vrai: on peut avoir $L_1 \lor C_1$ et $\neg L_2 \lor C_2$  avec $L_1$ et $L_2$ qui ont
+des variables différentes.
+On ne peut donc pas faire la résolution immédiatement.
+
+Pour pouvoir faire la résolution, il va falloir en quelque sorte ``rendre $L_1$ et $L_2$ identiques''.
+On va donc dire: ce ne sont peut-être pas toujours les mêmes, mais, pour certaines valeurs, ils sont identiques.
+L'idée sera donc de les rendre identiques en substituant leurs variables par d'autres judicieusement choisies.
+Cette opération s'appelle l'{\em unification}.
+Prenons un exemple:
+
 \begin{minipage}{0.25\textwidth}
-		L1:  P(x,a)\\
-		L2:  P(y,z)
-\end{minipage}
-\begin{minipage}{0.75\textwidth}
-		Pour que $L_1$ et $L_2$ soient identiques, on va restreindre les variables et faire une substitution.
+		$L_1$ $=$ $P(x,a)$ \\
+		$L_2$ $=$ $P(y,z)$
 \end{minipage}
 
-$$(a: constante,\ x,y,z : variables)$$
-$$\sigma=\{(x,y),(z,a)\}$$
-$$P(x,a) \to P(y,a)$$
-$$P(y,z) \to P(y,a)$$
-
-Cette résolution marche pour toutes les valeurs qui sont limitées par la substitution. Le résultat ne sera donc pas général.
-Cette opération s'appelle l'unification et utilise la substitution $\sigma$ (sigma). 
-On peut maintenant faire la résolution en appliquant  le même algorithme de réfutation que pour la logique des prédicats: 
-
-$$\frac{L_1C_1, \neg L_2 \lor C_2}{(C_1 \lor C_2)\sigma}$$
-
-\subsection{Propriétés de l'algorithme}
-\begin{itemize}
-\item Cet algorithme est moins fort que pour la logique des propositions, car la logique des prédicats est beaucoup plus expressive.
-\item  adéquat: Si $B\vdash T$ $\to$ $B \models T$\\
-\textit{si l'on trouve une preuve de T avec les axiomes B alors T sera vrai dans tous les modèles de B}
-\item complet: Si $B \models T$ $\to$ $B\vdash T$\\
-\textit{Si quelque chose est vrai dans tous les modèles alors on va trouver une preuve}
-\item L'algorithme possède les propriétés d'un algorithme semi-décidable:
-\begin{itemize}
-\item Si $B \vdash T$ $\to$ l'algorithme trouve une preuve. 
-\item Si $B  \nvDash T$ $\to$ il peut tourner en rond indéfiniment.
-\end{itemize}
-\textit{Si ce qu'on tente de prouver est vrai dans tous les modèles, l'algorithme va finir par trouver une preuve, mais si ce n'est pas vrai, l'algorithme va tourner en rond et ne jamais se terminer. Le problème est donc que quand l'algorithme prend trop de temps à trouver une preuve, on doit l'arrêter et l'on n'est jamais certain du résultat. On ne peut jamais être sûr que l'algorithme n'aurait pas trouvé une preuve si on l'avait laissé tourner plus longtemps. Il est donc semi-décidable, car ses résultats ne sont totalement fiables que dans le cas ou une preuve est trouvée. }
-\end{itemize}
+Pour que $L_1$ et $L_2$ deviennent identiques, on va restreindre leurs variables en faisant une substitution.
+Nous avons les variables $x$, $y$, $z$ et une constante $a$.
+Une substitution possible est de remplacer $x$ par $y$ et $z$ par $a$.
+On écrit $\sigma = \{(x,y),(z,a)\}$ où $\sigma$ est la substitution.
+Si on applique $\sigma$ à $L_1$ et $L_2$ on obtient:
+$$L_1 \sigma = P(x,a) \sigma = P(y,a)$$
+$$L_2 \sigma = P(y,z) \sigma = P(y,a)$$
+Les deux formules sont maintenant identiques, et on peut donc faire la résolution.
+Cette résolution marche pour toutes les valeurs qui sont limitées par la substitution.
+Le résultat ne sera donc pas général.
+En résumant, on peut écire la règle de résolution de façon plus générale en y mettant la substitution:
+$$\frac{L_1 \lor C_1, \neg L_2 \lor C_2}{(C_1 \lor C_2)\sigma}$$
+Pour faire l'inférence
+on choisit le $\sigma$ le plus général possible, ce que nous appellons
+l'{\em unificateur le plus général} (``{\em most general unifier}'').
+On peut démontrer qu'un unificateur le plus général existe toujours.
+C'est cette règle d'inférence que nous allons utiliser dans l'algorithme de preuve.
 
 \section{Transformation de la formule de base vers la forme prénexe}
 
