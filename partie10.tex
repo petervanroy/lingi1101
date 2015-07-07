@@ -130,6 +130,8 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
 \underline{Alors} $$ \mbox{\huge $\frac{L^{+} \vee C_1, \neg L^{-} \vee C_2}{(C_1 \vee C_2)\sigma}$ } $$
 
 \section{Algorithme}
+
+\subsection{Définition de l'algorithme}
 \begin{algorithm}
 \KwIn{$S := \big\{ \Delta x_1, ..., \Delta x_i, \neg Th \big\}$ dont chaque formule est en forme normale conjonctive (FNC).}
 \While{$ false \notin S$ et il existe une paire de clauses résolvables et non résolues.}{
@@ -149,7 +151,7 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
 \eIf{$false \in S$}{Th prouvé.}{Th non prouvé.}
 \end{algorithm}
 
-\section{Exemple}
+\subsection{Exemple d'exécution}
 \begin{itemize}
   \item $(\forall x) homme(x) \wedge fume(x) \Rightarrow mortel(x)$
   \item $(\forall x) animal(x) \Rightarrow mortel(x)$
@@ -158,7 +160,7 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
   \item \textbf{Candidat-théorème:} $mortel(Ginzburg)$
 \end{itemize}
 
-\subsection{Initialisation de S}
+\subsubsection{Initialisation de S}
 \begin{itemize}
   \item P1: $(\forall x) \neg (homme(x)\wedge fume(x)) \vee mortel(x)$
   \item P2: $(\forall x) \neg animal(x) \vee mortel(x)$
@@ -167,7 +169,7 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
   \item P5: $\neg mortel(Ginzburg)$
 \end{itemize}
 
-\subsection{Itérations}
+\subsubsection{Itérations}
 
 \textbf{\underline{1}}
 \begin{itemize}
@@ -190,7 +192,7 @@ Dans ce cas-ci, $\sigma_2$ est plus général.\\
   \item $r = false.$ Inconsistence donc le candidat théorème est prouvé.
 \end{itemize}
 
-\subsection{Non-déterminisme}
+\subsubsection{Non-déterminisme}
 
 Importance des \underline{choix} qu'on fait. Voici un déroulement alternatif :
 
@@ -203,7 +205,7 @@ Importance des \underline{choix} qu'on fait. Voici un déroulement alternatif :
 
 Si on avait fait ce choix-ci pour la première itération, l'algorithme ne peut plus continuer et on doit faire marche arrière.
 
-\section{Stratégies}
+\subsection{Stratégies}
 
 \begin{itemize}
   \item Quelles paires $p_i, p_j$ choisir?
