@@ -487,68 +487,94 @@ On appelle souvent $a,b,c$ des {\em paramètres}.
 Nous allons maintenant introduire les règles de déduction pour les quantificateurs.
 D'abord, nous définissons une manipulation symbolique importante qui est utilisée
 dans ces règles: la substitution.
+Ensuite nous définissons les quatre règles pour les quantificateurs.
+
+Comment savons-nous que les règles sont correctes?
+On ne peut pas le prouver dans la logique des prédicats: on ne peut pas prouver l'exactitude
+des règles avec les règles elles-mêmes!
+Il faut faire un raisonnement en dehors de la logique des prédicats.
+Nous justifions chaque règle avec un raisonnement basé que un modèle de la formule.
+Si la logique des prédicats est notre langage pour formaliser les raisonnements,
+on peut donc dire que la justification des règles est faite en dehors de ce langage, donc en {\em meta-langage}.
 
 \subsection{La substitution}
 Une manipulation fréquente en logique des prédicats est la \textbf{substitution}. Elle consiste à prendre une formule et remplacer une partie par une autre.
 
-Si on a une formule $p[x/t]$ (où $p$ veut dire "toutes les formules"). On va remplacer toutes les occurrences libres de $x$ par $t$.\\
-On peut aussi écrire cela de la manière suivante :\\
-$p[x/t]$ possède deux portées :
-\begin{itemize}
-\item[] La première se note $p[x]$ et correspond à une partie de la règle.
-\item[] La seconde se note $p[t]$ et correspond à l'autre partie de la règle.\\
-\end{itemize}
-
-Exemple :
+Si on a une formule quelconque $p$, la notation $p[x/t]$ veut dire de remplacer toutes les occurrences libres de $x$ par $t$.
+Une {\em occurrence libre} d'une variable est une occurrence qui n'est pas dans la portée d'un quantificateur.
+Il faut faire attention aux variables dans $t$, pour éviter qu'une variable dans $t$ ne rentre dans la portée d'un quantificateur,
+ce qui s'appelle la {\em capture de variable}.
+Pour éviter la capture, il faut faire un {\em renommage} de variable, c'est-à-dire, changer les noms des variables dans $p$.
+Voici un exemple de $p[x/y]$ où $p = P(x) \rightarrow \forall y \cdot (P(x) \wedge R(y))$ :
 \begin{center}
 \begin{tabular}{|l |l |>{\raggedright}m{6cm}|}
 \hline
 1. &$P(x) \rightarrow \forall y \cdot (P(x) \wedge R(y))$&$[x/y]$ veut dire qu'on va remplacer toutes les occurrences libres de $x$ par $y$.\tabularnewline
 \hline
-2. &$P(y) \rightarrow \forall y \cdot (P(y) \wedge R(y))$&En remplaçant $x$ par $y$, on a changé le sens de la formule, car avant, $x$ n'était pas dans la portée du quantificateur alors que maintenant il l'est. Ce changement de sens s'appelle une \textbf{capture de variable}, car la variable $y$ est capturée par le quantificateur. Pour résoudre ce problème, on va effectuer un \textbf{renommage}.\tabularnewline
+2. &$P(y) \rightarrow \forall y \cdot (P(y) \wedge R(y))$&En remplaçant $x$ par $y$, on a changé le sens de la formule, car avant, $x$ n'était pas dans la portée du quantificateur alors que maintenant il l'est. Ce changement de sens s'appelle une \textit{capture de variable}, car la variable $y$ est capturée par le quantificateur. Pour résoudre ce problème, on va effectuer un \textit{renommage}.\tabularnewline
 \hline
-3. &$P(y) \rightarrow \forall z \cdot (P(y) \wedge R(z))$&Résultat après renommage (pour éviter la capture de variable).\tabularnewline
+3. &$P(y) \rightarrow \forall z \cdot (P(y) \wedge R(z))$&Résultat après renommage (pour éviter la capture de variable).
+On a changé le $y$ en $z$ (renommage) et remplacé le $x$ par $y$ (substitution). \tabularnewline
 \hline
 \end{tabular}
 \end{center}
+
+Voici un autre exemple avec $p = \exists y . P(x,y)$.
+Nous donnons plusieurs possibilités de substitution correctes:
+\begin{itemize}
+\item $p[x/y] = \exists z. P(y,z)$ (attention: $y$ a été renommée)
+\item $p[x/f(x)] = \exists y. P(f(x),y)$
+\item $p[x/c] = \exists y. P(c,y)$ ($c$ est une constante)
+\item $p[x/z] = \exists y. P(z,t)$
+\end{itemize}
 
 % Ancienne partie 8
 
 \subsection{Élimination de $\forall$}
 \begin{flushleft}
 
-$\forall$x$\bullet$P(x) $\rightarrow$ P(a) $\>$ a est une constante\\
-$\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\rightarrow$ P(y) $\>$ y est une variable $\>$ ($P_{I}$($y_{I}$) est vrai $\>$ $y_{I}$ $\in$ $P_{I}$)$\linebreak$ 
-$\forall$ = pour tout $x_{I}$ $\in$ $P_{I}$ : $P_{I}$($x_{I}$) est vrai$\linebreak$
+Parce que $\forall x . P(x)$ veut dire pour tout $x_{I}$ $\in$ $D_{I}$ : $P_{I}$($x_{I}$) est vrai,
+on peut remplacer sans contrainte:$\linebreak \linebreak$
+$\forall$x$\bullet$P(x) $\rightarrow$ P(a) $\>$ a est une constante quelconque\\
+$\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\rightarrow$ P(y) $\>$ y est une variable $\>$ (parce que $P_{I}$($y_{I}$) est vrai)$\linebreak$ 
 
-\underline{Règle :}$\linebreak$\\
+\underline{Règle :}
 \begin{center}
 {\LARGE $\frac{\forall x : p}{p[x/t]}$}
-\begin{flushright}$\>$ Substitution : t remplace x\end{flushright}
 \end{center}
-\textcolor{red}{\danger Il est parfois nécessaire d'effectuer un renommmge }
+\textcolor{red}{\danger\ N'oubliez pas de faire le renommage si nécessaire}
 
 \underline{Exemple :}\\
 \begin{enumerate}
 \item $\forall$x $\bullet$ $\forall$y $\bullet$ P(x,y) $\>$ Pr\'emisse
 \item $\forall$y $\bullet$ P(x,y) $\>$ $\>$ $\>$ $\>$ $\>$ Élimination de $\forall$
-\item P(x,x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Élimination de $\forall$ $\rightarrow$ Pas de renommage, car pas de capture
+\item P(x,x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Élimination de $\forall$
 \item $\forall$x $\bullet$ P(x,x) $\>$ $\>$ $\>$ $\>$ $\>$ Introduction de $\forall$
 \end{enumerate}
+Le renommage n'est pas nécessaire dans la ligne (3) parce qu'il n'y a pas de capture.
 
 \subsection{Élimination de $\exists$}
-$\exists$x $\bullet$ P(x) $\rightarrow$ P(a) $\>$ a = nouvelle constante qui apparaît nulle part ailleurs ($val_{I}(a) = x_{I}$)\\
-Il existe un $x_{I}$ $\in$ $D_{I}$ avec $P_{I}$($x_{I}$) est vrai\\
-$\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\nrightarrow$ P(y) $\>$ y = variable qui existe d\'ej\`a dans la preuve \\
-$\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\rightarrow$ P(z) $\>$ z = nouvelle variable dans la preuve $\>$ $val_{I}(z) = x_{I}$\\
+
+Il faut faire attention avec cette règle, parce que $\exists x. P(x)$ veut dire qu'il existe
+un élément $x_I \in D_I$ pour lequel $P_I(x_I)$ est vrai.
+On ne connait pas cet élément, mais on peut introduire un symbole qui le représente:$\linebreak \linebreak$
+$\exists$x $\bullet$ P(x) $\rightarrow$ P(a) \\
+a = nouvelle constante qui n'apparaît nulle part ailleurs ($val_{I}(a) = x_{I}$) $\linebreak$ \\
+
+$\exists$x $\bullet$ P(x) $\rightarrow$ P(z) \\
+z = nouvelle variable dans la preuve ($val_{I}(z) = x_{I}$) $\linebreak$\\
+
+$\exists$x $\bullet$ P(x) $\nrightarrow$ P(y) (pas autorisé)\\
+y = variable qui existe d\'ej\`a dans la preuve, elle a déjà une valeur $\linebreak$ \\
+
 \underline{Exemple 1 :}\\
 \begin{enumerate}
 \item $\exists$x $\bullet$ chef(x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>\>$Pr\'emisse
 \item $\exists$x $\bullet$ voleur(x) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$  $\>$Pr\'emisse
 \item chef(y) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$Élimination de $\exists$
-\item \sout{voleur(y)} $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Élimination de $\exists$ $\>$ \textcolor{red}{y n'est pas une nouvelle variable dans la preuve}
+\item voleur(y) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Élimination de $\exists$ \textcolor{red}{(y pas nouvelle)}
 \item chef(y) $\wedge$ voleur(y) $\>$ $\>$ $\>$ $\>$ $\>$ Conjonction
-\item \sout{$\exists$y $\bullet$ chef(y) $\wedge$ voleur(y) $\>$} Introduction de $\exists$ \textcolor{red}{FAUX}
+\item $\exists$y $\bullet$ chef(y) $\wedge$ voleur(y) $\>$ Introduction de $\exists$ \textcolor{red}{(FAUSSE)}
 \end{enumerate}
 
 \underline{Exemple 2 :}\\
@@ -558,19 +584,23 @@ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\rightarrow$ P(z) $\>$ z = nouvelle var
 \item chef(y) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Élimination de $\exists$
 \item voleur (z) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Élimination de $\exists$
 \item chef(y) $\wedge$ voleur(z) $\>$ $\>$ $\>$ $\>$ $\>$ $\>$ Conjonction
-\item $\exists$y $\exists$z chef(y) $\wedge$ voleur(z) $\>$ Introduction de $\exists$
+\item $\exists$y $\exists$z chef(y) $\wedge$ voleur(z) $\>$ Introduction de $\exists$ (EXACTE)
 \end{enumerate}
 
 \subsection{Introduction de $\exists$}
-\underline{R\`egle :}\\
+
+Si $p[t]$ est vrai cela veut dire qu'il existe un élément $t_I = \mathrm{VAL}_I(t) \in D_I$ avec $(\mathrm{val}_I(p))(t_I)$.
+On peut donc introduire $\exists x$ car un élément existe qui rend vrai $p[x]$.
+Mais attention, on doit pouvoir trouver la formule originale à partir de $\exists x.p[x]$,
+sinon l'introduction du quantificateur ``$\exists$'' a changé le sens de la formule (capture!).
+
+\underline{R\`egle :}
 \begin{center}
 {\LARGE $\frac{p[t]}{\exists x \bullet p[x]}$}
 \end{center}
-\begin{flushright}
-Il y a une substitution p[x/t]
-\end{flushright}
+Autorisé si la substitution $p[x/t]$ retrouve la formule originale.$\linebreak$
 
-\underline{Exemple :}\\
+\underline{Exemple :}
 \begin{center}
  P(y,y)\\
 $\exists$x $\bullet$ P(x,x)\\[2\baselineskip]
@@ -580,22 +610,23 @@ $\exists$x $\bullet$ P(x,x)\\[2\baselineskip]
 \textcolor{red}{Ceci n'est pas correct !}
 \end{flushright}
 \end{center}
-$\Rightarrow$ Il doit être possible de retrouver la formule originale en remplaçant.\\
+Le deuxième exemple ne marche pas parce que $P(x,x)[x/y]$ ne retrouve pas la formule originale.
 
 \subsection{Introduction de $\forall$}
-\underline{R\`egle :}\\
+
+\underline{R\`egle :}
 \begin{center}
 {\LARGE $\frac{p}{\forall x \bullet p}$}
 \end{center}
 \begin{itemize}
-\item Si p n'a pas d'occurrence libre de x alors c'est OK
-\item Si p contient une occurrence libre de x : on doit s'assurer que la preuve jusqu'à cet endroit marchera pour toutes valeurs affectées à x\\
-$\> \> \> \hookrightarrow$ Aucune formule dans la preuve jusqu'à cet endroit ne doit mettre une contrainte sur x !
+\item Si $p$ n'a pas d'occurrence libre de $x$ alors c'est OK
+\item Si $p$ contient une occurrence libre de $x$ : on doit s'assurer que la preuve jusqu'à cet endroit marchera pour toutes valeurs affectées à $x$\\
+$\> \> \> \hookrightarrow$ Aucune formule dans la preuve jusqu'à cet endroit ne doit mettre une contrainte sur $x$ !
 \end{itemize}
-\underline{Deux conditions :}\\
+\underline{Deux conditions :}
 \begin{itemize}
-\item x n'était pas libre dans une formule contenant un quantificateur $\exists$ qu'on a éliminé.
-\item x n'est pas libre dans une prémisse (dans ce cas, x serait connu depuis le début donc il possède déjà une valeur).
+\item $x$ n'était pas libre dans une formule contenant un quantificateur $\exists$ qu'on a éliminé.
+\item $x$ n'est pas libre dans une prémisse (dans ce cas, $x$ serait connu depuis le début donc il possède déjà une valeur).
 \end{itemize}
 
 \underline{Exemple :}\\
@@ -615,38 +646,47 @@ $\> \> \> \hookrightarrow$ Aucune formule dans la preuve jusqu'à cet endroit ne
 
 \section{Exemple plus conséquent}
 
-Il est important de pouvoir faire des preuves manuellement, car cela permet de bien comprendre toutes les étapes de raisonnement d'une preuve, même si par la suite on utilise un algorithme plutôt que de faire les preuves à la main. 
-Terminons donc par un exemple un peu plus conséquent d'une preuve manuelle en logique des prédicats avant d'introduire l'algorithme permettant d'effectuer des preuves de manière automatisée.
+Il est important de pouvoir faire des preuves manuellement, car cela permet de bien comprendre toutes les étapes de raisonnement
+d'une preuve, même si par la suite on utilise un algorithme plutôt que de faire les preuves à la main. 
+Terminons donc par un exemple un peu plus conséquent d'une preuve manuelle en logique des prédicats avant d'introduire
+l'algorithme permettant d'effectuer des preuves de manière automatisée.
 
-L'exemple suivant est inspiré de l'Empire romain: 
+L'exemple suivant est inspiré de l'Empire Romain: 
 \subsubsection{Prémisses}
 \begin{itemize}
-    \item Les maîtres et esclaves sont tous des hommes adultes
-    \item toutes les personnes ne sont pas des hommes adultes
+    \item Les maîtres et les esclaves sont tous des hommes adultes.
+    \item Toutes les personnes ne sont pas des hommes adultes.
 \end{itemize}
-\textit{Note: on voit dans les prémisses qu'il y a des quantificateurs: tous, toutes. 
-}
+\textit{Note: on voit dans les prémisses qu'il y a des quantificateurs: tous, toutes.}
+
 \subsubsection{A prouver} 
 \begin{itemize}
-    \item il existe des personnes qui ne sont pas des maîtres
+    \item Il existe des personnes qui ne sont pas des maîtres.
 \end{itemize}
+
 \subsubsection{Preuve}
 \begin{enumerate}
-    \item $\forall{}x\ (maitre(x)\lor{}esclave(x)\implies{}adulte(x)\land{}homme(x))$ \hfill prémisse
-    \item $\lnot{}\forall{}x\ (adulte(x)\land{}homme(x))$ \hfill prémisse
-    \item $\exists{}x\ \lnot{}(adulte(x)\land{}homme(x))$ \hfill théorème négation\\
+    \item $\forall{}x\ (maitre(x)\lor{}esclave(x)\implies{}adulte(x)\land{}homme(x))$ \hfill Prémisse
+    \item $\lnot{}\forall{}x\ (adulte(x)\land{}homme(x))$ \hfill Prémisse
+    \item $\exists{}x\ \lnot{}(adulte(x)\land{}homme(x))$ \hfill Théorème de négation\\
     \textit{S' il n'est pas vrai que toutes les personnes sont des hommes adultes alors il existe une personne qui n'est pas un homme adulte}
-    \item $\lnot{}(adulte(x)\land{}homme(x))$ \hfill $\exists{}$ elim\\
+    \item $\lnot{}(adulte(x)\land{}homme(x))$ \hfill Élimination de $\exists$ \\
 \textit{    On élimine le quantificateur existentiel:  on peut le faire, car on introduit une variable x qu'on choisit comme étant une personne rendant vraie la proposition.}
-    \item $(maitre(x)\lor{}esclave(x)\implies{}adulte(x)\land{}homme(x))$ \hfill $\forall{}$ elim\\
+    \item $(maitre(x)\lor{}esclave(x)\implies{}adulte(x)\land{}homme(x))$ \hfill Élim. de $\forall$ \\
     \textit{On peut retirer le $\forall$  en réduisant le champ de x aux x rendant vraie la proposition.}
-    \item $\lnot{}(maitre(x)\lor{}esclave(x))$ \hfill modus tollens
+    \item $\lnot{}(maitre(x)\lor{}esclave(x))$ \hfill Modus Tollens
     \item $\lnot{}maitre(x)\land{}\lnot{}esclave(x)$ \hfill De Morgan
-    \item $\lnot{}maitre(x)$ \hfill simplification
-    \item $\exists{}y\ \lnot{}maitre(y)$ \hfill $\exists{}$ intro\\
+    \item $\lnot{}maitre(x)$ \hfill Simplification
+    \item $\exists{}y\ \lnot{}maitre(y)$ \hfill Introduction de $\exists$ \\
     \textit{Comme dans l'interprétation, x est une personne qui rend valable cette proposition, on peut dire qu'il existe une personne rendant valable cette proposition et réintroduire le quantificateur $\exists$}
 \end{enumerate}
-C'était un exemple très simple ne faisant que quelques pas, mais la logique est assez expressive pour permettre des preuves plus complexes(par exemple, formaliser les mathématiques), le nombre de pas serait alors beaucoup plus important. 
+C'était un exemple très simple ne faisant que quelques pas, mais la logique est assez expressive pour permettre des preuves plus complexes
+(par exemple, formaliser les mathématiques).
+Le nombre de pas serait alors beaucoup plus important. 
+
+Les mathématiciens ont fait de grands efforts pour formaliser les mathématiques
+avec la logique des prédicats.
+Nous mentionnons le Principia Mathematica de Whitehead et Russell, et les ouvrages nombreux de Nicolas Bourbaki.
 
 \section{Note historique}
 
@@ -654,14 +694,14 @@ C'était un exemple très simple ne faisant que quelques pas, mais la logique es
 \begin{small}
 A la fin du 19ème siècle, début du 20ème: 
 \begin{itemize}
-\item création de la logique de 1er ordre (Gottlob Frege)
-\item Deux personnes ont essayé de formaliser toutes les mathématiques. Principa Mathématica (Alfred Whitehead, Bertrand Russell)
+\item Création de la logique de 1er ordre (Gottlob Frege)
+\item Deux personnes ont essayé de formaliser toutes les mathématiques. Principia Mathematica (Alfred Whitehead, Bertrand Russell)
 \end{itemize}
-Lors que l'arrivée des ordinateurs, fin du 20ème siècle(années 50-60 et fin du siècle) on a essayé de formaliser la logique via des algorithmes:
+Lors que l'arrivée des ordinateurs, fin du 20ème siècle (années 50-60 et fin du siècle) on a essayé de formaliser la logique via des algorithmes:
 \begin{itemize}
 \item Création de l'Algorithme de Preuves (1965):
 \begin{itemize}
-\item Alan Robinson crée La Règle de Résolution (qui va être expliquée au chapitre suivant)
+\item Alan Robinson invente la Règle de Résolution (qui va être expliquée au chapitre suivant)
 \item Création de prouveurs (assistants de preuve) par exemple Coq et Isabelle en 1972
 \item Création de la logique de programmation qui aide à l'élaboration de la programmation par contraintes: Prolog (1972) 
 \end{itemize}
