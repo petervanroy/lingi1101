@@ -209,10 +209,10 @@ $p : P(b,f(b)) \Rightarrow \exists y   P(a,y)$  \\
 On suppose que le $a$ et le $b$ sont des constantes et que le $f$ est une fonction.
 Une interprétation possible de cette formule est la suivante:
 \begin{itemize}
-\item[$\bullet$]P : $val_{I}(P) = $ $ \geq $ \hspace{3mm} (\textit{considéré comme un vrai prédicat})
-\item[$\bullet$] a : $val_{I}(a) = $ $ \sqrt{2} $ 
-\item[$\bullet$] b : $val_{I}(b) = $ $ \pi $ 
-\item[$\bullet$] $f$ : $val_{I}(f) = $ $ f_{i} $ \hspace{3mm} $f_{i}= \Re \rightarrow \Re : d \rightarrow \dfrac{d}{2} $ 
+\item[$\bullet$]P : $\mathrm{val}_{I}(P) = $ $ \geq $ \hspace{3mm} (\textit{considéré comme un vrai prédicat})
+\item[$\bullet$] a : $\mathrm{val}_{I}(a) = $ $ \sqrt{2} $ 
+\item[$\bullet$] b : $\mathrm{val}_{I}(b) = $ $ \pi $ 
+\item[$\bullet$] $f$ : $\mathrm{val}_{I}(f) = $ $ f_{i} $ \hspace{3mm} $f_{i}= \Re \rightarrow \Re : d \rightarrow \dfrac{d}{2} $ 
 \end{itemize}
 Avec ces éléments, on peut donc interpréter la formule $p$:
 \begin{center}
@@ -221,10 +221,10 @@ Avec ces éléments, on peut donc interpréter la formule $p$:
 Avec cette interprétation, la phrase logique donne ce sens.
 Une autre interprétation donnerait un sens totalement différent à la phrase logique. Voici une autre interprétation totalement différente :
 \begin{itemize}
-\item[$\bullet$] a : $val_{I}(a) = $ "Barack Obama"
-\item[$\bullet$] b : $val_{I}(b) = $ "Vladimir Putin"
-\item[$\bullet$] $f$ : $val_{I}(f) = $ $ f_{i} $ \hspace{3mm} $f_{i}: d \rightarrow \mathrm{père}(d)$
-\item[$\bullet$] P :  $val_{I}(P) = $ $P_{I}$ \hspace{3mm} $d_{1}$ est enfant de $d_{2}$\\
+\item[$\bullet$] a : $\mathrm{val}_{I}(a) = $ "Barack Obama"
+\item[$\bullet$] b : $\mathrm{val}_{I}(b) = $ "Vladimir Putin"
+\item[$\bullet$] $f$ : $\mathrm{val}_{I}(f) = $ $ f_{i} $ \hspace{3mm} $f_{i}: d \rightarrow \mathrm{père}(d)$
+\item[$\bullet$] P :  $\mathrm{val}_{I}(P) = $ $P_{I}$ \hspace{3mm} $d_{1}$ est enfant de $d_{2}$\\
 \end{itemize}
 
 Avec ce nouveau sens, on trouve l'interprétation suivante : 
@@ -559,10 +559,10 @@ Il faut faire attention avec cette règle, parce que $\exists x. P(x)$ veut dire
 un élément $x_I \in D_I$ pour lequel $P_I(x_I)$ est vrai.
 On ne connait pas cet élément, mais on peut introduire un symbole qui le représente:$\linebreak \linebreak$
 $\exists$x $\bullet$ P(x) $\rightarrow$ P(a) \\
-a = nouvelle constante qui n'apparaît nulle part ailleurs ($val_{I}(a) = x_{I}$) $\linebreak$ \\
+a = nouvelle constante qui n'apparaît nulle part ailleurs ($\mathrm{val}_{I}(a) = x_{I}$) $\linebreak$ \\
 
 $\exists$x $\bullet$ P(x) $\rightarrow$ P(z) \\
-z = nouvelle variable dans la preuve ($val_{I}(z) = x_{I}$) $\linebreak$\\
+z = nouvelle variable dans la preuve ($\mathrm{val}_{I}(z) = x_{I}$) $\linebreak$\\
 
 $\exists$x $\bullet$ P(x) $\nrightarrow$ P(y) (pas autorisé)\\
 y = variable qui existe d\'ej\`a dans la preuve, elle a déjà une valeur $\linebreak$ \\
@@ -853,3 +853,275 @@ Etapes de la transformation en formule logiquement équivalente:
 \item $\forall x [p(x) \land \forall y \exists u (\neg q(u,y) \land $\colorbox{lightgray}{$(\forall v) \bullet \neg$}$ r(a,u,y,v))]$\\$\neg\exists y\ devient\  \forall \ y\ \neg$
 \item $\forall x$\colorbox{lightgray}{$ \forall y \exists u \forall v  \bullet$}$ [p(x) \land (\neg q(u,y) \land  \neg r(a,u,y,v))]$\\\textit{Extraction des quantificateurs.}
 \end{enumerate}
+
+% Ancienne partie 10
+
+\section{Transformation en forme Skolem}
+\subsection{Intuition}
+
+Cette transformation consiste à éliminer toutes les occurrences de quantificateurs existentiels.
+\smallskip
+
+$(\forall x)(\forall y)(\exists u)(\forall v) \big[ P(x) \wedge \neg Q(u,y) \wedge \neg R(a,u,y,v) \big]$
+\smallskip 
+
+
+Dans ce cas-ci, la valeur de $u$ dépend des valeurs de $x$ et $y$. Lorsqu'on a choisi $x$ et $y$, on est alors libre de choisir $u$.
+On peut donc supposer qu'une fonction $g(x,y)$ fournit cet élément de façon à conserver la satisfaisabilité de la formule tout en supprimant $(\exists u)$.
+\smallskip
+
+$(\forall x)(\forall y)(\forall v) \big[ P(x) \wedge \neg Q(\textbf{g(x,y)},y) \wedge \neg R(a,\textbf{g(x,y)},y,v) \big]$
+\smallskip
+
+Après la transformation, l'existence des modèles est préservée.
+
+\subsection{Règle}
+
+Pour chaque élimination d'un quantificateur existentiel $(\exists x)$, on remplace sa variable quantifiée par une fonction $f(x_1,...,x_n)$ dont les arguments sont les variables des quantificateurs universels dont $x$ est dans la portée.
+Cette transformation ne conserve pas les modèles parce que la formule originale n'utilise pas le symbole $f$
+et la formule transformée utilise un symbole $f$.
+Mais la satisfaisabilité est conservée: la première formule a un modèle si et seulement si la deuxième formule en a un.
+\smallskip
+
+\underline{Justification par un exemple:}
+
+$p: \forall x \forall y \exists z \big[ \neg P(x,y) \vee Q(x,z) \big]$
+\smallskip
+
+$p_s: \forall x \forall y \big[ \neg P(x,y) \vee Q(x,\textbf{f(x,y)}) \big]$
+\smallskip
+
+Les modèles de $p$ ne sont les mêmes que les modèles de $p_s$.
+
+\underline{Pour $p$}
+\begin{itemize}
+  \item Interprétation $I$
+  \item $D_I =$ Professeur $\cup$ Université
+  \item $\mathrm{val}_I(P) = P_I = $ ``a enseigné à l'université''
+  \item $\mathrm{val}_I(Q) = Q_I = $ ``est diplômé de l'université''
+  \item $\mathrm{val}_I(f)$ n'existe pas (le symbole $f$ n'existe pas dans $p$).
+\end{itemize}
+
+\vspace{\baselineskip}
+
+\underline{Pour $p_s$}
+\begin{itemize}
+  \item Interprétation $I' = \{ f \leftarrow f_i \} \circ I$ (c'est une extension de $I$)
+  \item $D_I =$ Professeur $\cup$ Université
+  \item $\mathrm{val}_I(P) = P_I = $ ``a enseigné à l'université''
+  \item $\mathrm{val}_I(Q) = Q_I = $ ``est diplômé de l'université''
+  \item $\mathrm{val}_I(f) = f_I : \mathrm{Professeur} \times \mathrm{Université} \rightarrow \mathrm{Université}$ \\
+  $f_I(a,b) = $ ``l'université ayant dû diplômer $a$ pour que $a$ puisse enseigner à $b$''
+\end{itemize}
+
+$p$ admet un modèle $(I)$ si et seulement si $p_s$ admet un modèle $(I')$.
+
+Que ça ne soit exactement le même modèle ne pose pas de problème pour notre algorithme. L'algorithme par réfutation continue à itérer jusqu'à trouver une contradiction ({\em false}). S'il n'y a pas de modèle pour $p_s$, il n'y a pas de modèle pour $p$ et ça suffit.
+
+\section{Transformation en forme normale conjonctive}
+
+On fait les
+mêmes manipulations qu'en logique des propositions (voir Section \ref{fnc}).
+On transforme la formule en une conjonction de disjonctions.
+
+\section{La règle de résolution}
+
+$$ \mbox{\Large $\frac{L_1 \vee C_1, \neg L_2 \vee C_2}{(C_1 \vee C_2)\sigma}$ } $$
+
+Cette règle de résolution ne fonctionne que si $L_1$ et $L_2$ sont identiques.
+
+\underline{Exemple 1:}
+
+\begin{itemize}
+  \item $L_1 = P_1(a, y, z)$
+  \item $L_2 = P_1(x, b, z)$
+\end{itemize}
+
+Dans un modèle de $\{L_1, L_2\}$
+il y a un prédicat qui correspond au symbole $P_1$ et il y a un ensemble de triplets qui rendent vrai $P_1$.
+
+L'unification de $L_1$ et $L_2$ donne $L$ qui représente l'intersection des deux ensembles. On écrit:
+\begin{itemize}
+  \item $L_1 \sigma = L$
+  \item $L_2 \sigma = L$
+\end{itemize}
+
+\vspace{5 mm}
+$L_1$ et $L_2$ sont {\em unifiables} s'il existe une substitution $\sigma$ telle que $L_1 \sigma = L_2 \sigma$.
+\begin{itemize}
+  \item $\sigma = \big\{(x,a),(y,b)\big\}$
+  \item $L_1 \sigma = P(a,b,z)$
+  \item $L_2 \sigma = P(a,b,z)$
+\end{itemize}
+
+\vspace{5 mm}
+\underline{Exemple 2:}
+\begin{itemize}
+  \item $L_1 = P_1(a,x)$
+  \item $L_2 = P_2(b,x)$
+\end{itemize}
+Il n'y pas de substitution qui existe, car on a deux constantes différentes, l'intersection des deux ensembles est vide.
+$L_1$ et $L_2$ ne sont donc pas unifiables.
+\smallskip
+
+\underline{Exemple 3:}
+
+\begin{itemize}
+  \item $L_1 = P(f(x), z)$ 
+  \item $L_2 = P(y, a)$
+\end{itemize}
+
+Dans ce cas-ci, il y a beaucoup de substitutions possibles telles que:
+\begin{itemize}
+  \item $\sigma_1 : \big\{ (y, f(a)), (x,a), (z,a) \big\}$ => $L_1 \sigma_1 = L_2 \sigma_1 = p(f(a), a)$
+  \item $\sigma_2 : \big\{ (y, f(x)), (z,a) \big\}$ \hspace{11 mm}=> $L_1 \sigma_2 = L_2 \sigma_2 = p(f(x), a)$
+\end{itemize}
+$L_1$ et $L_2$ sont donc unifiables.
+On peut démontrer que $\sigma_2$ est l'unificateur le plus général (souvent abbrévié en {\em upg},
+en anglais {\em mgu}: most general unifier).
+Il donne les ensembles les plus grands.\\
+
+\begin{itemize}
+  \item Pour que la démonstration soit la plus générale possible,
+  on préfère toujours l'unificateur $\sigma$ \underline{le plus générale}.
+  \item On peut démontrer que l'unificateur le plus général est unique.
+  La démonstration de ce fait est hors de portée pour ce cours.
+  \item L'upg est calculable.
+\end{itemize}
+
+\vspace{5 mm}
+\textbf{\underline{Règle de résolution:}}
+\begin{itemize}
+  \item $p_1, p_2$ clauses
+  \item $p_1 = L^{+} \vee C_1$
+  \item $p_2 = \neg L^{-} \vee C_2$
+  \item $ L^{+}$ et $L^{-}$ ont les mêmes symboles de prédicat.
+  \item $ \big\{L^{+}, L^{-}\big\}$ sont unifiables par l'upg $\sigma$.
+\end{itemize}
+
+\underline{Alors} $$ \mbox{\Large $\frac{L^{+} \vee C_1, \neg L^{-} \vee C_2}{(C_1 \vee C_2)\sigma}$ } $$
+
+\section{Algorithme}
+
+L'algorithme de preuve prend comme entrées un ensemble
+de formules (``axiomes'') $\{ \mathrm{Ax}_1, ..., \mathrm{Ax}_n \}$
+et une formule à prouver $\mathrm{Th}$.
+Chaque formule est en forme normale conjonctive.
+L'algorithme utilise la preuve par contradiction (réfutation):
+nous allons donc ajouter $\neg \mathrm{Th}$ à l'ensemble d'axiomes
+et essayer de déduire une contradiction ($\mathrm{false}$).
+Les déductions utilisent la règle de résolution, qui est bien adaptée
+à la forme normale conjonctive.
+
+L'algorithme n'est pas garantie de terminer.
+S'il termine avec une contradiction, cela démontre $\mathrm{Th}$.
+S'il termine sans contradiction, cela démontre que l'on ne peut pas prouver $\mathrm{Th}$.
+S'il ne termine pas, on est dans le cas de la semi-décidabilité.
+
+\subsection{Définition de l'algorithme}
+
+\begin{algorithm}
+\KwIn{$S := \big\{ \mathrm{Ax}_1, ..., \mathrm{Ax}_n, \neg \mathrm{Th} \big\}$}
+\While{$ \mathrm{false} \notin S$ et il existe une paire de clauses dans $S$ résolvables et non résolues.}{
+	Choisir $p_i, p_j$ dans $S$ tel qu'il existe:
+	\begin{itemize}
+        \item $L^{+}$ dans $p_i$
+        \item $L^{-}$ dans $p_j$
+  	\item $\big\{ L^{+}, L^{-} \big\}$ unifiable par upg $\sigma$
+	\end{itemize}
+
+	Calculer:
+	\begin{itemize}
+  	\item $r:=(p_i - [L^{+}] \vee p_j - [\neg L^{-}]) \sigma$
+  	\item $S_i = S \cup  \big\{ r \big\}$
+	\end{itemize}
+}
+\eIf{$\mathrm{false} \in S$}{$S$ inconsistent, donc $\mathrm{Th}$ prouvé.}{$S$ consistent, donc $\mathrm{Th}$ non prouvé.}
+\end{algorithm}
+
+\subsection{Exemple d'exécution}
+Voici un exemple avant la mise en forme clausale:
+\begin{itemize}
+  \item $(\forall x) \mathit{homme}(x) \wedge \mathit{fume}(x) \Rightarrow \mathit{mortel}(x)$
+  \item $(\forall x) \mathit{animal}(x) \Rightarrow \mathit{mortel}(x)$
+  \item $\mathit{homme}(\mathit{Ginzburg})$
+  \item $\mathit{fume}(\mathit{Ginzburg})$
+  \item \textbf{Candidat-théorème:} $\mathit{mortel}(\mathit{Ginzburg})$
+\end{itemize}
+
+\subsubsection{Initialisation de S}
+Après la mise en forme clausale cela donne:
+\begin{itemize}
+  \item P1: $(\forall x) \neg \mathit{homme}(x) \vee \neg \mathit{fume}(x) \vee \mathit{mortel}(x)$
+  \item P2: $(\forall x) \neg \mathit{animal}(x) \vee \mathit{mortel}(x)$
+  \item P3: $\mathit{homme}(\mathit{Ginzburg})$
+  \item P4: $\mathit{fume}(\mathit{Ginzburg})$
+  \item P5: $\neg \mathit{mortel}(\mathit{Ginzburg})$
+\end{itemize}
+
+\subsubsection{Itérations}
+
+\textbf{\underline{1}}
+\begin{itemize}
+  \item P1 + P5
+  \item $\sigma = \big\{ (x, \mathit{Ginzburg}) \big\}$
+  \item $r = P6 = \neg \mathit{homme}(\mathit{Ginzburg}) \vee \neg \mathit{fume}(\mathit{Ginzburg})$
+\end{itemize}
+
+\textbf{\underline{2}}
+\begin{itemize}
+  \item P3 + P6
+  \item $\sigma = \big\{ \big\}$
+  \item $r = P7 = \neg \mathit{fume}(\mathit{Ginzburg})$
+\end{itemize}
+
+\textbf{\underline{3}}
+\begin{itemize}
+  \item P4 + P7
+  \item $\sigma = \big\{ \big\}$
+  \item $r = \mathrm{false}$ 
+\end{itemize}
+Il y a une inconsistence donc le candidat théorème est prouvé.
+
+\subsubsection{Non-déterminisme}
+
+Cet algorithme a plusieures sources de non-déterminisme, c'est-à-dire
+le choix des clauses et le choix des littéraux dans les clauses.
+Ces choix sont faits à chaque itération.
+Avec un mauvais choix, l'algorithm peut ne pas terminer ou
+faire des déductions inutiles.
+Par exemple, si on fait un autre choix lors de la première itération:
+
+\textbf{\underline{1}}
+\begin{itemize}
+  \item P2 + P5
+  \item $\sigma = \big\{ (x, Ginzburg) \big\}$
+  \item $r = \neg animal(Ginzburg)$
+\end{itemize}
+
+C'est une déduction inutile qui n'aide pas pour la démonstration de $\mathrm{Th}$.
+
+\subsection{Stratégies}
+
+Pour que cet algorithme soit utilisable en pratique, il est très important
+de concrétiser des stratégies pour les choix:
+\begin{itemize}
+  \item Quelles paires $p_i$ et $p_j$ choisir?
+  \item Quelles $L^{+}$ et $L^{-}$ choisir?
+\end{itemize}
+Il y a deux possibilités pour ces stratégies qui sont utilisées en pratique,
+qui donne lieu à deux sortes de programmes que l'on appelle {\em assistant de preuve}
+ou {\em langage logique}.
+
+Un assistant de preuve, comme Coq ou Isabelle, est fait pour aider un humain à prouver des théorèmes compliqués.
+Il utilise donc des stratégies complexes pour réduire un maximum le travail qui doit
+être fait par l'être humain.
+Les assistants de preuve sont des outils pratique pour prouver formellement des théorèmes mathématiques.
+
+Un langage logique, comme \textbf{Prolog}, inventé en 1972 par Alain Colmerauer et Robert Kowalski,
+utilise {\em volontairement} des stratégies naïves qui permettent de rendre l'algorithme prévisible.
+Les axiomes deviennent un {\em programme}.
+Cette approche, appellée la programmation logique, donne alors un langage de programmation pratique.
+Un exemple de stratégie naïve est la stratégie LUSH qui choisi de haut vers le bas les paires $p_i, p_j$,
+et de gauche à droite dans chaque $p_i$.
+La programmation logique sera expliquée plus en détail dans la Section \ref{prolog}.
