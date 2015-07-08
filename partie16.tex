@@ -1,5 +1,7 @@
 \section{Exemples de programmes Prolog}
 
+\subsection{Exemple 1}
+
 \subsubsection{Programme (code Prolog)}
 Ce petit programme permet de calculer la factorielle d'un nombre. Il s'agit de clauses exprimant des faits, des règles et des questions. Le code commence par un fait: 0!==1. Ensuite, il définit une clause pour les factorielles de façon généralisée. Attention, les virgules et les points sont importants. Les virgules sont les séparateurs entre les littéraux dits négatifs tandis que le point marque la fermeture de la clause.
 \begin{verbatim}
@@ -48,7 +50,8 @@ Le but de l'exécution est de prouver que $G \equiv fact(5, r)$. Pour y arriver,
 (1) avec clause 2\\
 (2) a>b existe dans le système prédéfini -> true\\
 
-\subsubsection{Exemple 2}
+\subsection{Exemple 2}
+
 Le but de cet exemple est de faire un "append" de deux listes:\\
 append(L1, L2, L2)
 \paragraph{Prolog:}
@@ -84,7 +87,7 @@ l=con(1,cons(1,nil))
 
 \end{itemize}
 
-\subsubsection{Exemple 3}
+\subsection{Exemple 3}
 
 Intéressons-nous à la manière dont prolog exécute la requête \textbf{|?- append (L1,L2,[1])} en nous basant sur la syntaxe définie lors de l'exemple 2.\\
 Pour information, la fonction cons prend comme premier argument une valeur et comme second argument une liste. Elle place le premier argument en tête du second argument.\\
