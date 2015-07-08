@@ -2,25 +2,79 @@
 \chapter{Introduction à la programmation logique}
 \label{prolog}
 
-\section{Introduction à la programmation logique}
-
-\textbf{Prolog} est l'un des principaux langages de programmation logique. Il est à la base de nombreux fondements. 
-
-La programmation logique fait de la déduction sur les axiomes.
-On utilise la logique comme un langage de programmation : on va adapter l'algorithme de réfutation vu précédemment.
-
-Le programme (qui est similaire à une théorie):
+Depuis l'arrivée des ordinateurs, il y a eu la vision d'automatiser le raisonnement.
+La programmation logique est née dans le contexte de cette vision.
+Pour la programmation logique, l'exécution d'un programme correspond à un raisonnement logique dans une théorie logique.
+Elle propose l'approche suivante:
+\begin{itemize} 
+\item Le programme est un {\em ensemble d'axiomes} en logique des prédicats.
+\item L'exécution du programme est fait par un {\em prouveur de théorèmes} (similaire à notre algorithme de preuve).
+\item L'exécution démarre avec une {\em requête}, une formule à prouver en logique des prédicats.
+\end{itemize}
+Est-ce que cette approche peut donner un système de programmation pratique?
+C'est la grande question de la programmation logique.
+Une réponse affirmative à cette question pourrait réaliser plusieurs rêves:
 \begin{itemize}
-	\item Axiomes en logique des prédicats.
-	\item Une requête, un but (le goal) : le but du système est d'apporter une preuve.
-	\item Un prouveur de théorème. Attention : il faut des conditions sur le prouveur car il faut être capable de prévoir le temps et l'espace utilisé par le programme.
+\item La vérification des programmes: si le programme est lui-même un ensemble d'axiomes, sa vérification devient facile.
+\item L'intelligence artificielle: si le prouveur est sophistiqué, l'exécution pourrait faire le travail d'un mathématicien.
+\end{itemize}
+La réponse pour le deuxième rêve est {\em oui, en partie}: les prouveurs de théorèmes sont devenus
+des assistants très utiles pour les mathématiciens, mais ils ne les remplacent pas (encore!).
+Mais la réponse pour le premier rêve est un {\em oui} très clair.
+On peut même dire que c'est là une des plus grandes réalisations de l'informatique au 20ème siècle.
+Les systèmes actuels (le langage Prolog n'est que la partie visible d'un iceberg très grand)
+sont complètement utilisables pour les applications pratiques:
+ils sont performants et robustes, avec une multitude d'outils pratiques.
+
+Dans ce chapitre, nous allons suivre le raisonnement qui a mené à l'invention
+de Prolog et montrer les bases théoriques de son exécution.
+Principalement, il y a un {\em compris entre expressivité et efficacité}:
+un langage trop expressif devient lent.
+Si le langage permettrait de résoudre la logique des prédicats complètement,
+dans certains cas l'algorithme d'exécution ne pourra rien déduire (parce qu'il est semi-décidable).
+Est-ce que l'on peut trouver un langage moins puissant, qui est assez expressif pour la programmation
+et assex {\em peu} expressif pour avoir une implémentation efficace?
+La réponse ici, comme pour le premier rêve, est un oui très clair.
+Nous allons dans ce chapitre voir comment on obtient cette réponse.
+Il y a trois problèmes majeurs à résoudre:
+\begin{enumerate}
+\item Un prouveur est limité.
+Il y a des limites théoriques à ce qu'un prouveur peut faire en tant qu'algorithme.
+Nous avons vu une partie de ces limites avec notre algorithme de preuve:
+il est semi-décidable: si $p \models q$ l'algorithme termine mais si $p \not\models q$ il ne termine pas toujours.
+Si l'algorithme prend beaucoup de temps, on doit à un moment l'arrêter et on ne sait rien.
+\item Même si on peut trouver une preuve, le prouveur peut être inefficace (temps exponentiel).
+Le prouveur doit avoir une sémantique opérationnelle (= exécution) efficace et prévisible, pour être pratique.
+\item Même si le prouveur est efficace, on doit {\em construire} une réponse et pas seulement dire que la réponse existe.
+Tout programme pratique calcule des résultats et ne dit pas simplement que le résultat existe.
+\end{enumerate}
+
+\subsubsection{Limitations du prouveur}
+
+Notre algorithme de preuve a les propriétés suivantes:
+\begin{itemize}
+\item Il est adéquat (consistent): si $p \vdash q$ alors $p \models q$.
+C'est-à-dire, si l'algorithme peut prouver la reqûete $q$ à partie du programme $p$,
+alors $q$ est effectivement vrai quand $p$ est vrai.
+\item Il est complet: si $p \models q$ alors $p \vdash q$.
+C'est-à-dire, si $q$ est vrai quand $p$ est vrai, alors l'algorithme peut trouver une preuve.
+\end{itemize}
+Où est donc le problème?
+C'est le ``si'' dans le deuxième point: l'algorithme ne peut pas savoir si $p \models q$.
+Si ce n'est pas le cas, alors l'algorithme pourrait ne rien nous dire.
+
+\subsubsection{Efficacité du prouveur}
+
+Même si l'algorithme peut trouver un résultat, il est souvent hautement exponentiel.
+Pour pallier à ce problème on va faire deux choses:
+\begin{itemize}
+\item Mettre des restrictions sur la forme des axiomes.
+On ne permettra que des axiomes pour lequel l'algorithme sait raisonner efficacement.
+\item 
 \end{itemize}
 
-\paragraph{}
-Exécuter un programme = faire des déductions en essayant de prouver le but. Mais est-ce que cette idée peut donner un système de programmation pratique?
+\subsubsection{Construction du résultat}
 
-\paragraph{}
-Il y a un compromis entre expressivité et efficacité: si c'est trop expressif, ça devient moins efficace, par contre si c'est trop peu expressif, on ne peut rien programmer, ça ne sert à rien non plus. Il faut donc être expressif tout en restant efficace. Prolog offre un bon équilibre entre expressivité et efficacité.
 
 \paragraph{}
 Mais pour arriver à cela, il y a quelques problèmes à surmonter:
