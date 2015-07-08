@@ -1,12 +1,21 @@
 %document réalisé par Scott Ivinza, Florent Lejoly, Cédric Vanden Buckle et Guillaume Demaude
+
 \section{Théorie de l'égalité (EG)}
+
+Le concept d'égalité est omniprésent dans les mathématiques.
+Nous allons définir une théorie pour le formaliser.
+D'abord, il faut faire attention à la notation.
 Il existe différents symboles pour représenter l'égalité : 
 \begin{itemize}
 	\item E(x,y)
 	\item $x = y$
 	\item $x == y $
 \end{itemize}
-Nous allons utiliser $'=='$ dans la suite de ce cours pour représenter l'égalité.
+Nous allons utiliser ``$==$'' dans la suite de ce cours pour représenter l'égalité.
+
+La théorie de l'égalité est souvent {\em ajoutée} à d'autres axiomes pour être utile en pratique.
+Dans cette section on donne que les axiomes d'égalité.  Dans la suite nous allons voir comment
+ajouter l'égalité à d'autres théories.
 
 \subsection{Axiomes} 
 Pour définir ce qu'est une égalité, nous avons d'abord besoin de définir 3 axiomes et 2 schémas d'axiomes:
@@ -14,39 +23,62 @@ Pour définir ce qu'est une égalité, nous avons d'abord besoin de définir 3 a
 \item Réflexivité \\$\forall x, x==x$
 \item Symétrie \\$\forall x, \forall y, x==y \Rightarrow y==x$
 \item Transitivité \\$\forall x, \forall y, \forall z, (x==y \land y==z) \Rightarrow x==z$
-\item Substituabilité dans les fonctions\\$\forall x_{1}, ...,x_i, .. x_{n}$ ,  $k==x_i \Rightarrow f(x_{1}, ...,k, .. x_{n}) == f(x_{1}, ...,x_i, .. x_{n})$
-\item Substituabilité dans les prédicats\\$\forall x_{1}, ...,x_i, .. x_{n}$ ,  $k==x_i \Rightarrow P(x_{1}, ...,k, .. x_{n}) == P(x_{1}, ...,x_i, .. x_{n})$ 
+\item Substituabilité dans les fonctions\\$\forall x, x_{1}, ..., x_i, ..., x_{n}\ .\ x==x_i \Rightarrow f(..., x, ...) == f(..., x_i, ...)$
+\item Substituabilité dans les prédicats\\$\forall x, x_{1}, ..., x_i, ..., x_{n}\ .\ x==x_i \Rightarrow P(..., x, ...) == P(..., x_i, ...)$ 
 \end{enumerate}
+Les deux derniers axiomes sont des {\em schémas}: chaque schéma définit plusieurs axiomes, où on remplace $f$ par tout symbole de fonction et $P$ par tout symbole de prédicat.
+
 \subsection{Règles d'inférences}
 En plus de ces 5 axiomes, il nous faut aussi définir deux règles d'inférences.\\ \\
 Substituabilité fonctionnelle 
 	$$ \frac{s_{1}==t_{1} \land s_{2}==t_{2} \land ... \land s_{n}==t_{n}}{f(s_{1},s_{2},...,s_{n}) == f(t_{1},t_{2},...,t_{n})}$$ 
 	Substituabilité prédicative 
 	$$ \frac{s_{1}==t_{1} \land s_{2}==t_{2} \land ... \land s_{n}==t_{n}}{P(s_{1},s_{2},...,s_{n}) == P(t_{1},t_{2},...,t_{n})}$$ 
-Grâce aux règles sémantiques de l'égalité, on peut raisonner sur des formules, mais aussi bien sur une interprétation. \\ 
-Si $VAL_{I}(t_{1}) ==  VAL_{I}(t_{2})$ alors $VAL_{I}(t_{1} == t_{2}) = true$
-\subsection*{Preuve (Métalangage)}
-\noindent Soit I, un modèle de EG ($'=='$) pour $t_{1}$ et $t_{2}$. \\
-$VAL_{I}(t_{1} == t_{2}) = VAL_{I}(==)(VAL_{I}(t_{1}), VAL_{I}(t_{2}))$\\
-On pose $VAL_{I}(==) = E_{I}$ et $VAL_{I}(t_{1}) = e$ et $VAL_{I}(t_{2}) = e$\\
-Donc $VAL_{I}(t_{1} == t_{2}) =E_{I}(e,e)$ \\
-$\Rightarrow$ preuve en regardant les axiomes \\
-$ VAL_{I}(\forall x, x==x)= true$ (réflexivité) \\
-On cherche le $\forall x$ dans la sémantique : \\
-On sait que pour tout d $\in$ Domaine de I, $VAL_{I}(d==d)=true$, \\
-Si $d = e$\\
-alors $E_{I}(e,e)=true$
-\textbf{Remarque}
-La théorie de l'égalité a une utilité très limitée, elle doit être étendue pour pouvoir servir à quelque chose. On appelle une telle théorie un template.
-\section{Théorie de l'ordre partiel (OP)}
-On ajoute un deuxième symbole dans le langage en plus du symbole d'égalité.
+
+\subsection{Théorème sur la sémantique de l'égalité}
+
+$$\mathrm{Si}\ \ \mathrm{VAL}_{I}(t_{1}) ==  \mathrm{VAL}_{I}(t_{2}) \ \ \mathrm{alors}\ \  \mathrm{VAL}_{I}(t_{1} == t_{2}) = \mathrm{true}$$
+
+L'égalité comme elle est définie ici est une propriété syntaxique qui nous permet de faire des preuves.
+Avec ce théorème, nous pouvons aussi raisonner sur un modèle (c'est-à-dire la sémantique) pour déterminer l'égalité.
+C'est-à-dire, si deux termes donnent la même entité dans le domaine de discours, alors on peut dire que les
+deux termes sont égaux.
+
+\subsubsection{Preuve}
+
+Voici la preuve étape par étape:
 \begin{itemize}
-	\item $==$
-	\item $\leq $
+\item Soit $I$ un modèle de EG et deux termes quelconques $t_{1}$ et $t_{2}$.
+\item Par définition $\mathrm{VAL}_{I}(t_{1} == t_{2}) = \mathrm{VAL}_{I}(==)(\mathrm{VAL}_{I}(t_{1}), \mathrm{VAL}_{I}(t_{2}))$.
+\item On pose $VAL_{I}(==) = E_{I}$ et $VAL_{I}(t_{1}) = e_1$ et $VAL_{I}(t_{2}) = e_2$.
+\item La prémisse du théorème nous dit que $e_1 = e_2 = e$.
+\item Donc $\mathrm{VAL}_{I}(t_{1} == t_{2}) =E_{I}(e,e)$.
+\item L'axiome de réflexivité nous dit $\mathrm{VAL}_{I}(\forall x.\ x==x)= \mathrm{true}$.
+\item La sémantique de $\forall$ nous dit que pour tout $d \in D_I$, il est vrai que $\mathrm{VAL}_{I}(d==d)=\mathrm{true}$.
+\item On prend $d=e$ et on peut conclure que $E_{I}(e,e)=\mathrm{true}$.
 \end{itemize}
 
+\vspace{\baselineskip}
+Remarquez que ceci n'est pas une preuve en logique des prédicats, mais une preuve en méta-langage, c'est-à-dire
+une preuve qui parle de la logique des prédicats.
+On ne peut pas formaliser cette preuve comme un objet formel qui est une preuve en logique des prédicats.
+Toute l'argumentation sur la sémantique de la logique des prédicats et la justification des règles de preuve
+sont des raisonnements en méta-langage.
+
+\section{Théorie de l'ordre partiel (OP)}
+
+Pour définit la théorie de l'ordre partiel, nous prenons EG et nous ajoutons un symbole en
+plus du symbole d'égalité:
+On ajoute un deuxième symbole dans le langage en plus du symbole d'égalité.
+\begin{itemize}
+	\item $\leq$
+\end{itemize}
+Les axiomes d'égalité sont déjà présents.
+Il nous reste de faire les axiomes pour ce nouveau symbole.
+
 \subsection{Axiomes} 
-Aux axiomes et schémas d'axiomes de la théorie de l'égalité, on rajoute de nouveaux axiomes
+
+Aux axiomes et schémas d'axiomes de la théorie de l'égalité, on rajoute de nouveaux axiomes:
 \begin{enumerate}
 \item Réflexivité \\$\forall x$, $x\leq x$
 \item Anti-symétrie \\$\forall x$, $\forall y$, $ x\leq y \land y\leq x\Rightarrow y==x$
@@ -54,9 +86,17 @@ Aux axiomes et schémas d'axiomes de la théorie de l'égalité, on rajoute de n
 \item Substituabilité à gauche \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{1}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x \leq x_{2}$
 \item Substituabilité à droite \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{2}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x_{1} \leq x$
 \end{enumerate}
-\underline{Théorème :} $\models \forall x, \forall y,  [x==y \Leftrightarrow (x\leq y)\land (y \leq x)] $
-\subsection{Preuve}
-La preuve va être démontrée en partie en métalangage et en partie en preuve formelle.\\ \\
+
+\subsubsection{Exemple de théorème}
+
+Nous allons prouver le théorème suivant:
+$$\models \forall x.\ \forall y.\  [x==y \Leftrightarrow (x\leq y)\land (y \leq x)] $$
+
+\subsubsection{Preuve}
+
+Le théorème n'est pas une formule en logique des prédicats, mais en méta-langage.
+La preuve va donc être démontrée en partie en méta-langage.
+
 \begin{align*}
 \Leftrightarrow \text{equivaut à :} \Leftarrow \land \Rightarrow \\
 \Leftarrow \text{: est démontré par l'axiome antisymétrique} \\	

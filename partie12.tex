@@ -105,9 +105,11 @@ $Th_1$ et $Th_2$ sont équivalentes. \\
 
 \noindent \underline{Si} $p$ une formule fermée telle que $\models_{Th_1} p$ et $Th_2 = Th_1 \bigcup \left\lbrace p \right\rbrace$ \underline{alors} $Th_1$ et $Th_2$ sont équivalentes. \\
 
-\section{Théorie des ordres partiels stricts}
+\section{Théorie des ordres partiels stricts (OPS)}
 
-Nous allons donner un autre exemple de théorie ainsi que deux interprétations différentes de cette théorie.
+Le concept d'ordre partiel strict est un des concepts de base des mathématiques.
+Nous allons le définir par une théorie.
+Ensuite nous donnons deux interprétations différentes de cette théorie.
 \subsection*{Vocabulaire}
 \begin{itemize}
 \item[$\bullet$] Le symbole P/2
@@ -118,15 +120,20 @@ Nous allons donner un autre exemple de théorie ainsi que deux interprétations 
 \item[$\bullet$] $ (\forall x) (\forall y) (\forall z) (P(x,y) \wedge P(y,z) \Rightarrow P(x,z))$ (transitivité) (OPS2)
 \end{itemize}
 \subsection*{Première interprétation}
-Soit l'interprétation I de cette théorie. On a :
+Soit l'interprétation $I$ de cette théorie:
 \begin{itemize}
 \item[$\bullet$] $D_I = \mathbb{Z} $
-\item[$\bullet$] $val_I (P) = "<"$
+\item[$\bullet$] $\mathrm{val}_I (P) = "<"$
 \end{itemize}
-Lorsque l'on écrit $val_I(<) = "<"$, le premier symbole $<$ est un mot de vocabulaire dans la théorie tandis que le deuxième est une fonction. Cette fonction confère un sens au symbole. 
-On remarque que cette interprétation est un modèle de notre théorie. En effet, la fonction $<$ sur les entiers est irréflexive et transitive. Si on a $x < y$ et $y <z$, on peut en déduire que $x<z$.
+Lorsque l'on écrit $\mathrm{val}_I(<) = "<"$, le premier symbole $<$ est un mot de vocabulaire dans la théorie
+tandis que le deuxième est une fonction sur les entiers.
+Cette fonction confère un sens au symbole. 
+On remarque que cette interprétation est un modèle de notre théorie.
+En effet, la fonction $<$ sur les entiers est irréflexive et transitive.
+Si on a $x < y$ et $y <z$, on peut en déduire que $x<z$.
+
 \subsection*{Deuxième interprétation}
-Soit l'interprétation J de cette théorie. On a : 
+Soit l'interprétation $J$ de cette théorie:
 \begin{itemize}
 \item[$\bullet$] $D_J = \mathbb{Z} $
 \item[$\bullet$] $val_J (P) = "\ne"$
@@ -136,5 +143,6 @@ $$val_J(<) = "\ne"$$
 Cette interprétation n'est pas un modèle. En effet, par exemple, pour $x=5, y=3, z=5$, on a :
 $$x<y \wedge y<z \nRightarrow x<z$$
 $$5 \neq 3 \wedge 3 \neq 5 \nRightarrow 5 \neq 5$$
-Ceci est un contre-exemple, car $5$ n'est pas différent de $5$ (irréflexivité), et donc cette interprétation ne vérifie pas l'axiome sur la transitivité!
+Ceci est un contre-exemple, car $5$ n'est pas différent de $5$ (irréflexivité),
+et donc cette interprétation ne vérifie pas l'axiome sur la transitivité!
 
