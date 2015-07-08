@@ -1501,7 +1501,7 @@ Pour définir ce qu'est une égalité, nous avons d'abord besoin de définir 3 a
 \end{enumerate}
 Les deux derniers axiomes sont des {\em schémas}: chaque schéma définit plusieurs axiomes, où on remplace $f$ par tout symbole de fonction et $P$ par tout symbole de prédicat.
 
-\subsection{Règles d'inférences}
+\subsection{Règles d'inférence}
 En plus de ces 5 axiomes, il nous faut aussi définir deux règles d'inférences.\\ \\
 Substituabilité fonctionnelle 
 	$$ \frac{s_{1}==t_{1} \land s_{2}==t_{2} \land ... \land s_{n}==t_{n}}{f(s_{1},s_{2},...,s_{n}) == f(t_{1},t_{2},...,t_{n})}$$ 
@@ -1691,26 +1691,26 @@ de gestion de stock dans une bibliothèque.
 
 Type:\\
 \begin{itemize} 
-\item Types génériques (ensembles): par exemple : Book, Location
-\item Types énumérés: par exemple : \\
-Status := $\underbrace{In}_{Dans \hspace{0.1cm} la \hspace{0.1cm} bibliothèque, \hspace{0.1cm} disponible}$ $\vert$ $\overbrace{Out}^{Prêté}$ $\vert$ $\underbrace{Ref}_{Livre \hspace{0.1cm} de \hspace{0.1cm} référence}$ \\
+\item {\em Types génériques} (ensembles): par exemple : Book, Location
+\item {\em Types énumérés}: par exemple : \\
+Status := $\underbrace{\mathit{In}}_{Dans \hspace{0.1cm} la \hspace{0.1cm} bibliothèque, \hspace{0.1cm} disponible}$ $\vert$ $\overbrace{\mathit{Out}}^{Prêté}$ $\vert$ $\underbrace{\mathit{Ref}}_{Livre \hspace{0.1cm} de \hspace{0.1cm} référence}$ \\
 \end{itemize}
 
-Schéma:\\
+Schéma d'un état:\\
 \begin{itemize}
-\item Nom: le nom d'un composant du système
-\item Signature: une énumération des variables utilisées avec leurs types, et une description de la transformation faite par le composant
-\item Prédicat: des formules en logique des prédicats qui décrivent l'état du système
-\item Comportement: voir suivant\\
+\item {\em Nom}: le nom d'un état du système
+\item {\em Signature}: une énumération des variables utilisées avec leurs types
+\item {\em Prédicat}: formule en logique des prédicats qui décrit l'état du système\\
 \end{itemize}
 
-Comportement:\\
+Schéma d'un comportement:\\
 \begin{itemize}
-\item Précondition du système: formule en logique des prédicats, ce qui doit être vrai avant pour que le composant soit applicable
-\item Postcondition du système: formule en logique des prédicats, ce qui est vrai après l'application du composant
-\item Transformation de l'état: formule en logique des prédicats, équations entre état initial et terminal du composant
+\item {\em Nom}: le nom d'un comportement du système
+\item {\em Signature}: une description de la transformation faite par le comportement
+\item {\em Précondition}: formule en logique des prédicats, ce qui doit être vrai avant pour que le composant soit applicable
+\item {\em Postcondition}: formule en logique des prédicats, ce qui est vrai après l'application du composant
 \end{itemize}
-La définition d'un comportement utilise une sémantique et une syntaxe particulière pour décrire les transformtations d'état.
+La définition d'un comportement utilise une sémantique et une syntaxe particulière pour décrire les transformations d'état.
 Une exécution est une séquence d'états et chaque application d'un composant avant l'exécution d'un pas avec
 un avant et un après:
 \begin{center}
