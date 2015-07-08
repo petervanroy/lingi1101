@@ -1,58 +1,109 @@
-\section{Extension d'une théorie}
-Lorsqu'on a une théorie déjà existante, on souhaite parfois l'étendre afin de la rendre plus complète. Pour ce faire, on ajoute des axiomes et on étend le vocabulaire. Voici deux exemples d'extension de théorie pour mieux comprendre comment effectuer cette opération. Ils étendent tous les deux la théorie des liens familiaux (FAM) décrite dans la section précédente.
+\section{Opérations sur les théories}
 
-\subsection*{Exemple 1}
-Considérons le nouvel axiome suivant, que nous noterons Ax.
+Nous allons définir une opération, l'extension, qui permet de créer une nouvelle théorie par rapport à une théorie existante,
+et deux opérations, l'inclusion et l'équivalence, qui permettent de comparer deux théories.
+
+\subsection{Extension d'une théorie}
+Lorsqu'on a une théorie déjà existante, on souhaite parfois l'étendre afin de la rendre plus complète.
+On dit que $Th_2$ est une {\em extension} de $Th_1$ si:
+\begin{itemize}
+\item[$\bullet$] Le vocabulaire de $Th_1$ est inclus dans le vocabulaire de $Th_2$.
+\item[$\bullet$] Tout axiome de $Th_1$ est axiome de $Th_2$.
+\end{itemize}
+On peut donc étendre le vocabulaire et ajouter des axiomes.
+Voici deux exemples d'extension de théorie pour mieux comprendre comment effectuer cette opération. Ils étendent tous les deux
+la théorie des liens familiaux (\bsc{fam}) décrite dans la section précédente.
+
+\subsubsection{Exemple 1}
+
+Considérons le nouvel axiome suivant, que nous noterons Ax:
 $$ Ax \equiv (\forall x) \neg P(x,x) $$
-La nouvelle théorie ainsi étendue que nous noterons FAM* possède un axiome de plus : Ax. Cette théorie FAM* est \textbf{consistante}, c'est-à-dire qu'il existe au moins un modèle qui valide cette théorie. Pour s'en convaincre, il suffit de considérer la première interprétation de la théorie FAM de la section précédente, qui utilise les liens familiaux. \\
+La nouvelle théorie ainsi étendue que nous noterons \bsc{fam*} possède un axiome de plus : Ax. Cette théorie \bsc{fam*}
+est {\em consistante}, c'est-à-dire qu'il existe au moins un modèle qui valide cette théorie.
+Pour s'en convaincre, il suffit de considérer la première interprétation de la théorie \bsc{fam} de la section précédente,
+qui utilise les liens familiaux: personne est parent de lui-même.\\
 
-En revanche, si on considère la deuxième interprétation (deuxième modèle, noté $J$) de FAM qui associe les symboles $p$ et $m$ aux fonctions mathématiques $p_J : \mathbb{N} \rightarrow \mathbb{N} : d \rightarrow 2d$ et $m_J : \mathbb{N} \rightarrow \mathbb{N} : d \rightarrow 3d$, on observe une contradiction. En effet, dans le modèle $J$ on a la définition suivante du prédicat $P$ :
+En revanche, si on considère la deuxième interprétation (deuxième modèle, noté $J$) de \bsc{fam}
+qui associe les symboles $p$ et $m$ aux fonctions mathématiques $p_J : \mathbb{N} \rightarrow \mathbb{N} : d \rightarrow 2d$ et $m_J : \mathbb{N} \rightarrow \mathbb{N} : d \rightarrow 3d$, on observe une contradiction.
+En effet, dans le modèle $J$ on a la définition suivante du prédicat $P$ :
 $$ P_J(d_1, d_2) \textrm{ ssi } d_2 = 2d_1 \textrm{ ou } d_2 = 3d_1$$
-Il suffit de choisir $x=0$ dans notre nouvel axiome Ax pour constater que le modèle $J$ ne valide pas la théorie étendue FAM*. De manière générale, l'extension d'une théorie peut donc réduire l'ensemble des modèles de celle-ci.
+Il suffit de choisir $x=0$ dans notre nouvel axiome Ax pour constater que le modèle $J$ ne valide pas la théorie étendue \bsc{fam*}.
+De manière générale, l'extension d'une théorie peut donc {\em réduire} l'ensemble des modèles de celle-ci.
 
-\subsection*{Exemple 2}
-Considérons à présent le nouvel axiome suivant, que nous noterons Adam.
+\subsubsection{Exemple 2}
+
+Considérons le nouvel axiome suivant, que nous noterons Adam:
 $$ (\forall y) \neg P(a,y) $$
-où $a$ est une constante arbitraire. Notons la théorie étendue FAM' = FAM + Adam. Dans cet exemple, on peut observer que FAM' est \textbf{inconsistante,} car aucun modèle ne peut valider cette théorie. En effet, en partant du premier axiome de FAM (appelé "père"), nous effectuons quelques étapes pour obtenir une contradiction.
+où $a$ est une constante arbitraire.
+Notons la théorie étendue \bsc{fam'} = \bsc{fam} + Adam. Dans cet exemple, on peut observer que \bsc{fam'}
+est {\em inconsistante}, car aucun modèle ne peut valider cette théorie.
+En effet, en partant du premier axiome de \bsc{fam} (appelé "père"), nous effectuons quelques étapes pour obtenir une contradiction:
 \begin{align*}
-& (\forall x) P(x,p(x)) \\
-\Leftrightarrow & P(a,p(a)) && \textrm{Elimination } \forall \\
-\Leftrightarrow & (\exists y) P(a,y) && \textrm{Intro } \exists
+& (\forall x) P(x,p(x)) && \textrm{Axiome père} \\
+& P(a,p(a)) && \textrm{Elimination } \forall \\
+& (\exists y) P(a,y) && \textrm{Introduction} \exists
 \end{align*}
-Ci-dessus, le premier axiome de FAM reformulé (père), qui est en contradiction avec le nouvel axiome (Adam), que nous reformulons ci-dessous.
+Ci-dessus, le premier axiome de \bsc{fam} reformulé (père),
+qui est en contradiction avec le nouvel axiome (Adam), que nous reformulons ci-dessous.
 \begin{align*}
 & (\forall y) \neg P(a,y) \\
-\Leftrightarrow & \neg (\exists y) P(a,y)
+\Leftrightarrow & \ \neg (\exists y) P(a,y)
 \end{align*}
-Par la règle de preuve par contradiction, on démontre qu'aucun modèle n'est possible pour la théorie étendue FAM'. \'{E}tendre une théorie équivaut à faire de la manipulation syntaxique. Il est important de bien vérifier ce que notre modification a comme conséquence sur le nombre de modèles que la théorie accepte.
+Par la règle de preuve par contradiction, on démontre qu'aucun modèle n'est possible pour la théorie étendue \bsc{fam'}.
+Nous avons vu que
+l'extension d'une théorie peut réduire le nombre de modèles: ici on voit qu'il faut bien vérifier que ce nombre ne devient pas 0.
 
-\section{Liens entre théories}
-Dans cette section, nous abordons la comparaison de différentes théories : inclusion, équivalence et quelques corollaires ainsi que la théorie des ordres partiels stricts. Dans ce qui suit, on note $Th_1$ et $Th_2$ deux théories.
+\subsection{Comparaison des théories}
 
-\subsection*{Inclusion}
-On dit que $Th_1$ est \textbf{contenue} dans $Th_2$ si
+Dans cette section, nous abordons la comparaison de différentes théories :
+inclusion, équivalence et quelques corollaires.
+Dans ce qui suit, on prend $Th_1$ et $Th_2$ deux théories.
+
+\subsubsection{Inclusion}
+On dit que $Th_1$ est {\em contenue} dans $Th_2$ si
 \begin{itemize}
 \item[$\bullet$] Le vocabulaire de $Th_1$ est inclus dans le vocabulaire de $Th_2$.
 \item[$\bullet$] Toute formule valide dans $Th_1$ l'est aussi dans $Th_2$.
 \end{itemize}
-Attention, on peut donc avoir deux théories qui "parlent de la même chose" mais qui possèdent des axiomes totalement différents.
-%TODO : expliquer pourquoi / Ajouter un exemple
+Tout modèle de $Th_2$ est donc aussi un modèle de $Th_1$.
+Mais pas inversément: il est possible qu'il existe des modèles de $Th_1$ qui ne sont pas des modèles de $Th_2$.
+C'est parce que $Th_2$ peut contenir des formules valides qui ne le sont pas dans $Th_1$.
 
-\subsection*{Équivalence}
-On dit que $Th_1$ et $Th_2$ sont \textbf{équivalentes} si elles sont contenues l'une dans l'autre. Cela signifie que les deux théories "disent la même chose" et que tout modèle d'une des théories est également modèle de l'autre.\\
+\subsubsection{Équivalence}
+On dit que $Th_1$ et $Th_2$ sont {\em équivalentes} si elles sont contenues l'une dans l'autre.
+Cela signifie que les deux théories "disent la même chose" et que tout modèle d'une des théories est également modèle de l'autre.\\
 
-Il est important de bien faire la différence entre les \textbf{liens} entre les théories et l'\textbf{extension} d'une théorie. Le premier concept est basé sur les similitudes entre ce que modélisent les théories, alors que le deuxième est une manipulation syntaxique qui modifie une théorie existante pour en créer une nouvelle.
 
-\subsection*{Corolaires}
-On note respectivement $V_i$, $M_i$ et $Ax$ le vocabulaire, les modèles et les axiomes d'une théorie $i$. \\
+Il est important de bien faire la différence entre
+l'extension d'une théorie et l'inclusion d'une théorie dans une autre.
+La confusion est possible parce que dans les deux cas, le nombre de modèles peut être réduit.
+Mais il ne faut pas oublier que
+l'extension est définie par rapport aux axiomes et l'inclusion est définie par rapport aux modèles.
+Pour l'extension on ajoute des axiomes et on ne regarde pas les modèles.
+Poir l'inclusion on compare les modèles et on ne regarde pas les axiomes.
+On peut dire que l'extension est une manipulation {\em syntaxique} (on change les axiomes ce qui permette de nouvelles preuves)
+et l'inclusion est une manipulation {\em sémantique} (on fait une comparaison entre ce que modélisent les deux théories).
 
-\noindent \underline{Si} $V_{Th_1} \subseteq V_{Th_2}$ et $M_{Th_2} \subseteq M_{Th_1}$ \underline{alors} $Th_1$ est contenue dans $Th_2$. \\
+\subsection{Corollaires}
+On note respectivement $V_t$, $M_t$ et $Ax_t$ le vocabulaire, les modèles et les axiomes d'une théorie $t$. \\
 
-\noindent \underline{Si} $V_{Th_1} \subseteq V_{Th_2}$ et tout axiome de $Th_1$ est aussi axiome de $Th_2$ \underline{alors} $Th_1$ est contenue dans $Th_2$. \\
+\noindent \underline{Si} $V_{Th_1} \subseteq V_{Th_2}$ et $M_{Th_2} \subseteq M_{Th_1}$
+(tout modèle de $Th_2$ est aussi modèle de $Th_1$) \underline{alors} $Th_1$ est contenue dans $Th_2$.
+Attention à la direction: $M_{Th_2}$ est bien à gauche!
+\\
 
-\noindent \underline{Si} $V_{Th_1} = V_{Th_2}$ et $\forall i,j \hspace{0.3cm} \vDash_{Th_2} Ax_{i,1} \textrm{ et } \vDash_{Th_1} Ax_{j,2} $ \underline{alors} $Th_1$ et $Th_2$ sont équivalentes. \\
+\noindent \underline{Si} $V_{Th_1} \subseteq V_{Th_2}$ et $Ax_{Th_1} \subseteq Ax_{Th_2}$
+(tout axiome de $Th_1$ est aussi axiome de $Th_2$) \underline{alors} $Th_1$ est contenue dans $Th_2$.
+Il est donc vrai que $M_{Th_2} \subseteq M_{Th_1}$.
+On peut donc dire qu'une extension donne lieu à une inclusion (mais pas inversément).\\
 
-\noindent \underline{Si} $p$ une formule fermée telle que $\vDash_{Th_1} p$ et $Th_2 = Th_1 \bigcup \left\lbrace p \right\rbrace$ \underline{alors} $Th_1$ et $Th_2$ sont équivalentes. \\
+\noindent \underline{Si} $V_{Th_1} = V_{Th_2}$ 
+et pour tout axiome $p \in Ax_{Th_1}$ nous avons $\models_{Th_2} p$
+et pour tout axiome $q \in Ax_{Th_2}$ nous avons $\models_{Th_1} q$,
+\underline{alors}
+$Th_1$ et $Th_2$ sont équivalentes. \\
+
+\noindent \underline{Si} $p$ une formule fermée telle que $\models_{Th_1} p$ et $Th_2 = Th_1 \bigcup \left\lbrace p \right\rbrace$ \underline{alors} $Th_1$ et $Th_2$ sont équivalentes. \\
 
 \section{Théorie des ordres partiels stricts}
 
