@@ -1128,3 +1128,498 @@ et de gauche à droite dans chaque $p_i$.
 LUSH est un acronyme qui veut dire {\em Linear resolution with Unrestricted Selection for Horn clauses}.
 La programmation logique sera expliquée plus en détail dans la Section \ref{prolog}.
 
+% Ancienne partie 11
+
+\chapter{Théories logiques}
+
+On peut utiliser la logique des prédicats pour définir et étudier des structures mathématiques.
+L'avantage est qu'une définition avec la logique est complètement précise.
+La définition d'une structure contiendra deux types de formules:
+des {\em axiomes} et des {\em règles d'inférence}.
+Quelques exemples simples des structures que l'on peut définir sont
+l'ordre partiel, les treillis, les groupes, les entiers, les chaînes, les arbres,
+les ensembles, les relations et les fonctions.
+Il y en a beaucoup plus que cela; en fait quasi toutes les mathématiques
+peuvent êtres formalisées avec la logique des prédicats.
+Dans ce chapitre nous allons voir quelques exemples de ces formalisations
+pour des structures discrètes.
+
+Ces formalisations peuvent être utilisées pour la programmation (par ex. avec Prolog)
+et aussi dans les assistants de preuve.
+Pour ces deux utilisations, il faut faire très attention à la manière dont on définit
+les axiomes et les règles: cela peut avoir une grande influence sur l'efficacité de
+l'exécution.
+Mais dans ce chapitre nous ne nous intéressons pas à l'efficacité, mais plutôt à
+la simplicité et la compréhension.
+
+\subsubsection{Logique du premier ordre}
+
+La logique des prédicats est parfois appelé la logique du premier ordre.
+Dans ce chapitre nous allons parfois utiliser cette terminologie.
+On l'appelle premier ordre parce que le domaine des quantificateurs $\forall x$ et $\exists x$
+est $D_I$: les valeurs de $\mathrm{val}_I(x)$ sont toujours dans $D_I$.
+Il existe aussi des logiques d'ordres superieurs; dans ce cas le domaine des quantificateurs
+peut être autre chose.
+Par exemple, dans une logique du second ordre, on peut quantifier sur les prédicats et pas
+simplement sur les éléments du domaine de discours.
+On pourra donc dire $\forall p$ ou $\exists p$ où $p$ est un prédicat.
+Cela donne une expressivité supplémentaire par rapport à la logique du premier ordre,
+mais les raisonnements et les preuves deviennent beaucoup plus complexes.
+Il y a aussi moins de résultats généraux sur cette logique
+et la plupart des mathématiques utilisées en pratique n'ont pas besoin de cette logique
+pour être formalisée.
+Nous n'abordons pas les logiques d'ordres supérieurs dans ce cours.
+
+\section{Théorie du premier ordre}
+
+Le concept de base est la {\em théorie du premier ordre}.
+Une théorie du premier ordre est un ensemble $B$ de formules
+qui représente les axiomes et les règles d'inférence d'une structure mathématique.
+Nous allons nous restreindre au modèles: les interprétations de $B$
+où les axiomes et les règles sont valides.
+
+\subsection{Définition d'une théorie}
+
+Une théorie contient les partie suivantes:
+\begin{itemize}
+\item Un sous-langage de la logique du premier ordre:
+\begin{itemize}
+\item Vocabulaire : constantes, fonctions, prédicats ;
+\item Règles syntaxiques et sémantiques sur ce vocabulaire ;
+\end{itemize}
+\item Ensemble d'axiomes
+\item Ensemble de règles d'inférence
+\end{itemize}
+Les axiomes et les règles d'inférence sont des
+formules {\em fermées}, c'est-à-dire des formules ne contenant pas de variables libres.
+L'idée est que ces formules expriment des faits sur tous les éléments du domaine.
+
+\subsection{Exemple : théorie des liens familiaux (\bsc{FAM})}
+
+Comme premier exemple
+nous définissons une théorie qui permettra de raisonner sur les liens familiaux.
+
+\begin{enumerate}
+\item Vocabulaire : 
+\begin{itemize}
+\item 2 symboles de fonctions à un paramètre : $p/1$, $m/1$
+\item 3 symboles de prédicats à deux paramètres : $P/2$, $GM/2$, $GP/2$\\
+\end{itemize}
+On peut interpréter les fonctions $p$ et $m$ comme "père de" et "mère de", et les prédicats $P$, $GM$ et $GP$ comme "parent de", "grand-mère de" et "grand-père de". On donnera plus de précisions sur cette interprétation par la suite.\\
+
+\item Axiomes :
+\begin{center}
+\begin{tabular}{lcr}
+$(\forall x) \left(P(x,p(x))\right)$ & \hspace*{2cm}& (père)\\
+$(\forall x) \left(P(x,m(x))\right)$ & \hspace*{2cm}& (mère)\\
+$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GP(x,p(y)) \right)$&& (grand-père)\\
+$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x,m(y)) \right)$&& (grand-mère)\\
+\end{tabular}
+\end{center}
+\vspace{\baselineskip}
+
+\item Règles : \\
+Les règles sont uniquement celles de la logique des prédicats.
+\end{enumerate}
+
+\subsubsection{Première interprétation}
+\begin{tabular}{@{}llr}
+$D_I$ : personnes&&\\
+$\text{val}_I(p)=\text{"père de"}$ & &$\text{père de} : \text{Pers}\rightarrow\text{Pers} : d \rightarrow \text{"père de" }d$\\
+$\text{val}_I(m)=\text{"mère de"}$ & &$\text{mère de} : \text{Pers}\rightarrow\text{Pers} : d \rightarrow \text{"mère de" }d$\\
+$\text{val}_I(P)=\text{"Parent"}$ & &$\text{Parent}(d_1,d_2)=T$ ssi $d_2$ est un parent de $d_1$\\
+$\text{val}_I(GP)=\text{"Grand-père"}$ & &$\text{Grand-père}(d_1,d_2)=T$ ssi $d_2$ est un grand-père de $d_1$\\
+$\text{val}_I(GM)=\text{"Grand-mère"}$ & &$\text{Grand-mère}(d_1,d_2)=T$ ssi $d_2$ est une grand-mère de $d_1$\\
+\end{tabular}\\
+
+Cette interprétation est un modèle de \bsc{fam} car les axiomes sont tous vérifiés.
+On remarque la ressemblance avec une théorie scientique, où les axiomes correspondent à la théorie
+et l'interprétation à ce que celle-ci signifie dans le monde réel.
+Une théorie peut avoir plusieurs modèles.
+
+\subsubsection{Seconde interprétation}
+
+\begin{tabular}{lll}
+$D_J$ : $\mathbb{N}$&&\\
+$\text{val}_J(p)="p_J"$ &\hspace*{1cm} &$p_J : \mathbb{N}\rightarrow\mathbb{N} : d \rightarrow 2d$\\
+$\text{val}_J(m)="m_J"$ &\hspace*{1cm} &$m_J : \mathbb{N}\rightarrow\mathbb{N} : d \rightarrow 3d$\\
+$\text{val}_J(P)="P_J"$ &\hspace*{1cm} &$P_J(d_1,d_2)$ ssi $d_2=2d_1$ ou $d_2=3d_1$\\
+$\text{val}_J(GP)="GP_J"$ &\hspace*{1cm} &$GP_J(d_1,d_2)$ ssi $d_2=4d_1$ ou $d_2=6d_1$\\
+$\text{val}_J(GM)="GM_J"$ &\hspace*{1cm} &$GM_J(d_1,d_2)$ ssi $d_2=6d_1$ ou $d_2=9d_1$\\
+\end{tabular}\\
+
+Cette interprétation est également un modèle de \bsc{fam}.
+
+\subsubsection{Exemple de preuve}
+
+Voici une preuve dans la théorie \bsc{fam}.
+Cette preuve est un exemple de l'approche syntaxique qui est mentionnée dans la section suivante.
+La propriété qui est prouvée est vraie dans les deux interprétations.
+On veut montrer  : 
+$$\models_{\text{\bsc{fam}}} (\forall x)(\exists z) GM(x,z)$$
+
+\begin{tabular}{lll}
+1.&$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x, m(y)) \right)$&(Axiome de grand-mère)\\
+2.&$(\forall x) \left(P(x,p(x))\Rightarrow GM(x, m(p(x))) \right)$&(Elimination de $\forall y$ et substitution $y/p(x)$)\\
+3.&$(\forall x) P(x,p(x)) \Rightarrow (\forall x) GM(x,m(p(x)))$& (Distributivité $\forall/\Rightarrow$)\\
+4.&$(\forall x) P(x,p(x))$ & (Axiome de père) \\
+5.&$(\forall x) GM(x,m(p(x)))$&(Modus ponens)\\
+6.&$(\forall x) (\exists y) GM(x,y)$&(Introduction de $\exists$)\\
+\end{tabular}
+
+Attention, cette preuve utilise le schéma de distributivité de $\forall$ sur $\Rightarrow$
+dans la ligne (3).
+Ce schéma dit que pour toutes formules $p$ et $q$
+l'on peut remplacer $(\forall x) (p \Rightarrow q)$
+par $(\forall x) p \Rightarrow (\forall x) q$.
+Je vous laisse comme exercice de prouver la validité de ce schéma.
+Indice: on peut utiliser l'approche sémantique, comme définie la section suivante.
+
+\section{Propriétés des théories}
+
+\begin{itemize}
+\item Une formule fermée $p$ est \textit{valide} dans la théorie $Th$ si elle est vraie dans chaque modèle de $Th$. On écrit : 
+$$\models_{Th} p$$
+Soit l'ensemble des axiomes $Ax=\{Ax_1, \hdots, Ax_n\}$. On a bien que $\models_{Th} Ax_i$.\\
+\item $q$ est une \textit{conséquence logique} de $p$ dans la théorie $Th$
+si $q$ est vraie dans tous les modèles de $Th$ qui rendent $p$ vraie.
+On écrit :  $$p \models_{Th} q$$
+\item Une théorie est \textit{consistante} si elle a au moins un modèle ($>0$ modèles).
+\item Une théorie est \textit{inconsistante} si elle n'a pas de modèle ($0$ modèles).\\
+\end{itemize}
+
+\subsection{Établir la validité}
+
+Comment peut-on faire pour établir $\models_{Th} p$? Il y a deux approches différentes :
+\begin{enumerate}
+\item L'approche {\em sémantique} : on prend un modèle $I$ quelconque de $Th$ et on évalue $\textrm{VAL}_I (p)$
+en utilisant le fait que $\text{VAL}_I (Ax_i)=T$.
+\item L'approche {\em syntaxique} : on essaye de construire une preuve de $p$ à partir des axiomes, en appliquant les règles de $Th$.
+Cette approche s'appelle aussi {\em théorie de la preuve}.\\
+\end{enumerate}
+En pratique, la deuxième approche est beaucoup plus souvent utilisée.\\
+
+\subsection{Qualité d'une théorie}
+
+Une théorie peut posséder certaines qualités qui la rend
+meilleure que d'autres théories qui ne les possèdent pas.
+Une ``bonne'' théorie est:
+\begin {enumerate}
+\item {\em consistante} : il est impossible de déduire \(p\) et \(\neg p\)  de la même théorie.
+\item {\em minimale} : les axiomes sont indépendants: $\{Ax_1, \hdots, Ax_n\} \models Ax_k $\\
+On peut vérifier la minimalité en construisant une interprétation $J$ telle que:\\
+$\text{VAL}_J (Ax_k)= \mathrm{false}$\\
+$\text{VAL}_J (Ax_i)= \mathrm{true}$ pour $i \neq k$
+\item {\em complète} : les axiomes suffisent pour prouver les propriétés qui nous intéressent. Sinon il faut en ajouter.
+\end {enumerate}
+
+\subsubsection{Exemple dans l'astronomie}
+\begin {enumerate}
+\item {\textbf{Système de Copernic}} : Chaque axiome de chaque planète est indépendant, car elles tournent toutes autour du soleil.
+\item{\textbf{Système de Ptolémée}} : Les axiomes de chaque planète dépendent de ceux de la Terre, car elle représente le centre de l'univers, mais elle est également une planète et dispose donc d'axiomes.
+\end {enumerate}
+
+% Ancienne partie 12
+
+\section{Opérations sur les théories}
+
+Nous allons définir une opération, l'extension, qui permet de créer une nouvelle théorie par rapport à une théorie existante,
+et deux opérations, l'inclusion et l'équivalence, qui permettent de comparer deux théories.
+
+\subsection{Extension d'une théorie}
+Lorsqu'on a une théorie déjà existante, on souhaite parfois l'étendre afin de la rendre plus complète.
+On dit que $Th_2$ est une {\em extension} de $Th_1$ si:
+\begin{itemize}
+\item[$\bullet$] Le vocabulaire de $Th_1$ est inclus dans le vocabulaire de $Th_2$.
+\item[$\bullet$] Tout axiome de $Th_1$ est axiome de $Th_2$.
+\end{itemize}
+On peut donc étendre le vocabulaire et ajouter des axiomes.
+Voici deux exemples d'extension de théorie pour mieux comprendre comment effectuer cette opération. Ils étendent tous les deux
+la théorie des liens familiaux (\bsc{fam}) décrite dans la section précédente.
+
+\subsubsection{Exemple 1}
+
+Considérons le nouvel axiome suivant, que nous noterons Ax:
+$$ Ax \equiv (\forall x) \neg P(x,x) $$
+La nouvelle théorie ainsi étendue que nous noterons \bsc{fam*} possède un axiome de plus : Ax. Cette théorie \bsc{fam*}
+est {\em consistante}, c'est-à-dire qu'il existe au moins un modèle qui valide cette théorie.
+Pour s'en convaincre, il suffit de considérer la première interprétation de la théorie \bsc{fam} de la section précédente,
+qui utilise les liens familiaux: personne est parent de lui-même.\\
+
+En revanche, si on considère la deuxième interprétation (deuxième modèle, noté $J$) de \bsc{fam}
+qui associe les symboles $p$ et $m$ aux fonctions mathématiques $p_J : \mathbb{N} \rightarrow \mathbb{N} : d \rightarrow 2d$ et $m_J : \mathbb{N} \rightarrow \mathbb{N} : d \rightarrow 3d$, on observe une contradiction.
+En effet, dans le modèle $J$ on a la définition suivante du prédicat $P$ :
+$$ P_J(d_1, d_2) \textrm{ ssi } d_2 = 2d_1 \textrm{ ou } d_2 = 3d_1$$
+Il suffit de choisir $x=0$ dans notre nouvel axiome Ax pour constater que le modèle $J$ ne valide pas la théorie étendue \bsc{fam*}.
+De manière générale, l'extension d'une théorie peut donc {\em réduire} l'ensemble des modèles de celle-ci.
+
+\subsubsection{Exemple 2}
+
+Considérons le nouvel axiome suivant, que nous noterons Adam:
+$$ (\forall y) \neg P(a,y) $$
+où $a$ est une constante arbitraire.
+Notons la théorie étendue \bsc{fam'} = \bsc{fam} + Adam. Dans cet exemple, on peut observer que \bsc{fam'}
+est {\em inconsistante}, car aucun modèle ne peut valider cette théorie.
+En effet, en partant du premier axiome de \bsc{fam} (appelé "père"), nous effectuons quelques étapes pour obtenir une contradiction:
+\begin{align*}
+& (\forall x) P(x,p(x)) && \textrm{Axiome père} \\
+& P(a,p(a)) && \textrm{Elimination } \forall \\
+& (\exists y) P(a,y) && \textrm{Introduction} \exists
+\end{align*}
+Ci-dessus, le premier axiome de \bsc{fam} reformulé (père),
+qui est en contradiction avec le nouvel axiome (Adam), que nous reformulons ci-dessous.
+\begin{align*}
+& (\forall y) \neg P(a,y) \\
+\Leftrightarrow & \ \neg (\exists y) P(a,y)
+\end{align*}
+Par la règle de preuve par contradiction, on démontre qu'aucun modèle n'est possible pour la théorie étendue \bsc{fam'}.
+Nous avons vu que
+l'extension d'une théorie peut réduire le nombre de modèles: ici on voit qu'il faut bien vérifier que ce nombre ne devient pas 0.
+
+\subsection{Comparaison des théories}
+
+Dans cette section, nous abordons la comparaison de différentes théories :
+inclusion, équivalence et quelques corollaires.
+Dans ce qui suit, on prend $Th_1$ et $Th_2$ deux théories.
+
+\subsubsection{Inclusion}
+On dit que $Th_1$ est {\em contenue} dans $Th_2$ si
+\begin{itemize}
+\item[$\bullet$] Le vocabulaire de $Th_1$ est inclus dans le vocabulaire de $Th_2$.
+\item[$\bullet$] Toute formule valide dans $Th_1$ l'est aussi dans $Th_2$.
+\end{itemize}
+Tout modèle de $Th_2$ est donc aussi un modèle de $Th_1$.
+Mais pas inversément: il est possible qu'il existe des modèles de $Th_1$ qui ne sont pas des modèles de $Th_2$.
+C'est parce que $Th_2$ peut contenir des formules valides qui ne le sont pas dans $Th_1$.
+
+\subsubsection{Équivalence}
+On dit que $Th_1$ et $Th_2$ sont {\em équivalentes} si elles sont contenues l'une dans l'autre.
+Cela signifie que les deux théories "disent la même chose" et que tout modèle d'une des théories est également modèle de l'autre.\\
+
+
+Il est important de bien faire la différence entre
+l'extension d'une théorie et l'inclusion d'une théorie dans une autre.
+La confusion est possible parce que dans les deux cas, le nombre de modèles peut être réduit.
+Mais il ne faut pas oublier que
+l'extension est définie par rapport aux axiomes et l'inclusion est définie par rapport aux modèles.
+Pour l'extension on ajoute des axiomes et on ne regarde pas les modèles.
+Poir l'inclusion on compare les modèles et on ne regarde pas les axiomes.
+On peut dire que l'extension est une manipulation {\em syntaxique} (on change les axiomes ce qui permette de nouvelles preuves)
+et l'inclusion est une manipulation {\em sémantique} (on fait une comparaison entre ce que modélisent les deux théories).
+
+\subsection{Corollaires}
+On note respectivement $V_t$, $M_t$ et $Ax_t$ le vocabulaire, les modèles et les axiomes d'une théorie $t$. \\
+
+\noindent \underline{Si} $V_{Th_1} \subseteq V_{Th_2}$ et $M_{Th_2} \subseteq M_{Th_1}$
+(tout modèle de $Th_2$ est aussi modèle de $Th_1$) \underline{alors} $Th_1$ est contenue dans $Th_2$.
+Attention à la direction: $M_{Th_2}$ est bien à gauche!
+\\
+
+\noindent \underline{Si} $V_{Th_1} \subseteq V_{Th_2}$ et $Ax_{Th_1} \subseteq Ax_{Th_2}$
+(tout axiome de $Th_1$ est aussi axiome de $Th_2$) \underline{alors} $Th_1$ est contenue dans $Th_2$.
+Il est donc vrai que $M_{Th_2} \subseteq M_{Th_1}$.
+On peut donc dire qu'une extension donne lieu à une inclusion (mais pas inversément).\\
+
+\noindent \underline{Si} $V_{Th_1} = V_{Th_2}$ 
+et pour tout axiome $p \in Ax_{Th_1}$ nous avons $\models_{Th_2} p$
+et pour tout axiome $q \in Ax_{Th_2}$ nous avons $\models_{Th_1} q$,
+\underline{alors}
+$Th_1$ et $Th_2$ sont équivalentes. \\
+
+\noindent \underline{Si} $p$ une formule fermée telle que $\models_{Th_1} p$ et $Th_2 = Th_1 \bigcup \left\lbrace p \right\rbrace$ \underline{alors} $Th_1$ et $Th_2$ sont équivalentes. \\
+
+\section{Théorie des ordres partiels stricts (OPS)}
+
+Le concept d'ordre partiel strict est un des concepts de base des mathématiques.
+Nous allons le définir par une théorie.
+Ensuite nous donnons deux interprétations différentes de cette théorie.
+\subsection*{Vocabulaire}
+\begin{itemize}
+\item[$\bullet$] Le symbole P/2
+\end{itemize}
+\subsection*{Axiomes}
+\begin{itemize}
+\item[$\bullet$] $ (\forall x) \neg P(x,x) $  (irréflexivité) (OPS1)
+\item[$\bullet$] $ (\forall x) (\forall y) (\forall z) (P(x,y) \wedge P(y,z) \Rightarrow P(x,z))$ (transitivité) (OPS2)
+\end{itemize}
+\subsection*{Première interprétation}
+Soit l'interprétation $I$ de cette théorie:
+\begin{itemize}
+\item[$\bullet$] $D_I = \mathbb{Z} $
+\item[$\bullet$] $\mathrm{val}_I (P) = "<"$
+\end{itemize}
+Lorsque l'on écrit $\mathrm{val}_I(<) = "<"$, le premier symbole $<$ est un mot de vocabulaire dans la théorie
+tandis que le deuxième est une fonction sur les entiers.
+Cette fonction confère un sens au symbole. 
+On remarque que cette interprétation est un modèle de notre théorie.
+En effet, la fonction $<$ sur les entiers est irréflexive et transitive.
+Si on a $x < y$ et $y <z$, on peut en déduire que $x<z$.
+
+\subsection*{Deuxième interprétation}
+Soit l'interprétation $J$ de cette théorie:
+\begin{itemize}
+\item[$\bullet$] $D_J = \mathbb{Z} $
+\item[$\bullet$] $val_J (P) = "\ne"$
+\end{itemize}
+Ici on change le sens du symbole $<$ :
+$$val_J(<) = "\ne"$$
+Cette interprétation n'est pas un modèle. En effet, par exemple, pour $x=5, y=3, z=5$, on a :
+$$x<y \wedge y<z \nRightarrow x<z$$
+$$5 \neq 3 \wedge 3 \neq 5 \nRightarrow 5 \neq 5$$
+Ceci est un contre-exemple, car $5$ n'est pas différent de $5$ (irréflexivité),
+et donc cette interprétation ne vérifie pas l'axiome sur la transitivité!
+
+% Ancienne partie 13
+
+%document réalisé par Scott Ivinza, Florent Lejoly, Cédric Vanden Buckle et Guillaume Demaude
+
+\section{Théorie de l'égalité (EG)}
+
+Le concept d'égalité est omniprésent dans les mathématiques.
+Nous allons définir une théorie pour le formaliser.
+D'abord, il faut faire attention à la notation.
+Il existe différents symboles pour représenter l'égalité : 
+\begin{itemize}
+	\item E(x,y)
+	\item $x = y$
+	\item $x == y $
+\end{itemize}
+Nous allons utiliser ``$==$'' dans la suite de ce cours pour représenter l'égalité.
+
+La théorie de l'égalité est souvent {\em ajoutée} à d'autres axiomes pour être utile en pratique.
+Dans cette section on donne que les axiomes d'égalité.  Dans la suite nous allons voir comment
+ajouter l'égalité à d'autres théories.
+
+\subsection{Axiomes} 
+Pour définir ce qu'est une égalité, nous avons d'abord besoin de définir 3 axiomes et 2 schémas d'axiomes:
+\begin{enumerate}
+\item Réflexivité \\$\forall x, x==x$
+\item Symétrie \\$\forall x, \forall y, x==y \Rightarrow y==x$
+\item Transitivité \\$\forall x, \forall y, \forall z, (x==y \land y==z) \Rightarrow x==z$
+\item Substituabilité dans les fonctions\\$\forall x, x_{1}, ..., x_i, ..., x_{n}\ .\ x==x_i \Rightarrow f(..., x, ...) == f(..., x_i, ...)$
+\item Substituabilité dans les prédicats\\$\forall x, x_{1}, ..., x_i, ..., x_{n}\ .\ x==x_i \Rightarrow P(..., x, ...) == P(..., x_i, ...)$ 
+\end{enumerate}
+Les deux derniers axiomes sont des {\em schémas}: chaque schéma définit plusieurs axiomes, où on remplace $f$ par tout symbole de fonction et $P$ par tout symbole de prédicat.
+
+\subsection{Règles d'inférences}
+En plus de ces 5 axiomes, il nous faut aussi définir deux règles d'inférences.\\ \\
+Substituabilité fonctionnelle 
+	$$ \frac{s_{1}==t_{1} \land s_{2}==t_{2} \land ... \land s_{n}==t_{n}}{f(s_{1},s_{2},...,s_{n}) == f(t_{1},t_{2},...,t_{n})}$$ 
+	Substituabilité prédicative 
+	$$ \frac{s_{1}==t_{1} \land s_{2}==t_{2} \land ... \land s_{n}==t_{n}}{P(s_{1},s_{2},...,s_{n}) == P(t_{1},t_{2},...,t_{n})}$$ 
+
+\subsection{Théorème sur la sémantique de l'égalité}
+
+$$\mathrm{Si}\ \ \mathrm{VAL}_{I}(t_{1}) ==  \mathrm{VAL}_{I}(t_{2}) \ \ \mathrm{alors}\ \  \mathrm{VAL}_{I}(t_{1} == t_{2}) = \mathrm{true}$$
+
+L'égalité comme elle est définie ici est une propriété syntaxique qui nous permet de faire des preuves.
+Avec ce théorème, nous pouvons aussi raisonner sur un modèle (c'est-à-dire la sémantique) pour déterminer l'égalité.
+C'est-à-dire, si deux termes donnent la même entité dans le domaine de discours, alors on peut dire que les
+deux termes sont égaux.
+
+\subsubsection{Preuve}
+
+Voici la preuve étape par étape:
+\begin{itemize}
+\item Soit $I$ un modèle de EG et deux termes quelconques $t_{1}$ et $t_{2}$.
+\item Par définition $\mathrm{VAL}_{I}(t_{1} == t_{2}) = \mathrm{VAL}_{I}(==)(\mathrm{VAL}_{I}(t_{1}), \mathrm{VAL}_{I}(t_{2}))$.
+\item On pose $VAL_{I}(==) = E_{I}$ et $VAL_{I}(t_{1}) = e_1$ et $VAL_{I}(t_{2}) = e_2$.
+\item La prémisse du théorème nous dit que $e_1 = e_2 = e$.
+\item Donc $\mathrm{VAL}_{I}(t_{1} == t_{2}) =E_{I}(e,e)$.
+\item L'axiome de réflexivité nous dit $\mathrm{VAL}_{I}(\forall x.\ x==x)= \mathrm{true}$.
+\item La sémantique de $\forall$ nous dit que pour tout $d \in D_I$, il est vrai que $\mathrm{VAL}_{I}(d==d)=\mathrm{true}$.
+\item On prend $d=e$ et on peut conclure que $E_{I}(e,e)=\mathrm{true}$.
+\end{itemize}
+
+\vspace{\baselineskip}
+Remarquez que ceci n'est pas une preuve en logique des prédicats, mais une preuve en méta-langage, c'est-à-dire
+une preuve qui parle de la logique des prédicats.
+On ne peut pas formaliser cette preuve comme un objet formel qui est une preuve en logique des prédicats.
+Toute l'argumentation sur la sémantique de la logique des prédicats et la justification des règles de preuve
+sont des raisonnements en méta-langage.
+
+\section{Théorie de l'ordre partiel (OP)}
+
+Pour définit la théorie de l'ordre partiel, nous prenons EG et nous ajoutons un symbole en
+plus du symbole d'égalité:
+On ajoute un deuxième symbole dans le langage en plus du symbole d'égalité:
+	$$\leq$$
+Les axiomes d'égalité sont déjà présents.
+Il nous reste de faire les axiomes pour ce nouveau symbole.
+
+\subsection{Axiomes} 
+
+Aux axiomes et schémas d'axiomes de la théorie de l'égalité, on rajoute de nouveaux axiomes:
+\begin{enumerate}
+\item Réflexivité \\$\forall x$, $x\leq x$
+\item Anti-symétrie \\$\forall x$, $\forall y$, $ x\leq y \land y\leq x\Rightarrow y==x$
+\item Transitivité \\$\forall x$, $\forall y$, $\forall z$, $(x\leq y \land y\leq z) \Rightarrow x\leq z$
+\item Substituabilité à gauche \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{1}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x \leq x_{2}$
+\item Substituabilité à droite \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{2}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x_{1} \leq x$
+\end{enumerate}
+
+\subsubsection{Exemple de théorème}
+
+Nous allons prouver le théorème suivant:
+$$\models \forall x.\ \forall y.\  [x==y \Leftrightarrow (x\leq y)\land (y \leq x)] $$
+
+\subsubsection{Preuve}
+
+Le théorème n'est pas une formule en logique des prédicats, mais en méta-langage.
+La preuve va donc être démontrée en partie en méta-langage.
+
+\begin{align*}
+\Leftrightarrow \text{equivaut à :} \Leftarrow \land \Rightarrow \\
+\Leftarrow \text{: est démontré par l'axiome antisymétrique} \\	
+\Rightarrow \models_{op} \forall x, \forall y, [x\leq y \land y \leq x] 
+\end{align*}
+
+\underline{Preuve formelle :}
+\begin{enumerate}
+\item $ \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow y \leq x$ \hfill substituabilité à gauche
+\item $ \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow x \leq y$ \hfill substituabilité à droite
+\item $ x==y \Rightarrow x \leq x \Leftrightarrow y \leq x $ \hfill $\forall$ élimination
+\item $ x==y \Rightarrow x \leq x \Leftrightarrow x \leq y $ \hfill $\forall$ élimination
+\end{enumerate}
+
+\underline{Preuve conditionnelle :}
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item $ x==y$ \hfill supposition
+\item $ y\leq x$ \hfill modus ponens (1,4)
+\item $ x\leq y$ \hfill modus ponens (2,4)
+\item $ y\leq x \land  x\leq y$ \hfill conjonction (6,7)
+\item $ x==y \Rightarrow x \leq x \Leftrightarrow y\leq x \land  x\leq y$
+\item $ \forall x, \forall y, x==y \Rightarrow x \leq x \Leftrightarrow y\leq x \land  x\leq y$ \hfill $\forall$ Introduction
+\end{enumerate}
+\subsection{Exemples de modèles d'OP}
+\begin{itemize}
+\item \underline{$I_{1}$} : $D_{I_{1}} =  \mathbb{Z}$ \\
+$ val_{I_{1}}(==) = '=' :$ égalité d'entiers \\
+$ val_{I_{1}}(\leq) = '\leq' :$ plus petit ou égal pour les entiers\\
+Cette interprétation va satisfaire tous les entiers.
+\item \underline{$I_{2}$} : $D_{I_{2}} =  P(E)$ ensemble des sous-ensembles de E\\
+$ val_{I_{2}}(==) = '=' :$ égalité d'ensemble \\
+$ val_{I_{2}}(\leq) = '\subseteq' :$ inclusion d'ensemble
+\item \underline{$I_{3}$} : $D_{I_{3}} = ALPH^{2} = {(l_{1},l_{2}),..}$ doublons de lettres de l'alphabet\\
+$ val_{I_{3}}(==) = $ égalité des paires \\
+$ val_{I_{3}}(\leq) =$ suivant ordre lexicographique\\
+Exemple : $(l_{i},l_{j}) \leq (l_{p},l_{q})$ si $ l_{i} < l_{p}$ ou $ l_{i} = l_{p}$ et $ l_{j} < l_{q}$ ou $ l_{j} = l_{q}$
+\item \underline{$I_{3}$} : $D_{I_{4}} =$ ensemble de listes\\
+$ val_{I_{4}}(==) = $ = égalité de liste (si elles possèdent les mêmes composants à la même position)\\
+$ val_{I_{3}}(\leq) =$ "suffixe de" \\
+Exemple : $l_{1} $ est suffixe de $l_{2}$ \\
+$l_{1} $ = [d, e, f, g, h] et $l_{2} =$ [a, b, c, d, e, f, g, h, i]
+\item \underline{$I_{5}$} : Soit D$_{I_{5}}$ l'ensemble des formules en logique des propositions. On commence à utiliser la logique pour parler d'elle-même:\\
+VAL$_{I_{5}}$(==) = "$\Lleftarrow \Rrightarrow$" : L'égalité est synonyme d'équivalence en logique des propositions \\
+VAL$_{I_{5}}$($\leq$) = "$\models$" : Le signe d'inclusion entre les ensembles de modèles.
+Maintenant qu'on a défini la sémantique de l'ordre partiel en utilisant la notion de modèles, on peut prendre quelques exemples en raisonnant sur la logique :\\
+p $\leq_{I_{5}}$ q   \hspace{1.5cm} p $\models_{I_{5}}$ q \hspace{1.5cm} $\models$ p $\Rightarrow$ q
+\item \underline{$I_{6}$} : D$_{I_{6}}$ = l'ensemble des unificateurs d'un ensemble S de termes ou de formules
+VAL$_{I_{6}}$(==) = égalité entre substitutions \{ (x$_{i}$,t$_{i}$)... \} : un ensemble de paires avec une variable et un terme VAL$_{I_{6}}$($\leq$) = "moins général que"\\
+\newline
+Exemple: P(x,f(y)) \hspace{1cm} $\underbrace{P(x,z)}_{\sigma}$\\
+$\sigma$' = $\sigma$ $\cup$ \{(z, f(y)\} donc 
+$\sigma$' $\leq$ $\sigma$\\
+\end{itemize}
+Ces exemples montrent qu'on peut raisonner sur tout, y compris sur la logique et les algorithmes eux-mêmes, à partir du moment où on respecte les axiomes.
