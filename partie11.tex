@@ -1,70 +1,111 @@
-\chapter{Théorie logique}
-\section{Étude des structures discrètes}
-\noindent
-\textbf{Exemples de structures discrètes} : entiers positifs, chaînes, arbres, ensembles, relations, fonctions ...\\
+\chapter{Théories logiques}
 
-On peut définir ces structures avec la logique des prédicats et faire des raisonnements sur celles-ci en utilisant des règles d'inférence.\\
+On peut utiliser la logique des prédicats pour définir et étudier des structures mathématiques.
+L'avantage est qu'une définition avec la logique est complètement précise.
+La définition d'une structure contiendra deux types de formules:
+des {\em axiomes} et des {\em règles d'inférence}.
+Quelques exemples simples des structures que l'on peut définir sont
+l'ordre partiel, les treillis, les groupes, les entiers, les chaînes, les arbres,
+les ensembles, les relations et les fonctions.
+Il y en a beaucoup plus que cela; en fait quasi toutes les mathématiques
+peuvent êtres formalisées avec la logique des prédicats.
+Dans ce chapitre nous allons voir quelques exemples de ces formalisations
+pour des structures discrètes.
 
-\noindent
-\textbf{Utilisation} :\begin{itemize}
-\item On peut programmer avec ces structures. \textit{Prolog} permet d'écrire les axiomes directement. Il faut cependant faire attention de bien les choisir ;
-\item On peut les utiliser dans les assistants de preuve (exemples d'assistants de preuve : \textit{Coq, Isabelle})\\
-\end{itemize}
+Ces formalisations peuvent être utilisées pour la programmation (par ex. avec Prolog)
+et aussi dans les assistants de preuve.
+Pour ces deux utilisations, il faut faire très attention à la manière dont on définit
+les axiomes et les règles: cela peut avoir une grande influence sur l'efficacité de
+l'exécution.
+Mais dans ce chapitre nous ne nous intéressons pas à l'efficacité, mais plutôt à
+la simplicité et la compréhension.
+
+\subsubsection{Logique du premier ordre}
+
+La logique des prédicats est parfois appelé la logique du premier ordre.
+Dans ce chapitre nous allons parfois utiliser cette terminologie.
+On l'appelle premier ordre parce que le domaine des quantificateurs $\forall x$ et $\exists x$
+est $D_I$: les valeurs de $\mathrm{val}_I(x)$ sont toujours dans $D_I$.
+Il existe aussi des logiques d'ordres superieurs; dans ce cas le domaine des quantificateurs
+peut être autre chose.
+Par exemple, dans une logique du second ordre, on peut quantifier sur les prédicats et pas
+simplement sur les éléments du domaine de discours.
+On pourra donc dire $\forall p$ ou $\exists p$ où $p$ est un prédicat.
+Cela donne une expressivité supplémentaire par rapport à la logique du premier ordre,
+mais les raisonnements et les preuves deviennent beaucoup plus complexes.
+Il y a aussi moins de résultats généraux sur cette logique
+et la plupart des mathématiques utilisées en pratique n'ont pas besoin de cette logique
+pour être formalisée.
+Nous n'abordons pas les logiques d'ordres supérieurs dans ce cours.
 
 \section{Théorie du premier ordre}
-\noindent
-\textbf{Intuition} : définition logique d'une structure mathématique
 
-\noindent
+Le concept de base est la {\em théorie du premier ordre}.
+Une théorie du premier ordre est un ensemble $B$ de formules
+qui représente les axiomes et les règles d'inférence d'une structure mathématique.
+Nous allons nous restreindre au modèles: les interprétations de $B$
+où les axiomes et les règles sont valides.
+
 \subsection{Définition d'une théorie}
-\begin{itemize}
-\item Sous-langage de la logique du premier ordre
-\begin{itemize}
-\item \textbf{vocabulaire} : constantes, fonctions, prédicats ;
-\item règles syntaxiques et sémantiques sur ce vocabulaire ;
-\end{itemize}
-\item Ensemble d'axiomes (formules fermées, c'est-à-dire formules ne contenant pas de variables libres);
-\item Ensemble de règles d'inférence.
-\end{itemize}
 
-\subsection{Exemple : théorie des liens familiaux (\bsc{fam})}
+Une théorie contient les partie suivantes:
+\begin{itemize}
+\item Un sous-langage de la logique du premier ordre:
+\begin{itemize}
+\item Vocabulaire : constantes, fonctions, prédicats ;
+\item Règles syntaxiques et sémantiques sur ce vocabulaire ;
+\end{itemize}
+\item Ensemble d'axiomes
+\item Ensemble de règles d'inférence
+\end{itemize}
+Les axiomes et les règles d'inférence sont des
+formules {\em fermées}, c'est-à-dire des formules ne contenant pas de variables libres.
+L'idée est que ces formules expriment des faits sur tous les éléments du domaine.
+
+\subsection{Exemple : théorie des liens familiaux (\bsc{FAM})}
+
+Comme premier exemple
+nous définissons une théorie qui permettra de raisonner sur les liens familiaux.
+
 \begin{enumerate}
 \item Vocabulaire : 
 \begin{itemize}
 \item 2 symboles de fonctions à un paramètre : $p/1$, $m/1$
 \item 3 symboles de prédicats à deux paramètres : $P/2$, $GM/2$, $GP/2$\\
 \end{itemize}
-
 On peut interpréter les fonctions $p$ et $m$ comme "père de" et "mère de", et les prédicats $P$, $GM$ et $GP$ comme "parent de", "grand-mère de" et "grand-père de". On donnera plus de précisions sur cette interprétation par la suite.\\
 
-\item Axiomes : \\
+\item Axiomes :
 \begin{center}
-\begin{tabular}{lcc}
+\begin{tabular}{lcr}
 $(\forall x) \left(P(x,p(x))\right)$ & \hspace*{2cm}& (père)\\
 $(\forall x) \left(P(x,m(x))\right)$ & \hspace*{2cm}& (mère)\\
-$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GP(x,p(y)) \right)$&&\\
-$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x,m(y)) \right)$&&\\
+$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GP(x,p(y)) \right)$&& (grand-père)\\
+$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x,m(y)) \right)$&& (grand-mère)\\
 \end{tabular}
 \end{center}
+\vspace{\baselineskip}
 
 \item Règles : \\
 Les règles sont uniquement celles de la logique des prédicats.
 \end{enumerate}
+
 \subsubsection{Première interprétation}
-\begin{tabular}{lll}
+\begin{tabular}{@{}llr}
 $D_I$ : personnes&&\\
-$\text{val}_I(p)=\text{"père de"}$ &\hspace*{1cm} &$\text{père de} : \text{Pers}\rightarrow\text{Pers} : d \rightarrow \text{"père de" }d$\\
-$\text{val}_I(m)=\text{"mère de"}$ &\hspace*{1cm} &$\text{mère de} : \text{Pers}\rightarrow\text{Pers} : d \rightarrow \text{"mère de" }d$\\
-$\text{val}_I(P)=\text{"Parent"}$ &\hspace*{1cm} &$\text{Parent}(d_1,d_2)=T$ ssi $d_2$ est un parent de $d_1$\\
-$\text{val}_I(GP)=\text{"Grand-père"}$ &\hspace*{1cm} &$\text{Grand-père}(d_1,d_2)=T$ ssi $d_2$ est un grand-père de $d_1$\\
-$\text{val}_I(GM)=\text{"Grand-mère"}$ &\hspace*{1cm} &$\text{Grand-mère}(d_1,d_2)=T$ ssi $d_2$ est une grand-mère de $d_1$\\
+$\text{val}_I(p)=\text{"père de"}$ & &$\text{père de} : \text{Pers}\rightarrow\text{Pers} : d \rightarrow \text{"père de" }d$\\
+$\text{val}_I(m)=\text{"mère de"}$ & &$\text{mère de} : \text{Pers}\rightarrow\text{Pers} : d \rightarrow \text{"mère de" }d$\\
+$\text{val}_I(P)=\text{"Parent"}$ & &$\text{Parent}(d_1,d_2)=T$ ssi $d_2$ est un parent de $d_1$\\
+$\text{val}_I(GP)=\text{"Grand-père"}$ & &$\text{Grand-père}(d_1,d_2)=T$ ssi $d_2$ est un grand-père de $d_1$\\
+$\text{val}_I(GM)=\text{"Grand-mère"}$ & &$\text{Grand-mère}(d_1,d_2)=T$ ssi $d_2$ est une grand-mère de $d_1$\\
 \end{tabular}\\
 
-Cette interprétation est un modèle de \bsc{fam} car les axiomes sont tous vérifiés.\\
-On remarque la ressemblance avec une théorie scientique, où les axiomes correspondent à la théorie et l'interprétation à ce que celle-ci signifie dans le monde réel.\\
-Une théorie peut avoir plusieurs modèles.\\ 
+Cette interprétation est un modèle de \bsc{fam} car les axiomes sont tous vérifiés.
+On remarque la ressemblance avec une théorie scientique, où les axiomes correspondent à la théorie
+et l'interprétation à ce que celle-ci signifie dans le monde réel.
+Une théorie peut avoir plusieurs modèles.
+
 \subsubsection{Seconde interprétation}
-Cette interprétation est également un modèle de \bsc{fam}.\\
 
 \begin{tabular}{lll}
 $D_J$ : $\mathbb{N}$&&\\
@@ -75,51 +116,72 @@ $\text{val}_J(GP)="GP_J"$ &\hspace*{1cm} &$GP_J(d_1,d_2)$ ssi $d_2=4d_1$ ou $d_2
 $\text{val}_J(GM)="GM_J"$ &\hspace*{1cm} &$GM_J(d_1,d_2)$ ssi $d_2=6d_1$ ou $d_2=9d_1$\\
 \end{tabular}\\
 
+Cette interprétation est également un modèle de \bsc{fam}.
+
+\subsubsection{Exemple de preuve}
+
+Voici une preuve dans la théorie \bsc{fam}.
+Cette preuve est un exemple de l'approche syntaxique qui est mentionnée dans la section suivante.
+La propriété qui est prouvée est vraie dans les deux interprétations.
+On veut montrer  : 
+$$\models_{\text{\bsc{fam}}} (\forall x)(\exists z) GM(x,z)$$
+
+\begin{tabular}{lll}
+1.&$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x, m(y)) \right)$&(Axiome de grand-mère)\\
+2.&$(\forall x) \left(P(x,p(x))\Rightarrow GM(x, m(p(x))) \right)$&(Elimination de $\forall y$ et substitution $y/p(x)$)\\
+3.&$(\forall x) P(x,p(x)) \Rightarrow (\forall x) GM(x,m(p(x)))$& (Distributivité $\forall/\Rightarrow$)\\
+4.&$(\forall x) P(x,p(x))$ & (Axiome de père) \\
+5.&$(\forall x) GM(x,m(p(x)))$&(Modus ponens)\\
+6.&$(\forall x) (\exists y) GM(x,y)$&(Introduction de $\exists$)\\
+\end{tabular}
+
+Attention, cette preuve utilise le schéma de distributivité de $\forall$ sur $\Rightarrow$
+dans la ligne (3).
+Ce schéma dit que pour toutes formules $p$ et $q$
+l'on peut remplacer $(\forall x) (p \Rightarrow q)$
+par $(\forall x) p \Rightarrow (\forall x) q$.
+Je vous laisse comme exercice de prouver la validité de ce schéma.
+Indice: on peut utiliser l'approche sémantique, comme définie la section suivante.
+
 \section{Propriétés des théories}
+
 \begin{itemize}
-\item Une formule fermée $p$ est \textbf{valide} dans la théorie $Th$ si elle est vraie dans chaque modèle de $Th$. On écrit : 
-$$\vDash_{Th} p$$
-Soit l'ensemble des axiomes $Ax=\{Ax_1, \hdots, Ax_n\}$. On a bien que $\vDash_{Th} Ax_i$.\\
-\item $q$ est une \textbf{conséquence logique} de $p$ dans la théorie $Th$ si $q$ est vraie dans tous les modèles de $Th$ qui rendent $p$ vraie. On écrit :  
-$$p \vDash_{Th} q$$
-\item Une théorie est \textbf{consistante} si elle a au moins un modèle ($>0$ modèles).
-\item Une théorie est \textbf{inconsistante} si elle n'a pas de modèle ($0$ modèles).\\
+\item Une formule fermée $p$ est \textit{valide} dans la théorie $Th$ si elle est vraie dans chaque modèle de $Th$. On écrit : 
+$$\models_{Th} p$$
+Soit l'ensemble des axiomes $Ax=\{Ax_1, \hdots, Ax_n\}$. On a bien que $\models_{Th} Ax_i$.\\
+\item $q$ est une \textit{conséquence logique} de $p$ dans la théorie $Th$
+si $q$ est vraie dans tous les modèles de $Th$ qui rendent $p$ vraie.
+On écrit :  $$p \models_{Th} q$$
+\item Une théorie est \textit{consistante} si elle a au moins un modèle ($>0$ modèles).
+\item Une théorie est \textit{inconsistante} si elle n'a pas de modèle ($0$ modèles).\\
 \end{itemize}
 
-Comment peut-on faire pour établir $\vDash_{Th} p$? Il y a deux approches différentes :
+\subsection{Établir la validité}
+
+Comment peut-on faire pour établir $\models_{Th} p$? Il y a deux approches différentes :
 \begin{enumerate}
-\item \textbf{l'approche sémantique} : on prend un modèle quelconque de $Th$ et on évalue $\text{VAL}_I (p)$ en utilisant le fait que $\text{VAL}_I (Ax_i)=T$ ;
-\item \textbf{l'approche syntaxique} : théorie de preuve : on essaye de construire une preuve de $p$ à partir des axiomes, en appliquant les règles de $Th$.\\
+\item L'approche {\em sémantique} : on prend un modèle $I$ quelconque de $Th$ et on évalue $\textrm{VAL}_I (p)$
+en utilisant le fait que $\text{VAL}_I (Ax_i)=T$.
+\item L'approche {\em syntaxique} : on essaye de construire une preuve de $p$ à partir des axiomes, en appliquant les règles de $Th$.
+Cette approche s'appelle aussi {\em théorie de la preuve}.\\
 \end{enumerate}
 En pratique, la deuxième approche est beaucoup plus souvent utilisée.\\
 
+\subsection{Qualité d'une théorie}
 
-\subsubsection{Preuve (esquisse)}
-La preuve qui suit est une esquisse. Il manque plusieurs étapes.\\
-On veut montrer  : 
-$$\vDash_{\text{\bsc{fam}}} (\forall x)(\exists z) GM(x,z)$$
-
-\begin{tabular}{lll}
-$(\forall x)(\forall y) \left(P(x,y)\Rightarrow GM(x, m(y)) \right)$&\hspace*{1cm}&($Ax$)\\
-$(\forall x) \left(P(x,p(x))\Rightarrow GM(x, m(p(x))) \right)$&\hspace*{1cm}&(Elimination de $\forall y$ et substitution $y/p(x)$)\\
-$\left( \forall x \hspace*{0.1cm} Ax \right)\Rightarrow \forall x \hspace*{0.1cm} GM(x,m(p(x)))$&\hspace*{1cm}&\\
-$\forall x \hspace*{0.1cm} GM(x,m(p(x)))$&\hspace*{1cm}&(Modus ponens)\\
-$\forall x \hspace*{0.1cm} \exists y \hspace*{0.1cm} GM(x,y)$&\hspace*{1cm}&(Introduction de $\exists$)\\
-\end{tabular}\\
-
-\section{Qualité d'une théorie}
-Une théorie peut posséder certaines qualités. Ces qualités sont directement issues de la logique:
+Une théorie peut posséder certaines qualités qui la rend
+meilleure que d'autres théories qui ne les possèdent pas.
+Une ``bonne'' théorie est:
 \begin {enumerate}
-\item {\textbf{consistante}} : il est impossible de déduire \(p\) et \(\neg p\)  de la même théorie.
-\item {\textbf{minimale}} : les axiomes sont indépendants: 
-$\{Ax_1, \hdots, Ax_n\}$   $\nvDash Ax_k $\\
-\textbf{Vérification} : Construction d'interprétations.\\
-$\text{VAL}_J (Ax_k)= False$\\
-$\text{VAL}_J (Ax_i)= True$  
-pour $i \neq k$
-\item {\textbf{complète}} : les axiomes suffisent pour prouver la propriété d'intérêt. Sinon il faut en ajouter.
+\item {\em consistante} : il est impossible de déduire \(p\) et \(\neg p\)  de la même théorie.
+\item {\em minimale} : les axiomes sont indépendants: $\{Ax_1, \hdots, Ax_n\} \models Ax_k $\\
+On peut vérifier la minimalité en construisant une interprétation $J$ telle que:\\
+$\text{VAL}_J (Ax_k)= \mathrm{false}$\\
+$\text{VAL}_J (Ax_i)= \mathrm{true}$ pour $i \neq k$
+\item {\em complète} : les axiomes suffisent pour prouver les propriétés qui nous intéressent. Sinon il faut en ajouter.
 \end {enumerate}
-\subsection{Exemple : qualité de deux théories}
+
+\subsubsection{Exemple dans l'astronomie}
 \begin {enumerate}
 \item {\textbf{Système de Copernic}} : Chaque axiome de chaque planète est indépendant, car elles tournent toutes autour du soleil.
 \item{\textbf{Système de Ptolémée}} : Les axiomes de chaque planète dépendent de ceux de la Terre, car elle représente le centre de l'univers, mais elle est également une planète et dispose donc d'axiomes.
