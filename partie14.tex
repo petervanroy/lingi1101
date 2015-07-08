@@ -1,20 +1,26 @@
 %\section*{Suite des exemples de la première heure}
-\section{Théorie des ensembles}
-Elle sera utilisée pour la spécification des systèmes $\mathbb{Z}$.\\
 
-\textbf{Ensemble} : on peut définir les ensembles de façon informelle (c'est-à-dire sans les axiomes) : \\
+\section{Théorie des ensembles}
+
+Nous introduisons une version simple de la théorie des ensembles
+comme prérequis pour la spécification des systèmes avec l'approche Z.
+Informellement, il y a deux manières de définir des ensembles:
 \begin{itemize}
-\item Un ensemble peut être défini comme une énumération d'éléments \\
-Ex: \{0,20,40,60,80,100 \} ou \{Mercure, Vénus, terre ..., Neptune\}
-\item Il peut également être défini comme le prédicat d'un argument qui est vrai pour les membres. On appelle cette définition informelle "compréhension)". Certains langages comme Python possèdent des syntaxes particulières dédiées à la création de listes remplies par des compréhensions\\
-Ex.: \{ n | n $\in$ $\mathbb{N}$ $\wedge$ $\exists$ k, k $\in$ $\mathbb{N}$ $\wedge$ 20k = n $\wedge$ 0 $\leq$ n $\leq$ 100 \} \\
+\item Un ensemble peut être défini comme une énumération d'éléments, comme par exemple
+\{0,20,40,60,80,100 \} ou \{Mercure, Vénus, Terre, ..., Neptune\}.
+\item Un ensemble peut également être défini avec un prédicat d'un argument qui est vrai pour les membres.
+On appelle cette définition une {\em compréhension}.
+Certains langages de programmation (comme Python ou Haskell) possèdent des syntaxes particulières dédiées
+à la création de listes remplies par des compréhensions.
+Par exemple: \{ n | n $\in$ $\mathbb{N}$ $\wedge$ $\exists$ k, k $\in$ $\mathbb{N}$ $\wedge$ 20k = n $\wedge$ 0 $\leq$ n $\leq$ 100 \}.
 \end{itemize}
-La définition formelle des ensembles passe par 8 axiomes :
+Les axiomes vont en partie suivre cette intuition.
+Nous introduisons maintenant les axiomes pour les ensembles.
 
 \textbf{Axiomes}
 
 \begin{itemize}
-\item \textbf{Égalité} (1 ère définition) \\
+\item \textbf{Égalité} (première définition) \\
 A = B $\Leftrightarrow$ ($\forall$ x) (x $\in$ A $\Leftrightarrow$ x $\in$ B)\\
 \item \textbf{Ensemble vide} (sans éléments)\\
 $\emptyset$ = \{\} = \{x $\vert$ x $\neq$ x\}\\
@@ -43,26 +49,57 @@ A $\subseteq$ B $\wedge$ B $\subseteq$ C $\Rightarrow$ A $\subseteq$ C \\
     \end{itemize}
 \end{itemize}
 
-\textbf{Spécification formelle des systèmes avec l'approche $\mathbb{Z}$} \\
-\newline
-Cette approche est "Orientée modèle" : On ne donne pas que des équations, mais aussi des structures\\
-\newline
-\underline{Deux concepts en $\mathbb{Z}$}: \\
+\subsection{Spécification formelle avec l'approche Z}
 
-Types:\\
+L'approche Z utilise la logique des prédicat et est basée sur la théorie des ensembles.
+C'est une approche ``orientée modèle''': on ne donne pas que les équations, mais aussi la structure du système.
+Dans cette section nous donnons une introduction à l'approche Z avec un exemple simple
+de gestion de stock dans une bibliothèque.
+
+\subsubsection{Concepts en Z}
+
+Type:\\
 \begin{itemize} 
 \item Types génériques (ensembles): par exemple : Book, Location
-\item Types énumérés: par exemple : \\Statuts := $\underbrace{In}_{Dans \hspace{0.1cm} la \hspace{0.1cm} bibliothèque, \hspace{0.1cm} disponible}$ $\vert$ $\overbrace{Out}^{Prêté}$ $\vert$ $\underbrace{Ref}_{Livre \hspace{0.1cm} de \hspace{0.1cm} référence}$ \\
+\item Types énumérés: par exemple : \\
+Status := $\underbrace{In}_{Dans \hspace{0.1cm} la \hspace{0.1cm} bibliothèque, \hspace{0.1cm} disponible}$ $\vert$ $\overbrace{Out}^{Prêté}$ $\vert$ $\underbrace{Ref}_{Livre \hspace{0.1cm} de \hspace{0.1cm} référence}$ \\
 \end{itemize}
 
-Schémas:\\
+Schéma:\\
 \begin{itemize}
-\item État du système : $\rightarrow$ logique des prédicats
-\item Comportement actions : préconditions et posconditions $\rightarrow$ également logique des prédicats\\
+\item Nom: le nom d'un composant du système
+\item Signature: une énumération des variables utilisées avec leurs types, et une description de la transformation faite par le composant
+\item Prédicat: des formules en logique des prédicats qui décrivent l'état du système
+\item Comportement: voir suivant\\
 \end{itemize}
 
-\underline{Exemple d'un état} \\
-\newline
+Comportement:\\
+\begin{itemize}
+\item Précondition du système: formule en logique des prédicats, ce qui doit être vrai avant pour que le composant soit applicable
+\item Postcondition du système: formule en logique des prédicats, ce qui est vrai après l'application du composant
+\item Transformation de l'état: formule en logique des prédicats, équations entre état initial et terminal du composant
+\end{itemize}
+La définition d'un comportement utilise une sémantique et une syntaxe particulière pour décrire les transformtations d'état.
+Une exécution est une séquence d'états et chaque application d'un composant avant l'exécution d'un pas avec
+un avant et un après:
+\begin{center}
+\includegraphics[scale=0.5]{images/14_sequence.png} 
+\end{center}
+Les variables avant sont écrites normalement (Lib\_Stock) et les variables après sont écrites avec un apostrophe
+(Lib\_Stock').
+Il y a une syntaxe particulière pour décrire ce qui se passe avec les états avant et après:
+\begin{itemize}
+\item $\Delta$ Lib\_Stock: état avant (Lib\_Stock) et après (Lib\_Stock')
+\item $\Xi$ Lib\_Stock: état avant et après s'ils sont identiques
+\end{itemize}
+Les définitions de ces deux symboles sont:
+\begin{itemize}
+\item $\Delta$ Lib\_Stock $\triangleq$ Lib\_Stock $\wedge$ Lib\_Stock'
+\item $\Xi$ Lib\_Stock $\triangleq$ Lib\_Stock $\wedge$ Lib\_Stock' $\mid$ Lib\_Stock=Lib\_Stock'
+\end{itemize}
+
+\subsubsection{Exemple d'un état}
+
 \begin{center}
 \newcolumntype{M}[1]{>{\raggedright}m{#1}}
 	\begin{tabular}{|l|M{7cm}|}
@@ -75,23 +112,9 @@ Schémas:\\
     	\hline
  	\end{tabular}
 \end{center}
-\vspace{10 mm}
-$\mathbb{F}$ Book représente un sous-ensemble fini de l'ensemble Book.\\
-\newline
-\underline{Exemple du comportement}\\
-\begin{itemize}
-\item Il y a un "avant" et un "après"\\
-Les variables "avant", on les écrit normalement (sans rien changer) alors qu'on ajoute une apostrophe aux variables "après" pour pouvoir les distinguer. Ex.: Stock et Stock'
-\item Une exécution est une séquence d'états\\
-\newline
-\begin{center}
-\includegraphics[scale=0.5]{images/14_sequence.png} 
-\end{center}
-\item Notation $\mathbb{Z}$ \\
-$\Delta$ Lib\_Stock $\stackrel{\Delta}{=}$ Lib\_Stock $\wedge$ Lib\_Stock'\\
-$\equiv$ Lib\_Stock $\stackrel{\Delta}{=}$ Lib\_Stock $\wedge$ (Lib\_Stock' $\vert$ Lib\_Stock = Lib\_Stock')\\
-Cette deuxième ligne d'exemple veut dire la même chose, mais dans la condition où Lib\_stock n'a pas changé.\\
-\newline
+La notation $\mathbb{F}$ Book représente un sous-ensemble {\em fini} de l'ensemble Book.\\
+
+\subsubsection{Exemple d'un comportement}
 
 \begin{center}
 \newcolumntype{M}[1]{>{\raggedright}m{#1}}
@@ -99,39 +122,35 @@ Cette deuxième ligne d'exemple veut dire la même chose, mais dans la condition
     	\hline
     	nom & \hspace{2cm} ADD\_STOCKo \tabularnewline
     	\hline
-    	signature & $\Delta$ lib\_stock\\ new ? : $\mathbb{F}$  Book \tabularnewline
+    	signature & $\Delta$ Lib\_Stock\\ new ? : $\mathbb{F}$  Book \tabularnewline
     	\hline
-    	prédicat & new ? $\neq$ $\emptyset$ $\rightarrow$ précondition\\ new ? $\wedge$ stock = $\emptyset$ $\rightarrow$ précondition\\ stock' = stock $\cup$ new ? $\rightarrow$ postcondition\\ on\_loan' = on\_loan $\rightarrow$ postcondition\tabularnewline
+    	prédicat & new ? $\neq$ $\emptyset$ \hfill $\rightarrow$ précondition\\ new ? $\wedge$ stock = $\emptyset$ \hfill $\rightarrow$ précondition\\ stock' = stock $\cup$ new ? \hfill $\rightarrow$ postcondition\\ on\_loan' = on\_loan \hfill $\rightarrow$ postcondition\tabularnewline
     	\hline
  	\end{tabular}
 
 \end{center}
-\vspace{10 mm}
-
-Le "?" signifie qu'il s'agit d'une entrée.\\
+Le "?" signifie qu'il s'agit d'une entrée.
 On peut déduire de ces prédicats que new? sera dans on\_shelf.
+Si la ou les préconditions ne sont pas satisfaites, on aura des erreurs que l'on devra corriger via la gestion d'erreurs.
+Si les préconditions n'échouent jamais, on a affaire à une opération totale.
 
-\item Si la ou les préconditions ne sont pas satisfaites, on aura des erreurs que l'on devra corriger via la gestion d'erreurs. Si les préconditions n'échouent jamais, on a affaire à une opération totale.\\
+\subsubsection{Exemple d'opération totale}
 
-Exemple d'opération totale :\\
+On peut définir une operation totale en ajoutant un traitement d'erreur:
 
-ADD\_STCK = AdDD\_STCKo $\cup$ ERRONEOUS\_NEW\_STOCK
+ADD\_STOCK = ADD\_STOCK${}_0$ $\cup$ ERRONEOUS\_NEW\_STOCK
 
 \begin{center}
 \newcolumntype{M}[1]{>{\raggedright}m{#1}}
-	\begin{tabular}{|l|M{7cm}|}
+	\begin{tabular}{|l|M{8.5cm}|}
     	\hline
     	nom & \hspace{1cm}ERRONEOUS\_NEW\_STOCK \tabularnewline
     	\hline
-    	signature & $\equiv$ lib\_stock\\ new ? : \# Book\\ rep! : Report \tabularnewline
+    	signature & $\Xi$ Lib\_Stock\\ new ? : \# Book\\ rep! : Report \tabularnewline
     	\hline
-    	prédicat & (new ? = $\emptyset$ $\cup$ new ? $\cap$ stock $\wedge$ $\emptyset$) ... $\rightarrow$ préconditions\\ rep ! = "Attention stock problem" \tabularnewline
+    	prédicat & (new ? = $\emptyset$ $\vee$ new ? $\cap$ stock $\neq$ $\emptyset$) \hfill $\rightarrow$ préconditions\\ rep ! = "Attention stock problem" \tabularnewline
     	\hline
  	\end{tabular}
 
 \end{center}
-\vspace{10 mm}
-Le "!" signifie qu'il s'agit d'une sortie.\\
-
-
-\end{itemize}
+Le "!" signifie qu'il s'agit d'une sortie.
