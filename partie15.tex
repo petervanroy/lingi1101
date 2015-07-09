@@ -26,30 +26,32 @@ Les systèmes actuels (le langage Prolog n'est que la partie visible d'un iceber
 sont complètement utilisables pour les applications pratiques:
 ils sont performants et robustes, avec une multitude d'outils pratiques.
 
-Dans ce chapitre, nous allons suivre le raisonnement qui a mené à l'invention
-de Prolog et montrer les bases théoriques de son exécution.
+Dans ce chapitre, nous allons suivre le raisonnement qui a mené à l'invention de Prolog
+et nous allons montrer les bases théoriques de son exécution.
 Principalement, il y a un {\em compris entre expressivité et efficacité}:
 un langage trop expressif devient lent.
 Si le langage permettrait de résoudre la logique des prédicats complètement,
 dans certains cas l'algorithme d'exécution ne pourra rien déduire (parce qu'il est semi-décidable).
 Est-ce que l'on peut trouver un langage moins puissant, qui est assez expressif pour la programmation
 et assex {\em peu} expressif pour avoir une implémentation efficace?
-La réponse ici, comme pour le premier rêve, est un oui très clair.
+La réponse à cette question est un oui très clair.
 Nous allons dans ce chapitre voir comment on obtient cette réponse.
 Il y a trois problèmes majeurs à résoudre:
 \begin{enumerate}
-\item Un prouveur est limité.
+\item {\em Limitations théoriques du prouveur}.
 Il y a des limites théoriques à ce qu'un prouveur peut faire en tant qu'algorithme.
 Nous avons vu une partie de ces limites avec notre algorithme de preuve:
 il est semi-décidable: si $p \models q$ l'algorithme termine mais si $p \not\models q$ il ne termine pas toujours.
 Si l'algorithme prend beaucoup de temps, on doit à un moment l'arrêter et on ne sait rien.
-\item Même si on peut trouver une preuve, le prouveur peut être inefficace (temps exponentiel).
+\item {\em Efficacité du prouveur}.
+Même si on peut trouver une preuve, le prouveur peut être inefficace (temps exponentiel).
 Le prouveur doit avoir une sémantique opérationnelle (= exécution) efficace et prévisible, pour être pratique.
-\item Même si le prouveur est efficace, on doit {\em construire} une réponse et pas seulement dire que la réponse existe.
+\item {\em Construction du résultat}.
+Même si le prouveur est efficace, on doit {\em construire} une réponse et pas seulement dire que la réponse existe.
 Tout programme pratique calcule des résultats et ne dit pas simplement que le résultat existe.
 \end{enumerate}
 
-\subsubsection{Limitations du prouveur}
+\subsubsection{Limitations théoriques du prouveur}
 
 Notre algorithme de preuve a les propriétés suivantes:
 \begin{itemize}
@@ -70,149 +72,199 @@ Pour pallier à ce problème on va faire deux choses:
 \begin{itemize}
 \item Mettre des restrictions sur la forme des axiomes.
 On ne permettra que des axiomes pour lequel l'algorithme sait raisonner efficacement.
-\item 
+Typiquement, on ne permettra dans une clause $C_i$ qu'un littéral sans négation:
+	$$C_i = (\forall X_{1}) ... (\forall X_{n}) A_{1} \wedge A_{2} \wedge ... \wedge A_{n} \Rightarrow A$$
+En forme normale cela donne:
+	$$C_{i} = \neg A_{1} \vee \neg A_{2} \vee ... \vee \neg A_{n} \vee A$$
+Pour prouver $A$, il faut prouver $A_{1}$ et $A_{2}$ et ... et $A_{n}$).
+Le programme tout entier est donc une conjonction de clauses $C_i$:
+	$$C_{1} \wedge C_{2} \wedge ... \wedge C_{k}$$
+\item Permettre au programmeur de donner des heuristiques (des ``indices'') pour aider le prouveur.
+Typiquement, on donne de l'importance à l'ordre des clauses et l'ordre des littéraux dans les clauses.
+Le prouveur essaiera les clauses dans l'ordre et les littéraux dans l'ordre.
+	$$\text{ordre des axiomes}\left \{
+	\begin{array}{l}
+	C_{1} = \neg A_{1} \vee \neg A_{2} \vee ... \vee \neg A_{n} \vee A \\
+	C_{2} = \underbrace{\neg B_{1} \vee \neg B_{2} \vee ... \vee \neg B_{k} \vee A}_{\text{ordre des littéraux dans un axiome}}\\
+	\ldots
+	\end{array}
+	\right.$$
 \end{itemize}
+Le langage Prolog utilise ces deux techniques pour obtenir un langage efficace.
 
 \subsubsection{Construction du résultat}
 
+Notre algorithme de preuve construit de nouvelles clauses à partir des anciennes.
+La résolution utilise l'unification, ce qui instantie les variables.
+Pour obtenir un résultat final d'une reqûete, il suffit de garder la reqûete
+pendant le calcul et de l'instantier avec les mêmes substitutions utilisées
+par la résolution.
+À la fin du calcul, les variables de la reqûete contiendront alors le résultat.
 
-\paragraph{}
-Mais pour arriver à cela, il y a quelques problèmes à surmonter:
-\begin{enumerate}\renewcommand {\theenumi }{\alph {enumi}}
-	\item un prouveur est limité :\\
-		vérité = $ p \models q $ (= $ q $ est vrai dans tous les modèles de $ p $)\\
-		preuve = $ p  \vdash q $ \\
-		$ p \models q \Rightarrow p \vdash q $ (= Si c’est vrai dans tous les modèles, on peut trouver une preuve)\\
-		Si $ p \models q $ alors algorithme se terminera. Cependant, on ne peut trouver de preuve que pour des choses vraies dans tous les modèles (en pratique il est impossible d'analyser l'ensemble des modèles, on ne prend qu'une partie des modèles ce qui limite le programme).
-		
-		\item Même si l'on peut trouver une preuve, le prouveur est peut-être inefficace (utilise trop de temps ou de mémoire) ou imprévisible. $ \to $ On ne peut pas raisonner sur l'efficacité du prouveur.
-		
-		\item La déduction faite par le prouveur doit être constructive  
-\end{enumerate}
+\subsubsection{Bref historique}
 
-		Si le prouveur affirme : $ (\exists X) P(X) $  alors le prouveur doit donner une valeur de x (c'est quoi $ x $).
-
-
-
-Il faut construire un résultat.
-
-\underline{Pour résoudre ces problèmes}
 \begin{enumerate}
-	\item Restrictions sur la forme des axiomes.\\
-	typiquement : 
-	$$(\forall X_{1}) ... (\forall X_{n}) A_{1} \wedge A_{2} \wedge ... \wedge A_{n} \Rightarrow A$$
-	$$C_{i} = \neg A_{1} \vee \neg A_{2} \vee ... \vee \neg A_{n} \vee A$$
-	Il n’y a qu’un seul littéral sans négation. (Pour prouver A, il faut prouver $A_{1}$; $A_{2}$, ..., $A_{n}$).\\
-	$C_{i}$ est une clause. Le programme tout entier est une série de clauses :
-	$$C_{1} \wedge C_{2} \wedge ... \wedge C_{k}$$
-	\item Le programmeur va aider le prouveur.
-	Par exemple : il faut commencer par prouver $A_{1}$ puis $A_{2}$... dans cet ordre là.\\
-	Le programmeur donnera des heuristiques, des méthodes de calcul. Attention : ces heuristiques ne changent pas la sémantique logique du programme. Elles ont seulement un effet sur l'efficacité !
-	$$\text{ordre des axiomes}\left \{
-		\begin{array}{l}
-		C_{1} = \neg A_{1} \vee \neg A_{2} \vee ... \vee A_{n} \vee A \\
-	
-		C_{2} = \underbrace{\neg B_{1} \vee \neg B_{2} \vee ... \vee B_{k} \vee A}_{\text{ordre des littéraux dans un axiome}}
-		\end{array}
-		\right.$$
-	
+	\item 1965 : 	La règle de résolution est inventée par Alan Robinson.
+On commence à voir comment la logique peut devenir la base d'un langage de programmation.
+	\item 1972 :	Invention du langage Prolog et implémentation de la première interprète
+par Alain Colmerauer, Robert Kowalski et Philippe Roussel. 
+On démontre que Prolog est un langage utile avec lequel on peut écrire des vrais programmes
+avec les axiomes de logique.
+Ils inventent le nom Prolog qui vient de {\bf Pro}grammation {\bf Log}ique.
+        \item 1977 :    Premier compilateur Prolog par David H. D. Warren.
+Un énorme pas en avant, on démontre qu'une implémentation de Prolog peut être compétitif
+avec les implémentations des autres langages symboliques comme le Lisp.
+        \item 1990 :    Premier compilateur Prolog compétitif avec C par Peter Van Roy et Andrew Taylor.
+On démontre qu'il n'y a rien dans le langage Prolog qui empêche une efficacité complète.
 \end{enumerate}
+Le succès de Prolog vient du fait qu'il fait
+un compromis très intéressant par rapport à la tension entre efficacité et expressivité.
+Aujourd'hui, on peut faire une implémentation extrêmement efficace de Prolog, qui est même compétitif avec
+l'implémentation d'un langage de très bas niveau comme le C.
 
-Le langage Prolog utilise ces deux ordres.
+\section{Introduction au langage Prolog}
 
-\underline{Bref historique :}
-\begin{enumerate}
-	\item 1965 : 	La règle de résolution a été inventée par A. Robinson
-	\item 1972 :	Invention du langage Prolog / premier interprète (de Prolog) par A. Calmerauer, R. Kowalski et Ph. Roussel. 
-Ils voulaient faire un langage de programmation logique, et connaissaient les différentes formes de logique ainsi que la résolution. Ils ont donc inventé un langage très simple qu'ils ont appelé Prolog (pour Programmation Logique).  Il s'avère que ce langage a un compromis très intéressant par rapport à la tension entre efficacité et expressivité.
-Aujourd'hui, on peut faire une implémentation extrêmement efficace de Prolog. Il est extrêmement expressif, ce qui permet de faire des programmes complexes. C'est un langage à part entière.
-\end{enumerate}
-
-\section{Introduction à Prolog}
-
+Un programme en Prolog est un ensemble de clauses (règles; axiomes):
 En Prolog, on a des clauses (règles):
 	\begin{equation}
-		 A1 \leftarrow B1, … , Bn
+		 A_1 \leftarrow B_1, … , B_n
 	\end{equation}
-	 (On peut prouver $ A $ en prouvant $ B1 $ jusqu’à $ Bn $. Remarque :$ \leftarrow $ou :- )
-	 
+L'intuition d'une clause est que l'on peut prouver $A$ en prouvant $B_1$ jusqu'à $B_n$.
+En transformant à la forme normale, cette clause devient d'abord:
 	 \begin{equation}
 	 	\neg (B_{1} \wedge ... \wedge B_{n}) \vee A_{1}
 	 \end{equation}
+et ensuite:
 	 \begin{equation}
 	 	 (\neg B_{1} \vee \neg B_{2} \vee ... \vee \neg B_{n} \vee A_{1})
 	 \end{equation}
-	 
-	 Programme = ensemble de clauses.
-	 
-	 \underline{Exemple d’un petit programme en Prolog:} (extrait du livre « The Art of Prolog » par L. Sterling et E. Shapine)
-	 
-	 Règle : $ grandpere(x, z) \leftarrow pere(x,y), pere(y,z) $. ($x$, $y$,… sont des variables. En Prolog, elles sont souvent en majuscule)
-	 
-	 \begin{table}[h]
-	 	\begin{tabular}{ll}
-	 		Faits: & $pere(terach, abraham)$ (terach, abraham,… sont des constantes) \\
-	 		& $pere(abraham, isaac)$\\
-	 		& $pere(haram, lot)$ \\
-	 		& $…$ \\\\
-	 		$ \to $ & Syntaxe clausale: $pere(terach,abraham) \wedge pere(abraham,isaac) \wedge  $ \\
-	 		& $ pere(haram,lot) \wedge (\neg pere(x,y) \vee \neg pere(y,z) \vee grandpere(x,z))      $                                                         
-	 	\end{tabular}
-	 \end{table}
-	 
-	Il existe une corrélation évidente entre Prolog et les bases de données. Elles ont été inventées quasi au même moment et aujourd'hui Prolog est utilisé comme une sémantique pour les bases de données déductibles. Ici, on peut avoir une relation avec deux colonnes qui auraient l'argument père. le grand-père serait une combinaison de ces deux relations.
-	 
-	 Prolog peut être vu comme une sorte de base de données relationnelle mais beaucoup plus puissante : on peut faire des programmes qui sont plus que des simples requêtes, avec des calculs beaucoup plus complexes.
-	 
+Avant d'expliquer l'exécution de Prolog, nous allons montrer un exemple d'un programme.
+
+\subsection{Exemple de programme Prolog}
+
+Écrire un programme en Prolog, c'est formuler les algorithmes avec des axiomes en logique.
+En voici un premier exemple, extrait du livre « The Art of Prolog » par L. Sterling et E. Shapiro \cite{pro}.
+Le voici en syntaxe Prolog:
+\begin{verbatim}
+   grandpere(X,Z) :- pere(X,Y), pere(Y,Z).
+
+   pere(terach, abraham).
+   pere(abraham, isaac).
+   pere(haram, lot).
+\end{verbatim}
+Cet exemple utilise la syntaxe usuelle de Prolog introduit par David Warren.
+Les noms des variables sont en majuscule et
+le symbole $\leftarrow$ est représenté par \verb+:-+.
+Cette syntaxe représente la forme normale suivante:
+\begin{equation}
+\begin{array}{l}
+(\forall x) (\forall y) (\forall z)\ \mathrm{grandpere}(x,z) \vee \neg \mathrm{pere}(x,y) \vee \neg \mathrm{pere}(y,z) \\
+\wedge \\
+\mathrm{pere}(\mathrm{terach},\mathrm{abraham}) \\
+\wedge \\
+\mathrm{pere}(\mathrm{abraham},\mathrm{isaac}) \\
+\wedge \\
+\mathrm{pere}(\mathrm{haram},\mathrm{lot})
+\end{array}
+\end{equation}
+En regardant ce programme, il est claire qu'il y a une correspondance entre Prolog et les bases de données relationnelles.
+Un programme Prolog peut être vu comme une base de données relationnelle augmentée avec la déduction.
+Le modèle relationnel a été inventé à peu près au même moment que Prolog par E. F. Codd.
+Par la suite
+il y a eu beaucoup d'influence mutuelle entre la programmation logique et les bases de données.
+En particulier, une forme simplifiée de Prolog sans symboles de fonction, appelée Datalog,
+est utilisée jusqu'à aujourd'hui pour modéliser la sémantique
+des bases de données relationnelles.
+
 \section{Algorithme d'exécution de Prolog}
 
-Dans la version de l’algorithme de preuve par résolution, l’ensemble S grandit (ce qui n’est pas très efficace).
+L'algorithme d'exécution de Prolog est basé sur l'algorithme de preuve de la logique des prédicats,
+modifié avec les techniques nécessaires pour obtenir l'efficacité et pour construire les résultats.
+Dans la version originale de cet algorithme, l'ensemble $S$ grandit toujours, ce qui n'est pas très efficace.
+Pour augmenter l'efficacité, on va remplacer $S$ par une seule clause $r$ qui s'appelle la {\em résolvante}.
+Pendant l'exécution de l'algorithme, on va utiliser la résolution sur $r$ pour la modifier.
+On ne va donc jamais augmenter le nombre de clauses.
+On ne garde que trois choses:
+les axiomes de base (le programme $P=\{Ax_1, ..., Ax_n\}$),
+la résolvante $r$
+et la reqûete originale $G$ (le ``{\em but}'' ou {\em goal})
+qui correspond au théorème à prouver.
 
-L’idée :
+\subsection{Explication de l'algorithme}
+
+L'exécution de l'algorithme se fait comme ceci:
 \begin{itemize}
-	\item On commence par mettre le but (G) que l’on veut prouver dans r (sans négation).
-	\item Ensuite, jusqu’à ce que r soit vide, on prend le premier littéral dans $r(A_{1})$.
-	\item Puis, on parcourt un à un les axiomes de P (P est le programme, la base de faits) pour trouver une clause $Ax_{i}$ unifiable avec $A_{1}$ au moyen de $\sigma(u.p.g)$
-	\begin{itemize}
-		\item Si on trouve une telle clause, on ajoute à r les littéraux de $Ax_{i}$ après unification avec $A_{1}$ (et on recommence au début).
-		\item Si on ne trouve pas de clause unifiable, on revient sur le dernier choix (Par exemple, pour un $A_{1}$ qui aurait plusieurs clauses unifiables, on a dû en choisir une. Et bien, on retourne en arrière pour en choisir une autre, sans oublier de modifier r. (En effet, il faut éliminer les résultats de toutes les unifications qui ont été réalisées entre le moment où le point de choix a été mémorisé et le moment du retour en arrière.))
-		\item Si on épuise tous les choix sans que r soit vide alors nous sommes en cas d’échec.
-	\end{itemize}
-	\item Lorsque le programme s’arrête, si r est vide, on a un résultat.
+\item On commence par mettre le but $G$ que l’on veut prouver dans $r$ (sans négation).
+\item Ensuite, jusqu’à ce que $r$ soit vide, on prend le premier littéral dans $r$ (par exemple, $A_1$).
+\item Puis, on parcourt un à un les axiomes de $P$
+pour trouver une clause $Ax_{i}$ unifiable avec $A_{1}$ au moyen de l'upg $\sigma$.
+
+\begin{itemize}
+\item Si on trouve une telle clause, on ajoute à $r$ les littéraux de $Ax_{i}$ après unification
+avec $A_{1}$, et on continue la boucle dès le début.
+\item Si on ne trouve pas de clause unifiable, on revient sur le dernier choix.
+Par exemple, pour un littéral $A_{1}$ qui aurait plusieurs clauses unifiables dans $P$, on a dû en choisir une.
+On choisit la clause suivante, sans oublier d'abord de remettre $r$ dans sa forme originale.
+\item Si on épuise tous les choix sans que $r$ soit vide alors nous sommes en cas d’échec.
+La reqûete $G$ ne peut pas être prouvée.
 \end{itemize}
 
-Programme  : $P={Ax_{1}, ..., Ax_{n}}$
+\item L'exécution s'arrête quand $r$ est vide ou quand il n'y a plus de choix à faire.
+Si $r$ est vide, on a un résultat qui se voit dans $G$.
+\item Il est possible aussi d'avoir une boucle infinie (l'algorithme ne s'arrête jamais).
+Ceci est considéré comme une erreur: le programmeur doit veiller à définir les axiomes
+pour que cela n'arrive pas.
+\end{itemize}
 
-Un « but » (un goal, une « requête ») G ($\simeq$ théorie)
-
+\subsection{Définition de l'algorithme}
 
 \begin{algorithm}[H]
-$r := <G>$ … résolvante (une séquence de littéraux $\rightarrow$ $r= <A_{1},A_{2},...,A_{m}>$  Il n’y a qu’un seul r.)\\
+$r := <G>$ … résolvante initiale (séquence initiale contient $G$) \\
+… pendant l'exécution $r= <A_{1},A_{2},...,A_{m}>$ (séquence de littéraux)\\
 \While{r est non vide}{
 	\begin{itemize}
-		\item Choisir un littéral $A_{1}$ dans r (on prend le premier littéral)
-		\item Choisir une clause $Ax_{1}=(A \leftarrow B_{1},...,B_{k})$ dans P. (d’abord on prend la première clause, puis la suivante jusqu’à ce qu’on trouve une clause unifiable avec $A_{1}$. Si aucune clause n’est unifiable on revient sur le dernier choix (backtrack))
-		\item Nouvelle résolvante $:= <B_{1},..., B_{k}, A_{2},...,A_{m}> \sigma$
-		\item $G^{'} = G \sigma$
+		\item Choisir le premier littéral $A_{1}$ dans $r$.
+		\item Choisir une clause $Ax_{1}=(A \leftarrow B_{1},...,B_{k})$ dans $P$. D’abord on prend la première clause, puis la suivante jusqu’à ce qu’on trouve une clause unifiable avec $A_{1}$. Si aucune clause n’est unifiable on revient sur le dernier choix (backtrack).
+		\item Nouvelle résolvante $r := <B_{1},..., B_{k}, A_{2},...,A_{m}> \sigma$
+		\item Nouveau but $G := G \sigma$
 	\end{itemize}
 }
-\If{r est vide}{le résultat est le dernier $G^{'}$}
-\If{on épuise les choix sans que r soit vide}{le résultat est NON. ( On n’a pas prouvé G). (Attention : G est peut-être vrai, mais les heuristiques ne suffisent pas pour le prouver.)}
+\If{r est vide}{Le résultat est OUI et le résultat est le tout dernier $G$.
+Si on le souhaite, on peut faire un retour en arrière pour que l'algorithm calcule d'autres solutions.}
+\If{On épuise les choix sans que $r$ soit vide}{Le résultat est NON. On n’a pas prouvé $G$. (Attention : $G$ est peut-être vrai, mais les heuristiques ne suffisent pas pour le prouver.)}
 \end{algorithm}
 
-On peut également avoir une boucle infinie (l’algorithme est non déterministe).
+\subsection{Gestion des choix}
 
-Dans l'algorithme, la condition de sortie "Si il n'y a plus de clauses unifiables" n'est pas explicité. La condition de sortie du while étant juste "r est vide". 
-Cependant, lorsque qu'il n'y a plus de clause unifiable, la boucle est interrompue.  Cette interruption est causé par les retours en arrière s'il n'y a plus de clauses unifiables (ce qui s'appelle un échec - "failure"). 
-Chaque fois que l'on choisit une clause à unifier avec le début de la résolvante, cela marque un endroit où l'on peut faire un retour en arrière. 
+Il est important de comprendre comment cet algorithme gère les choix des clauses.
+L'algorithm fait parfois du retour en arrière (qui s'appelle {\em backtrack} en anglais) pour changer un choix.
+Chaque fois que l'on choisit une clause à unifier avec le début de la résolvante,
+cela marque un endroit où l'on peut faire un retour en arrière. 
+Pour faire le retour en arrière,
+il remet ses structures de données internes ($r$ et $G$) à l'état avant le choix
+et il recommence son exécution à l'endroit du dernier choix.
+S'il n'y a plus de clauses possibles à ce choix,
+on revient à l'avant-dernier choix, et ainsi de suite.
+La gestion des choix est donc {\em récursive}.
+Il y a donc une {\em pile} de choix qui est gérée par l'algorithme.
+Pour simplifier la présentation, la gestion de cette pile n'est pas montrée dans la définition de l'algorithme.
 
-Pendant l'exécution de la boucle, il y a donc une *séquence* de choix qui sont faits. Si au dernier choix il n'y a plus de clauses unifiables, on retourne à l'avant-dernier choix et on continue avec un nouveau choix. 
+Si on arrive au tout premier choix qui a été fait quand on a commencé la boucle et il n'y a plus de clauses unifiables,
+alors on sort de la boucle avec une résolvante qui n'est pas vide. Et dans ce cas l'algorithme n'a pas trouvé de solution. 
+Il y a donc deux manières de sortir de la boucle: (1) $r$ est vide, et (2) il n'y a plus de choix.
+La première manière correspond à une exécution réussie.
+La deuxième manière correspond à un échec (``failure'').
+Attention, cet échec fait partie de l'algorithme d'exécution, il n'y a rien d'anormal à ce que l'algorithme sort avec un échec.
 
-Cela se fait récursivement: si à l'avant-dernier choix il n'y a plus de choix qui donne une solution, on retourne à l'avant-avant-dernier choix. Et ainsi de suite. 
+Une conséquence intéressante de la gestion des choix est que
+l'algorithme permet à un programme de trouver plusieurs solutions, s'il existe plusieurs possibilités
+de solution pour $G$ dans le programme $P$.
+Dans l'exemple $\mathrm{append}(l,m,\mathrm{cons}(1,\mathrm{nil}))$ plus bas,
+on voit comment cela marche en pratique.
+Pour cet exemple, on trouve une première solution avec $l=\mathrm{nil}$ et $m=\mathrm{cons}(1,\mathrm{nil})$ et une deuxième solution
+avec $l=\mathrm{cons}(1,\mathrm{nil})$ et $m=\mathrm{nil}$).
+Pour obtenir plusieurs solutions, il suffit après que l'algorithm à trouvé une solution,
+de demander un retour en arrière, c'est-à-dire, de revenir sur le dernier choix et continuer l'exécution.
+Ainsi, l'algorithme trouvera plusieurs solutions si la reqûete $G$ à plusieurs solutions avec le programme $P$.
+C'est une propriété très puissante de la programmation logique qui n'existe pas dans la programmation traditionnelle.
 
-Si on arrive au tout premier choix qui a été fait quand on a commencé la boucle et il n'y a plus de clauses unifiables, alors on sort de la boucle avec une résolvante qui n'est pas vide. Et dans ce cas l'algorithme n'a pas trouvé de solution. 
-
-Toute cette gestion de choix et de retours en arrière n'est pas codée explicitement dans l'algorithme, sinon cela devient incompréhensible. Il est plus facile de comprendre l'algorithme tel quel, et supposez qu'il y a une gestion des choix qui est imposée dessus. Chaque fois que l'on fait un choix, on sauvegarde l'état actuel de l'exécution dans la séquence de choix. Un retour en arrière fera une restoration de cet état (qui contient toutes les anciennes valeurs des variables utilisées dans la boucle y compris r et G).
-
-
-Dans l'exemple append(l,m,cons(1,nil)) plus bas, on voit comment cela marche en pratique: cela permet effectivement d'obtenir plusieurs solutions (pour cet exemple, une solution avec l=nil et m=cons(1,nil) et une autre solution avec l=cons(1,nil) et m=nil).

@@ -1,24 +1,35 @@
 \section{Exemples de programmes Prolog}
 
-\subsection{Exemple 1}
+Maintenant que nous avons vu l'algorithm d'exécution de Prolog,
+regardons quelques programmes pour voir comment on peut programmer en Prolog.
+L'idée de base est qu'un programme est un ensemble d'axiomes qui énoncent des propriétés vraies
+des algorithmes que l'on veut programmer, tout en permettant l'exécution de procéder de façon efficace.
+La programmation de Prolog est donc l'art de faire une spécification logique qui possède une exécution efficace.
+L'invention de Prolog a donc donné naissance à un style de programmation nouveau.
+Dans cette section nous ne pouvons montrer qu'une toute petite partie de ce style,
+mais vous êtes encouragés à explorer d'autres programmes en Prolog et à télécharger
+un des nombreux systèmes Prolog pour les exécuter.
+
+\subsection{Exemple 1: Factorielle}
 
 \subsubsection{Programme (code Prolog)}
 Ce petit programme permet de calculer la factorielle d'un nombre. Il s'agit de clauses exprimant des faits, des règles et des questions. Le code commence par un fait: 0!==1. Ensuite, il définit une clause pour les factorielles de façon généralisée. Attention, les virgules et les points sont importants. Les virgules sont les séparateurs entre les littéraux dits négatifs tandis que le point marque la fermeture de la clause.
 \begin{verbatim}
 fact(0,1).
 fact(N,F) :- N>0, 
-			 N1 is N-1,
-			 fact(N1,F1), 
-			 F is N* F1 .
+        N1 is N-1,
+        fact(N1,F1), 
+        F is N* F1 .
 \end{verbatim}
+
 \subsubsection{Requête} Nous allons maintenant exécuter le programme fact afin de trouver la factorielle de 5 et stocker la réponse dans la variable F. Le prompt Prolog est représenté par " |?- " et la sortie standard par "->". Les commentaires sont après les "\%" ou entre "/* */". Il ne faut pas oublier le point à la fin de la requête.
 \begin{verbatim} 
-|?- fact (5,F). %requête
+|?- fact(5,F). % requête
 -> F=120 % réponse
 \end{verbatim}
 
 \subsubsection{Forme clausale}
-Le programme réécrit sous forme clausale. 
+Voici le programme réécrit sous forme clausale. 
 \begin{align*}
 fact(0,1) \\
  \wedge & \\
@@ -28,8 +39,6 @@ fact(0,1) \\
 &	\vee \neg times(f, n, f1) \\
 &	\vee fact(n, f) ) \\
 \end{align*}
-
-
 
 \subsubsection{Exécution} 
 Le but de l'exécution est de prouver que $G \equiv fact(5, r)$. Pour y arriver, Prolog va faire une suite de substitutions $\sigma$ afin de vérifier les affirmations contenues dans r. La substitution finale contiendra le résultat final.
@@ -43,17 +52,18 @@ Le but de l'exécution est de prouver que $G \equiv fact(5, r)$. Pour y arriver,
 & \% (2) \\
 & r= < minus(n1, 5, 1), fact(n1, f1), times(r, 5, f1) > \\
 & \sigma'= \{ (n1, 4) \cup \sigma\} \\
-& r= < fact (4, f1), times(r, 5, f1) > \\
+& r= < fact(4, f1), times(r, 5, f1) > \\
 & [...]\\
 & \sigma_{res} = \{(r,120),...\} 
 \end{align*}
 (1) avec clause 2\\
 (2) a>b existe dans le système prédéfini -> true\\
 
-\subsection{Exemple 2}
+\subsection{Exemple 2: Append de deux listes}
 
 Le but de cet exemple est de faire un "append" de deux listes:\\
-append(L1, L2, L2)
+append([1], [2], L)
+
 \paragraph{Prolog:}
 \begin{itemize}
 \item append ( [] , L , L)
@@ -87,7 +97,7 @@ l=con(1,cons(1,nil))
 
 \end{itemize}
 
-\subsection{Exemple 3}
+\subsection{Exemple 3: Append avec plusieurs solutions}
 
 Intéressons-nous à la manière dont prolog exécute la requête \textbf{|?- append (L1,L2,[1])} en nous basant sur la syntaxe définie lors de l'exemple 2.\\
 Pour information, la fonction cons prend comme premier argument une valeur et comme second argument une liste. Elle place le premier argument en tête du second argument.\\
