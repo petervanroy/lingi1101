@@ -156,7 +156,7 @@ Le voici en syntaxe Prolog:
 \end{verbatim}
 Cet exemple utilise la syntaxe usuelle de Prolog introduit par David Warren.
 Les noms des variables sont en majuscule et
-le symbole $\leftarrow$ est représenté par \verb+:-+.
+le symbole $\leftarrow$ est représenté par les deux caractères \verb+:-+.
 Cette syntaxe représente la forme normale suivante:
 \begin{equation}
 \begin{array}{l}
@@ -221,7 +221,7 @@ pour que cela n'arrive pas.
 \subsection{Définition de l'algorithme}
 
 \begin{algorithm}[H]
-$r := <G>$ … résolvante initiale (séquence initiale contient $G$) \\
+$r :=\ <G>$ … résolvante initiale (séquence initiale contient $G$) \\
 … pendant l'exécution $r= <A_{1},A_{2},...,A_{m}>$ (séquence de littéraux)\\
 \While{r est non vide}{
 	\begin{itemize}
@@ -231,7 +231,7 @@ $r := <G>$ … résolvante initiale (séquence initiale contient $G$) \\
 		\item Nouveau but $G := G \sigma$
 	\end{itemize}
 }
-\If{r est vide}{Le résultat est OUI et le résultat est le tout dernier $G$.
+\If{r est vide}{Le résultat est OUI. Le résultat de l'exécution est le tout dernier $G$.
 Si on le souhaite, on peut faire un retour en arrière pour que l'algorithm calcule d'autres solutions.}
 \If{On épuise les choix sans que $r$ soit vide}{Le résultat est NON. On n’a pas prouvé $G$. (Attention : $G$ est peut-être vrai, mais les heuristiques ne suffisent pas pour le prouver.)}
 \end{algorithm}
@@ -269,4 +269,304 @@ Pour obtenir plusieurs solutions, il suffit après que l'algorithm à trouvé un
 de demander un retour en arrière, c'est-à-dire, de revenir sur le dernier choix et continuer l'exécution.
 Ainsi, l'algorithme trouvera plusieurs solutions si la reqûete $G$ à plusieurs solutions avec le programme $P$.
 C'est une propriété très puissante de la programmation logique qui n'existe pas dans la programmation traditionnelle.
+
+% Ancienne partie 16
+
+\section{Exemples de programmes Prolog}
+
+Maintenant que nous avons vu l'algorithm d'exécution de Prolog,
+regardons quelques programmes pour voir comment on peut programmer en Prolog.
+L'idée de base est qu'un programme est un ensemble d'axiomes qui énoncent des propriétés vraies
+des algorithmes que l'on veut programmer, tout en permettant l'exécution de procéder de façon efficace.
+
+L'invention de Prolog a donné naissance à un nouveau style de programmation.
+La programmation de Prolog est l'art de faire une spécification logique qui possède en même temps une exécution efficace.
+Dans cette section nous ne pouvons montrer qu'une toute petite partie de ce style,
+mais vous êtes encouragés à explorer d'autres programmes en Prolog et à télécharger
+un des nombreux systèmes Prolog pour les exécuter.
+
+\subsection{Exemple 1: Factorielle}
+
+Ce premier exemple montre comment on peut faire des calculs avec des nombres en Prolog.
+
+\subsubsection{Programme en Prolog}
+
+Ce programme permet de calculer la factorielle d'un nombre.
+La définition est un ensemble de clauses exprimant des propriétés de la fonction factorielle.
+Le code commence par un fait: 0!==1.
+Ensuite, il définit une clause pour les factorielles de façon généralisée.
+Attention, les virgules et les points sont importants.
+Les virgules sont les séparateurs entre les littéraux dits négatifs tandis que le point marque la fermeture de la clause.
+\begin{verbatim}
+fact(0,1).
+fact(N,F) :- N>0, 
+        N1 is N-1,
+        fact(N1,F1), 
+        F is N*F1.
+\end{verbatim}
+Pour les mordus des langages de programmation, nous mentionnons que ce programme n'est pas
+récursif terminal.  Comme pour la programmation fonctionnelle, il est avantageux aussi pour un prédicat
+en programmation logique
+d'être récursif terminal, parce que la taille de la pile n'augmentera pas pendant l'exécution.
+Ceci ne se voit pas avec une interprète Prolog, comme notre algorithme, mais devient important pour
+un compilateur Prolog.
+Il est tout à fait possible d'écrire une autre définition de factorielle qui est récursive terminale
+et qui garde la sémantique logique.
+
+\subsubsection{Requête}
+
+Nous allons maintenant exécuter le programme fact afin de trouver la factorielle de 5 et stocker la réponse dans la variable F.
+Le prompt Prolog est représenté par ``\verb+|?-+'' et la sortie standard par ``\verb+->+''.
+En Prolog on peut mettre des commentaires après les ``\verb+%+'' ou entre ``\verb+/* */+''.
+Il ne faut pas oublier le point à la fin de la requête.
+\begin{verbatim} 
+|?- fact(5,F). % Requête de l'utilisateur
+-> F=120       % Réponse du système
+\end{verbatim}
+
+\subsubsection{Forme clausale}
+Voici le programme écrit en forme clausale:
+\begin{equation}
+\begin{array}{l}
+\mathrm{fact}(0,1) \\
+\wedge \\
+(\forall n) (\forall f) (\forall n_1) (\forall f_1) \\
+\quad \quad \mathrm{fact}(n,f) \vee \neg(n>0) \vee \neg \mathrm{minus}(n_1,n,1) \vee \\
+\quad \quad \neg \mathrm{fact}(n_1,f_1) \vee \neg \mathrm{times}(f,n,f_1)
+\end{array}
+\end{equation}
+Les trois prédicats mathématiques font partie du système et sont prédéfinis:
+$a>b$ est vrai si $a>b$,
+$\mathrm{minus}(a,b,c)$ est vrai si $a=b-c$,
+$\mathrm{times}(a,b,c)$ est vrai si $a=b \times c$.
+
+\subsubsection{Exécution} 
+
+Le but de l'exécution est de prouver la requête $G$ avec $G = \mathrm{fact}(5, r)$.
+Pour y arriver, Prolog construira au fur et à mesure de l'exécution
+une substitution finale $\sigma_{res}$ en faisant les résolutions qui feront évoluer $r$.
+La substitution finale, appliquée à $G$, donnera le résultat final.
+
+\begin{equation}
+\begin{array}{l}
+\mathit{Requête\ initiale:}\\
+r =\ < \mathrm{fact}(5, r) > \\
+\mathit{Résolution\ 1:} \\
+\sigma = \{ (n, 5), (f, r) \} \\
+r =\ < (5>0), \mathrm{minus}(n_1, 5, 1), \mathrm{fact}(n_1, f_1), \mathrm{times}(r, 5, f_1) > \\
+\mathit{Résolution\ 2:} \\
+\sigma'=\sigma \\
+r =\ < \mathrm{minus}(n_1, 5, 1), \mathrm{fact}(n_1, f_1), \mathrm{times}(r, 5, f_1) > \\
+\mathit{Résolution\ 3:} \\
+\sigma''= \sigma' \cup \{ (n_1, 4) \} \\
+r =\ < \mathrm{fact}(4, f_1), \mathrm{times}(r, 5, f_1) > \\
+\ldots \\
+\sigma_{res} = \{(r,120), \ldots\} \\
+r =\ <\ >
+\end{array}
+\end{equation}
+Le résultat final est donc $\mathrm{fact}(5, 120)$, ce qui donne en syntaxe Prolog \verb+fact(5,120)+.
+
+\subsection{Exemple 2: Append de deux listes}
+
+Cet exemple montre comment on peut faire des calculs avec des structures de données en Prolog.
+Le but de ce programme est de faire la concaténation de deux listes.
+
+\subsubsection{Programme en Prolog}
+
+\begin{verbatim}
+append([],L,L).
+append([X|L1],L2,[X|L3]) :- append(L1,L2,L3).
+\end{verbatim}
+
+\subsubsection{Requête}
+
+La requête initiale $G = \mathrm{append}(\mathrm{cons}(1,\mathrm{nil}), \mathrm{cons}(2,\mathrm{nil}), l)$.
+On veut faire la concaténation des listes \verb+[1]+ et \verb+[2]+ (en syntaxe Prolog).
+La paire de liste, écrite \verb+[X|L1]+ en Prolog, s'écrit $\mathrm{cons}(x,l_1)$ en syntaxe logique.
+
+\begin{verbatim}
+|?- append([1], [2], L).
+-> L=[1,2]
+\end{verbatim}
+
+\subsubsection{Forme clausale}
+
+Voici le programme écrit en forme clausale:
+\begin{equation}
+\begin{array}{l}
+\mathrm{append}(\mathrm{nil},l',l') \\
+\wedge\\
+(\forall l_1) (\forall l_2) (\forall l_3) (\forall x) \\
+\quad \quad \mathrm{append}(\mathrm{cons}(x,l_1),l_2,\mathrm{cons}(x,l_3)) \vee \neg\mathrm{append}(l_1,l_2,l_3)
+\end{array}
+\end{equation}
+
+\subsubsection{Exécution}
+
+La première valeur de $r$ contient la requête initiale.
+\begin{equation}
+\begin{array}{l}
+\mathit{Requête\ initiale:} \\
+r =\ < \mathrm{append}(\mathrm{cons}(1,\mathrm{nil}), \mathrm{cons}(2,\mathrm{nil}), l)> \\
+\mathit{Résolution\ 1:} \\
+\sigma = \{(x,1), (l_1,\mathrm{nil}), (l_2,\mathrm{cons}(2,\mathrm{nil})), (l,\mathrm{cons}(x,l_3))\} \\
+r =\ < \mathrm{append}(\mathrm{nil}, \mathrm{cons}(2,\mathrm{nil}), l_3) > \\
+\mathit{Résolution\ 2:} \\
+\sigma_{res} = \sigma \cup \{ (l',\mathrm{cons}(2,\mathrm{nil})), (l_3,l') \} \\
+r =\ <\ > \\
+\end{array}
+\end{equation}
+Expliquons en plus de détail ce qui se passe lors de résolution 1:
+\begin{quote}
+Il y a une unification entre le premier élément de $r$,
+c'est-à-dire $\mathrm{append}(\mathrm{cons}(1,\mathrm{nil}), \mathrm{cons}(2,\mathrm{nil}), l)$,
+et la tête d'une clause (un littéral positif) dans le programme,
+c'est-à-dire ici $\mathrm{append}(\mathrm{cons}(x,l_1),l_2,\mathrm{cons}(x,l_3))$.
+Cette unification donne lieu à une substitution: une liste de paires (variable,terme)
+nécessaire pour que les deux littéraux deviennent égaux.
+C'est la substitution $\sigma$.
+La nouvelle résolvante après la résolution 1 est le littéral négatif de la clause,
+c'est-à-dire $\mathrm{append}(l_1,l_2,l_3)$, où l'on a remplacé les variables par leurs substitutions.
+C'est la valeur de $r$ juste en dessous de $\sigma$.
+\end{quote}
+Après la résolution 2,
+l'exécution s'arrête avec réussite parce que $r$ est vide.
+Le résultat final est:
+\begin{equation}
+\begin{array}{l}
+\sigma_{res} = \{(x,1), (l_1,\mathrm{nil}), (l_2,\mathrm{cons}(2,\mathrm{nil})), (l,\mathrm{cons}(x,l_3)), (l',\mathrm{cons}(2,\mathrm{nil})), (l_3,l') \} \\
+G = \mathrm{append}(\mathrm{cons}(1,\mathrm{nil}), \mathrm{cons}(2,\mathrm{nil}), \mathrm{cons}(1,\mathrm{cons}(2,\mathrm{nil})))
+\end{array}
+\end{equation}
+Pour trouver le résultat $G$ on a simplement appliqué $\sigma_{res}$ à la requête initiale.
+La seule variable dans la requête initiale est $l$: la valeur de $l$ est à trouver dans $\sigma_{res}$
+(il faut suivre les substitutions jusqu'au bout!).
+
+\begin{center}
+\noindent\fbox{
+\parbox{0.8\textwidth}{Attention, chaque fois que l'on fait la résolution
+avec une clause du programme il faut {\em renommer} les variables de la clause.
+Dans le cas ci-haut ce sont $l_1$, $l_2$, $l_3$ et $x$.
+Ceci est nécessaire pour éviter d'utiliser le même nom pour deux variables différentes pendant l'exécution.}}
+\end{center}
+
+\subsection{Exemple 3: Append avec plusieurs solutions}
+
+Le programme de l'exemple précédant peut calculer plusieurs solutions,
+si plusieurs solutions existent et on demande à l'algorithme de nous les calculer.
+Pour notre dernier exemple on va regarder cela de plus près
+en donnant comme requête $\mathrm{append}(l_1, l_2, \mathrm{cons}(1,\mathrm{nil}))$.
+On voit bien qu'il y a deux solutions:
+\begin{itemize}
+\item La première solution est $l_1=\mathrm{nil}$ et $l_2=\mathrm{cons}(1,\mathrm{nil})$.
+\item La deuxième solution est $l_1=\mathrm{cons}(1,\mathrm{nil})$ et $l_2=\mathrm{nil}$.
+\end{itemize}
+Regardons si l'algorithme les trouve aussi!
+
+\subsubsection{Requête}
+
+La requête initiale est $G = \mathrm{append}(l_1, l_2, \mathrm{cons}(1,\mathrm{nil}))$.
+On la donne au système avec la syntaxe \verb+append(L1,L2,[1])+.
+L'exécution du système donnera d'abord la première solution.
+L'utilisateur pourra demander une deuxième solution en tapant le caractère \verb+;+ (point-virgule).
+\begin{verbatim} 
+|?- append (L1,L2,[1]).
+-> L1=[], L2=[1] ;
+-> L1=[1], L2=[]
+\end{verbatim}
+
+\subsubsection{Exécution}
+
+La première valeur de $r$ contient la requête initiale.
+\begin{equation}
+\begin{array}{l}
+\mathit{Requête\ initiale:} \\
+r =\ < \mathrm{append}(l_1, l_2, \mathrm{cons}(1,\mathrm{nil})) > \\
+\mathit{Résolution\ 1:} \\
+\sigma = \{ (l_1,\mathrm{nil}), (l_2, l'), (l',\mathrm{cons}(1,\mathrm{nil})) \} \\
+r =\ <\ >
+\end{array}
+\end{equation}
+L'algorithme commence par choisir la première clause, $\mathrm{append}(\mathrm{nil},l',l')$.
+Cela donne un résultat (obtenu en remplissant la requête avec $\sigma$):
+\begin{equation}
+\begin{array}{l}
+G = \mathrm{append}(\mathrm{nil}, \mathrm{cons}(1,\mathrm{nil}), \mathrm{cons}(1,\mathrm{nil})) \\
+\end{array}
+\end{equation}
+En syntaxe Prolog, c'est le résultat \verb+append([],[1],[1])+.
+Si on demande un autre résultat,
+l'algorithme fera un retour en arrière pour faire un autre choix de clause.
+Le dernier choix fait par l'algorithme a été fait lors de la première résolution,
+où il a choisi la première clause.
+On peut re-exécuter cette résolution, en choisissant la deuxième clause.
+Ensuite on continue jusqu'à ce que la résolvante est vide:
+\begin{equation}
+\begin{array}{l}
+\mathit{Résolution\ 1bis:} \\
+\sigma = \{ (l_1,\mathrm{cons}(x',l_1')), (l_2,l_2'), (x',1), (l_3',\mathrm{nil}) \} \\
+r =\ < \mathrm{append}(\mathrm{cons}(1,l_1'), l_2', \mathrm{nil}) > \\
+\mathit{Résolution\ 2bis:} \\
+\sigma' = \sigma \cup \{ (l'',\mathrm{cons}(1,l_1'), (l'',l_2') \} \\
+r =\ < \mathrm{append}(l_1', l_2', \mathrm{nil})> \\
+\mathit{Résolution\ 3bis:} \\
+\sigma'' = \sigma' \cup \{ (l_1',\mathrm{nil}), (l_2',l'''), (l''',\mathrm{nil}) \} \\
+r =\ <\ >
+\end{array}
+\end{equation}
+Cela donne un autre résultat (obtenu en remplissant la requête avec $\sigma''$):
+\begin{equation}
+\begin{array}{l}
+G = \mathrm{append}(\mathrm{cons}(1,\mathrm{nil}), \mathrm{nil}, \mathrm{cons}(1,\mathrm{nil}))
+\end{array}
+\end{equation}
+En syntaxe Prolog, c'est le résultat \verb+append([1],[],[1])+.
+Cela donne deux résultats qui satisfont tous les deux la requête initiale.
+On peut essayer de trouver un troisième résultat, en faisant un nouveau retour en arrière
+(c'est possible parce que {\em 3bis} a choisi la première clause),
+on verra que l'unification échouera: il n'y a que deux résultats pour notre requête.
+
+\subsection{Dernières remarques}
+
+Voici ce qui termine notre introduction à la programmation logique et au langage Prolog.
+Nous n'avons expliqué qu'une petite partie de ce que peut faire un système Prolog.
+Je voudrais terminer par attirer votre attention sur les
+deux manières de percevoir l'exécution d'un programme Prolog:
+\begin{enumerate}
+\item {\em La vue opérationnelle}: l'exécution est vue comme une séquence de calculs.
+On se concentre sur l'exécution de l'algorithme de preuve.
+Le résultat d'un calcul est une séquence d'opérations, avec ses problèmes de temps
+d'exécution et d'espace mémoire utilisé.
+\item {\em La vue logique}: l'exécution est vue comme une preuve en logique des prédicats.
+On oublie l'algorithme et on se concentre sur la logique.
+Le résultat d'un calcul est un théorème, donc une conséquence logique des axiomes du programme.
+\end{enumerate}
+Prolog est un des rares langages à offrir ces deux vues sur une même exécution.
+Cela donne beaucoup de puissance: on peut raisonner sur l'exactitude de façon (presque) complètement
+indépendante de l'efficacité.
+
+\subsubsection{L'équation de Kowalski}
+
+La relation entre la vue logique et la vue opérationnelle
+est résumée par la célèbre équation de Kowalski:
+\begin{quote}
+Algorithm = Logic + Control
+\end{quote}
+La logique et le contrôle peuvent être vus de façon séparées.
+Pour une même définition logique, on peut changer l'efficacité
+en changeant le contrôle.
+Cela change l'algorithme mais ne change pas ce que calcule l'algorithme.
+
+\subsubsection{L'influence de Prolog}
+
+La programmation logique, le langage Prolog et ses successeurs,
+gardent une grande influence sur l'informatique.
+L'esprit de Prolog est toujours présent
+dans beaucoup de domaines de l'informatique, par exemple:
+\begin{itemize}
+\item Les bases de données (modèle relationnel et Datalog).
+\item La sémantique Web (basée sur un langage logique OWL et un modèle d'exécution).
+\item La programmation par contraintes (on remplace les substitutions par des relations quelconques).
+\end{itemize}
 
