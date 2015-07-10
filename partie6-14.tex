@@ -176,7 +176,7 @@ Nous appelons {\em arité} d'un prédicat ou d'une fonction son nombre d'argumen
 	\hline
 \end{tabular}
 
-\subsection{Règles de Grammaire}
+\subsection{Règles de grammaire}
 \begin{tabular}{rl}
 $<formule>::=$ 	  &	$<formule$ $atomique>$ \\
 				  & $\vert$ $\neg$ $<formule>$ \\
@@ -335,44 +335,44 @@ une interprétation $I$ pour $B$ est un {\em modèle} si et seulement si:
 
 % partie 1 (15 à 30 min) Thomas)
 
-\section{Preuves en logique des prédicats}
+% \section{Preuves en logique des prédicats}
+% 
+% Comme pour la logique propositionnelle, il est important de pouvoir faire des preuves avec la logique des prédicats.
+% Il y a deux approches principales: la preuve manuelle et la preuve automatisée.
+% Pour les deux approches, la preuve est toujours un objet mathématique, une séquence de déductions avec ses formules et
+% ses justifications, qui sont une application des règles de preuve.
+% 
+% \subsection{Preuves manuelles}
+% 
+% Les preuves manuelles sont le sujet du chapitre \ref{preuvemanuelle}.
+% 
+% \subsection{Preuves automatisées}
+% 
+% Les preuves automatisées sont le sujet du chapitre \ref{algorithmepreuve}.
+% L'algorithme de preuve que nous allons définir est une généralisation de l'algorithme pour la logique propositionnelle.
+% Il y a toujours :
+% \begin{itemize}
+%   \item Une règle de résolution pour les preuves automatisées, mais celle-ci est plus générale. Elle va utiliser un concept appelé
+% ``unification''. Ce nouveau concept est nécessaire à cause des variables.
+% En effet, celles-ci peuvent être différentes, il faut donc trouver un nouveau moyen de les fusionner.
+%   \item Une forme normale, qui  est plus compliquée à cause des quantificateurs et des symboles de fonctions, mais qu'il est encore possible de l'obtenir.
+%   \item Un algorithme avec ses propriétés. Mais il est moins fort/complet que l'algorithme développé pour la logique des propositions. Il ne sera plus décidable, mais seulement semi-décidable. C'est-à-dire que parfois il tournera en boucle. Cela est dû aux variables et aux quantificateurs. La logique des prédicats est beaucoup plus riche que la logique des propositions, mais en contrepartie l'algorithme arrive à prouver moins de choses. Cependant, l'algorithme sera toujours adéquat, mais pas forcément complet. Il ne sera pas toujours possible de trouver une preuve, même quand elle existe parce qu'elle sera trop compliquée.
+% \end{itemize}
+% Qu'est il possible de faire avec ce genre d'algorithme moins fort?
 
-Comme pour la logique propositionnelle, il est important de pouvoir faire des preuves avec la logique des prédicats.
-Il y a deux approches principales: la preuve manuelle et la preuve automatisée.
-Pour les deux approches, la preuve est toujours un objet mathématique, une séquence de déductions avec ses formules et
-ses justifications, qui sont une application des règles de preuve.
-
-\subsection{Preuves manuelles}
-
-Les preuves manuelles sont le sujet du chapitre \ref{preuvemanuelle}.
-
-\subsection{Preuves automatisées}
-
-Les preuves automatisées sont le sujet du chapitre \ref{algorithmepreuve}.
-L'algorithme de preuve que nous allons définir est une généralisation de l'algorithme pour la logique propositionnelle.
-Il y a toujours :
-\begin{itemize}
-  \item Une règle de résolution pour les preuves automatisées, mais celle-ci est plus générale. Elle va utiliser un concept appelé
-``unification''. Ce nouveau concept est nécessaire à cause des variables.
-En effet, celles-ci peuvent être différentes, il faut donc trouver un nouveau moyen de les fusionner.
-  \item Une forme normale, qui  est plus compliquée à cause des quantificateurs et des symboles de fonctions, mais qu'il est encore possible de l'obtenir.
-  \item Un algorithme avec ses propriétés. Mais il est moins fort/complet que l'algorithme développé pour la logique des propositions. Il ne sera plus décidable, mais seulement semi-décidable. C'est-à-dire que parfois il tournera en boucle. Cela est dû aux variables et aux quantificateurs. La logique des prédicats est beaucoup plus riche que la logique des propositions, mais en contrepartie l'algorithme arrive à prouver moins de choses. Cependant, l'algorithme sera toujours adéquat, mais pas forcément complet. Il ne sera pas toujours possible de trouver une preuve, même quand elle existe parce qu'elle sera trop compliquée.
-\end{itemize}
-Qu'est il possible de faire avec ce genre d'algorithme moins fort?
-
-\subsubsection{L'utilisation de l'algorithme de preuve}
-
-Il y a deux possibilités : 
-\begin{itemize}
-\item {\em Un assistant de preuve}
-C'est un outil qui aide les gens à faire des preuves formelles. Deux exemples d'assistants de preuves sont Coq et Isabelle. C'est un outil très sophistiqué, mais qui a permis de prouver des choses de manière totalement formelle, alors qu'avant des preuves prenaient des dizaines voire des centaines de pages de preuves mathématiques. Mais cet assistant ne fait pas tout parce que l'algorithme est moins bon. Cependant, il aide beaucoup. C'est à l'être humain de lui donner des coups de pouce sous forme de lemmes, hypothèses, chemins, stratégies ... Ensuite, l'algorithme s'occupe de la manipulation des symboles.\\
-Un exemple très célèbre est le théorème de la coloration d'une carte. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
-\item {\em Un langage de programmation}
-L'algorithme peut être considéré comme le moteur d'un programme. C'est ce qu'on appelle maintenant la programmation logique. Elle consiste à utiliser la logique dans un programme. Le langage le plus célèbre qui a suivi cette approche est Prolog. Ce fut un énorme succès, car les gens ne croyaient pas que c'était possible de faire un programme en logique qui pouvait tourner. Cela a donné naissance à la programmation par contraintes (une contrainte est une relation logique). Cette discipline est très utile pour les optimisations, par exemple dans le cas du "voyageur de commerce".
-\end{itemize}
-
-La logique des prédicats n'est donc pas quelque chose de seulement théorique, destiné uniquement aux mathématiciens.
-Elle a été utilisée avec succès dans les programmes.
+%% \subsubsection{L'utilisation de l'algorithme de preuve}
+%% 
+%% Il y a deux possibilités : 
+%% \begin{itemize}
+%% \item {\em Un assistant de preuve}
+%% C'est un outil qui aide les gens à faire des preuves formelles. Deux exemples d'assistants de preuves sont Coq et Isabelle. C'est un outil très sophistiqué, mais qui a permis de prouver des choses de manière totalement formelle, alors qu'avant des preuves prenaient des dizaines voire des centaines de pages de preuves mathématiques. Mais cet assistant ne fait pas tout parce que l'algorithme est moins bon. Cependant, il aide beaucoup. C'est à l'être humain de lui donner des coups de pouce sous forme de lemmes, hypothèses, chemins, stratégies ... Ensuite, l'algorithme s'occupe de la manipulation des symboles.\\
+%% Un exemple très célèbre est le théorème de la coloration d'une carte. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
+%% \item {\em Un langage de programmation}
+%% L'algorithme peut être considéré comme le moteur d'un programme. C'est ce qu'on appelle maintenant la programmation logique. Elle consiste à utiliser la logique dans un programme. Le langage le plus célèbre qui a suivi cette approche est Prolog. Ce fut un énorme succès, car les gens ne croyaient pas que c'était possible de faire un programme en logique qui pouvait tourner. Cela a donné naissance à la programmation par contraintes (une contrainte est une relation logique). Cette discipline est très utile pour les optimisations, par exemple dans le cas du "voyageur de commerce".
+%% \end{itemize}
+%% 
+%% La logique des prédicats n'est donc pas quelque chose de seulement théorique, destiné uniquement aux mathématiciens.
+%% Elle a été utilisée avec succès dans les programmes.
 
 %partie 3 de 30 à 45 min (Guillaume)
 
@@ -1112,21 +1112,27 @@ de concrétiser des stratégies pour les choix:
 Il y a deux possibilités pour ces stratégies qui sont utilisées en pratique,
 qui donne lieu à deux sortes de programmes que l'on appelle {\em assistant de preuve}
 ou {\em langage logique}.
+Dans ces deux cas, cela a donné lieu a des développements signifiants.
 
-Un assistant de preuve, comme Coq ou Isabelle, est fait pour aider un humain à prouver des théorèmes compliqués.
-Il utilise donc des stratégies complexes pour réduire un maximum le travail qui doit
-être fait par l'être humain.
-Les assistants de preuve sont des outils pratique pour prouver formellement des théorèmes mathématiques.
+\subsubsection{Un assistant de preuve}
 
-Un langage logique, comme \textbf{Prolog}, inventé en 1972 par Alain Colmerauer et Robert Kowalski,
-utilise {\em volontairement} des stratégies naïves qui permettent de rendre l'algorithme prévisible.
+Un assistant de preuve est un outil qui aide un mathématicien humain à faire des preuves formelles.
+Deux exemples d'assistants de preuves sont Coq et Isabelle. C'est un outil très sophistiqué, mais qui a permis de prouver des choses de manière totalement formelle, alors qu'avant des preuves prenaient des dizaines voire des centaines de pages de preuves mathématiques. Mais cet assistant ne fait pas tout parce que l'algorithme est moins bon. Cependant, il aide beaucoup. C'est à l'être humain de lui donner des coups de pouce sous forme de lemmes, hypothèses, chemins, stratégies ... Ensuite, l'algorithme s'occupe de la manipulation des symboles.
+
+Un exemple très célèbre est le théorème de la coloration d'une carte. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
+
+\subsubsection{Un langage logique}
+
+Un langage logique est un langage de programmation basé sur la logique des prédicats.
+Le plus célèbre de ces langages est {\em Prolog}, inventé en 1972 par Alain Colmerauer et Robert Kowalski.
+Prolog utilise {\em volontairement} des stratégies naïves qui permettent de rendre l'algorithme prévisible.
 Les axiomes deviennent un {\em programme}.
-Cette approche, appellée la programmation logique, donne alors un langage de programmation pratique.
+Cette approche donne un langage de programmation pratique.
 Un exemple de stratégie naïve est la stratégie LUSH utilisée par Prolog
 qui choisit de haut vers le bas les paires $p_i, p_j$,
 et de gauche à droite dans chaque $p_i$.
 LUSH est un acronyme qui veut dire {\em Linear resolution with Unrestricted Selection for Horn clauses}.
-La programmation logique sera expliquée plus en détail dans la Section \ref{prolog}.
+La programmation logique sera expliquée plus en détail dans le chapitre \ref{prolog}.
 
 % Ancienne partie 11
 
@@ -1364,7 +1370,7 @@ En effet, en partant du premier axiome de \bsc{fam} (appelé "père"), nous effe
 \begin{align*}
 & (\forall x) P(x,p(x)) && \textrm{Axiome père} \\
 & P(a,p(a)) && \textrm{Elimination } \forall \\
-& (\exists y) P(a,y) && \textrm{Introduction} \exists
+& (\exists y) P(a,y) && \textrm{Introduction } \exists
 \end{align*}
 Ci-dessus, le premier axiome de \bsc{fam} reformulé (père),
 qui est en contradiction avec le nouvel axiome (Adam), que nous reformulons ci-dessous.
@@ -1532,11 +1538,11 @@ Voici la preuve étape par étape:
 \end{itemize}
 
 \vspace{\baselineskip}
-Remarquez que ceci n'est pas une preuve en logique des prédicats, mais une preuve en méta-langage, c'est-à-dire
+Remarquez que ceci n'est pas une preuve en logique des prédicats, mais une preuve en métalangage, c'est-à-dire
 une preuve qui parle de la logique des prédicats.
 On ne peut pas formaliser cette preuve comme un objet formel qui est une preuve en logique des prédicats.
 Toute l'argumentation sur la sémantique de la logique des prédicats et la justification des règles de preuve
-sont des raisonnements en méta-langage.
+sont des raisonnements en métalangage.
 
 \section{Théorie de l'ordre partiel (OP)}
 
@@ -1558,7 +1564,7 @@ Aux axiomes et schémas d'axiomes de la théorie de l'égalité, on rajoute de n
 \item Substituabilité à droite \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{2}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x_{1} \leq x$
 \end{enumerate}
 
-\subsubsection{Exemple de théorème}
+\subsection{Exemple de théorème}
 
 Nous allons prouver le théorème suivant:
 $$\models \forall x.\ \forall y.\  [x==y \Leftrightarrow (x\leq y)\land (y \leq x)] $$
@@ -1625,7 +1631,7 @@ $\sigma$' $\leq$ $\sigma$\\
 \end{itemize}
 Ces exemples montrent qu'on peut raisonner sur tout, y compris sur la logique et les algorithmes eux-mêmes,
 à partir du moment où on respecte les axiomes.
-Ce qui est méta-langage dans un raisonnement peut devenir langage dans un autre raisonnement apparenté.
+Ce qui est métalangage dans un raisonnement peut devenir langage dans un autre raisonnement apparenté.
 
 % Ancienne partie 14
 

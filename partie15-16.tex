@@ -264,8 +264,8 @@ de solution pour $G$ dans le programme $P$.
 Dans l'exemple $\mathrm{append}(l,m,\mathrm{cons}(1,\mathrm{nil}))$ plus bas,
 on voit comment cela marche en pratique.
 Pour cet exemple, on trouve une première solution avec $l=\mathrm{nil}$ et $m=\mathrm{cons}(1,\mathrm{nil})$ et une deuxième solution
-avec $l=\mathrm{cons}(1,\mathrm{nil})$ et $m=\mathrm{nil}$).
-Pour obtenir plusieurs solutions, il suffit après que l'algorithm à trouvé une solution,
+avec $l=\mathrm{cons}(1,\mathrm{nil})$ et $m=\mathrm{nil}$.
+Pour obtenir plusieurs solutions, il suffit après que l'algorithm ait trouvé une solution,
 de demander un retour en arrière, c'est-à-dire, de revenir sur le dernier choix et continuer l'exécution.
 Ainsi, l'algorithme trouvera plusieurs solutions si la reqûete $G$ à plusieurs solutions avec le programme $P$.
 C'est une propriété très puissante de la programmation logique qui n'existe pas dans la programmation traditionnelle.
@@ -304,13 +304,14 @@ fact(N,F) :- N>0,
         fact(N1,F1), 
         F is N*F1.
 \end{verbatim}
-Pour les mordus des langages de programmation, nous mentionnons que ce programme n'est pas
+Pour les mordus des langages de programmation, nous mentionnons que ce programme Prolog n'est pas
 récursif terminal.  Comme pour la programmation fonctionnelle, il est avantageux aussi pour un prédicat
 en programmation logique
-d'être récursif terminal, parce que la taille de la pile n'augmentera pas pendant l'exécution.
-Ceci ne se voit pas avec une interprète Prolog, comme notre algorithme, mais devient important pour
+d'être récursif terminal, parce que l'exécution dépend aussi d'une pile
+et la taille de la pile n'augmentera pas pendant l'exécution.
+Ceci ne se voit pas avec une interprète Prolog, comme notre algorithme d'exécution de Prolog, mais devient important pour
 un compilateur Prolog.
-Il est tout à fait possible d'écrire une autre définition de factorielle qui est récursive terminale
+Il est tout à fait possible d'écrire une autre définition de factorielle en Prolog qui est récursive terminale
 et qui garde la sémantique logique.
 
 \subsubsection{Requête}
