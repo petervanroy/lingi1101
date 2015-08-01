@@ -80,7 +80,8 @@ ces entités qui sont représentés par des lignes. \newline
 
 La structure en réseaux est très présente pour décrire les relations
 entre les personnes sur Internet (à travers des réseaux sociaux comme
-Facebook et Twitter) et également dans le monde économique (comme
+Facebook et Twitter ; les sites de partage de contenu comme YouTube et
+Flickr) et également dans le monde économique (comme
 l'exemple des liens du monde bancaire dans la section précedente).
 \newline
 
@@ -106,39 +107,50 @@ empruntant la nouvelle route et dans un environnement non-régulé, cette
 situation peut déteriorier la performance globale).
 
 \section{Nouvelle discipline}
-Les graphes et leurs propriétés évoluent avec le temps, ce n'est pas statique.
 
-Nouvelles disciplines pour analyser des graphes d'informations tirés de sites comme YouTube, Flicker, etc.
+Le monde étant de plus en plus connecté peu importe les domaines
+étudiés, l'étude des structures discrètes s'impose comme une nouvelle discipline à
+part entière. Cette théorie a pour but d'analyser les graphes et leurs
+propriétés à travers le temps. \newline
 
-Synthèse de 3 disciplines :
+Nous pouvons la décrire comme la synthèse de 3 autres disciplines :
+
 \begin{enumerate}
-
-	\item Mathématiques : théorie des graphes
-	\item Mathématiques : théorie des jeux\\
-		Exemple : YouTube impose ses règles, c'est le croupier, et ceux qui utilisent YouTube sont des joueurs.
-	\item Sociologie : étude des groupes sociaux\\
-		les participants sont humains ou guidés par un humain. Il n'est pas uniquement question de mathématiques, il faut aussi comprendre les humains.
+	\item La théorie des graphes qui a pour but de résoudre des
+	    problèmes liés aux éléments des graphes ;
+	\item La théorie des jeux qui a pour but d'analyser les situations
+	    dans lesquelles les décisions d'une entité dépend des
+	    anticipations de l'entité vis-à-vis d'autres entités auxquelles
+	    elle est liée ;
+	\item L'étude des groupes sociaux (sociologie) qui a pour but
+	    d'expliquer les comportements humains. En effet, les
+	    participants d'un graphe sont des humains ou sont guidés par des
+	    humains, cette dimension est donc non négligeable.
 \end{enumerate}
 
-Dans ce cours, nous nous concentrerons principalement sur la théorie des graphes. La théorie des jeux sera abordée de façon intuitive, et nous parlerons un peu de la sociologie.
+Dans ce cours, nous nous concentrerons principalement sur la théorie des
+graphes. La théorie des jeux sera abordée de façon intuitive, et nous
+parlerons un peu de la sociologie.
 
 \subsection{Théorie des jeux}
-On a un ensemble de participants qui jouent à "un jeu" (un ensemble de règles suivies par tous les participants). Chaque participant doit agir : 
 
-\begin{itemize}
-\item Simple à spécifier (comme les échecs : 2 participants et 1 action en alternance). 
-\item Compliqué : pas d'alternance, tout le monde agit en même temps. C'est un système concurrent.
-\end{itemize}
+Un \textbf{jeu} est un ensemble de règles qu'on fait subir à un ensemble
+de participants qui interagissent. Il y a deux principaux types de jeux :
 
-Exemple d'action simple : la vente aux enchères : 
-	nombre fini de participants,
-	règles simples et définies (différentes techniques sont possibles)
-	
-\vspace{1cm}
+\begin{enumerate}
+    \item les jeux \textit{séquentiels}, autrement dit : où une seule action
+        est effectuée à la fois. C'est le cas du jeu d'échecs par
+        exemple, où chaque action produite par un joueur entrainera une
+        réaction par l'autre joueur, chacun essayant d'anticiper les
+        coups de son adversaire. Un autre exemple est la vente aux
+        enchères.
+    \item les jeux \textit{concurrents}, autrement dit : où plusieurs
+        actions sont effectuées en même temps.
+\end{enumerate}
 
-On va rester intuitif sur ce sujet, mais si on veut être plus précis, il y a des champs mathématiques qui étudient les systèmes concurrents.
-
-Enfin, on peut aussi voir que la position dans le graphe peut aussi apporter des avantages.
+Dans certains jeux, des participants peuvent avoir des avantages sur les
+autres, c'est le cas particulier des positions géographiques comme vont
+le montrer les exemples qui suivent.
 
 \begin{figure}[!ht]
 \centering
@@ -158,6 +170,10 @@ partenaires privilégie des États-Unis...}
 peut dépendre de la structure).}
 \end{figure}
 
-Si on observe correctement le réseau, on peut se placer en position d'avantage et se mettre à une position qui donne plus de pouvoir.
+Si on observe correctement le réseau, on peut se placer en position
+d'avantage et se mettre à une position qui donne plus de pouvoir.
 
-Si on connaît la structure, une petite action peut suffire pour arrêter une épidémie en coupant les liens par lesquels cette épidémie pourrait se répandre.
+Le genre d'application que ces graphes peuvent avoir se démontre dans le
+cas d'épidémie. Si on connaît la structure des graphes, une petite
+action peut suffire pour arrêter une épidémie en coupant les liens par
+lesquels cette épidémie pourrait se répandre.
