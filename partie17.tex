@@ -13,47 +13,62 @@ Networks, Crowds, and Markets: Reasoning About a Highly Connected World, by Davi
 \end{itemize}
 
 \section{Exemple et analyse de graphes}
-Voici quelques commentaires réalisés sur les figures du $1^{er}$ chapitre :
-
-\begin{itemize}
-
-	\item \textbf{Figure 1.1} (ci-dessous : Figure \ref{karate} Illustration des relations amicales entre 34 personnes dans un club de karaté.
-Chaque nœud représente une personne et chaque lien, un lien d'amitié entre ces personnes.
-On constate que tout le monde n'est pas ami avec tout le monde. Grâce à cette structure, on peut déduire certaines choses, par exemple : deux personnes ont beaucoup de liens d'amitié avec d'autres personnes, mais pas entre eux.
+Voici quelques commentaires réalisés sur les figures du 1\up{er} chapitre :
 
 \begin{center}
 \begin{figure}[!ht]
-\includegraphics[width=0.9\linewidth]{images/17_karate_club.png}
-\label{karate}
-\caption{Relations amicales dans un club de karaté}
+\includegraphics[width=0.75\linewidth]{images/17_karate_club.png}
+\caption{Illustration des relations amicales entre 34 personnes dans un
+    club de karaté. Chaque n\oe ud représente une personne et chaque lien,
+    un lien d'amitié entre ces personnes. On constate que tout le monde
+n'est pas ami avec tout le monde. Grâce à cette structure, on peut
+déduire certaines choses, par exemple : deux personnes ont beaucoup de
+liens d'amitié avec d'autres personnes, mais pas entre eux.}
 \end{figure}
 \end{center}
 
-	\item \textbf{Figure 1.2} Des employés dans un laboratoire de recherche (nœud) ont des liens entre eux :
-Lignes claires = communication e-mail.
-Lignes foncées = hiérarchie, organisation du laboratoire.
-On voit que la communication entre les gens suit relativement bien la structure hiérarchique, mais pas complètement. On peut voir comment les gens collaborent, leurs degrés de collaboration, etc.
-
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=0.8\linewidth]{images/social_networks_based_on_communication_and_interaction.png}
+\includegraphics[width=0.75\linewidth]{images/social_networks_based_on_communication_and_interaction.png}
+\caption{Des employés dans un laboratoire de recherche (n\oe ud) ont des
+    liens entre eux : Lignes claires = communication e-mail. Lignes
+    foncées = hiérarchie, organisation du laboratoire. On voit que la
+    communication entre les gens suit relativement bien la structure
+    hiérarchique, mais pas complètement. On peut voir comment les gens
+collaborent, leurs degrés de collaboration, etc.}
 \end{figure}
 
-	\item \textbf{Figure 1.3} On constate que dans cette illustration, il y a beaucoup plus de nœuds. Chaque nœud est une institution financière (banque par exemple). Les liens représente des relations entre les banques, c'est à dire des prêts faits par une banque à une autre. Le graphe est connexe (il y a des chemins entre toutes les banques). Le centre est très dense, ça montre une faiblesse du système financier : si une banque dans le centre fait faillite par exemple, toutes les autres banques liées à elle sont également mises en danger . Donc si le noyau central est trop grand, c'est une faiblesse. En regardant cette structure, on peut trouver les faiblesses et les comprendre. Ça peut être très important.
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=0.8\linewidth]{images/reseaux_prets_entre_banques.png}
+\includegraphics[width=0.65\linewidth]{images/reseaux_prets_entre_banques.png}
+\caption{On constate que dans cette illustration, il y a beaucoup plus
+    de nœuds. Chaque nœud est une institution financière (banque par
+    exemple). Les liens représente des relations entre les banques,
+    c'est à dire des prêts faits par une banque à une autre. Le graphe
+    est connexe (il y a des chemins entre toutes les banques). Le centre
+    est très dense, ça montre une faiblesse du système financier : si
+    une banque dans le centre fait faillite par exemple, toutes les
+    autres banques liées à elle sont également mises en danger . Donc si
+    le noyau central est trop grand, c'est une faiblesse. En regardant
+    cette structure, on peut trouver les faiblesses et les comprendre.
+Ça peut être très important.}
 \end{figure}
 
-	\item \textbf{Figure 1.4} Un nœud représente un blog politique et un lien, une référence vers un autre blog. Nous avons deux partis qui représentent chacun un noyau : les démocrates et les républicains. On constate qu'il y a moins de connexions entre les deux noyaux qu'à l'intérieur de ceux-ci. On peut visualiser cette structure et se poser des questions : est-ce que cette absence de contact entre les deux factions d'un monde bipolaire est un problème ?
-\end{itemize}
-
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=0.8\linewidth]{images/network_structure_of_political_blogs.png}
+\includegraphics[width=0.65\linewidth]{images/network_structure_of_political_blogs.png}
+\caption{Un n\oe ud représente un blog politique et un lien, une référence
+    vers un autre blog. Nous avons deux partis qui représentent chacun
+    un noyau : les démocrates et les républicains. On constate qu'il y a
+    moins de connexions entre les deux noyaux qu'à l'intérieur de
+    ceux-ci. On peut visualiser cette structure et se poser des
+    questions : est-ce que cette absence de contact entre les deux
+factions d'un monde bipolaire est un problème ?}
 \end{figure}
 
 Ce sont divers exemples que nous allons essayer d'analyser. Sur Internet, il y a beaucoup de nœuds avec de grandes capacités de calcul et de stockage. Grâce à de nouveaux outils utilisés sur internet pour analyser l'information, on peut observer la structure des graphes (ce qu'on ne pouvait pas faire avant).
+
+\clearpage
 
 \section{Introduction}
 \begin{itemize}
