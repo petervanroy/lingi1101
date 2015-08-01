@@ -734,7 +734,7 @@ L'algorithme pour la logique des prédicats
 ne garde pas toutes les propriétés de l'algorithme pour la logique propositionnelle,
 car la logique des prédicats est beaucoup plus expressive.
 En particulier, là où l'algorithme pour la logique propositionnelle est décidable,
-l'algorithm pour la logique des prédicats n'est que semi-décidable.
+l'algorithme pour la logique des prédicats n'est que semi-décidable.
 
 Supposons $B$ l'ensemble des axiomes (prémisses) et $T$ le théorème que l'on veut prouver.
 On a les propriétés suivantes:
@@ -844,7 +844,8 @@ Etapes de la transformation en formule logiquement équivalente:
 \end{enumerate}
 \subsection{Exemple d'une transformation en forme prénexe}
 \begin{enumerate}
-\item $\forall x  [p(x) \land \neg (\exists y) \forall x ( \neg q(x,y)) = > \forall z \exists v \bullet p(a,x,y,v))]$\\ \textit{Expression de base}
+\item $\forall x  [p(x) \land \neg (\exists y) \forall x ( \neg q(x,y))
+    \Rightarrow\forall z \exists v \bullet p(a,x,y,v))]$\\ \textit{Expression de base}
 \item $\forall x [p(x) \land \neg(\exists y) (\forall x) ($\colorbox{lightgray}{$\neg$} $\neg q(x,y) $\colorbox{lightgray}{$\lor$} $\forall z \exists v \bullet r(a,x,y,v)]$\\\textit{Suppression des $\implies{}$} 
 \item $\forall x [p(x) \land \neg(\exists y) (\forall $\colorbox{lightgray}{$u$}$)(\neg\neg q($\colorbox{lightgray}{$u$}$,y) \lor $\colorbox{lightgray}{$\cancel{\forall z}$}$\exists v \bullet r(a,$\colorbox{lightgray}{$u$}$,y,v)]$\\\textit{Renommage des variables et suppression des quantificateurs inutiles}
 \item $\forall x [p(x) \land$ \colorbox{lightgray}{$\forall y \neg$} $ (\forall u)($ \colorbox{lightgray}{$\cancel{\neg \neg}$} $q(u,y) \lor \exists v \bullet r(a,u,y,v)] $\\$\neg\exists y\ devient\  \forall \ y\ \neg \ et\ simplification\ des\ \neg$
@@ -983,7 +984,7 @@ Il donne les ensembles les plus grands.\\
 
 \begin{itemize}
   \item Pour que la démonstration soit la plus générale possible,
-  on préfère toujours l'unificateur $\sigma$ \underline{le plus générale}.
+  on préfère toujours l'unificateur $\sigma$ \underline{le plus général}.
   \item On peut démontrer que l'unificateur le plus général est unique.
   La démonstration de ce fait est hors de portée pour ce cours.
   \item L'upg est calculable.
@@ -1088,7 +1089,7 @@ Il y a une inconsistence donc le candidat théorème est prouvé.
 Cet algorithme a plusieures sources de non-déterminisme, c'est-à-dire
 le choix des clauses et le choix des littéraux dans les clauses.
 Ces choix sont faits à chaque itération.
-Avec un mauvais choix, l'algorithm peut ne pas terminer ou
+Avec un mauvais choix, l'algorithme peut ne pas terminer ou
 faire des déductions inutiles.
 Par exemple, si on fait un autre choix lors de la première itération:
 
@@ -1117,7 +1118,14 @@ Dans ces deux cas, cela a donné lieu a des développements signifiants.
 \subsubsection{Un assistant de preuve}
 
 Un assistant de preuve est un outil qui aide un mathématicien humain à faire des preuves formelles.
-Deux exemples d'assistants de preuves sont Coq et Isabelle. C'est un outil très sophistiqué, mais qui a permis de prouver des choses de manière totalement formelle, alors qu'avant des preuves prenaient des dizaines voire des centaines de pages de preuves mathématiques. Mais cet assistant ne fait pas tout parce que l'algorithme est moins bon. Cependant, il aide beaucoup. C'est à l'être humain de lui donner des coups de pouce sous forme de lemmes, hypothèses, chemins, stratégies ... Ensuite, l'algorithme s'occupe de la manipulation des symboles.
+Deux exemples d'assistants de preuves sont Coq et Isabelle. C'est un
+outil très sophistiqué qui a permis de prouver des choses de manière
+totalement formelle, alors qu'avant des preuves prenaient des dizaines
+voire des centaines de pages de preuves mathématiques. Mais cet
+assistant ne fait pas tout parce que l'algorithme est moins bon.
+Cependant, il aide beaucoup. C'est à l'être humain de lui donner des
+coups de pouce sous forme de lemmes, hypothèses, chemins,
+stratégies\ldots Ensuite, l'algorithme s'occupe de la manipulation des symboles.
 
 Un exemple très célèbre est le théorème de la coloration d'une carte. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
 
@@ -1186,7 +1194,7 @@ où les axiomes et les règles sont valides.
 
 \subsection{Définition d'une théorie}
 
-Une théorie contient les partie suivantes:
+Une théorie contient les parties suivantes:
 \begin{itemize}
 \item Un sous-langage de la logique du premier ordre:
 \begin{itemize}
@@ -1409,7 +1417,7 @@ La confusion est possible parce que dans les deux cas, le nombre de modèles peu
 Mais il ne faut pas oublier que
 l'extension est définie par rapport aux axiomes et l'inclusion est définie par rapport aux modèles.
 Pour l'extension on ajoute des axiomes et on ne regarde pas les modèles.
-Poir l'inclusion on compare les modèles et on ne regarde pas les axiomes.
+Pour l'inclusion, on compare les modèles et on ne regarde pas les axiomes.
 On peut dire que l'extension est une manipulation {\em syntaxique} (on change les axiomes ce qui permette de nouvelles preuves)
 et l'inclusion est une manipulation {\em sémantique} (on fait une comparaison entre ce que modélisent les deux théories).
 
@@ -1493,7 +1501,7 @@ Il existe différents symboles pour représenter l'égalité :
 Nous allons utiliser ``$==$'' dans la suite de ce cours pour représenter l'égalité.
 
 La théorie de l'égalité est souvent {\em ajoutée} à d'autres axiomes pour être utile en pratique.
-Dans cette section on donne que les axiomes d'égalité.  Dans la suite nous allons voir comment
+Dans cette section on ne donne que les axiomes d'égalité.  Dans la suite nous allons voir comment
 ajouter l'égalité à d'autres théories.
 
 \subsection{Axiomes} 
