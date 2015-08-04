@@ -127,10 +127,10 @@ Le capital social est la capacité à se procurer des avantages grâce à l'appa
 Il existe d'autres notions de capitaux:\\
 
 \begin{itemize}
-\item Capital physique (exemple : technologie ) 
-\item Capital humain (exemple : expertise des personnes )
-\item Capital économique (exemple : monétaire ) 
-\item Capital culturel (exemple : les ressources accumulées dans une culture, les connaissances communes )
+\item Capital physique (exemple : technologie) 
+\item Capital humain (exemple : expertise des personnes)
+\item Capital économique (exemple : monétaire) 
+\item Capital culturel (exemple : les ressources accumulées dans une culture, les connaissances communes)
 \end{itemize}
 
 \section{Similitude des noeuds}
@@ -198,7 +198,7 @@ Définition \textit{graphe biparti}: Soit un graphe G=G(V,E) et $V_{1}$, $V_{2}$
 Le graphe ci-dessous représente l'affiliation des personnes (A, B, C, D) au conseil d'administration de différentes entreprises.
 Comme on peut le voir (graphe \ref{graph:grapheGoogle}), il peut y avoir un conflit d'intérêts, par exemple entre Google et Apple. En effet, les deux compagnies sont concurrentes (sur le marché des smartphones), et pourtant une personne est membre des deux conseils d'administration.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \begin{tikzpicture}
 \coordinate (D) at (0,0);
@@ -383,7 +383,7 @@ Heureusement avec la propriété de fermeture focale, on peut raisonner sur la r
 \label{graph:graphe5}
 \end{figure}
 
-\subsection*{Coefficient de regroupement}
+\subsection{Coefficient de regroupement}
 Le coefficient de regroupement ou en anglais, \textit{clustering coefficient}, représente la probabilité pour un nœud \textbf{A} que deux amis de celui-ci choisi aléatoirement, soit amis entre eux. 
 $$ \text{Clustering coefficient} = \frac{\text{nombre d'arêtes existantes reliant les amis de \textbf{A}}}{\text{nombre total d'arêtes possible reliant les amis de \textbf{A}}}$$
 
@@ -396,4 +396,10 @@ Un exemple de ce concept est donné pour la figure suivante.
 \label{img:coef-regr-exp}
 \end{figure}
 
-Considérons la figure \ref{img:coef-regr-exp}. Le coefficient de regroupement pour le nœud \textbf{A} est $,\frac{1}{6}$ car il n'y a qu'une seule arête (\textbf{C-D}) parmi les six autres paires possibles (\textbf{B-C}, \textbf{B-D}, \textbf{B-E}, \textbf{C-D}, \textbf{C-E}, et \textbf{D-E}) reliées entre elles.
+Considérons la figure \ref{img:coef-regr-exp}. Le coefficient de
+regroupement pour le n\oe ud \textbf{A} est $\frac{1}{6}$, car il n'y a
+qu'une seule arête (\textbf{C-D}) parmi les six autres paires possibles
+(\textbf{B-C}, \textbf{B-D}, \textbf{B-E}, \textbf{C-D}, \textbf{C-E},
+et \textbf{D-E}) qui pourraient les relier. Il faut donc imaginer tous
+les chemins possibles entre les amis de \textbf{A} et ensuite diviser le
+nombre de liens existants par ce nombre de possibilités.
