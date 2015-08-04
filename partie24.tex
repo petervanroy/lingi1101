@@ -9,7 +9,7 @@
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.5]{images/ref/fig-14-1.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-1.jpeg}
 \caption{Comptage des liens entrants pour la recherche "newspapers"}
 \label{fig-14-1}
 \end{figure}
@@ -77,8 +77,8 @@ En appliquant maintenant cet algorithme, la requête "newspapers" nous donnerait
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.45]{images/ref/fig-14-2.jpeg}
-\includegraphics[scale=0.45]{images/ref/fig-14-3.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-2.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-3.jpeg}
 \caption{Page Rank}
 \label{pageRankNews1}
 \end{figure}
@@ -86,8 +86,8 @@ En appliquant maintenant cet algorithme, la requête "newspapers" nous donnerait
 \begin{figure}[!ht]
 \centering
 
-\includegraphics[scale=0.45]{images/ref/fig-14-4.jpeg}
-\includegraphics[scale=0.45]{images/ref/fig-14-5.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-4.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-5.jpeg}
 \caption{Page Rank}
 \label{pageRankNews2}
 \end{figure}
@@ -119,8 +119,11 @@ Au plus grand est le poids d'une page au plus son autorité sera grande.
 
 \begin{figure}[!ht]
 \centering
- \includegraphics[scale=0.8]{images/24_imagePr.pdf}
-\label{graphPageRank}
+ \includegraphics[width=0.5\linewidth]{images/24_PageRank.png}
+ \caption{Un ensemble de huit pages : la page A a le plus large
+     PageRank, suivies par les pages B et C (qui collectent l'appui de
+ A)}
+ \label{graphPageRank}
 \end{figure}
 
  
@@ -141,6 +144,14 @@ Au plus grand est le poids d'une page au plus son autorité sera grande.
 		\hline
 	\end{tabular}
 
+Par exemple, A a un PageRank de $\frac{1}{2}$ après la première mise à
+jour car il reçoit les PageRanks de F, G, H ainis que la moitié de D et
+E. D'autre part, B et C reçoivent chacun la moitié du PageRank de A,
+donc ils ont seulement $\frac{1}{16}$ chacun dans la première étape.
+Mais une fois que A a reçu beaucoup de PageRank, B et C en profite dans
+l'étape suivante. Intuitivement, cela s'explique par le fait que si on
+considère A comme était une page importante, les liens qui la composent
+doivent l'être eux aussi.
 
  Si nous continuons à laisser travailler l'algorithme, pour un nombre n fini d'itérations telles que k=n, il y aura convergence de l'algorithme. Dans cet exemple-ci,  nous aurons :
 
