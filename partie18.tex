@@ -1,10 +1,10 @@
-\chapter{Théorie des Graphes}
+\chapter{Théorie des graphes}
 
 \section{Définitions}
 Un graphe G est un ensemble de liens et de nœuds. Un lien est une paire de deux nœuds.
 \begin{center}
 	G = (N,E)\\
-	N = nœud\\
+	N = n\oe ud\\
 	E = edge (lien, arête)\\
 \end{center}
 
@@ -12,19 +12,16 @@ Deux types de graphes :
 
 \begin{itemize}
 \item \textbf{Les graphes orientés} (avec flèches et principe de direction). Une arête/lien est une paire de nœuds. L'ordre a de l'importance. Dans cet exemple, les paires de nœuds sont : (A,B), (A,C), (D,A) et (C,D). 
-\begin{figure}[!h] %TODO : cette figure pourrait bénéficier d'un peu d'anti-aliasing
-\centering
-\includegraphics[scale=1]{images/17_oriente.png}
-\caption{Graphe orienté}
-\end{figure}
 
-\item \textbf{Les graphes non orientés} (sans flèche, sans direction). Une arête est un ensemble de deux nœuds. On ne parle pas de "paire" vu que l'ordre des nœuds n'a pas d'importance. Ici, parler de l'arête (A,B) ou (B,A) revient à la même chose.
-\begin{figure}[!h] %TODO : cette figure pourrait bénéficier d'un peu d'anti-aliasing
-\centering
-\includegraphics[scale=1]{images/17_non-oriente.png}
-\caption{Graphe non orienté}
-\end{figure}
+\input{tikz/graphe_oriente_basique}
+
+\item \textbf{Les graphes non orientés} (sans flèche, sans direction).
+    Une arête est un ensemble de deux n\oe uds. On ne parle pas de "paire"
+    vu que l'ordre des nœuds n'a pas d'importance. Ici, parler de
+    l'arête (A,B) ou (B,A) revient à la même chose.
 \end{itemize}
+
+\input{tikz/graphe_non_oriente_basique}
 
 \vspace{0.3cm}
 Ce cours s'intéressera principalement aux graphes non orientés.
@@ -85,7 +82,7 @@ La méthode de calcul de distance entre deux n\oe uds est la traversée en large
 
 \section{Phénomène du petit monde}
 Le « phénomène du petit monde », aussi connu sous le vocable « paradoxe de Milgram » (du nom du psychosociologue  \textit{Stanley Milgram}), est l'hypothèse que chacun puisse être relié à n'importe quel autre individu par une courte chaîne de relations sociales. La figure \ref{petit_monde} montre la probabilité qu'ont deux personnes d'être reliés par $x$ intermédiaires. 
-	\begin{figure}
+\begin{figure}[!ht]
 	\center
 	\includegraphics[scale=0.5]{images/18_fig.png}
 	\caption{\label{petit_monde} Statistiques du phénomène du petit monde}
@@ -131,14 +128,14 @@ Pour expliquer l'exemple précédent, nous avons besoin de la notion de pont (fi
     \item[Pont local] Un lien entre $A$ et $B$ est un pont local si l'enlèvement de ce lien aboutit au fait que deux composantes sont reliées par un chemin significativement plus long.
     \end{description}
     
-    \begin{figure}[ht]
+    \begin{figure}[!ht]
     \center
-    \includegraphics[scale=0.25]{images/18_Pont.png}
+    \includegraphics[width=\linewidth]{images/18_Pont.png}
     \caption{\label{Pont} Pont}
     \end{figure}
     
-    \begin{figure}[ht]
+    \begin{figure}[!ht]
     \center
-    \includegraphics[scale=0.3]{images/18_Pontlocal.png}
+    \includegraphics[width=\linewidth]{images/18_Pontlocal.png}
     \caption{\label{Pontlocal} Pont local}
     \end{figure}

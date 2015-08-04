@@ -7,9 +7,9 @@
 
 
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.5]{images/ref/fig-14-1.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-1.jpeg}
 \caption{Comptage des liens entrants pour la recherche "newspapers"}
 \label{fig-14-1}
 \end{figure}
@@ -75,19 +75,19 @@ $$
 En appliquant maintenant cet algorithme, la requête "newspapers" nous donnerait les résultats suivants (\ref{pageRankNews1} et \ref{pageRankNews2}):
 
 
-\begin{figure}
+\begin{figure}[!ht]
 \centering
-\includegraphics[scale=0.45]{images/ref/fig-14-2.jpeg}
-\includegraphics[scale=0.45]{images/ref/fig-14-3.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-2.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-3.jpeg}
 \caption{Page Rank}
 \label{pageRankNews1}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!ht]
 \centering
 
-\includegraphics[scale=0.45]{images/ref/fig-14-4.jpeg}
-\includegraphics[scale=0.45]{images/ref/fig-14-5.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-4.jpeg}
+\includegraphics[width=0.8\linewidth]{images/ref/fig-14-5.jpeg}
 \caption{Page Rank}
 \label{pageRankNews2}
 \end{figure}
@@ -117,10 +117,13 @@ Au plus grand est le poids d'une page au plus son autorité sera grande.
 \end{enumerate}
 \subsection*{Exemple de PageRank :}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
- \includegraphics[scale=0.8]{images/24_imagePr.pdf}
-\label{graphPageRank}
+ \includegraphics[width=0.5\linewidth]{images/24_PageRank.png}
+ \caption{Un ensemble de huit pages : la page A a le plus large
+     PageRank, suivies par les pages B et C (qui collectent l'appui de
+ A)}
+ \label{graphPageRank}
 \end{figure}
 
  
@@ -141,6 +144,14 @@ Au plus grand est le poids d'une page au plus son autorité sera grande.
 		\hline
 	\end{tabular}
 
+Par exemple, A a un PageRank de $\frac{1}{2}$ après la première mise à
+jour car il reçoit les PageRanks de F, G, H ainis que la moitié de D et
+E. D'autre part, B et C reçoivent chacun la moitié du PageRank de A,
+donc ils ont seulement $\frac{1}{16}$ chacun dans la première étape.
+Mais une fois que A a reçu beaucoup de PageRank, B et C en profite dans
+l'étape suivante. Intuitivement, cela s'explique par le fait que si on
+considère A comme était une page importante, les liens qui la composent
+doivent l'être eux aussi.
 
  Si nous continuons à laisser travailler l'algorithme, pour un nombre n fini d'itérations telles que k=n, il y aura convergence de l'algorithme. Dans cet exemple-ci,  nous aurons :
 
@@ -148,12 +159,21 @@ Au plus grand est le poids d'une page au plus son autorité sera grande.
  
 Et la condition $\sum Pr(p) = 1$ est toujours vérifiée.
  
- L'équilibre est vérifié si le graphe est connexe,par contre si il ne l'est pas un problème se pose: Le fluide peut arriver au mauvais noeud (analogie réseau d'eau )  :
+ L'équilibre est vérifié si le graphe est connexe,par contre si il ne
+ l'est pas un problème se pose: Le fluide peut arriver au mauvais noeud
+ (Par analogie avec un réseau d'eau, on comprend que ce genre de
+ situation entraîne un blocage du \og{}fluide\fg{}) :
 
-\includegraphics[scale=0.8]{images/24_Nconnexe.pdf}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/24_PageRank_non_connexe.png}
+    \caption{Le même ensemble de huit pages, mais F et G ont changé
+        leurs liens pour pointer l'un vers l'autre. Sans un effet de
+    lissage, tout le PageRank irait vers F et G.}
+\end{figure}
 
 \subsection*{Solution du problème}
-	La solution dans le cas où le PageRank s'amasse dans un nœuds serait de former des cycles afin d'assurer que le fluide continue à circuler.
+	La solution dans le cas où le PageRank s'amasse dans un n\oe ud serait de former des cycles afin d'assurer que le fluide continue à circuler.
 	
  	En pratique, on va réinjecter un peu de fluide partout à chaque itération pour éviter que le fluide se concentre dans les nœuds qui n'ont que des liens entrants et pas de liens sortant. De cette façon on referme la boucle et le fluide peut continuer à circuler.
  	

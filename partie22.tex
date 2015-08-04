@@ -17,13 +17,12 @@ L'idée cruciale est d'identifier dans le graphe les situations équilibrées et
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{images/22_situation.png}
-	\label{equi}
 	\caption{Relations équilibrées et non équilibrées}
+    \label{equi}
 \end{figure}
 
 
 Dans la figure \ref{equi}, les schémas de gauche sont considérés comme équilibrés. En effet, soit A, B et C sont tous amis et il n'y aucun conflit entre eux, soit B et C sont amis, mais sont en confit avec A. 
-%TODO si quelqu'un comprend pourquoi la référence se fait à la subsection et pas à la figure
 
 \paragraph{}
 Par contre, les schémas de droite sont des situations non équilibrées. Dans la 3, B et C sont amis avec A mais ennemis entre eux, on peut supposer que A doive alors choisir un camp. La 4 indique que tous sont ennemis, mais il est fort probable que le graphe évolue vers une situation où deux nœuds se liguent contre le troisième. 
@@ -64,11 +63,11 @@ $\rightarrow$ direction plus complexe à déterminer
 
 \subsection{Théorème d'équilibre [Frank Harary 1953]}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/22_amis-ennemies2.png}
-	\label{groupami}
 	\caption{2 groupes d'amis qui sont ennemis entre eux.}
+    \label{groupami}
 \end{figure}
 
 Si un graphe complet est équilibré, alors:
@@ -76,7 +75,6 @@ Si un graphe complet est équilibré, alors:
 \begin{enumerate}
 	\item toutes les paires sont amies
 	\item on peut diviser les nœuds en deux groupes X et Y, tel que X et Y chacun contient des amis mutuels et chaque membre de X est ennemi de chaque membre de Y comme représenté à la figure : \ref{groupami}.
-	%TODO même problème, la référence se fait à la subsection et pas à la figure
 \end{enumerate}
 
 \subsubsection*{Preuve}
@@ -109,7 +107,7 @@ Si un graphe complet est équilibré, alors:
 	\item chaque nœud de X est ennemi de chaque nœud de Y
 \end{enumerate}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1]{images/22_amis-ennemies.png}
 \end{figure}
@@ -121,11 +119,11 @@ On peut retrouver ce type de comportement de graphe dans les relations internati
 Comme indiqué dans la figure \ref{paysconflit}, les USA désiraient se rapprocher de la Chine, pour y arriver, ils ont analysé les relations des différents pays de la région. Ils ont ainsi constaté que la Chine avait des ennemis communs avec le Pakistan. Un rapprochement avec le Pakistan lui permettait de rentrer dans le groupe des amis de la Chine.
 
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1]{images/22_pays-conflit.png}
-	\label{paysconflit}
 	\caption{Relation lors de l'indépendance du Bangladesh}
+    \label{paysconflit}
 \end{figure}
 
 \paragraph{}
@@ -139,10 +137,19 @@ Une autre approche de ce conflit peut être réalisée d'un point de vue de la C
 %TODO besoin de plus d'explications ici
 
 \subsubsection*{Exemple 2}
-Un autre exemple de ce jeu diplomatique est donné à la figure 55 du livre de référence et représente le jeu des alliances des grandes puissances européennes à la veille de la Première Guerre mondiale.
+Un autre exemple de ce jeu diplomatique est donné à la figure
+\ref{first_world_war} et représente le jeu des alliances des grandes puissances européennes à la veille de la Première Guerre mondiale.
 
 On assiste à un équilibrage du graphe des relations avec des pays qui changent continuellement d'alliés jusqu'au moment de la triple entente et de la triple alliance qui sépara tous les pays d'Europe en deux camps ennemis.
-%TODO ajouter illustration
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/22_first_world_war.png}
+    \caption{Evolution des alliances en Europe de 1872 à 1907. (a)
+        1872-1881 ; (b) 1882 ; (c) 1890 ; (d) 1891-1994 ; (e) 1904 ; (f)
+    1907.}
+    \label{first_world_war}
+\end{figure}
 
 \subsubsection*{Exemple 3}
 Dans ce troisième exemple, on touche directement les réseaux sociaux où il existe des relations \textit{Like} ou \textit{Trust} et \textit{Dislike} ou \textit{Distrust} dont les utilisateurs peuvent se servir pour juger le contenu des autres (par exemple Reddit, les reviews sur Amazon...)

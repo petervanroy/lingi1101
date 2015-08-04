@@ -11,24 +11,42 @@
 \vspace{1ex}
 \textbf{Idée générale}
 
-\begin{figure}!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.4]{images/21_IdeeGenerale.png}
 \end{figure}
 
 \subsection*{Exemples}
-Il y a trois formes de fermeture
-\begin{enumerate}
-\item Fermeture triadique \includegraphics[scale=0.1]{images/21_FermetureTriadique.png}
-\item Fermeture focale \includegraphics[scale=0.1]{images/21_FermetureFocale.png}
-\item Fermeture d'adhésion \includegraphics[scale=0.1]{images/21_FermetureAdhesion.png}
-\end{enumerate}
+Il y a trois formes de fermeture :
+
+\begin{figure}[!ht]
+\begin{minipage}{\linewidth}
+    \centering
+    \begin{minipage}[t]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/21_FermetureTriadique.png}
+        \caption{Fermeture triadique}
+    \end{minipage}
+    \vrule
+    \begin{minipage}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/21_FermetureFocale.png}
+        \caption{Fermeture focale}
+    \end{minipage}
+    \vrule
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/21_FermetureAdhesion.png}
+        \caption{Fermeture d'adhésion}
+    \end{minipage}
+\end{minipage}
+\end{figure}
 
 \section{La formation des liens (selon les 3 approches)}
 Grâce à l'accès aux informations et aux outils d'analyse de réseau social, on peut observer les liens de plusieurs façons.
 \begin{itemize}
-\item On a des données réelles via les réseaux sociaux \\
-		On a plus facilement un accès direct au graphes qu'avant.
+\item On a des données réelles via les réseaux sociaux
+\item On a plus facilement un accès direct aux graphes qu'avant.
 \item On peut mesurer empiriquement le taux de création des liens en fonction du nombres d'amis communs.
 \end{itemize}
 
@@ -53,20 +71,48 @@ La probabilité qu'aucun lien se forme quand il y a un ami en commun est de $(1-
 On en déduit que pour "k" amis en commun, la probabilité est de $ (1-p)^{k}$\\
 Dès lors, la probabilité qu'au moins 1 lien se forme pour k amis en commun est de $ 1-(1-p)^{k}$. C'est ce qui est égal à T(k).
 
-\includegraphics[width=\textwidth]{images/21_emailFriends.jpg}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/21_emailFriends.png}
+    \caption{Quantification des effets de la fermeture triadique dans un
+        ensemble d'emails. La courbe déterminée à partir des données est
+        une ligne noire continue. Les lignes en pointillés montrent la
+        comparaison avec les probabilités depuis deux modèles simples
+        dans lesquels les amis en communs fournissent des probabilités
+    indépendantes de formation de lien}
+    \label{emailFriends}
+\end{figure}
 
-On voit sur la figure 4.9 (fermeture triadique) que la probabilité qu'un lien se forme augmente exponentiellement avec le nombre d'amis en commun.
+On voit sur la figure \ref{emailFriends} (fermeture triadique) que la probabilité qu'un lien se forme augmente exponentiellement avec le nombre d'amis en commun.
 
 \paragraph{Attention !}
 Le comportement et donc les calculs sont différents pour la fermeture focale et d'adhésion !
 
-\includegraphics[width=\textwidth]{images/21_pointsCommuns.jpg}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{images/21_pointsCommuns.png}
+    \caption{Quantification des effets d'une fermeture focalse dans un
+        ensemble d'emails. A nouveau, la courbe déterminée à partir des
+        données est une ligne continue, alors que la ligne en pointillés
+    fournit une comparaison par rapport à une base simple.}
+    \label{pointsCommuns}
+\end{figure}
 
-La figure 4.10 (fermeture focale) nous montre que dans le cas où l'on considère le nombre d'intérêts en commun (ici, des cours), on arrive à un certains moment à saturation. Augmenter le nombre de points d'intérêts communs n'augmente plus la probabilité de création d'un lien à partir d'un certain point (ici 3 cours en communs).
+La figure \ref{pointsCommuns} (fermeture focale) nous montre que dans le cas où l'on considère le nombre d'intérêts en commun (ici, des cours), on arrive à un certains moment à saturation. Augmenter le nombre de points d'intérêts communs n'augmente plus la probabilité de création d'un lien à partir d'un certain point (ici 3 cours en communs).
 
-\includegraphics[width=\textwidth]{images/21_community.jpg}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{images/21_community.png}
+    \caption{Quantification des effets de la fermeture d'adhésion dans
+        un large ensemble de données en ligne : Le graphe montre la
+        probabilité de rejoindre une communauté LiveJournal en fonction
+    du nombre d'amis qui sont déjà membres.}
+    \label{community}
+\end{figure}
 
-Enfin, la figure 4.11 (fermeture d'adhésion) présente aussi un saturation à partir d'un certains nombre d'amis qui ont le même point d'intérêt.
+Enfin, la figure \ref{community} (fermeture d'adhésion) présente aussi un saturation à partir d'un certains nombre d'amis qui ont le même point d'intérêt.
+
+\clearpage
 
 \section{Quantifier les rôles relatifs de sélection d'influence sociale}
 Les mécanismes de similitude :
@@ -75,7 +121,8 @@ Les mécanismes de similitude :
 \item L'influence sociale (extérieur, c'est les autres qui nous influencent) 
 \end{itemize}
 \subsection{Comment quantifier cela ?}
-\paragraph*{Par exemple wikipédia}
+
+\paragraph{Exemple - Wikipédia}
 Il peut exister une similitude de comportement entre rédacteurs. Par exemple les articles sur lesquels ils travaillent.
 
 Raisonnement :
@@ -87,7 +134,19 @@ Raisonnement :
 	$$\displaystyle\frac{\mbox{nombre d'articles rédigés par A ET B}}{\mbox{nombre d'articles rédigés par A OU B}}$$
 Notons dès lors que la similitude ne peut pas être plus petite que 0 ni plus grand que 1. $0 \leq sim \leq 1$
 \item Le moment de rupture est le moment où le lien est créé.
-\item On compare la similitude avant et après cette rupture (figure 4.13). C'est surtout la sélection qui joue avant, car chaque rédacteur choisit ce qu'il doit ajouter ou modifier par rapport à ce qu'a mis l'autre rédacteur. Après la rupture, c'est principalement l'influence sociale qui entre en jeu car les deux rédacteurs mettent leurs idées en commun. %TODO utiliser plus la figure 4.13 pour cet exemple
+\item On compare la similitude avant et après cette rupture (figure
+    \ref{wikipedia}). C'est surtout la sélection qui joue avant, car chaque rédacteur choisit ce qu'il doit ajouter ou modifier par rapport à ce qu'a mis l'autre rédacteur. Après la rupture, c'est principalement l'influence sociale qui entre en jeu car les deux rédacteurs mettent leurs idées en commun.
 \end{itemize}
 
-\includegraphics[width=\textwidth]{images/21_wikipedia.jpg}
+\begin{figure}[!ht]
+    \includegraphics[width=\textwidth]{images/21_wikipedia.png}
+    \caption{La similitude moyenne de deux contributeurs sur Wikipedia,
+        relativement au temps (0) auquel ils ont communiqué pour la
+        première fois. Le temps en abscisses, mesurés en unités
+        discrètes correspond à une action Wikipedia faite par un des
+        deux contributeurs. La courbe croît avant et après leur contact
+        au temps 0, indiquant qu'à la fois la sélection et l'influence
+        sociale joue un rôle ; la croissance de la similitude est plus
+    forte juste avant le temps 0.}
+    \label{wikipedia}
+\end{figure}

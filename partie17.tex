@@ -13,115 +13,167 @@ Networks, Crowds, and Markets: Reasoning About a Highly Connected World, by Davi
 \end{itemize}
 
 \section{Exemple et analyse de graphes}
-Voici quelques commentaires réalisés sur les figures du $1^{er}$ chapitre :
+Voici quelques commentaires réalisés sur les figures du 1\up{er} chapitre :
 
-\begin{itemize}
+\begin{center}
+\begin{figure}[!ht]
+\includegraphics[width=0.75\linewidth]{images/17_karate_club.png}
+\caption{Illustration des relations amicales entre 34 personnes dans un
+    club de karaté. Chaque n\oe ud représente une personne et chaque lien,
+    un lien d'amitié entre ces personnes. On constate que tout le monde
+n'est pas ami avec tout le monde. Grâce à cette structure, on peut
+déduire certaines choses, par exemple : deux personnes ont beaucoup de
+liens d'amitié avec d'autres personnes, mais pas entre eux.}
+\end{figure}
+\end{center}
 
-	\item \textbf{Figure 1.1} (ci-dessous : Figure \ref{karate} Illustration des relations amicales entre 34 personnes dans un club de karaté.
-Chaque nœud représente une personne et chaque lien, un lien d'amitié entre ces personnes.
-On constate que tout le monde n'est pas ami avec tout le monde. Grâce à cette structure, on peut déduire certaines choses, par exemple : deux personnes ont beaucoup de liens d'amitié avec d'autres personnes, mais pas entre eux.
-
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \centering
-\includegraphics[scale=1]{images/17_karate_club.jpg}
-\label{karate}
-\caption{Relations amicales dans un club de karaté}
+\includegraphics[width=0.75\linewidth]{images/social_networks_based_on_communication_and_interaction.png}
+\caption{Des employés dans un laboratoire de recherche (n\oe ud) ont des
+    liens entre eux : Lignes claires = communication e-mail. Lignes
+    foncées = hiérarchie, organisation du laboratoire. On voit que la
+    communication entre les gens suit relativement bien la structure
+    hiérarchique, mais pas complètement. On peut voir comment les gens
+collaborent, leurs degrés de collaboration, etc.}
 \end{figure}
 
-	\item \textbf{Figure 1.2} Des employés dans un laboratoire de recherche (nœud) ont des liens entre eux :
-Lignes claires = communication e-mail.
-Lignes foncées = hiérarchie, organisation du laboratoire.
-On voit que la communication entre les gens suit relativement bien la structure hiérarchique, mais pas complètement. On peut voir comment les gens collaborent, leurs degrés de collaboration, etc.
-
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \centering
-\includegraphics[scale=.4]{images/ref/fig-1-2.jpeg}
+\includegraphics[width=0.65\linewidth]{images/reseaux_prets_entre_banques.png}
+\caption{On constate que dans cette illustration, il y a beaucoup plus
+    de nœuds. Chaque nœud est une institution financière (banque par
+    exemple). Les liens représente des relations entre les banques,
+    c'est à dire des prêts faits par une banque à une autre. Le graphe
+    est connexe (il y a des chemins entre toutes les banques). Le centre
+    est très dense, ça montre une faiblesse du système financier : si
+    une banque dans le centre fait faillite par exemple, toutes les
+    autres banques liées à elle sont également mises en danger . Donc si
+    le noyau central est trop grand, c'est une faiblesse. En regardant
+    cette structure, on peut trouver les faiblesses et les comprendre.
+Ça peut être très important.}
 \end{figure}
 
-	\item \textbf{Figure 1.3} On constate que dans cette illustration, il y a beaucoup plus de nœuds. Chaque nœud est une institution financière (banque par exemple). Les liens représente des relations entre les banques, c'est à dire des prêts faits par une banque à une autre. Le graphe est connexe (il y a des chemins entre toutes les banques). Le centre est très dense, ça montre une faiblesse du système financier : si une banque dans le centre fait faillite par exemple, toutes les autres banques liées à elle sont également mises en danger . Donc si le noyau central est trop grand, c'est une faiblesse. En regardant cette structure, on peut trouver les faiblesses et les comprendre. Ça peut être très important.
-\begin{figure}[!h]
+\begin{figure}[!ht]
 \centering
-\includegraphics[scale=.4]{images/ref/fig-1-3.jpeg}
+\includegraphics[width=0.65\linewidth]{images/network_structure_of_political_blogs.png}
+\caption{Un n\oe ud représente un blog politique et un lien, une référence
+    vers un autre blog. Nous avons deux partis qui représentent chacun
+    un noyau : les démocrates et les républicains. On constate qu'il y a
+    moins de connexions entre les deux noyaux qu'à l'intérieur de
+    ceux-ci. On peut visualiser cette structure et se poser des
+    questions : est-ce que cette absence de contact entre les deux
+factions d'un monde bipolaire est un problème ?}
 \end{figure}
 
-	\item \textbf{Figure 1.4} Un nœud représente un blog politique et un lien, une référence vers un autre blog. Nous avons deux partis qui représentent chacun un noyau : les démocrates et les républicains. On constate qu'il y a moins de connexions entre les deux noyaux qu'à l'intérieur de ceux-ci. On peut visualiser cette structure et se poser des questions : est-ce que cette absence de contact entre les deux factions d'un monde bipolaire est un problème ?
-\end{itemize}
-
-\begin{figure}[!H]
-\centering
-\includegraphics[scale=.4]{images/ref/fig-1-4.jpeg}
-\end{figure}
+\clearpage
 
 Ce sont divers exemples que nous allons essayer d'analyser. Sur Internet, il y a beaucoup de nœuds avec de grandes capacités de calcul et de stockage. Grâce à de nouveaux outils utilisés sur internet pour analyser l'information, on peut observer la structure des graphes (ce qu'on ne pouvait pas faire avant).
 
 \section{Introduction}
-\begin{itemize}
-\item Structure des réseaux (Facebook, Twitter, réseau économique,...).
-\item Comportement des participants (interactions : chaque nœud sera un participant et va interagir).En principe, chaque nœud ne voit que son voisinage et interagit en conséquence.
 
-\begin{itemize}
-	\item Interactions \textit{locales} avec conséquences \textit{globales}.
-	Il faut faire le lien entre ces deux choses.
-	\item Effets non attendus. Par exemple les réseaux routiers : s'il y a des bouchons, on augmente la capacité du réseau (en ajoutant une voie). 
-	Le résultat peut être contre intuitif, ça peut être :
-	\begin{itemize} 
-		\item Une réduction des transferts.
-		\item Une augmentation du trafic. (résultat opposé à celui attendu)
-	\end{itemize}	
-	\item Le \textbf{Paradoxe de Braess} nous dit que l'ajout d'une nouvelle capacité à un réseau peut réduire la performance globale (effet non attendu).
-Il faut donc comprendre comment le réseau fonctionne pour prévoir la réaction à une modification plutôt que d'agir impulsivement et avoir des effets non attendus.
-\end{itemize}
-\end{itemize}
+Comme montré dans la section précédente, l'analyse des interactions
+entre des personnes ou des entités distinctes se fait à l'aide de
+graphes. Ces graphes reprennent deux éléments : les entités qui
+correspondent à une forme qui peut varier en taille et les liens entre
+ces entités qui sont représentés par des lignes. \newline
 
-\section{Nouvelle discipline}
-Les graphes et leurs propriétés évoluent avec le temps, ce n'est pas statique.
+La structure en réseaux est très présente pour décrire les relations
+entre les personnes sur Internet (à travers des réseaux sociaux comme
+Facebook et Twitter ; les sites de partage de contenu comme YouTube et
+Flickr) et également dans le monde économique (comme
+l'exemple des liens du monde bancaire dans la section précedente).
+\newline
 
-Nouvelles disciplines pour analyser des graphes d'informations tirés de sites comme YouTube, Flicker, etc.
+L'intérêt de la représentation en graphes est de pouvoir montrer les
+liens entre des interactions \textit{locales} et leurs conséquences
+\textit{globales}. \newline
 
-Synthèse de 3 disciplines :
+Il se peut que certaines actions sur les réseaux aient des résultats
+contre-intuitifs. Prenons l'exemple d'un réseau routier où il y a des
+bouchons, si on augmente la capacité du réseau en ajoutant une voie, les
+résultats contre-intuitifs peuvent être multiples :
+
 \begin{enumerate}
-
-	\item Mathématiques : théorie des graphes
-	\item Mathématiques : théorie des jeux\\
-		Exemple : YouTube impose ses règles, c'est le croupier, et ceux qui utilisent YouTube sont des joueurs.
-	\item Sociologie : étude des groupes sociaux\\
-		les participants sont humains ou guidés par un humain. Il n'est pas uniquement question de mathématiques, il faut aussi comprendre les humains.
+    \item Réduction des transferts ;
+    \item Augmentation du traffic.
 \end{enumerate}
 
-Dans ce cours, nous nous concentrerons principalement sur la théorie des graphes. La théorie des jeux sera abordée de façon intuitive, et nous parlerons un peu de la sociologie.
+Ce genre de résultats est repris sous l'appellation \textbf{Paradoxe de
+Braess}. Concrètement, l'ajout d'une nouvelle capacité sur un réseau
+peut réduire la performance globale du réseau (l'explication vient du
+fait que chacun tente d'améliorer son temps en trajet personnel en
+empruntant la nouvelle route et dans un environnement non-régulé, cette
+situation peut déteriorier la performance globale).
+
+\section{Nouvelle discipline}
+
+Le monde étant de plus en plus connecté peu importe les domaines
+étudiés, l'étude des structures discrètes s'impose comme une nouvelle discipline à
+part entière. Cette théorie a pour but d'analyser les graphes et leurs
+propriétés à travers le temps. \newline
+
+Nous pouvons la décrire comme la synthèse de 3 autres disciplines :
+
+\begin{enumerate}
+	\item La théorie des graphes qui a pour but de résoudre des
+	    problèmes liés aux éléments des graphes ;
+	\item La théorie des jeux qui a pour but d'analyser les situations
+	    dans lesquelles les décisions d'une entité dépend des
+	    anticipations de l'entité vis-à-vis d'autres entités auxquelles
+	    elle est liée ;
+	\item L'étude des groupes sociaux (sociologie) qui a pour but
+	    d'expliquer les comportements humains. En effet, les
+	    participants d'un graphe sont des humains ou sont guidés par des
+	    humains, cette dimension est donc non négligeable.
+\end{enumerate}
+
+Dans ce cours, nous nous concentrerons principalement sur la théorie des
+graphes. La théorie des jeux sera abordée de façon intuitive, et nous
+parlerons un peu de la sociologie.
 
 \subsection{Théorie des jeux}
-On a un ensemble de participants qui jouent à "un jeu" (un ensemble de règles suivies par tous les participants). Chaque participant doit agir : 
 
-\begin{itemize}
-\item Simple à spécifier (comme les échecs : 2 participants et 1 action en alternance). 
-\item Compliqué : pas d'alternance, tout le monde agit en même temps. C'est un système concurrent.
-\end{itemize}
+Un \textbf{jeu} est un ensemble de règles qu'on fait subir à un ensemble
+de participants qui interagissent. Il y a deux principaux types de jeux :
 
-Exemple d'action simple : la vente aux enchères : 
-	nombre fini de participants,
-	règles simples et définies (différentes techniques sont possibles)
-	
-\vspace{1cm}
+\begin{enumerate}
+    \item les jeux \textit{séquentiels}, autrement dit : où une seule action
+        est effectuée à la fois. C'est le cas du jeu d'échecs par
+        exemple, où chaque action produite par un joueur entrainera une
+        réaction par l'autre joueur, chacun essayant d'anticiper les
+        coups de son adversaire. Un autre exemple est la vente aux
+        enchères.
+    \item les jeux \textit{concurrents}, autrement dit : où plusieurs
+        actions sont effectuées en même temps.
+\end{enumerate}
 
-On va rester intuitif sur ce sujet, mais si on veut être plus précis, il y a des champs mathématiques qui étudient les systèmes concurrents.
+Dans certains jeux, des participants peuvent avoir des avantages sur les
+autres, c'est le cas particulier des positions géographiques comme vont
+le montrer les exemples qui suivent.
 
-Enfin, on peut aussi voir que la position dans le graphe peut aussi apporter des avantages.
-
-\begin{itemize}
-	\item \textbf{Figure 1.8} Réseau d'interaction économique entre pays. Structure de l'économie mondiale : Hong Kong a un gros avantage, il a une porte d'entrée vers la Chine (à l'époque). Certains pays sont des partenaires privilégie des États-Unis... 
-	\begin{figure}[!H]
+\begin{figure}[!ht]
 \centering
-\includegraphics[scale=.4]{images/ref/fig-1-8.jpeg}
+\includegraphics[width=0.8\linewidth]{images/network_international_trade.png}
+\caption{Réseau d'interaction économique entre pays. Structure de
+    l'économie mondiale : Hong Kong a un gros avantage, il a une porte
+    d'entrée vers la Chine (à l'époque). Certains pays sont des
+partenaires privilégie des États-Unis...}
 \end{figure}
 
-	\item \textbf{Figure 1.9} Chemins de commerces médiévaux en Europe. Une position stratégique donne des avantages. Tous ces avantages viennent de la structure du réseau (notons que le comportement d'un participant peut dépendre de la structure).
-\begin{figure}[!H]
+\begin{figure}[!ht]
 \centering
-\includegraphics[scale=.4]{images/ref/fig-1-9.jpeg}
+\includegraphics[width=0.9\linewidth]{images/map_of_medieval_trade_routes.png}
+\caption{Chemins de commerces médiévaux en Europe. Une position
+    stratégique donne des avantages. Tous ces avantages viennent de la
+    structure du réseau (notons que le comportement d'un participant
+peut dépendre de la structure).}
 \end{figure}
-\end{itemize}
 
-Si on observe correctement le réseau, on peut se placer en position d'avantage et se mettre à une position qui donne plus de pouvoir.
+Si on observe correctement le réseau, on peut se placer en position
+d'avantage et se mettre à une position qui donne plus de pouvoir.
 
-Si on connaît la structure, une petite action peut suffire pour arrêter une épidémie en coupant les liens par lesquels cette épidémie pourrait se répandre.
+Le genre d'application que ces graphes peuvent avoir se démontre dans le
+cas d'épidémie. Si on connaît la structure des graphes, une petite
+action peut suffire pour arrêter une épidémie en coupant les liens par
+lesquels cette épidémie pourrait se répandre.

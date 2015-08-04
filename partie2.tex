@@ -1,4 +1,3 @@
-
 \chapter{La logique propositionnelle}
 
 \begin{quote}
@@ -168,15 +167,15 @@ fausses.
 
 Les autres propositions sont construites à partir de propositions plus
 simples. Leur véracité est fonction de celle des propositions qui les
-composent. Prenons par exemple $p \land q$, où $p$ et $q$ sont d’autres
-propositions. La véracité de $p \land q$ est une fonction de celle de $p$ et
-de $q$ : $p \land q$ est vrai si et seulement si $p$ et $q$ sont vrais aussi
+composent. Prenons par exemple $A \land B$, où $A$ et $B$ sont d’autres
+propositions. La véracité de $A \land B$ est une fonction de celle de $A$ et
+de $B$ : $A \land B$ est vrai si et seulement si $A$ et $B$ sont vrais aussi
 ($\land$ est un « et » logique). Cette relation peut être exprimée à l’aide
 de la table de vérité suivante :
 
 \vspace{2 mm}
 \begin{tabular}{ll|l}
-  $p$ & $q$ & $p \land q$ \\
+  $A$ & $B$ & $A \land B$ \\
   \hline
 
   $\true$ & $\true$ & $\true$ \\
@@ -190,7 +189,7 @@ Voici la table de vérité des autres connecteurs logiques :
 \vspace{2 mm}
 
 \begin{tabular}{ll|l}
-  $p$ & $q$ & $p \lor q$ \\
+  $A$ & $B$ & $A \lor B$ \\
   \hline
 
   $\true$ & $\true$ & $\true$ \\
@@ -201,7 +200,7 @@ Voici la table de vérité des autres connecteurs logiques :
 \vspace{2 mm}
 
 \begin{tabular}{ll|l}
-  $p$ & $q$ & $p \Leftrightarrow q$ \\
+  $A$ & $B$ & $A\Leftrightarrow B$ \\
   \hline
 
   $\true$ & $\true$ & $\true$ \\
@@ -212,7 +211,7 @@ Voici la table de vérité des autres connecteurs logiques :
 \vspace{2 mm}
 
 \begin{tabular}{l|l}
-  $p$ & $\lnot p$ \\
+  $A$ & $\lnot B$ \\
   \hline
 
   $\true$ & $\false$ \\
@@ -221,7 +220,7 @@ Voici la table de vérité des autres connecteurs logiques :
 \vspace{2 mm}
 
 \begin{tabular}{ll|l}
-  $p$ & $q$ & $p \Rightarrow q$ \\
+  $A$ & $B$ & $A \Rightarrow B$ \\
   \hline
 
   $\true$ & $\true$ & $\true$ \\
