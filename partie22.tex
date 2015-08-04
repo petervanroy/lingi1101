@@ -107,7 +107,7 @@ Si un graphe complet est équilibré, alors:
 	\item chaque nœud de X est ennemi de chaque nœud de Y
 \end{enumerate}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1]{images/22_amis-ennemies.png}
 \end{figure}
@@ -119,11 +119,11 @@ On peut retrouver ce type de comportement de graphe dans les relations internati
 Comme indiqué dans la figure \ref{paysconflit}, les USA désiraient se rapprocher de la Chine, pour y arriver, ils ont analysé les relations des différents pays de la région. Ils ont ainsi constaté que la Chine avait des ennemis communs avec le Pakistan. Un rapprochement avec le Pakistan lui permettait de rentrer dans le groupe des amis de la Chine.
 
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=1]{images/22_pays-conflit.png}
-	\label{paysconflit}
 	\caption{Relation lors de l'indépendance du Bangladesh}
+    \label{paysconflit}
 \end{figure}
 
 \paragraph{}
@@ -137,10 +137,19 @@ Une autre approche de ce conflit peut être réalisée d'un point de vue de la C
 %TODO besoin de plus d'explications ici
 
 \subsubsection*{Exemple 2}
-Un autre exemple de ce jeu diplomatique est donné à la figure 55 du livre de référence et représente le jeu des alliances des grandes puissances européennes à la veille de la Première Guerre mondiale.
+Un autre exemple de ce jeu diplomatique est donné à la figure
+\ref{first_world_war} et représente le jeu des alliances des grandes puissances européennes à la veille de la Première Guerre mondiale.
 
 On assiste à un équilibrage du graphe des relations avec des pays qui changent continuellement d'alliés jusqu'au moment de la triple entente et de la triple alliance qui sépara tous les pays d'Europe en deux camps ennemis.
-%TODO ajouter illustration
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/22_first_world_war.png}
+    \caption{Evolution des alliances en Europe de 1872 à 1907. (a)
+        1872-1881 ; (b) 1882 ; (c) 1890 ; (d) 1891-1994 ; (e) 1904 ; (f)
+    1907.}
+    \label{first_world_war}
+\end{figure}
 
 \subsubsection*{Exemple 3}
 Dans ce troisième exemple, on touche directement les réseaux sociaux où il existe des relations \textit{Like} ou \textit{Trust} et \textit{Dislike} ou \textit{Distrust} dont les utilisateurs peuvent se servir pour juger le contenu des autres (par exemple Reddit, les reviews sur Amazon...)
