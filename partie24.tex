@@ -159,12 +159,21 @@ doivent l'être eux aussi.
  
 Et la condition $\sum Pr(p) = 1$ est toujours vérifiée.
  
- L'équilibre est vérifié si le graphe est connexe,par contre si il ne l'est pas un problème se pose: Le fluide peut arriver au mauvais noeud (analogie réseau d'eau )  :
+ L'équilibre est vérifié si le graphe est connexe,par contre si il ne
+ l'est pas un problème se pose: Le fluide peut arriver au mauvais noeud
+ (Par analogie avec un réseau d'eau, on comprend que ce genre de
+ situation entraîne un blocage du \og{}fluide\fg{}) :
 
-\includegraphics[scale=0.8]{images/24_Nconnexe.pdf}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/24_PageRank_non_connexe.png}
+    \caption{Le même ensemble de huit pages, mais F et G ont changé
+        leurs liens pour pointer l'un vers l'autre. Sans un effet de
+    lissage, tout le PageRank irait vers F et G.}
+\end{figure}
 
 \subsection*{Solution du problème}
-	La solution dans le cas où le PageRank s'amasse dans un nœuds serait de former des cycles afin d'assurer que le fluide continue à circuler.
+	La solution dans le cas où le PageRank s'amasse dans un n\oe ud serait de former des cycles afin d'assurer que le fluide continue à circuler.
 	
  	En pratique, on va réinjecter un peu de fluide partout à chaque itération pour éviter que le fluide se concentre dans les nœuds qui n'ont que des liens entrants et pas de liens sortant. De cette façon on referme la boucle et le fluide peut continuer à circuler.
  	
