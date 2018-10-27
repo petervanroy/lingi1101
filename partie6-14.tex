@@ -394,36 +394,32 @@ Une preuve est toujours un objet formel:
 
 \begin{center}
 \fbox{
-$
-\begin{array}{l l l}
+\begin{tabular}{l l l}
   1. & \fbox{\ldots} &  Prémisses \\
   2. & \fbox{Formule, regle} &  Justification \\
   \ldots & \ldots &  \ldots \\
   n. & \fbox{Conclusion} &  Justification \\
-\end{array}
-$
+\end{tabular}
 }
 \end{center}
 
 Mais il est vrai que les preuves en logique des prédicats sont parfois délicates à cause des variables:
-occurrences libres (par quantifiées), occurrences liées par $\forall$ et occurrences liées par $\exists$.
+occurrences libres (pas quantifiées), occurrences liées par $\forall$ et occurrences liées par $\exists$.
 Dans ce chapitre nous allons surtout étudier comment manipuler les variables et les quantificateurs
 correctement dans une preuve.
 
 \section{Exemple}
 
 Nous allons prouver que s'il est vrai que
-$\forall x \cdot P(x) \wedge Q(x)$ (prémisse) 
+$\forall x \cdot P(x) \wedge Q(x)$ (prémisse)
 alors il est vrai que $\forall x \cdot P(x)\wedge(\forall x \cdot Q(x))$ (conclusion).
-Nous utilisons l'approche suivante pour traiter les quantificateurs:
+Nous utilisons l'approche suivante pour traiter les quantificateurs~:
 \begin{center}
-$
-\begin{array}{l l}
-  1. & $Enlever les quantificateurs pour avoir des variables libres$ \\
-  2. & $Raisonner sur l'intérieur$\\
-  3. & $Remettre les quantificateurs$\\
-\end{array}
-$
+\begin{enumerate}
+	\item Enlever les quantificateurs pour avoir des variables libres\\
+	\item Raisonner sur l'intérieur\\
+	\item Remettre les quantificateurs\\
+\end{enumerate}
 \end{center}
 Les étapes difficiles à réaliser correctement sont les étapes $1$ et $3$. Voici la preuve en ``français'' :
 
@@ -441,7 +437,7 @@ $
   2. & P(x) \wedge Q(x) &  $Élimination de $\forall \\
   3. & P(x) &  $Simplification$ \\
   4. & \forall x \cdot  P(x) &  $Introduction de $ \forall \\
-  5. & Q(x) &  $Simplification $ \forall \\
+  5. & Q(x) &  $Simplification de 2$ \\
   6. & \forall x \cdot Q(x) &  $Introduction de $\forall \\
   7. & \forall x \cdot P(x) \wedge \forall x \cdot Q(x) &  $Conjonction$ \\
 \end{array}
@@ -495,8 +491,8 @@ Comment savons-nous que les règles sont correctes?
 On ne peut pas le prouver dans la logique des prédicats: on ne peut pas prouver l'exactitude
 des règles avec les règles elles-mêmes!
 Il faut faire un raisonnement en dehors de la logique des prédicats.
-Nous justifions chaque règle avec un raisonnement basé que un modèle de la formule.
-Si la logique des prédicats est notre langage pour formaliser les raisonnements,
+Nous justifions chaque règle avec un raisonnement basé sur un modèle de la formule.
+Si la logique des prédicats est notre langage pour exprimer les raisonnements formels,
 on peut donc dire que la justification des règles est faite en dehors de ce langage, donc en {\em meta-langage}.
 
 \subsection{La substitution}
@@ -627,8 +623,13 @@ $\> \> \> \hookrightarrow$ Aucune formule dans la preuve jusqu'à cet endroit ne
 \end{itemize}
 \underline{Deux conditions :}
 \begin{itemize}
-\item $x$ n'était pas libre dans une formule contenant un quantificateur $\exists$ qu'on a éliminé.
-\item $x$ n'est pas libre dans une prémisse (dans ce cas, $x$ serait connu depuis le début donc il possède déjà une valeur).
+\item $x$ n'est pas libre dans une formule obtenue par élimination de $\exists$. Deux cas sont possibles~:
+	\begin{itemize}
+		\item $\exists x$ éliminé, donc $x$ a été choisi pour rendre vraie la formule
+		\item $\exists y$ éliminé, donc $y$ a été choisi selon la valeur de $x$ ($y$ dépend de $x$)
+	\end{itemize}
+		Dans les deux cas, une contrainte sur $x$ empèche d'introduire $\forall x$
+\item $x$ n'est pas libre dans une prémisse (dans ce cas, $x$ serait connu depuis le début donc il possède déjà une valeur)
 \end{itemize}
 
 \underline{Exemple :}\\
@@ -704,7 +705,7 @@ Lors que l'arrivée des ordinateurs, fin du 20ème siècle (années 50-60 et fin
 \item Création de l'Algorithme de Preuves (1965):
 \begin{itemize}
 \item Alan Robinson invente la Règle de Résolution (qui va être expliquée au chapitre suivant)
-\item Création de prouveurs (assistants de preuve) par exemple Coq et Isabelle en 1972
+\item Création de prouveurs (assistants de preuve) par exemple Coq (1989) et Isabelle (1986)
 \item Création de la logique de programmation qui aide à l'élaboration de la programmation par contraintes: Prolog (1972) 
 \end{itemize}
 \item Création de la sémantique Web: OWL (Web Ontology Langage)
@@ -720,7 +721,7 @@ Avec l'arrivée des ordinateurs, les logiciens ont tout de suite essayé de fair
 Nous avons vu dans le chapitre \ref{preuveprop} (Section \ref{algorithmeprop})
 un algorithme de preuve pour la logique propositionnelle qui utilise la réfutation.
 La logique des prédicats est beaucoup plus expressive que la logique propositionnelle
-et les raisonnement est plus délicat (voir chapitre précédent!).
+et le raisonnement est plus délicat (voir chapitre précédent!).
 
 Est-ce que nous pouvons faire un algorithme de preuve pour la logique des prédicats?
 Cela ne semble pas évident.
