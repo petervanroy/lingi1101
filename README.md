@@ -16,7 +16,7 @@ Markets" de D. Easley et J. Kleinberg.
 
 Pour accéder à la dernière version du syllabus, il est nécessaire de
 posséder tous les fichiers présents sur ce répertoire, vous pouvez
-compiler le fichier principal (rapport.tex) grâce à la commande
+compiler le fichier principal (syllabus.tex) grâce à la commande
 
 ```
 make

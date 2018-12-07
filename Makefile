@@ -6,7 +6,7 @@
 #PDFVIEWER=xpdf # lightweight
 PDFVIEWER=xdg-open # Default pdf viewer - GNU/Linux
 #PDFVIEWER=open # Default pdf viewer - Mac OS
-MAIN_NAME=rapport
+MAIN_NAME=syllabus
 PDF_NAME=$(MAIN_NAME).pdf
 OPTIONS= -pdf -pdflatex="pdflatex -shell-escape -enable-write18" \
 	  -use-make
