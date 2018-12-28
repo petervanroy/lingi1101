@@ -161,21 +161,42 @@ une preuve déductive est beaucoup plus expressive qu'une preuve transformationn
 \subsection{Equivalences logiques}
 			\begin{center}
 			\begin{tabular}{ll}
-			$p \Lleftarrow \Rrightarrow p \lor p$ & Idempotence de $\lor$\\
 			$p \lor q \Lleftarrow \Rrightarrow q \lor p$ & Commutativité de $\lor$\\
+			$p \land q \Lleftarrow \Rrightarrow q \land p$ & Commutativité de $\land$\\
+			$p \Leftrightarrow q \Lleftarrow \Rrightarrow q \Leftrightarrow p$ & Commutativité de $\Leftrightarrow$\\
+
 			$(p \lor q) \lor r \Lleftarrow \Rrightarrow p \lor (q \lor r)$ & Associativité de $\lor$\\
+			$(p \land q) \land r \Lleftarrow \Rrightarrow p \land (q \land r)$ & Associativité de $\land$\\
+
+			$(p \land q) \lor r \Lleftarrow \Rrightarrow (p \lor r) \land (q \lor r)$ & Distributivité de $\lor$\\
+			$(p \lor q) \land r \Lleftarrow \Rrightarrow (p \land r) \lor (q \land r)$ & Distributivité de $\land$\\
+			\\
+
+			$p \Lleftarrow \Rrightarrow p \lor p$ & Idempotence de $\lor$\\
+			$p \Lleftarrow \Rrightarrow p \land p$ & Idempotence de $\land$\\
+
 			$ \lnot \lnot p \Lleftarrow \Rrightarrow p$ & Double Négation\\
+			$p \lor \lnot p \Lleftarrow \Rrightarrow true$ & Tiers exclu\\
+			$p \land \lnot p \Lleftarrow \Rrightarrow false$ & Contradiction\\
 			$p \Rightarrow q \Lleftarrow \Rrightarrow \lnot p \lor q$ & Implication\\
+			$p \Rightarrow q \Lleftarrow \Rrightarrow \lnot q \Rightarrow \lnot p$ & Contraposée\\
+			$p \Leftrightarrow q \Lleftarrow \Rrightarrow (p \Rightarrow q) \land (q \Rightarrow p)$ & Équivalence\\
+
 			$\lnot (p \land q) \Lleftarrow \Rrightarrow \lnot p \lor \lnot q$ & $1^{ere}$ loi de De Morgan\\
 			$\lnot (p \lor q) \Lleftarrow \Rrightarrow \lnot p \land \lnot q$ & $2^{eme}$ loi de De Morgan\\
-			$(p \land q) \lor r \Lleftarrow \Rrightarrow (p \lor r) \land (q \lor r)$ & Distributivité de $\lor$\\
+			\\
+
+			$p \land true \Lleftarrow \Rrightarrow p$ & Simplification\\
+			$p \lor true \Lleftarrow \Rrightarrow true$ & Simplification\\
+			$p \land false \Lleftarrow \Rrightarrow false$ & Simplification\\
+			$p \lor false \Lleftarrow \Rrightarrow p$ & Simplification\\
+			$p \lor (p \land q) \Lleftarrow \Rrightarrow p$ & Simplification\\
+			$p \land (p \lor q) \Lleftarrow \Rrightarrow p$ & Simplification\\
 			\end{tabular}
 			\end{center}
-À ces équivalence nous ajoutons aussi l'idempotence, la commutativité, l'associativité et
-la distributivité de $\land$.\\
-			
+
 \subsection{Règles d'inférence}
-		
+
 À la différence de la preuve transformationnelle, les règles d'inférences ont une direction : elles commencent par les prémisses et se terminent par la conclusion.
 Pour chaque règle, si les prémisses sont vraies, alors la conclusion est vraie.
 Nous utilisons un raisonnement informel pour justifier chaque règle.
