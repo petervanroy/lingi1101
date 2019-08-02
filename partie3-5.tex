@@ -508,7 +508,7 @@ une propriété vraie en une autre propriété vraie en
 remplaçant systématiquement tout symbole par un autre
 selon un schéma de correspondances.
 
-\subsubsection{Dans les formules sans $\rightarrow$ :}
+\subsubsection{Dans les formules sans $\Rightarrow$ :}
 
 Les correspondances sont:
 \begin{align*}
@@ -535,12 +535,12 @@ p \leftrightarrow \lnot p
 Par exemple, si on prend la définition suivante:
  \begin{align*}
 	 \{p_1,...,p_n\} \models q \hspace{0.5cm}
-         ssi \hspace{0.5cm} \models (p_1 \land ... \land p_n \land \lnot q) \leftrightarrow \false
+         ssi \hspace{0.5cm} \models (p_1 \land ... \land p_n \land \lnot q) \Leftrightarrow \false
  \end{align*}
 en remplaçant chaque symbole par le symbole correspondant on obtient une propriété vraie:
  \begin{align*}
 	 \{p_1,...,p_n\} \models q \hspace{0.5cm}
-         ssi \hspace{0.5cm} \models ( \lnot p_1 \lor ... \lor \lnot p_n \lor q) \leftrightarrow \true
+         ssi \hspace{0.5cm} \models ( \lnot p_1 \lor ... \lor \lnot p_n \lor q) \Leftrightarrow \true
  \end{align*}
 
 
@@ -685,7 +685,7 @@ On écrit $\lor L_i$ ou $( L_1 \lor L_2 \lor L_3 \lor ... \lor L_i )$.
 
 L'algorithme de normalisation se fait en quatre phases:
 \begin{enumerate}
-\item Eliminer les $\rightarrow$ et $\leftrightarrow$ en les remplaçant par des formules équivalentes.  Par exemple, $p \rightarrow q$ sera remplacée par $\lnot p \lor q$.
+\item Eliminer les $\Rightarrow$ et $\Leftrightarrow$ en les remplaçant par des formules équivalentes.  Par exemple, $p \Rightarrow q$ sera remplacée par $\lnot p \lor q$.
 \item Déplacer les négations vers l'intérieur (jusqu'à dans les propositions premières) en utilisant les formules de De Morgan.
 \item Déplacer les disjonctions ($\lor$) vers l'intérieur en utlisant les lois distributives.
 \item Simplifier en éliminant les formes $(P \lor \lnot P)$ dans chaque disjonction.
@@ -694,7 +694,7 @@ L'algorithme de normalisation se fait en quatre phases:
 \subsubsection{Exemple de normalisation}
 
 \begin{align*}
-& (P \rightarrow (Q \rightarrow R)) \rightarrow ((P \land S) \rightarrow R) \\
+& (P \Rightarrow (Q \Rightarrow R)) \Rightarrow ((P \land S) \Rightarrow R) \\
 & \lnot (\lnot P \lor (\lnot Q \lor R)) \lor (\lnot (P \land S) \lor R) \\
 & ( \lnot \lnot P \land \lnot (\lnot Q \lor R)) \lor ((\lnot P \lor \lnot S) \lor R) \\
 & (P \land (Q \land \lnot R)) \lor ( \lnot P \lor \lnot S \lor R) \\
