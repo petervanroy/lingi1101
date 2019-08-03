@@ -200,87 +200,85 @@ une preuve déductive est beaucoup plus expressive qu'une preuve transformationn
 À la différence de la preuve transformationnelle, les règles d'inférences ont une direction : elles commencent par les prémisses et se terminent par la conclusion.
 Pour chaque règle, si les prémisses sont vraies, alors la conclusion est vraie.
 Nous utilisons un raisonnement informel pour justifier chaque règle.
-		\begin{center}
-		\begin{tabular}{llp{3cm}l}
-		
-   			Conjonction : &
-   			\begin{tabular}{cl}
-      		p & prémisse\\
-      		q & prémisse\\
-      		\line(1,0){25}&\\
-      		$p\land q$ & Conclusion
-   			\end{tabular} 
-   			&
-   			
-   			Simplification : &
-   			\begin{tabular}{c}
-      		$p \land q$ \\
-      		\hline
-      		$p$\\
-   			\end{tabular} \\
-   			&\\
-   			
-   			Addition : &
-   			\begin{tabular}{c}
-      		$p $ \\
-      		\hline
-      		$p \lor q$\\
-   			\end{tabular}
-   			&
-   			
-   			Contradiction : &
-   			\begin{tabular}{c}
-      		$p$ \\
-      		$\lnot p$\\
-      		\hline
-      		$q$\\
-   			\end{tabular}\\
-   			&\\
-   			
-   			Double Négation : &
-   			\begin{tabular}{c}
-      		$\lnot \lnot p $ \\
-      		\hline
-      		$p$\\
-   			\end{tabular}
-   			&
-   			
-   			\raggedright Transitivité de l'équivalence : &
-   			\begin{tabular}{c}
-      		$p \Leftrightarrow q$ \\
-      		$q \Leftrightarrow r$ \\
-      		\hline
-      		$p \Leftrightarrow r$\\
-   			\end{tabular}\\
-   			&\\
-   			
-   			Modus Ponens : &
-   			\begin{tabular}{c}
-      		$p \Rightarrow q$ \\
-      		$p$ \\
-      		\hline
-      		$q$\\
-   			\end{tabular}
-   			&
-   			
-   			Modus Tollens : &
-   			\begin{tabular}{c}
-      		$p \Rightarrow q$ \\
-      		$\lnot q$ \\
-      		\hline
-      		$\lnot p$\\
-   			\end{tabular}\\
-   			&\\
-   			
-   			Loi d'équivalence : &
-   			\begin{tabular}{c}
-      		$p \Leftrightarrow q$ \\
-      		\hline
-      		$q \Leftrightarrow p$\\
-   			\end{tabular}\\		
+
+\begin{center}
+	\begin{tabular}{ccc}
+		Conjonction & Simplification & Addition\\
+		\begin{tabular}{c}
+			p\\
+			q\\
+			\hline
+			$p\land q$
 		\end{tabular}
-		\end{center}
-		
+		&
+		\begin{tabular}{c}
+			$p \land q$ \\
+			\hline
+			$p$\\
+		\end{tabular}
+		&
+		\begin{tabular}{c}
+			$p $ \\
+			\hline
+			$p \lor q$\\
+		\end{tabular}
+		\\
+
+		Contradiction & Double Négation & Transitivité de l'équivalence\\
+		\begin{tabular}{c}
+			$p$ \\
+			$\lnot p$\\
+			\hline
+			$q$\\
+		\end{tabular}
+		&
+		\begin{tabular}{c}
+			$\lnot \lnot p $ \\
+			\hline
+			$p$\\
+		\end{tabular}
+		&
+		\begin{tabular}{c}
+			$p \Leftrightarrow q$ \\
+			$q \Leftrightarrow r$ \\
+			\hline
+			$p \Leftrightarrow r$\\
+		\end{tabular}
+		\\
+
+		Modus Ponens & Modus Tollens & Loi d'équivalence\\
+		\begin{tabular}{c}
+			$p \Rightarrow q$ \\
+			$p$ \\
+			\hline
+			$q$\\
+		\end{tabular}
+		&
+		\begin{tabular}{c}
+			$p \Rightarrow q$ \\
+			$\lnot q$ \\
+			\hline
+			$\lnot p$\\
+		\end{tabular}
+		&
+		\begin{tabular}{c}
+			$p \Leftrightarrow q$ \\
+			\hline
+			$q \Leftrightarrow p$\\
+			$q \Rightarrow p$\\
+			$p \Rightarrow q$\\
+		\end{tabular}
+		\\
+		Syllogisme disjoint\\
+		\begin{tabular}{c}
+			$p\lor q$\\
+			$\lnot p$\\
+			\hline
+			$q$\\
+		\end{tabular}
+		\\
+	\end{tabular}
+\end{center}
 \subsection{Schémas de preuve}
 
 En plus des équivalences logiques et des règles d'inférence,
