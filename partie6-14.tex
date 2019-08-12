@@ -756,7 +756,8 @@ vrai dans tous les modèles, l'algorithme peut tourner en rond et ne jamais se t
 Le problème est donc que quand l'algorithme prend trop de temps à trouver une preuve,
 à un certain moment on doit l'arrêter et l'on n'est jamais certain du résultat.
 On ne peut jamais être sûr que l'algorithme n'aurait pas trouvé une preuve si on l'avait laissé tourner plus longtemps.
-Il est donc semi-décidable, car ses résultats ne sont totalement fiables que dans le cas ou une preuve est trouvée.
+Il est donc semi-décidable, car il ne s'arrête que si une preuve existe.
+Si il était décidable, il s'arrêterait toujours.
 \end{itemize}
 
 \section{Concepts de base}
@@ -768,7 +769,7 @@ On transforme les prémisses dans une forme uniforme et simple qui s'appelle for
 \item Simplification des règles d'inférence.
 On garde une seule règle d'inférence, la résolution, qui marche sur la forme clausale.
 \end{itemize}
-Avec ces deux simplifications, la définition de l'algorithme devient simple aussi.
+Avec ces deux simplifications, la définition de l'algorithme se simplifie également.
 
 \subsection{Forme normale conjonctive (forme clausale)} 
 
@@ -864,6 +865,9 @@ Etapes de la transformation en formule logiquement équivalente:
 \subsection{Intuition}
 
 Cette transformation consiste à éliminer toutes les occurrences de quantificateurs existentiels.
+Ceux-ci correspondent au solutions des équations.
+Comme l'algorithme ne résoud pas toutes les équations, la skolemisation retire le besoin de trouver une solution.
+L'algorithme n'a plus qu'a trouver une solution en fonction des solutions aux équations.
 \smallskip
 
 $(\forall x)(\forall y)(\exists u)(\forall v) \big[ P(x) \wedge \neg Q(u,y) \wedge \neg R(a,u,y,v) \big]$
@@ -1017,7 +1021,7 @@ et essayer de déduire une contradiction ($\mathrm{false}$).
 Les déductions utilisent la règle de résolution, qui est bien adaptée
 à la forme normale conjonctive.
 
-L'algorithme n'est pas garantie de terminer.
+L'algorithme n'est pas garanti de terminer.
 S'il termine avec une contradiction, cela démontre $\mathrm{Th}$.
 S'il termine sans contradiction, cela démontre que l'on ne peut pas prouver $\mathrm{Th}$.
 S'il ne termine pas, on est dans le cas de la semi-décidabilité.
@@ -1130,7 +1134,7 @@ Cependant, il aide beaucoup. C'est à l'être humain de lui donner des
 coups de pouce sous forme de lemmes, hypothèses, chemins,
 stratégies\ldots Ensuite, l'algorithme s'occupe de la manipulation des symboles.
 
-Un exemple très célèbre est le théorème de la coloration d'une carte. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
+Un exemple très célèbre est le théorème des quatres couleurs. La question est : est-il toujours possible de colorier chaque pays avec une couleur, de façon à ce que deux pays limitrophes n'aient pas la même couleur et en utilisant un certain nombre de couleurs différentes? Ce n'est pas évident à prouver et ça a demandé beaucoup de travail aux mathématiciens. Mais récemment, Georges Gonthier (un informaticien) a réussi à formuler ce problème avec l'assistant de preuves. Ce fut un tour de force. Désormais, il existe une preuve complètement formalisée, sans erreur pour ce théorème.
 
 \subsubsection{Un langage logique}
 
