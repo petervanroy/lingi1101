@@ -1327,7 +1327,7 @@ meilleure que d'autres théories qui ne les possèdent pas.
 Une ``bonne'' théorie est:
 \begin {enumerate}
 \item {\em consistante} : il est impossible de déduire \(p\) et \(\neg p\)  de la même théorie.
-\item {\em minimale} : les axiomes sont indépendants: $\{Ax_1, \hdots, Ax_n\} \models Ax_k $\\
+\item {\em minimale} : les axiomes sont indépendants, ce qui veut dire que l'on peut faire deux modèles des autre axiomes, un dans lequel l'axiome est vrai et un autre dans lequel l'axiome est faux~: $\forall i \neq k, Ax_i \not \models Ax_k $.\\
 On peut vérifier la minimalité en construisant une interprétation $J$ telle que:\\
 $\text{VAL}_J (Ax_k)= \mathrm{false}$\\
 $\text{VAL}_J (Ax_i)= \mathrm{true}$ pour $i \neq k$
@@ -1337,11 +1337,10 @@ $\text{VAL}_J (Ax_i)= \mathrm{true}$ pour $i \neq k$
 \subsubsection{Exemple dans l'astronomie}
 \begin {enumerate}
 \item {\textbf{Système de Copernic}} : Chaque axiome de chaque planète est indépendant, car elles tournent toutes autour du soleil.
-\item{\textbf{Système de Ptolémée}} : Les axiomes de chaque planète dépendent de ceux de la Terre, car elle représente le centre de l'univers, mais elle est également une planète et dispose donc d'axiomes.
+\item{\textbf{Système de Ptolémée}} : Les axiomes de chaque planète dépendent de ceux de la Terre, car elle représente le centre de l'univers, mais elle est également une planète et dispose donc d'axiomes. Les epicycles de chaque planète dépendent	des axiomes de la Terre. Ce sont des cycles qui viennent en fait de la révolution de la Terre autour du soleil.
 \end {enumerate}
 
 % Ancienne partie 12
-
 \section{Opérations sur les théories}
 
 Nous allons définir une opération, l'extension, qui permet de créer une nouvelle théorie par rapport à une théorie existante,
@@ -1395,7 +1394,7 @@ qui est en contradiction avec le nouvel axiome (Adam), que nous reformulons ci-d
 \end{align*}
 Par la règle de preuve par contradiction, on démontre qu'aucun modèle n'est possible pour la théorie étendue \bsc{fam'}.
 Nous avons vu que
-l'extension d'une théorie peut réduire le nombre de modèles: ici on voit qu'il faut bien vérifier que ce nombre ne devient pas 0.
+l'extension d'une théorie peut réduire le nombre de modèles: ici on voit qu'il faut bien vérifier que ce nombre ne devienne pas 0.
 
 \subsection{Comparaison des théories}
 
@@ -1414,7 +1413,7 @@ Mais pas inversément: il est possible qu'il existe des modèles de $Th_1$ qui n
 C'est parce que $Th_2$ peut contenir des formules valides qui ne le sont pas dans $Th_1$.
 
 \subsubsection{Équivalence}
-On dit que $Th_1$ et $Th_2$ sont {\em équivalentes} si elles sont contenues l'une dans l'autre.
+On dit que $Th_1$ et $Th_2$ sont {\em équivalentes} si elles sont inclues l'une dans l'autre.
 Cela signifie que les deux théories "disent la même chose" et que tout modèle d'une des théories est également modèle de l'autre.\\
 
 
@@ -1425,7 +1424,7 @@ Mais il ne faut pas oublier que
 l'extension est définie par rapport aux axiomes et l'inclusion est définie par rapport aux modèles.
 Pour l'extension on ajoute des axiomes et on ne regarde pas les modèles.
 Pour l'inclusion, on compare les modèles et on ne regarde pas les axiomes.
-On peut dire que l'extension est une manipulation {\em syntaxique} (on change les axiomes ce qui permette de nouvelles preuves)
+On peut dire que l'extension est une manipulation {\em syntaxique} (on change les axiomes ce qui permet de nouvelles preuves)
 et l'inclusion est une manipulation {\em sémantique} (on fait une comparaison entre ce que modélisent les deux théories).
 
 \subsection{Corollaires}
@@ -1451,9 +1450,9 @@ $Th_1$ et $Th_2$ sont équivalentes. \\
 
 \section{Théorie des ordres partiels stricts (OPS)}
 
-Le concept d'ordre partiel strict est un des concepts de base des mathématiques.
+Le concept d'ordre partiel strict est une théorie simple qui est très utile en mathématiques.
 Nous allons le définir par une théorie.
-Ensuite nous donnons deux interprétations différentes de cette théorie.
+Ensuite nous donnerons deux interprétations différentes de cette théorie.
 \subsection*{Vocabulaire}
 \begin{itemize}
 \item[$\bullet$] Le symbole P/2
@@ -1469,7 +1468,7 @@ Soit l'interprétation $I$ de cette théorie:
 \item[$\bullet$] $D_I = \mathbb{Z} $
 \item[$\bullet$] $\mathrm{val}_I (P) = "<"$
 \end{itemize}
-Lorsque l'on écrit $\mathrm{val}_I(<) = "<"$, le premier symbole $<$ est un mot de vocabulaire dans la théorie
+Lorsque l'on écrit $\mathrm{val}_I(P) = "<"$, le premier symbole $P$ est un mot de vocabulaire dans la théorie
 tandis que le deuxième est une fonction sur les entiers.
 Cette fonction confère un sens au symbole. 
 On remarque que cette interprétation est un modèle de notre théorie.
@@ -1482,8 +1481,8 @@ Soit l'interprétation $J$ de cette théorie:
 \item[$\bullet$] $D_J = \mathbb{Z} $
 \item[$\bullet$] $val_J (P) = "\ne"$
 \end{itemize}
-Ici on change le sens du symbole $<$ :
-$$val_J(<) = "\ne"$$
+Ici on change le sens du symbole $P$ :
+$$val_J(P) = "\ne"$$
 Cette interprétation n'est pas un modèle. En effet, par exemple, pour $x=5, y=3, z=5$, on a :
 $$x<y \wedge y<z \nRightarrow x<z$$
 $$5 \neq 3 \wedge 3 \neq 5 \nRightarrow 5 \neq 5$$
@@ -1505,7 +1504,7 @@ Il existe différents symboles pour représenter l'égalité :
 	\item $x = y$
 	\item $x == y $
 \end{itemize}
-Nous allons utiliser ``$==$'' dans la suite de ce cours pour représenter l'égalité.
+Afin d'éviter la confusion, nous allons utiliser ``$==$'' dans la suite de ce cours pour représenter l'égalité.
 
 La théorie de l'égalité est souvent {\em ajoutée} à d'autres axiomes pour être utile en pratique.
 Dans cette section on ne donne que les axiomes d'égalité.  Dans la suite nous allons voir comment
@@ -1561,9 +1560,8 @@ sont des raisonnements en métalangage.
 
 \section{Théorie de l'ordre partiel (OP)}
 
-Pour définir la théorie de l'ordre partiel, nous prenons EG et nous ajoutons un symbole en
+Pour définir la théorie de l'ordre partiel, nous prenons EG \footnote{Il est intéressant de séparer EG de OP car l'égalité est intéressante en soi, et car elle peut être utile pour d'autre théories.} et nous ajoutons un symbole en
 plus du symbole d'égalité:
-On ajoute un deuxième symbole dans le langage en plus du symbole d'égalité:
 	$$\leq$$
 Les axiomes d'égalité sont déjà présents.
 Il nous reste de faire les axiomes pour ce nouveau symbole.
@@ -1575,7 +1573,7 @@ Aux axiomes et schémas d'axiomes de la théorie de l'égalité, on rajoute de n
 \item Réflexivité \\$\forall x$, $x\leq x$
 \item Anti-symétrie \\$\forall x$, $\forall y$, $ x\leq y \land y\leq x\Rightarrow y==x$
 \item Transitivité \\$\forall x$, $\forall y$, $\forall z$, $(x\leq y \land y\leq z) \Rightarrow x\leq z$
-\item Substituabilité à gauche \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{1}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x \leq x_{2}$
+\item Substituabilité à gauche \footnote{Obtenu en utilisant $\leq$ comme prédicat P dans substituabilité des prédicats pour EG} \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{1}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x \leq x_{2}$
 \item Substituabilité à droite \\$\forall x_{1}$, $\forall x_{2}$, $\forall x$,  $x_{2}==x \Rightarrow x_{1}\leq x_{2} \Leftrightarrow x_{1} \leq x$
 \end{enumerate}
 
@@ -1640,7 +1638,7 @@ p $\leq_{I_{5}}$ q   \hspace{1.5cm} p $\models_{I_{5}}$ q \hspace{1.5cm} $\model
 \item \underline{$I_{6}$} : D$_{I_{6}}$ = l'ensemble des unificateurs d'un ensemble S de termes ou de formules
 VAL$_{I_{6}}$(==) = égalité entre substitutions \{ (x$_{i}$,t$_{i}$)... \} : un ensemble de paires avec une variable et un terme VAL$_{I_{6}}$($\leq$) = "moins général que"\\
 \newline
-Exemple: P(x,f(y)) \hspace{1cm} $\underbrace{P(x,z)}_{\sigma}$\\
+Exemple: $P(x,f(y))$ \hspace{1cm} $\underbrace{P(x,z)}_{\sigma_1}$\\
 $\sigma$' = $\sigma$ $\cup$ \{(z, f(y)\} donc 
 $\sigma$' $\leq$ $\sigma$\\
 \end{itemize}
