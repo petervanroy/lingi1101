@@ -33,10 +33,9 @@ Principalement, il y a un {\em compromis entre expressivité et efficacité}:
 un langage trop expressif devient lent.
 Si le langage permettrait de résoudre la logique des prédicats complètement,
 dans certains cas l'algorithme d'exécution ne pourra rien déduire (parce qu'il est semi-décidable).
-Est-ce que l'on peut trouver un langage moins puissant, qui est assez expressif pour la programmation
-et assez {\em peu} expressif pour avoir une implémentation efficace?
-La réponse à cette question est un oui très clair.
-Nous allons dans ce chapitre voir comment on obtient cette réponse.
+Il faut donc un language moins puissant, assez expressif pour la programmation et assez {\em peu} expressif pour avoir un implémantation efficace.
+Nous allons dans ce chapitre voir comment on obtient cette language.
+
 Il y a trois problèmes majeurs à résoudre:
 \begin{enumerate}
 \item {\em Limitations théoriques du prouveur}.
@@ -44,6 +43,7 @@ Il y a des limites théoriques à ce qu'un prouveur peut faire en tant qu'algori
 Nous avons vu une partie de ces limites avec notre algorithme de preuve:
 il est semi-décidable: si $p \models q$ l'algorithme termine mais si $p \not\models q$ il ne termine pas toujours.
 Si l'algorithme prend beaucoup de temps, on doit à un moment l'arrêter et on ne sait rien.
+Il n'y a pas moyen de contourner cette limite.
 \item {\em Efficacité du prouveur}.
 Même si on peut trouver une preuve, le prouveur peut être inefficace (temps exponentiel).
 Le prouveur doit avoir une sémantique opérationnelle (= exécution) efficace et prévisible, pour être pratique.
@@ -69,17 +69,18 @@ Si ce n'est pas le cas, alors l'algorithme pourrait ne rien nous dire.
 \subsection{Efficacité du prouveur}
 
 Même si l'algorithme peut trouver un résultat, il est souvent hautement exponentiel.
-Pour pallier à ce problème on va faire deux choses:
+Pour pallier à ce problème on va faire trois choses:
 \begin{itemize}
 \item Mettre des restrictions sur la forme des axiomes.
 On ne permettra que des axiomes pour lequel l'algorithme sait raisonner efficacement.
-Typiquement, on ne permettra dans une clause $C_i$ qu'un littéral sans négation:
+Typiquement, on utilisera des clauses de Horn, c'est à dire des clauses $C_i$ ne comportant qu'un littéral sans négation:
 	$$C_i = (\forall X_{1}) ... (\forall X_{n}) A_{1} \wedge A_{2} \wedge ... \wedge A_{n} \Rightarrow A$$
 En forme normale cela donne:
 	$$C_{i} = \neg A_{1} \vee \neg A_{2} \vee ... \vee \neg A_{n} \vee A$$
 Pour prouver $A$, il faut prouver $A_{1}$ et $A_{2}$ et ... et $A_{n}$).
 Le programme tout entier est donc une conjonction de clauses $C_i$:
 	$$C_{1} \wedge C_{2} \wedge ... \wedge C_{k}$$
+
 \item Permettre au programmeur de donner des heuristiques (des ``indices'') pour aider le prouveur.
 Typiquement, on donne de l'importance à l'ordre des clauses et l'ordre des littéraux dans les clauses.
 Le prouveur essaiera les clauses dans l'ordre et les littéraux dans l'ordre.
@@ -90,8 +91,12 @@ Le prouveur essaiera les clauses dans l'ordre et les littéraux dans l'ordre.
 	\ldots
 	\end{array}
 	\right.$$
+
+\item Choisir une clause spéciale, la clause résolvante, qui sera toujours utilisée dans la résolution.
+Il n'y aura plus alors qu'a choisir une seule clause au lieu de deux pour chaque résolution.
 \end{itemize}
-Le langage Prolog utilise ces deux techniques pour obtenir un langage efficace.
+
+Le langage Prolog utilise ces trois techniques pour obtenir un langage efficace.
 
 \subsection{Construction du résultat}
 
@@ -119,13 +124,13 @@ avec les implémentations des autres langages symboliques comme le Lisp.
 On démontre qu'il n'y a rien dans le langage Prolog qui empêche une efficacité complète.
 \end{enumerate}
 Le succès de Prolog vient du fait qu'il fait
-un compromis très intéressant par rapport à la tension entre efficacité et expressivité.
+un compromis très intéressant entre efficacité et expressivité.
 Aujourd'hui, on peut faire une implémentation extrêmement efficace de Prolog, qui est même compétitif avec
 l'implémentation d'un langage de très bas niveau comme le C.
 
 \section{Introduction au langage Prolog}
 
-Un programme en Prolog est un ensemble de clauses (règles; axiomes):
+Un programme en Prolog est un ensemble de clauses de Horn (règles; axiomes):
 En Prolog, on a des clauses (règles):
 	\begin{equation}
 		 A_1 \leftarrow B_1, … , B_n
@@ -195,7 +200,7 @@ qui correspond au théorème à prouver.
 
 L'exécution de l'algorithme se fait comme ceci:
 \begin{itemize}
-\item On commence par mettre le but $G$ que l’on veut prouver dans $r$ (sans négation).
+\item On commence par mettre le but $G$ que l’on veut prouver dans $r$ (on ne note pas la négation).
 \item Ensuite, jusqu’à ce que $r$ soit vide, on prend le premier littéral dans $r$ (par exemple, $A_1$).
 \item Puis, on parcourt un à un les axiomes de $P$
 pour trouver une clause $Ax_{i}$ unifiable avec $A_{1}$ au moyen de l'upg $\sigma$.
@@ -221,8 +226,8 @@ pour que cela n'arrive pas.
 
 \begin{algorithm}[H]
 $r :=\ <G>$ … résolvante initiale (séquence initiale contient $G$) \\
-… pendant l'exécution $r= <A_{1},A_{2},...,A_{m}>$ (séquence de littéraux)\\
-\While{r est non vide}{
+… pendant l'exécution $r= <A_1,A_2,...,A_m>$ (séquence de littéraux \footnote{Attention, $<A_1,A_2,...,A_m>$ représente $\neg A_1\vee \neg A_2\vee \neg ...\vee \neg A_m$})\\
+\While{r est non vide et il y a encore des choix}{
 	\begin{itemize}
 		\item Choisir le premier littéral $A_{1}$ dans $r$.
 		\item Choisir une clause $Ax_{1}=(A \leftarrow B_{1},...,B_{k})$ dans $P$. D’abord on prend la première clause, puis la suivante jusqu’à ce qu’on trouve une clause unifiable avec $A_{1}$. Si aucune clause n’est unifiable on revient sur le dernier choix (backtrack).
@@ -241,7 +246,7 @@ l'algorithme calcule d'autres solutions.}
 Il est important de comprendre comment cet algorithme gère les choix des clauses.
 L'algorithme fait parfois du retour en arrière (qui s'appelle {\em backtrack} en anglais) pour changer un choix.
 Chaque fois que l'on choisit une clause à unifier avec le début de la résolvante,
-cela marque un endroit où l'on peut faire un retour en arrière. 
+cela marque un endroit où l'on peut faire un retour en arrière.
 Pour faire le retour en arrière,
 il remet ses structures de données internes ($r$ et $G$) à l'état avant le choix
 et il recommence son exécution à l'endroit du dernier choix.
@@ -252,11 +257,11 @@ Il y a donc une {\em pile} de choix qui est gérée par l'algorithme.
 Pour simplifier la présentation, la gestion de cette pile n'est pas montrée dans la définition de l'algorithme.
 
 Si on arrive au tout premier choix qui a été fait quand on a commencé la boucle et il n'y a plus de clauses unifiables,
-alors on sort de la boucle avec une résolvante qui n'est pas vide. Et dans ce cas l'algorithme n'a pas trouvé de solution. 
-Il y a donc deux manières de sortir de la boucle: (1) $r$ est vide, et (2) il n'y a plus de choix.
+alors on sort de la boucle avec une résolvante qui n'est pas vide. Et dans ce cas l'algorithme n'a pas trouvé de solution.
+Il y a donc deux manières de sortir de la boucle: (1) $r$ est vide, ou (2) il n'y a plus de choix.
 La première manière correspond à une exécution réussie.
 La deuxième manière correspond à un échec (``failure'').
-Attention, cet échec fait partie de l'algorithme d'exécution, il n'y a rien d'anormal à ce que l'algorithme sort avec un échec.
+Attention, cet échec fait partie de l'algorithme d'exécution, il n'y a rien d'anormal à ce que l'algorithme sorte avec un échec.
 
 Une conséquence intéressante de la gestion des choix est que
 l'algorithme permet à un programme de trouver plusieurs solutions, s'il existe plusieurs possibilités
@@ -267,7 +272,7 @@ Pour cet exemple, on trouve une première solution avec $l=\mathrm{nil}$ et $m=\
 avec $l=\mathrm{cons}(1,\mathrm{nil})$ et $m=\mathrm{nil}$.
 Pour obtenir plusieurs solutions, il suffit après que l'algorithme ait trouvé une solution,
 de demander un retour en arrière, c'est-à-dire, de revenir sur le dernier choix et continuer l'exécution.
-Ainsi, l'algorithme trouvera plusieurs solutions si la reqûete $G$ à plusieurs solutions avec le programme $P$.
+Ainsi, l'algorithme trouvera plusieurs solutions si la reqûete $G$ a plusieurs solutions avec le programme $P$.
 C'est une propriété très puissante de la programmation logique qui n'existe pas dans la programmation traditionnelle.
 
 % Ancienne partie 16
@@ -307,7 +312,7 @@ fact(N,F) :- N>0,
 Pour les mordus des langages de programmation, nous mentionnons que ce programme Prolog n'est pas
 récursif terminal.  Comme pour la programmation fonctionnelle, il est avantageux aussi pour un prédicat
 en programmation logique
-d'être récursif terminal, parce que l'exécution dépend aussi d'une pile
+d'être récursif terminal, parce que l'exécution dépend aussi d'une pile (la résolvante r)
 et la taille de la pile n'augmentera pas pendant l'exécution.
 Ceci ne se voit pas avec une interprète Prolog, comme notre algorithme d'exécution de Prolog, mais devient important pour
 un compilateur Prolog.
@@ -316,8 +321,8 @@ et qui garde la sémantique logique.
 
 \subsubsection{Requête}
 
-Nous allons maintenant exécuter le programme fact afin de trouver la factorielle de 5 et stocker la réponse dans la variable F.
-Le prompt Prolog est représenté par ``\verb+|?-+'' et la sortie standard par ``\verb+->+''.
+Nous allons maintenant exécuter le programme fact.pl afin de trouver la factorielle de 5 et stocker la réponse dans la variable F.
+Le prompt Prolog est représenté par ``\verb+|?-+''\footnote{Le prompt Prolog ``|?-'' est une combinaison de |- (prouvable) et ?. Le prompt pose donc la question au système «est-ce qu'il existe une preuve».»} et la sortie standard par ``\verb+->+''.
 En Prolog on peut mettre des commentaires après les ``\verb+%+'' ou entre ``\verb+/* */+''.
 Il ne faut pas oublier le point à la fin de la requête.
 \begin{verbatim} 
@@ -329,9 +334,9 @@ Il ne faut pas oublier le point à la fin de la requête.
 Voici le programme écrit en forme clausale:
 \begin{equation}
 \begin{array}{l}
+(\forall n) (\forall f) (\forall n_1) (\forall f_1) \\
 \mathrm{fact}(0,1) \\
 \wedge \\
-(\forall n) (\forall f) (\forall n_1) (\forall f_1) \\
 \quad \quad \mathrm{fact}(n,f) \vee \neg(n>0) \vee \neg \mathrm{minus}(n_1,n,1) \vee \\
 \quad \quad \neg \mathrm{fact}(n_1,f_1) \vee \neg \mathrm{times}(f,n,f_1)
 \end{array}
@@ -396,9 +401,9 @@ La paire de liste, écrite \verb+[X|L1]+ en Prolog, s'écrit $\mathrm{cons}(x,l_
 Voici le programme écrit en forme clausale:
 \begin{equation}
 \begin{array}{l}
+(\forall l') (\forall l_1) (\forall l_2) (\forall l_3) (\forall x) \\
 \mathrm{append}(\mathrm{nil},l',l') \\
 \wedge\\
-(\forall l_1) (\forall l_2) (\forall l_3) (\forall x) \\
 \quad \quad \mathrm{append}(\mathrm{cons}(x,l_1),l_2,\mathrm{cons}(x,l_3)) \vee \neg\mathrm{append}(l_1,l_2,l_3)
 \end{array}
 \end{equation}
@@ -447,7 +452,7 @@ La seule variable dans la requête initiale est $l$: la valeur de $l$ est à tro
 \begin{center}
 \noindent\fbox{
 \parbox{0.8\textwidth}{Attention, chaque fois que l'on fait la résolution
-avec une clause du programme il faut {\em renommer} les variables de la clause.
+avec une clause du programme il faut {\em renommer} les variables de la clause car les variables sont quantifiées, l'universel étant éliminé.
 Dans le cas ci-haut ce sont $l_1$, $l_2$, $l_3$ et $x$.
 Ceci est nécessaire pour éviter d'utiliser le même nom pour deux variables différentes pendant l'exécution.}}
 \end{center}
