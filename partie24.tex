@@ -113,7 +113,7 @@ Au plus grand est le poids d'une page au plus son autorité sera grande.
 	Initialisation Pr(p) =  $\frac{1}{n}$
 	\item Choisir un nombre de pas k
 	\item K mises à jour:\\
-	Pr(p) = $ \sum_ {p'}\frac{Pr(p')}{n(p')} $ avec n(p') le nombre de liens sortant de p' et Pr(p') le poids (ou PageRank) de p' à la $k^{ème}$ itération.
+	$Pr(p) =  \sum_ {p'}\frac{Pr(p')}{n(p')} $ avec $p'$ les nœuds pointants vers p, $n(p')$ le nombre de liens sortant de $p'$ et $Pr(p')$ le poids (ou PageRank) de $p'$ à la $k^{ème}$ itération.
 \end{enumerate}
 \subsection*{Exemple de PageRank :}
 
@@ -173,23 +173,25 @@ Et la condition $\sum Pr(p) = 1$ est toujours vérifiée.
 \end{figure}
 
 \subsection*{Solution du problème}
-	La solution dans le cas où le PageRank s'amasse dans un n\oe ud serait de former des cycles afin d'assurer que le fluide continue à circuler.
-	
+	La solution dans le cas où le PageRank s'amasse dans un nœud serait de former des cycles afin d'assurer que le fluide continue à circuler.
+
  	En pratique, on va réinjecter un peu de fluide partout à chaque itération pour éviter que le fluide se concentre dans les nœuds qui n'ont que des liens entrants et pas de liens sortant. De cette façon on referme la boucle et le fluide peut continuer à circuler.
- 	
+
  	Cela peut s'apparenter à la circulation de l'eau dans l'atmosphère : le fluide s'évapore un peu partout et retombe de façon équitable.
 
 	Ancienne règle de mise à jour :
 	\begin{align*}
-	Pr(p) =  \sum_ {p'}\frac{Pr(p')}{n(p')}
+		Pr(p) &=  \sum_ {p'}\frac{Pr(p')}{n(p')}
 	\end{align*}
-	
+
  	Nouvelle règle de mise à jour : \\
 	\begin{align*}
-         Pr(p) = S*Pr(p) + (1-S)  \times \frac{1}{n} \\
-	 \text{Où S est un paramètre : $ 0 \le S \le 1 $} 
+		Pr(p) &= S*Pr(p) + (1-S)  \times \frac{1}{n} \\
 	\end{align*}
-        
+	 Où $S$ est un paramètre : $ 0 \le S \le 1 $, typiquement entre 0,8 et 0,9.
+
+	$S*Pr(p)$ correspond à l'évaporation du fluide, et $(1-S)  \times \frac{1}{n}$ à sa précipitation.
+
 \subsection*{ Une autre manière de voir l'algorithme:}
     Cet algorithme correspond aussi au comportement des utilisateurs sur le web. La marche aléatoire d'un utilisateur sur le web peut être vue comme : 
 	\begin{itemize}
@@ -197,12 +199,12 @@ Et la condition $\sum Pr(p) = 1$ est toujours vérifiée.
         \item (1-S) : Choisir un n\oe ud au hasard, par exemple, taper une URL et accéder directement à un site.
         \item Pr(p), tel que calculé dans la nouvelle règle de PageRank, est la probabilité de tomber sur la page p.
 	\end{itemize}
-	
+
 \subsection*{Historique de PageRank}
 
 	PageRank a commencé à être utilisée au début des années 1990, mais a été en partie abandonné à partir de 2003-2004 pour bloquer les services de SEO (\textit{Search Engine Optimisation}) et autres manipulations du système comme les Google bombs\footnote{wikipedia.org/wiki/Google\_bomb}.
-	
+
 	Ceux-ci consistent à altérer les résultats de recherche soit en créant de nombreuses pages contenant des liens vers une page en particulier, soit en utilisant de gros concentrateurs qui contiennent énormément de mots-clés.
-	
+
 	Outre les modifications à l'algorithme de tri, certains sites utilisent aussi un attribut html "\textit{nofollow}" qui a pour effet que ces liens n'entrent pas en compte dans le PageRank d'une page. C'est notamment utilisé par les sites de blogging et les sites collaboratifs comme les wikis afin que personne n'ait intérêt à saboter une page pour ajouter un lien et améliorer le classement d'un site en particulier.\footnote{wikipedia.org/wiki/Nofollow}
 
