@@ -1,55 +1,4 @@
-% \documentclass[10pt,a4paper]{article}
-% \usepackage[utf8]{inputenc}
-% \usepackage{amsmath}
-% \usepackage{amsfonts}
-% \usepackage{amssymb}
-% \usepackage{array}
-% \begin{document}
-%% 	\chapter{Rappel}
-% 		\subsection{Conséquence logique}
-% 			$p$ est conséquence logique de $q$ si et seulement si $p \Rightarrow q$ est une tautologie. En d'autres termes, si
-% 			\begin{center}
-% 			\begin{tabular}{ll}
-% 			$p \models q$ & $q$ est valide dans tous les modèles de $p$ \\
-% 			&\\
-% 			alors & \\
-% 			$\models (p \Rightarrow q)$ & $p \Rightarrow q$ est une tautologie.\\
-% 			&\\
-% 			On peut donc écrire & \\
-% 			$p \Rrightarrow q$ & $p$ est conséquence logique de $q$.\\
-% 			\end{tabular}
-% 			\end{center}
-% 			Cependant, la conséquence logique ($\Rrightarrow$) n'est pas une proposition logique (cf. syntaxe d'une proposition).
-% 		
-% 		\subsection{Équivalence logique}
-% 			Par le raisonnement ci-dessus, on peut dire que $p$ est logiquement équivalent à $q$ si et seulement si
-% 			\begin{center}
-% 			\begin{tabular}{ll}
-% 			$p \models q$ & $q$ est valide dans tous les modèles de $p$ \\
-% 			$q \models p$ & $p$ est valide dans tous les modèles de $q$ \\
-% 			&\\
-% 			et donc & \\
-% 			$\models (p \Rightarrow q)$ & $p \Rightarrow q$ est une tautologie et\\
-% 			$\models (p \Rightarrow q)$ & $p \Rightarrow q$ est une tautologie.\\
-% 			&\\
-% 			On peut donc écrire & \\
-% 			%impossible de trouver l'équivalence logique en symbole
-% 			$p \Lleftarrow \Rrightarrow q$ & $p$ est conséquence logique de $q$.\\ 
-% 			\end{tabular}
-% 			\end{center}
-% 			L'équivalence logique n'est pas non plus une proposition logique.\\
-% 			
-% 			Il ne faut pas non plus oublier la différence entre phrase propositionnelle ($p$, $q$, $s$,...) et propositions primaires ($P$, $Q$, $S$,...) (cf. syntaxe d'une proposition) :
-% 			\begin{center}
-% 			\begin{tabular}{ll}
-% 				$p \Rightarrow q$ & n'est pas une proposition\\
-% 				
-% 				mais &\\
-% 				$P \land Q \Rightarrow R \land \lnot S$ & en est bien une.\\
-% 			\end{tabular}
-% 			\end{center}
-% 	
-	\chapter{Preuves en logique propositionnelle}
+\chapter{Preuves en logique propositionnelle}
 \label{preuveprop}
 		Une preuve est un raisonnement déductif qui démontre si une proposition
 est vraie ou fausse.
@@ -393,56 +342,6 @@ Les justifications pour les lignes 9 et 15 sont {\em preuve indirecte}.
 
 Avec cette preuve déductive,
 nous avons pu prouver que tu ne manges pas bien et que tu ne pratiques pas d'activité physique régulière. 
-% Maintenant nous allons automatiser les preuves, quand elles existent.
-% Mais il faut savoir s'il peut tout résoudre ou pas. 
-% Dans la section suivante
-% on va donc construire un algorithme nous permettant de trouver automatiquement les preuves en logique propositionnelle.
-% \end{document}
-
-%% Partie 4 commence ici
-
-% \section{Deux règles plus sophistiquées}
-% \subsection{Théorème de déduction}
-% 
-% \begin{itemize}
-% \item  Pour prouver s $\Rightarrow$ t
-% \item  On suppose s vrai
-% \item  On déduit t
-% \item  Ensuite, on évacue l'hypothèse
-% \end{itemize}
-% 
-% 
-% \textit{Notation: p $\vdash$ t (on peut prouver t à partir de p) }
-% 
-% \subsubsection{Prémisse:}
-% 
-% \begin{equation}
-% \frac{p,..., r, s \vdash t} 
-% {p,..., r \vdash (s \Rightarrow t)}
-% \end{equation}
-% 
-% \subsubsection{Conclusion:}
-% 
-% Déduire une implication
-% 
-% \subsection{Preuve par contradiction (ou preuve indirecte)}
-% 
-% On prend une hypothèse, et on peut prouver qu'elle est vraie ou fausse, d'où l'hypothèse n'est pas bonne.
-% 
-% \subsubsection{Prémisse:} 
-% on suppose que p...q n'a pas de problème
-% 
-% \begin{equation}
-% \begin{split}
-% p,...,q, r, s \vdash s \\
-% \frac{p,...,q, r, s \vdash \lnot s}
-% {p,...,q \vdash \lnot r}
-% \end{split}
-% \end{equation}
-% 
-% \subsubsection{Conclusion:}
-% 
-% si p...q n'a pas de problème, on se focalise alors sur r
 
 \section{Exemples de l'utilisation des schémas}
 
@@ -544,106 +443,10 @@ en remplaçant chaque symbole par le symbole correspondant on obtient une propri
  \end{align*}
 
 
-
-% \subsection{Algorithme de normalisation}
-% 
-% Toute formule peut être transformée en une formule équivalente, la forme normale,
-% qui a toujours la même forme.
-% La forme normale facilite les manipulations des formules par des algorithmes.
-% Nous allons introduire une forme normale que nous allons utiliser pour l'algorithme de preuve.
-% 
-% \subsubsection{Forme normale}
-% 
-% Il y a deux formes normales qui sont souvent utilisées:
-% la forme normale conjonctive (FNC) et la forme normale disjonctive (FND).
-% Pour l'algorithme de preuve, nous allons utiliser la FNC, mais comme la FND est parfois importante,
-% nous les définissons toutes les deux.
-% Dans la FNC, la formule est écrite comme une conjonction de disjonctions.
-% Dans la FND, la formule est écrite comme une disjonction de conjonctions.
-% À l'intérieur de chaque forme normale on trouve des propositions premières ou des négations des propositions premières.
-% Voici un exemple de chaque forme normale:
-% \begin{itemize}
-%   \item FNC: $( P \lor \lnot Q ) \land ( Q \lor A ) \land ( \lnot S \lor R )$  
-%   \item FND: $( P \land \lnot Q ) \lor ( Q \land A ) \lor ( \lnot S \land R )$  
-% \end{itemize}
-% Pour faciliter la discussion autour des formes normales, nous introduisons une terminologie:
-% \begin{itemize}
-% \item Un {\em littéral}, écrit $L$, est où une proposition première où la négation d'une proposition première.
-% Pour une proposition première $P$ on peut faire deux littéraux,
-% $P$ et $\lnot P$.
-% \item Une {\em clause}, écrite $C$, est (pour la forme normale conjonctive) une disjonction de littéraux.
-% On écrit $\lor L_i$ ou $( L_1 \lor L_2 \lor L_3 \lor ... \lor L_i )$.
-% \end{itemize}
-% 
-% \subsubsection{Algorithme de normalisation}
-% 
-% Nous donnons une explication brève de l'algorithme de normalisation,
-% qui peut transformer toute formule en forme normale conjonctive.
-% L'algorithme a quatre phases:
-% \begin{enumerate}
-% \item Eliminer les $\rightarrow$ et $\leftrightarrow$ en les remplaçant par des formules équivalentes.  Par exemple, $p \rightarrow q$ sera remplacée par $\lnot p \lor q$.
-% \item Déplacer les négations vers l'intérieur (jusqu'à dans les propositions premières) en utilisant les formules de De Morgan.
-% \item Déplacer les disjonctions ($\lor$) vers l'intérieur en utlisant les lois distributives.
-% \item Simplifier en éliminant les formes $(P \lor \lnot P)$ dans chaque disjonction.
-% \end{enumerate}
-% 
-% \subsubsection{Exemple de normalisation}
-% 
-% \begin{align*}
-% & (P \rightarrow (Q \rightarrow R)) \rightarrow ((P \land S) \rightarrow R) \\
-% & \lnot (\lnot P \lor (\lnot Q \lor R)) \lor (\lnot (P \land S) \lor R) \\
-% & ( \lnot \lnot P \land \lnot (\lnot Q \lor R)) \lor ((\lnot P \lor \lnot S) \lor R) \\
-% & (P \land (Q \land \lnot R)) \lor ( \lnot P \lor \lnot S \lor R) \\
-% & (P \lor \lnot P \lor \lnot S \lor R) \land ( Q \lor \lnot P \lor \lnot S \lor R) \land (\lnot R \lor \lnot P \lor \lnot S \lor R) \\
-% & (Q \lor \lnot P \lor \lnot S \lor R) 
-% \end{align*}
-% 
-
 % Ancienne partie 5:
 
 \section{Algorithme de preuve}
 \label{algorithmeprop}
-
-% \subsection{Exemple de preuve propositionnelle}
-% 
-% \noindent Voici les propositions premières : \\
-% A : tu manges bien \\
-% B : ton système digestif est en bonne santé \\
-% C : tu pratiques une activité physique régulière \\
-% D : tu es en bonne forme physique \\
-% E : tu vis longtemps \\
-% 
-% \noindent On peut maintenant faire une théorie et on espère qu'elle aura un modèle. \\
-% A$\Rightarrow$B, C$\Rightarrow$D, B$\lor$D $\Rightarrow$ E, $\lnot$E
-% \\
-% \noindent On aimerait prouver que $\lnot$A $\land$ $\lnot$C est vrai.\\
-% 
-% \noindent Preuve : \\
-% \\
-% \begin{tabular}{|l|l|}
-% \hline
-% 1. A$\Rightarrow$B & prémisse \\
-% 2. C$\Rightarrow$D & prémisse \\
-% 3. B$\lor$D $\Rightarrow$E & prémisse \\
-% 4. $\lnot$E & prémisse \\ 
-% \indent 5. A & hypothèse \\
-% \indent 6. B & modus ponens (1) \\
-% \indent 7. B$\lor$D & addition (6) \\
-% \indent 8. E & modus ponens (7) \\
-% 9. $\lnot$A & preuve indirecte \\
-% \indent 10. C & hypothèse \\
-% \indent 11. D & modus ponens (2) \\
-% \indent 12. D$\lor$B & addition (11) \\
-% \indent 13. B$\lor$D & commutativité (12)\\
-% \indent 14. E & modus ponens (9) \\
-% 15. $\lnot$C & preuve indirecte \\
-% 16. $\lnot$A $\land$ $\lnot$C & conjonction (9,15) \\
-% \hline
-% \end{tabular}\\
-% 
-% Grâce à la déduction on a donc pu prouver que tu ne manges pas bien et que tu ne pratiques pas d'activité physique régulière. 
-% On aimerait maintenant pouvoir automatiser les preuves quand elles existent. Mais il faut savoir s'il peut tout résoudre ou pas. 
-% On va donc construire un algorithme nous permettant de résoudre automatiquement les preuves en logique propositionnelle.
 
 Nous allons maintenant introduire un algorithme qui permet de trouver
 une preuve en logique propositionnelle.
